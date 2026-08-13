@@ -1,558 +1,608 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
 
 <meta charset="UTF-8">
 
 <meta
-name="viewport"
-content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
+  name="viewport"
+  content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
 >
 
-<meta
-name="theme-color"
-content="#111318"
->
+<meta name="theme-color" content="#111318">
 
 <title>🔥 FF Arena</title>
 
 <style>
 
-/* =====================================================
-RESET
-===================================================== */
-
 *{
-box-sizing:border-box;
-margin:0;
-padding:0;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
 html,
 body{
-width:100%;
-height:100%;
+  width:100%;
+  height:100%;
 }
 
 body{
-font-family:Arial,sans-serif;
-background:#111318;
-color:white;
-overflow:hidden;
+  font-family:Arial,sans-serif;
+  background:#111318;
+  color:white;
+  overflow:hidden;
 }
 
 button{
-font:inherit;
-cursor:pointer;
+  font:inherit;
+  cursor:pointer;
 }
-
 
 /* =====================================================
 APP
 ===================================================== */
 
 .app{
-display:flex;
-width:100%;
-height:100vh;
-overflow:hidden;
+  display:flex;
+  width:100%;
+  height:100vh;
 }
-
 
 /* =====================================================
 SIDEBAR
 ===================================================== */
 
 .sidebar{
-width:285px;
-height:100vh;
-background:#181b22;
-border-right:1px solid #292d36;
-display:flex;
-flex-direction:column;
-overflow:auto;
-flex-shrink:0;
+  width:285px;
+  height:100vh;
+  flex-shrink:0;
+  background:#181b22;
+  border-right:1px solid #292d36;
+  display:flex;
+  flex-direction:column;
+  overflow:auto;
 }
 
 .logo{
-padding:20px;
-font-size:22px;
-font-weight:800;
-border-bottom:1px solid #292d36;
+  padding:20px;
+  font-size:22px;
+  font-weight:800;
+  border-bottom:1px solid #292d36;
 }
 
 .category{
-padding:18px 15px 8px;
-font-size:12px;
-font-weight:bold;
-color:#858c99;
+  padding:18px 15px 8px;
+  font-size:12px;
+  font-weight:bold;
+  color:#858c99;
 }
 
 .channel{
-display:flex;
-align-items:center;
-gap:8px;
-margin:2px 8px;
-padding:10px;
-border-radius:6px;
-color:#b8bec9;
-cursor:pointer;
-transition:.15s;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:2px 8px;
+  padding:10px;
+  border-radius:6px;
+  color:#b8bec9;
+  cursor:pointer;
 }
 
 .channel:hover,
 .channel.active{
-background:#292e3a;
-color:white;
+  background:#292e3a;
+  color:white;
 }
 
 .channel-name{
-flex:1;
+  flex:1;
 }
 
 .count{
-font-size:11px;
-color:#777f8d;
+  font-size:11px;
+  color:#777f8d;
 }
 
 .members{
-padding:2px 12px 8px 38px;
+  padding:2px 12px 8px 38px;
 }
 
 .member{
-display:flex;
-align-items:center;
-gap:6px;
-padding:5px 0;
-font-size:12px;
-color:#b7bdc8;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:5px 0;
+  font-size:12px;
+  color:#b7bdc8;
 }
 
 .avatar{
-width:25px;
-height:25px;
-border-radius:50%;
-background:#5865f2;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:11px;
-font-weight:bold;
-flex-shrink:0;
+  width:25px;
+  height:25px;
+  border-radius:50%;
+  background:#5865f2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:11px;
+  font-weight:bold;
+  flex-shrink:0;
 }
 
 .status-icon{
-margin-left:2px;
+  margin-left:2px;
 }
 
 .muted{
-color:#ff414f;
+  color:#ff414f;
 }
 
 .camera{
-color:#5fa7ff;
+  color:#5fa7ff;
 }
 
 .screen{
-color:#65d79a;
+  color:#65d79a;
 }
 
 .role{
-font-size:9px;
-color:#858c99;
-margin-left:auto;
+  font-size:9px;
+  color:#858c99;
+  margin-left:auto;
 }
-
 
 /* =====================================================
 USER
 ===================================================== */
 
 .user-area{
-margin-top:auto;
-padding:12px;
-background:#20242d;
-display:flex;
-gap:9px;
-align-items:center;
+  margin-top:auto;
+  padding:12px;
+  background:#20242d;
+  display:flex;
+  gap:9px;
+  align-items:center;
 }
 
 .user-info{
-flex:1;
-min-width:0;
+  flex:1;
+  min-width:0;
 }
 
 .user-name{
-font-size:13px;
-font-weight:bold;
-white-space:nowrap;
-overflow:hidden;
-text-overflow:ellipsis;
+  font-size:13px;
+  font-weight:bold;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
 .user-role{
-font-size:10px;
-color:#858c99;
-margin-top:3px;
+  font-size:10px;
+  color:#858c99;
+  margin-top:3px;
 }
-
-.settings-button{
-border:0;
-background:transparent;
-color:#aaa;
-font-size:18px;
-}
-
 
 /* =====================================================
 MAIN
+
+IMPORTANTE:
+Fica escondido na tela inicial.
+Só aparece quando uma análise foi selecionada.
 ===================================================== */
 
 .main{
-flex:1;
-min-width:0;
-height:100vh;
-display:flex;
-flex-direction:column;
-overflow:hidden;
+  flex:1;
+  min-width:0;
+  height:100vh;
+  display:none;
+  flex-direction:column;
+  background:#111318;
 }
 
-.header{
-height:70px;
-border-bottom:1px solid #292d36;
-display:flex;
-align-items:center;
-padding:12px 20px;
-flex-shrink:0;
+.main.show{
+  display:flex;
 }
-
-.header h2{
-font-size:18px;
-}
-
-.header p{
-font-size:12px;
-color:#858c99;
-margin-top:4px;
-}
-
 
 /* =====================================================
-STAGE
+TELA DE ENTRADA DA ANÁLISE
+===================================================== */
+
+.analysis-preview{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:25px;
+}
+
+.preview-box{
+  width:min(520px,100%);
+  background:#181b22;
+  border:1px solid #292d36;
+  border-radius:14px;
+  padding:30px;
+  text-align:center;
+  box-shadow:0 15px 50px rgba(0,0,0,.35);
+}
+
+.preview-icon{
+  font-size:50px;
+  margin-bottom:15px;
+}
+
+.preview-box h2{
+  font-size:22px;
+  margin-bottom:8px;
+}
+
+.preview-box p{
+  color:#858c99;
+  font-size:13px;
+  line-height:1.5;
+  margin-bottom:22px;
+}
+
+.enter-analysis{
+  border:0;
+  border-radius:8px;
+  padding:13px 22px;
+  background:#5865f2;
+  color:white;
+  font-weight:bold;
+}
+
+.enter-analysis:hover{
+  background:#4752c4;
+}
+
+/* =====================================================
+ÁREA DA ANÁLISE
+===================================================== */
+
+.analysis-room{
+  display:none;
+  flex:1;
+  min-height:0;
+  flex-direction:column;
+}
+
+.analysis-room.show{
+  display:flex;
+}
+
+.room-top{
+  height:58px;
+  flex-shrink:0;
+  border-bottom:1px solid #292d36;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:10px 16px;
+}
+
+.room-title{
+  font-size:16px;
+  font-weight:bold;
+}
+
+.room-description{
+  font-size:11px;
+  color:#858c99;
+  margin-top:3px;
+}
+
+.leave-top{
+  border:0;
+  border-radius:6px;
+  padding:8px 12px;
+  background:#d83b4b;
+  color:white;
+  font-weight:bold;
+}
+
+/* =====================================================
+QUADRADO DA TRANSMISSÃO
+
+Só aparece depois de entrar na análise.
 ===================================================== */
 
 .stage{
-position:relative;
-flex:1;
-min-height:0;
-margin:15px;
-border:1px solid #292d36;
-border-radius:10px;
-background:#090b0f;
-overflow:auto;
-padding:12px;
+  position:relative;
+  flex:1;
+  min-height:0;
+  margin:15px;
+  border:1px solid #292d36;
+  border-radius:10px;
+  background:#090b0f;
+  overflow:auto;
+  padding:12px;
 }
 
 .empty{
-min-height:100%;
-display:flex;
-align-items:center;
-justify-content:center;
-flex-direction:column;
-color:#858c99;
-text-align:center;
+  min-height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  color:#858c99;
+  text-align:center;
 }
 
 .empty-icon{
-font-size:45px;
-margin-bottom:10px;
+  font-size:45px;
+  margin-bottom:10px;
 }
 
 .empty h3{
-color:#e5e7ec;
-margin-bottom:6px;
+  color:#e5e7ec;
+  margin-bottom:6px;
 }
 
 .empty p{
-font-size:12px;
+  font-size:12px;
 }
-
 
 /* =====================================================
 VIDEO GRID
 ===================================================== */
 
 .video-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-gap:10px;
-width:100%;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:10px;
+  width:100%;
 }
 
 .video-card{
-position:relative;
-background:#151820;
-border-radius:8px;
-overflow:hidden;
-min-height:170px;
+  position:relative;
+  background:#151820;
+  border-radius:8px;
+  overflow:hidden;
+  min-height:170px;
 }
 
 .video-card video{
-width:100%;
-height:100%;
-min-height:170px;
-object-fit:cover;
-background:#050608;
-display:block;
+  width:100%;
+  height:100%;
+  min-height:170px;
+  object-fit:cover;
+  background:#050608;
+  display:block;
 }
 
 .video-label{
-position:absolute;
-bottom:8px;
-left:8px;
-background:rgba(0,0,0,.65);
-padding:5px 8px;
-border-radius:5px;
-font-size:11px;
+  position:absolute;
+  bottom:8px;
+  left:8px;
+  background:rgba(0,0,0,.65);
+  padding:5px 8px;
+  border-radius:5px;
+  font-size:11px;
 }
 
 .video-status{
-position:absolute;
-right:8px;
-bottom:8px;
-font-size:13px;
+  position:absolute;
+  right:8px;
+  bottom:8px;
+  font-size:13px;
 }
-
 
 /* =====================================================
 CONTROLES
+
+Só aparecem dentro da análise.
 ===================================================== */
 
 .controls{
-display:none;
-justify-content:center;
-gap:8px;
-padding:10px 15px 18px;
-flex-wrap:wrap;
-flex-shrink:0;
-}
-
-.controls.show{
-display:flex;
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  padding:10px 15px 18px;
+  flex-wrap:wrap;
+  flex-shrink:0;
 }
 
 .control{
-border:0;
-border-radius:7px;
-padding:11px 15px;
-background:#292e3a;
-color:white;
-font-weight:bold;
+  border:0;
+  border-radius:7px;
+  padding:11px 15px;
+  background:#292e3a;
+  color:white;
+  font-weight:bold;
 }
 
 .control:hover{
-background:#353b49;
+  background:#353b49;
 }
 
 .control.active{
-background:#5865f2;
+  background:#5865f2;
 }
 
 .control.danger{
-background:#d83b4b;
+  background:#d83b4b;
 }
 
 .control.danger:hover{
-background:#b52e3b;
+  background:#b52e3b;
 }
 
+/* =====================================================
+TELA CHEIA - REGRAS
+===================================================== */
+
+.rules-fullscreen{
+  position:fixed;
+  inset:0;
+  z-index:200;
+  background:#111318;
+  display:none;
+  flex-direction:column;
+}
+
+.rules-fullscreen.show{
+  display:flex;
+}
+
+.fullscreen-header{
+  height:65px;
+  flex-shrink:0;
+  border-bottom:1px solid #292d36;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 18px;
+}
+
+.fullscreen-header h2{
+  font-size:19px;
+}
+
+.fullscreen-close{
+  border:0;
+  border-radius:7px;
+  padding:9px 14px;
+  background:#343a48;
+  color:white;
+  font-weight:bold;
+}
+
+.rules-content{
+  flex:1;
+  overflow:auto;
+  padding:20px;
+}
+
+.rule-box{
+  max-width:1000px;
+  margin:0 auto;
+  background:#181b22;
+  border:1px solid #292d36;
+  border-radius:10px;
+  padding:20px;
+}
+
+.rule-box h2{
+  margin-bottom:18px;
+}
+
+.rule-box h3{
+  margin:20px 0 10px;
+}
+
+.rule{
+  font-size:13px;
+  line-height:1.5;
+  color:#c5c9d1;
+  margin:9px 0;
+}
+
+/* =====================================================
+ÁREA DOS DONOS
+===================================================== */
+
+.owner-panel{
+  position:fixed;
+  inset:0;
+  background:#111318;
+  z-index:300;
+  display:none;
+  flex-direction:column;
+}
+
+.owner-panel.show{
+  display:flex;
+}
+
+.owner-header{
+  height:65px;
+  flex-shrink:0;
+  border-bottom:1px solid #292d36;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 18px;
+}
+
+.owner-header h2{
+  font-size:19px;
+}
+
+.owner-close{
+  border:0;
+  border-radius:7px;
+  padding:9px 14px;
+  background:#d83b4b;
+  color:white;
+  font-weight:bold;
+}
+
+.owner-scroll{
+  flex:1;
+  overflow:auto;
+  padding:20px;
+}
+
+.owner-box{
+  width:min(800px,100%);
+  margin:0 auto;
+  background:#181b22;
+  border:1px solid #343944;
+  border-radius:12px;
+  padding:20px;
+}
+
+.input{
+  width:100%;
+  padding:12px;
+  border:1px solid #343944;
+  border-radius:7px;
+  background:#101218;
+  color:white;
+  margin-bottom:10px;
+  outline:none;
+}
+
+.owner-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:15px;
+}
+
+.admin-user{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:9px;
+  background:#22262f;
+  border-radius:7px;
+  margin:5px 0;
+  flex-wrap:wrap;
+}
+
+.admin-user-name{
+  flex:1;
+}
+
+.small-button{
+  border:0;
+  border-radius:5px;
+  padding:7px 9px;
+  background:#343a48;
+  color:white;
+  font-size:11px;
+}
 
 /* =====================================================
 TELA INICIAL
 ===================================================== */
 
-.home-screen{
-position:absolute;
-inset:0;
-display:flex;
-align-items:center;
-justify-content:center;
-flex-direction:column;
-text-align:center;
-padding:20px;
-color:#858c99;
+.home-message{
+  display:none;
 }
-
-.home-screen.hidden{
-display:none;
-}
-
-.home-logo{
-font-size:55px;
-margin-bottom:15px;
-}
-
-.home-screen h2{
-color:white;
-font-size:22px;
-margin-bottom:8px;
-}
-
-.home-screen p{
-font-size:13px;
-max-width:400px;
-line-height:1.5;
-}
-
-
-/* =====================================================
-PAINÉIS EM TELA CHEIA
-===================================================== */
-
-.fullscreen-panel{
-position:fixed;
-inset:0;
-z-index:500;
-background:#111318;
-display:none;
-flex-direction:column;
-overflow:hidden;
-}
-
-.fullscreen-panel.show{
-display:flex;
-}
-
-.fullscreen-header{
-height:70px;
-min-height:70px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 22px;
-border-bottom:1px solid #292d36;
-background:#181b22;
-}
-
-.fullscreen-header h2{
-font-size:20px;
-}
-
-.fullscreen-content{
-flex:1;
-overflow:auto;
-padding:25px;
-}
-
-
-/* =====================================================
-REGRAS
-===================================================== */
-
-.rule-box{
-max-width:1000px;
-margin:0 auto;
-background:#181b22;
-border:1px solid #292d36;
-border-radius:12px;
-padding:25px;
-}
-
-.rule-box h2{
-margin-bottom:20px;
-}
-
-.rule-box h3{
-margin:25px 0 12px;
-font-size:17px;
-}
-
-.rule{
-font-size:13px;
-line-height:1.6;
-color:#c5c9d1;
-margin:9px 0;
-padding:9px 10px;
-background:#20242d;
-border-radius:6px;
-}
-
-
-/* =====================================================
-DONOS
-===================================================== */
-
-.owner-content-box{
-width:min(850px,100%);
-margin:0 auto;
-background:#181b22;
-border:1px solid #343944;
-border-radius:12px;
-padding:25px;
-}
-
-.owner-content-box h2{
-margin-bottom:10px;
-}
-
-.owner-description{
-color:#858c99;
-font-size:13px;
-margin-bottom:18px;
-}
-
-.input{
-width:100%;
-padding:12px;
-border:1px solid #343944;
-border-radius:7px;
-background:#101218;
-color:white;
-margin-bottom:10px;
-outline:none;
-}
-
-.owner-actions{
-display:flex;
-gap:8px;
-flex-wrap:wrap;
-margin-bottom:15px;
-}
-
-.close-button{
-border:0;
-background:#d83b4b;
-color:white;
-padding:9px 12px;
-border-radius:6px;
-}
-
-.admin-user{
-display:flex;
-align-items:center;
-gap:8px;
-padding:9px;
-background:#22262f;
-border-radius:7px;
-margin:5px 0;
-flex-wrap:wrap;
-}
-
-.admin-user-name{
-flex:1;
-min-width:130px;
-}
-
-.small-button{
-border:0;
-border-radius:5px;
-padding:7px 9px;
-background:#343a48;
-color:white;
-font-size:11px;
-}
-
 
 /* =====================================================
 MOBILE
@@ -560,102 +610,110 @@ MOBILE
 
 @media(max-width:700px){
 
-.sidebar{
-width:100%;
-height:43%;
-border-right:0;
-border-bottom:1px solid #292d36;
+  .sidebar{
+    width:100%;
+    height:100vh;
+    border-right:0;
+    border-bottom:0;
+  }
+
+  .app{
+    flex-direction:column;
+  }
+
+  .logo{
+    padding:15px;
+    font-size:19px;
+  }
+
+  .category{
+    padding-top:12px;
+  }
+
+  .user-area{
+    display:none;
+  }
+
+  .main{
+    position:fixed;
+    inset:0;
+    z-index:100;
+    width:100%;
+    height:100vh;
+  }
+
+  .analysis-preview{
+    padding:15px;
+  }
+
+  .preview-box{
+    padding:25px 18px;
+  }
+
+  .room-top{
+    height:55px;
+    padding:8px 10px;
+  }
+
+  .stage{
+    margin:7px;
+    padding:7px;
+  }
+
+  .video-grid{
+    grid-template-columns:1fr 1fr;
+    gap:6px;
+  }
+
+  .video-card{
+    min-height:120px;
+  }
+
+  .video-card video{
+    min-height:120px;
+  }
+
+  .control{
+    flex:1;
+    min-width:130px;
+    font-size:12px;
+    padding:10px;
+  }
+
+  .rules-content,
+  .owner-scroll{
+    padding:10px;
+  }
+
+  .rule-box,
+  .owner-box{
+    padding:15px;
+  }
+
 }
 
-.app{
-flex-direction:column;
-}
+/* =====================================================
+TELA MUITO PEQUENA
+===================================================== */
 
-.logo{
-padding:12px 15px;
-font-size:19px;
-}
+@media(max-width:400px){
 
-.category{
-padding-top:10px;
-}
+  .video-grid{
+    grid-template-columns:1fr;
+  }
 
-.user-area{
-display:none;
-}
-
-.main{
-height:57%;
-}
-
-.header{
-height:58px;
-padding:10px 15px;
-}
-
-.header h2{
-font-size:16px;
-}
-
-.stage{
-margin:7px;
-padding:7px;
-}
-
-.video-grid{
-grid-template-columns:1fr 1fr;
-gap:6px;
-}
-
-.video-card{
-min-height:120px;
-}
-
-.video-card video{
-min-height:120px;
-}
-
-.control{
-flex:1;
-min-width:130px;
-font-size:12px;
-padding:10px;
-}
-
-.fullscreen-header{
-height:58px;
-min-height:58px;
-padding:0 15px;
-}
-
-.fullscreen-header h2{
-font-size:17px;
-}
-
-.fullscreen-content{
-padding:10px;
-}
-
-.rule-box,
-.owner-content-box{
-padding:15px;
-}
-
-.rule{
-font-size:12px;
-}
+  .control{
+    min-width:100%;
+  }
 
 }
 
 </style>
-
 </head>
-
 
 <body>
 
 <div class="app">
-
 
 <!-- ==================================================
 SIDEBAR
@@ -663,77 +721,72 @@ SIDEBAR
 
 <aside class="sidebar">
 
-<div class="logo">
-🔥 FF Arena
-</div>
+  <div class="logo">
+    🔥 FF Arena
+  </div>
 
+  <!-- ÁREA DOS DONOS PRIMEIRO -->
 
-<!-- ÁREA DOS DONOS PRIMEIRO -->
+  <div
+    class="channel"
+    id="ownerButton"
+    onclick="openOwnerPanel()"
+  >
+    👑
+    <span class="channel-name">
+      Área dos Donos
+    </span>
+  </div>
 
-<div
-class="channel"
-onclick="openOwnerPanel()"
->
-👑
-<span class="channel-name">
-Área dos Donos
-</span>
-</div>
+  <!-- REGRAS SEGUNDO -->
 
+  <div
+    class="channel"
+    id="rulesButton"
+    onclick="openRules()"
+  >
+    📜
+    <span class="channel-name">
+      Regras
+    </span>
+  </div>
 
-<!-- REGRAS SEGUNDO -->
+  <!-- ANÁLISES ABAIXO -->
 
-<div
-class="channel"
-id="rulesButton"
-onclick="openRules()"
->
-📜
-<span class="channel-name">
-Regras
-</span>
-</div>
+  <div class="category">
+    🔎 ANÁLISES
+  </div>
 
+  <div id="channels"></div>
 
-<!-- ANÁLISES EMBAIXO -->
+  <div class="user-area">
 
-<div class="category">
-🔎 ANÁLISES
-</div>
+    <div
+      class="avatar"
+      id="myAvatar"
+    >
+      U
+    </div>
 
-<div id="channels"></div>
+    <div class="user-info">
 
+      <div
+        class="user-name"
+        id="myNameDisplay"
+      >
+        Usuário
+      </div>
 
-<!-- USUÁRIO -->
+      <div
+        class="user-role"
+        id="myRoleDisplay"
+      >
+        MEMBRO
+      </div>
 
-<div class="user-area">
+    </div>
 
-<div
-class="avatar"
-id="myAvatar"
->
-U
-</div>
-
-<div class="user-info">
-
-<div
-class="user-name"
-id="myNameDisplay"
->
-Usuário
-</div>
-
-<div
-class="user-role"
-id="myRoleDisplay"
->
-MEMBRO
-</div>
-
-</div>
-
-</div>
+  </div>
 
 </aside>
 
@@ -742,412 +795,432 @@ MEMBRO
 MAIN
 ================================================== -->
 
-<main class="main">
-
-<header class="header">
-
-<div>
-
-<h2 id="title">
-🔥 FF Arena
-</h2>
-
-<p id="description">
-Selecione uma Análise para entrar.
-</p>
-
-</div>
-
-</header>
-
-
-<section
-class="stage"
-id="stage"
+<main
+  class="main"
+  id="main"
 >
 
-<!-- TELA INICIAL -->
+  <!-- PRÉVIA DA ANÁLISE -->
 
-<div
-class="home-screen"
-id="homeScreen"
->
+  <section
+    class="analysis-preview"
+    id="analysisPreview"
+  >
 
-<div class="home-logo">
-🔥
-</div>
+    <div class="preview-box">
 
-<h2>
-FF Arena
-</h2>
+      <div class="preview-icon">
+        🔎
+      </div>
 
-<p>
-Selecione uma Análise para entrar.
-</p>
+      <h2 id="previewTitle">
+        Análise 01
+      </h2>
 
-</div>
+      <p>
+        Você selecionou esta análise.
+        Para entrar na sala, toque no botão abaixo.
+      </p>
 
+      <button
+        class="enter-analysis"
+        onclick="enterSelectedAnalysis()"
+      >
+        ▶️ Entrar na análise
+      </button>
 
-<!-- EMPTY DA ANÁLISE -->
+    </div>
 
-<div
-class="empty"
-id="empty"
-style="display:none"
->
-
-<div class="empty-icon">
-🎥
-</div>
-
-<h3>
-Nenhuma análise aberta
-</h3>
-
-<p>
-Abra a câmera ou compartilhe sua tela.
-</p>
-
-</div>
+  </section>
 
 
-<div
-class="video-grid"
-id="videoGrid"
-></div>
+  <!-- SALA DA ANÁLISE -->
 
-</section>
+  <section
+    class="analysis-room"
+    id="analysisRoom"
+  >
+
+    <header class="room-top">
+
+      <div>
+
+        <div
+          class="room-title"
+          id="roomTitle"
+        >
+          🔎 Análise 01
+        </div>
+
+        <div
+          class="room-description"
+          id="description"
+        >
+          Conectando à análise...
+        </div>
+
+      </div>
+
+      <button
+        class="leave-top"
+        onclick="leaveRoom()"
+      >
+        ⏹ Sair
+      </button>
+
+    </header>
 
 
-<!-- CONTROLES -->
+    <!-- QUADRADO SÓ EXISTE AQUI -->
 
-<footer
-class="controls"
-id="controls"
->
+    <section
+      class="stage"
+      id="stage"
+    >
 
-<button
-class="control"
-id="cameraButton"
-onclick="toggleCamera()"
->
-📷 Abrir câmera
-</button>
+      <div
+        class="empty"
+        id="empty"
+      >
 
-<button
-class="control"
-id="screenButton"
-onclick="toggleScreen()"
->
-🖥️ Compartilhar tela
-</button>
+        <div class="empty-icon">
+          🎥
+        </div>
 
-<button
-class="control"
-id="micButton"
-onclick="toggleMicrophone()"
->
-🎙️ Microfone
-</button>
+        <h3>
+          Nenhuma transmissão ativa
+        </h3>
 
-<button
-class="control danger"
-onclick="leaveRoom()"
->
-⏹ Sair
-</button>
+        <p>
+          Abra a câmera ou compartilhe sua tela.
+        </p>
 
-</footer>
+      </div>
+
+      <div
+        class="video-grid"
+        id="videoGrid"
+      ></div>
+
+    </section>
+
+
+    <!-- CONTROLES -->
+
+    <footer class="controls">
+
+      <button
+        class="control"
+        id="cameraButton"
+        onclick="toggleCamera()"
+      >
+        📷 Abrir câmera
+      </button>
+
+      <button
+        class="control"
+        id="screenButton"
+        onclick="toggleScreen()"
+      >
+        🖥️ Compartilhar tela
+      </button>
+
+      <button
+        class="control"
+        id="micButton"
+        onclick="toggleMicrophone()"
+      >
+        🎙️ Microfone
+      </button>
+
+      <button
+        class="control danger"
+        onclick="leaveRoom()"
+      >
+        ⏹ Sair
+      </button>
+
+    </footer>
+
+  </section>
 
 </main>
 
-</div>
-
 
 <!-- ==================================================
-PAINEL DE REGRAS — TELA CHEIA
+REGRAS EM TELA CHEIA
 ================================================== -->
 
 <div
-class="fullscreen-panel"
-id="rulesPanel"
+  class="rules-fullscreen"
+  id="rulesFullscreen"
 >
 
-<div class="fullscreen-header">
+  <header class="fullscreen-header">
 
-<h2>
-📜 Regras
-</h2>
+    <h2>
+      📜 Regras da FF Arena
+    </h2>
 
-<button
-class="close-button"
-onclick="closeRules()"
->
-✕ Fechar
-</button>
+    <button
+      class="fullscreen-close"
+      onclick="closeRules()"
+    >
+      ✕ Fechar
+    </button>
 
-</div>
-
-
-<div class="fullscreen-content">
-
-<div class="rule-box">
-
-<h2>
-📜 REGRAS DA FF ARENA
-</h2>
+  </header>
 
 
-<h3>
-📱 ANDROID
-</h3>
+  <div class="rules-content">
 
-<div class="rule">
-🔹 PROIBIDO ROOT.
-</div>
+    <div class="rule-box">
 
-<div class="rule">
-🔹 PROIBIDO MT MANAGER.
-</div>
-
-<div class="rule">
-🔹 PLAY STORE PÓS-PARTIDA PODE RESULTAR EM W.O CASO O ANALISTA ACHE NECESSÁRIO.
-</div>
-
-<div class="rule">
-🔹 PROIBIDO JOGAR QUALQUER MODO QUE SALVE REPLAY PÓS-PARTIDA.
-</div>
-
-<div class="rule">
-🔹 PROIBIDO QUALQUER TIPO DE ARQUIVO OU PROGRAMA QUE DÊ VANTAGEM SOBRE OUTROS JOGADORES.
-</div>
-
-<div class="rule">
-🔹 PROIBIDO ACESSAR GOOGLE DRIVE E ZARCHIVER PÓS-PARTIDA.
-</div>
-
-<div class="rule">
-🔹 NAVEGADOR SÓ SERÁ W.O CASO O HISTÓRICO ESTEJA LIMPO.
-</div>
-
-<div class="rule">
-🔹 QUALQUER TIPO DE ARQUIVO, PROGRAMA OU RASTRO SUSPEITO DO DIA 01 DE JANEIRO DE 2026 EM DIANTE SERÁ APLICADO W.O.
-</div>
-
-<div class="rule">
-🔹 SHADERS MODIFICADA É W.O.
-</div>
-
-<div class="rule">
-🔹 QUALQUER TIPO DE VPN QUE NÃO SEJA DO GOVERNO OU APOSTAS ESPORTIVAS SERÁ APLICADO W.O.
-</div>
-
-<div class="rule">
-🔹 OBRIGATÓRIO TER APP USAGE INSTALADO COM TODAS AS PERMISSÕES CONCEDIDAS.
-</div>
-
-<div class="rule">
-🔹 APP USAGE DESINSTALADO — W.O APENAS SE ESTIVER COM REPLAY SUSPEITO.
-</div>
-
-<div class="rule">
-🔹 EM CASOS DE REPLAY SUSPEITO COM BUFFER DE LOG 256KB — PASSÍVEL DE W.O.
-</div>
+      <h2>
+        📜 REGRAS
+      </h2>
 
 
-<h3>
-🍎 IOS
-</h3>
+      <h3>
+        📱 ANDROID
+      </h3>
 
-<div class="rule">
-🔹 VPN É W.O. (EXCETO VPN ESCOLAR).
-</div>
+      <div class="rule">
+        🔹 PROIBIDO ROOT.
+      </div>
 
-<div class="rule">
-🔹 IPHONE É PROIBIDO REINICIAR DURANTE/APÓS A PARTIDA.
-</div>
+      <div class="rule">
+        🔹 PROIBIDO MT MANAGER.
+      </div>
 
-<div class="rule">
-🔹 IPHONE OBRIGATÓRIO JOGAR COM TEMPO DE USO E RELATÓRIO DE PRIVACIDADE ATIVADO.
-</div>
+      <div class="rule">
+        🔹 PLAY STORE PÓS-PARTIDA PODE RESULTAR EM W.O CASO O ANALISTA ACHE NECESSÁRIO.
+      </div>
 
-<div class="rule">
-🔹 PROIBIDO SCARLET, ESIGN, KSIGN, GBOX E SIMILARES.
-</div>
+      <div class="rule">
+        🔹 PROIBIDO JOGAR QUALQUER MODO QUE SALVE REPLAY PÓS-PARTIDA.
+      </div>
 
-<div class="rule">
-🔹 IPHONE VERSÃO 15.X A 16.X EM APOSTAS ACIMA DE R$50 (MD3): DEVE ABRIR TELA REINSTALANDO O JOGO E ENTRANDO NA SALA.
-</div>
+      <div class="rule">
+        🔹 PROIBIDO QUALQUER TIPO DE ARQUIVO OU PROGRAMA QUE DÊ VANTAGEM SOBRE OUTROS JOGADORES.
+      </div>
 
-<div class="rule">
-🔹 IPHONES 15.X–16.X COM APP STORE NA BATERIA APÓS A PARTIDA SÃO PASSÍVEIS DE W.O.
-</div>
+      <div class="rule">
+        🔹 PROIBIDO ACESSAR GOOGLE DRIVE E ZARCHIVER PÓS-PARTIDA.
+      </div>
 
-<div class="rule">
-🔹 IPHONES 15.X–16.X COM REPLAY SUSPEITO SÃO PASSÍVEIS DE W.O.
-</div>
+      <div class="rule">
+        🔹 NAVEGADOR SÓ SERÁ W.O CASO O HISTÓRICO ESTEJA LIMPO.
+      </div>
 
-<div class="rule">
-🔹 IPHONES COM MODO DEVELOPER ATIVADO RESULTAM EM W.O.
-</div>
+      <div class="rule">
+        🔹 QUALQUER TIPO DE ARQUIVO, PROGRAMA OU RASTRO SUSPEITO DO DIA 01 DE JANEIRO DE 2026 EM DIANTE SERÁ APLICADO W.O.
+      </div>
 
-<div class="rule">
-🔹 É PROIBIDO RELOGAR COM REPLAY SUSPEITO.
-</div>
+      <div class="rule">
+        🔹 SHADERS MODIFICADA É W.O.
+      </div>
 
-<div class="rule">
-🔹 RELATÓRIO DE PRIVACIDADE OU TEMPO DE USO DESATIVADO — W.O APENAS SE REPLAY ESTIVER SUSPEITO.
-</div>
+      <div class="rule">
+        🔹 QUALQUER TIPO DE VPN QUE NÃO SEJA DO GOVERNO OU APOSTAS ESPORTIVAS SERÁ APLICADO W.O.
+      </div>
 
+      <div class="rule">
+        🔹 OBRIGATÓRIO TER APP USAGE INSTALADO COM TODAS AS PERMISSÕES CONCEDIDAS.
+      </div>
 
-<h3>
-🖥️ EMULADO
-</h3>
+      <div class="rule">
+        🔹 APP USAGE DESINSTALADO — W.O APENAS SE ESTIVER COM REPLAY SUSPEITO.
+      </div>
 
-<div class="rule">
-🔹 PROIBIDO USO DE INJEÇÕES OU MODIFICAÇÕES DE DLL DURANTE/APÓS A PARTIDA.
-</div>
-
-<div class="rule">
-🔹 PROIBIDO REMOVER PENDRIVE PÓS BOOT.
-</div>
-
-<div class="rule">
-🔹 TODOS OS DISCOS DEVEM SER NTFS COM USNJOURNAL ATIVO.
-</div>
-
-<div class="rule">
-🔹 PROIBIDO REINICIAR O EMULADOR APÓS A PARTIDA.
-</div>
-
-<div class="rule">
-🔹 TEMP, PREFETCH, RECENT LIMPAS PÓS BOOT DO PC = W.O.
-</div>
-
-<div class="rule">
-🔹 BAM PAUSADA/LIMPA = W.O.
-</div>
-
-<div class="rule">
-🔹 WINDOWS MODIFICADO QUE IMPOSSIBILITE TELAGEM = W.O.
-</div>
-
-<div class="rule">
-🔹 NEGAR ACESSO VIA ANYDESK/TEAMVIEWER = W.O.
-</div>
-
-<div class="rule">
-🔹 SYSMON ATIVADA APÓS BOOT = W.O.
-</div>
-
-<div class="rule">
-🔹 RASTRO DE SERVIÇO PAUSADO MESMO QUE TEMPORARIAMENTE = W.O.
-</div>
-
-<div class="rule">
-🔹 SEMPRE CONFIRA ATUALIZAÇÕES DA SYSMON.
-</div>
-
-<div class="rule">
-🔹 PLACAS-MÃES X99: AVISAR O SS CASO NÃO TENHA SECURE BOOT/TPM.
-</div>
-
-<div class="rule">
-🔹 PROIBIDO USO DE EMULADORES PROTEGIDOS POR KERNEL.
-</div>
-
-<div class="rule">
-🔹 CASO ALGUM SERVIÇO NECESSÁRIO ESTEJA DESABILITADO, SERÁ W.O EM REPLAYS SUSPEITOS.
-</div>
-
-<div class="rule">
-🔹 EM CASOS PARA CONFERIR SE O EMULADOR É PERMITIDO OU NÃO, INSTALE O ARQUIVO QUE CONFERE O EMULADOR.
-</div>
+      <div class="rule">
+        🔹 EM CASOS DE REPLAY SUSPEITO COM BUFFER DE LOG 256KB — PASSÍVEL DE W.O.
+      </div>
 
 
-<h3>
-⚠️ REGRA FINAL
-</h3>
+      <h3>
+        🍎 IOS
+      </h3>
 
-<div class="rule">
-🔹 BREVENT PAREADO SERÁ W.O.
-</div>
+      <div class="rule">
+        🔹 VPN É W.O. (EXCETO VPN ESCOLAR).
+      </div>
 
-</div>
+      <div class="rule">
+        🔹 IPHONE É PROIBIDO REINICIAR DURANTE/APÓS A PARTIDA.
+      </div>
 
-</div>
+      <div class="rule">
+        🔹 IPHONE OBRIGATÓRIO JOGAR COM TEMPO DE USO E RELATÓRIO DE PRIVACIDADE ATIVADO.
+      </div>
+
+      <div class="rule">
+        🔹 PROIBIDO SCARLET, ESIGN, KSIGN, GBOX E SIMILARES.
+      </div>
+
+      <div class="rule">
+        🔹 IPHONE VERSÃO 15.X A 16.X EM APOSTAS ACIMA DE R$50 (MD3): DEVE ABRIR TELA REINSTALANDO O JOGO E ENTRANDO NA SALA.
+      </div>
+
+      <div class="rule">
+        🔹 IPHONES 15.X–16.X COM APP STORE NA BATERIA APÓS A PARTIDA SÃO PASSÍVEIS DE W.O.
+      </div>
+
+      <div class="rule">
+        🔹 IPHONES 15.X–16.X COM REPLAY SUSPEITO SÃO PASSÍVEIS DE W.O.
+      </div>
+
+      <div class="rule">
+        🔹 IPHONES COM MODO DEVELOPER ATIVADO RESULTAM EM W.O.
+      </div>
+
+      <div class="rule">
+        🔹 É PROIBIDO RELOGAR COM REPLAY SUSPEITO.
+      </div>
+
+      <div class="rule">
+        🔹 RELATÓRIO DE PRIVACIDADE OU TEMPO DE USO DESATIVADO — W.O APENAS SE REPLAY ESTIVER SUSPEITO.
+      </div>
+
+
+      <h3>
+        🖥️ EMULADO
+      </h3>
+
+      <div class="rule">
+        🔹 PROIBIDO USO DE INJEÇÕES OU MODIFICAÇÕES DE DLL DURANTE/APÓS A PARTIDA.
+      </div>
+
+      <div class="rule">
+        🔹 PROIBIDO REMOVER PENDRIVE PÓS BOOT.
+      </div>
+
+      <div class="rule">
+        🔹 TODOS OS DISCOS DEVEM SER NTFS COM USNJOURNAL ATIVO.
+      </div>
+
+      <div class="rule">
+        🔹 PROIBIDO REINICIAR O EMULADOR APÓS A PARTIDA.
+      </div>
+
+      <div class="rule">
+        🔹 TEMP, PREFETCH, RECENT LIMPAS PÓS BOOT DO PC = W.O.
+      </div>
+
+      <div class="rule">
+        🔹 BAM PAUSADA/LIMPA = W.O.
+      </div>
+
+      <div class="rule">
+        🔹 WINDOWS MODIFICADO QUE IMPOSSIBILITE TELAGEM = W.O.
+      </div>
+
+      <div class="rule">
+        🔹 NEGAR ACESSO VIA ANYDESK/TEAMVIEWER = W.O.
+      </div>
+
+      <div class="rule">
+        🔹 SYSMON ATIVADA APÓS BOOT = W.O.
+      </div>
+
+      <div class="rule">
+        🔹 RASTRO DE SERVIÇO PAUSADO MESMO QUE TEMPORARIAMENTE = W.O.
+      </div>
+
+      <div class="rule">
+        🔹 SEMPRE CONFIRA ATUALIZAÇÕES DA SYSMON.
+      </div>
+
+      <div class="rule">
+        🔹 PLACAS-MÃES X99: AVISAR O SS CASO NÃO TENHA SECURE BOOT/TPM.
+      </div>
+
+      <div class="rule">
+        🔹 PROIBIDO USO DE EMULADORES PROTEGIDOS POR KERNEL.
+      </div>
+
+      <div class="rule">
+        🔹 CASO ALGUM SERVIÇO NECESSÁRIO ESTEJA DESABILITADO, SERÁ W.O EM REPLAYS SUSPEITOS.
+      </div>
+
+      <div class="rule">
+        🔹 EM CASOS PARA CONFERIR SE O EMULADOR É PERMITIDO OU NÃO, INSTALE O ARQUIVO QUE CONFERE O EMULADOR.
+      </div>
+
+
+      <h3>
+        ⚠️ REGRA FINAL
+      </h3>
+
+      <div class="rule">
+        🔹 BREVENT PAREADO SERÁ W.O.
+      </div>
+
+    </div>
+
+  </div>
 
 </div>
 
 
 <!-- ==================================================
-ÁREA DOS DONOS — TELA CHEIA
+ÁREA DOS DONOS EM TELA CHEIA
 ================================================== -->
 
 <div
-class="fullscreen-panel"
-id="ownerPanel"
+  class="owner-panel"
+  id="ownerPanel"
 >
 
-<div class="fullscreen-header">
+  <header class="owner-header">
 
-<h2>
-👑 Área dos Donos
-</h2>
+    <h2>
+      👑 Área dos Donos
+    </h2>
 
-<button
-class="close-button"
-onclick="closeOwnerPanel()"
->
-✕ Fechar
-</button>
+    <button
+      class="owner-close"
+      onclick="closeOwnerPanel()"
+    >
+      ✕ Fechar
+    </button>
 
-</div>
+  </header>
 
 
-<div class="fullscreen-content">
+  <div class="owner-scroll">
 
-<div class="owner-content-box">
+    <div class="owner-box">
 
-<h2>
-👑 Administração da FF Arena
-</h2>
+      <p
+        style="color:#858c99;font-size:12px;margin-bottom:15px"
+      >
+        Entre com o código do Dono para administrar a sala.
+      </p>
 
-<p class="owner-description">
-Entre com o código do Dono para administrar a sala.
-</p>
+      <input
+        class="input"
+        id="ownerCode"
+        type="password"
+        placeholder="Código do Dono"
+      >
 
-<input
-class="input"
-id="ownerCode"
-type="password"
-placeholder="Código do Dono"
->
+      <div class="owner-actions">
 
-<div class="owner-actions">
+        <button
+          class="control"
+          onclick="ownerLogin()"
+        >
+          Entrar
+        </button>
 
-<button
-class="control"
-onclick="ownerLogin()"
->
-Entrar
-</button>
+      </div>
 
-</div>
+      <div id="ownerContent"></div>
 
-<div id="ownerContent">
+    </div>
 
-<p
-style="color:#858c99;font-size:12px"
->
-Faça login como Dono para administrar os membros.
-</p>
-
-</div>
-
-</div>
-
-</div>
+  </div>
 
 </div>
 
@@ -1159,11 +1232,13 @@ CONFIGURAÇÃO
 ===================================================== */
 
 const SERVER_URL =
-"wss://ff-arena-serve.onrender.com";
+  "wss://ff-arena-serve.onrender.com";
 
 let socket = null;
 
-let currentRoom = null;
+let currentRoom = 1;
+
+let selectedRoom = null;
 
 let myId = null;
 
@@ -1179,6 +1254,11 @@ let microphoneMuted = false;
 
 let ownerAuthenticated = false;
 
+
+/* =====================================================
+WEBRTC
+===================================================== */
+
 const peerConnections = {};
 
 const makingOffer = {};
@@ -1193,60 +1273,66 @@ ELEMENTOS
 ===================================================== */
 
 const channels =
-document.getElementById("channels");
+  document.getElementById("channels");
 
-const title =
-document.getElementById("title");
+const main =
+  document.getElementById("main");
+
+const analysisPreview =
+  document.getElementById("analysisPreview");
+
+const analysisRoom =
+  document.getElementById("analysisRoom");
+
+const previewTitle =
+  document.getElementById("previewTitle");
+
+const roomTitle =
+  document.getElementById("roomTitle");
 
 const description =
-document.getElementById("description");
+  document.getElementById("description");
 
 const videoGrid =
-document.getElementById("videoGrid");
+  document.getElementById("videoGrid");
 
 const empty =
-document.getElementById("empty");
-
-const homeScreen =
-document.getElementById("homeScreen");
-
-const controls =
-document.getElementById("controls");
+  document.getElementById("empty");
 
 const cameraButton =
-document.getElementById("cameraButton");
+  document.getElementById("cameraButton");
 
 const screenButton =
-document.getElementById("screenButton");
+  document.getElementById("screenButton");
 
 const micButton =
-document.getElementById("micButton");
-
-const rulesPanel =
-document.getElementById("rulesPanel");
+  document.getElementById("micButton");
 
 const ownerPanel =
-document.getElementById("ownerPanel");
+  document.getElementById("ownerPanel");
 
 const ownerContent =
-document.getElementById("ownerContent");
+  document.getElementById("ownerContent");
+
+const rulesFullscreen =
+  document.getElementById("rulesFullscreen");
 
 
 /* =====================================================
 CRIAR 20 ANÁLISES
 ===================================================== */
 
-for(let i=1;i<=20;i++){
+for(let i = 1; i <= 20; i++){
 
   const container =
-  document.createElement("div");
+    document.createElement("div");
 
   container.innerHTML = `
 
     <div
       class="channel"
       id="channel-${i}"
-      onclick="openRoom(${i})"
+      onclick="selectAnalysis(${i})"
     >
 
       <span>🔎</span>
@@ -1272,7 +1358,6 @@ for(let i=1;i<=20;i++){
   `;
 
   channels.appendChild(container);
-
 }
 
 
@@ -1283,7 +1368,7 @@ NOME
 function loadName(){
 
   const saved =
-  localStorage.getItem("ffArenaName");
+    localStorage.getItem("ffArenaName");
 
   if(saved){
 
@@ -1292,12 +1377,12 @@ function loadName(){
   }else{
 
     const answer =
-    prompt("Digite seu nome:");
+      prompt("Digite seu nome:");
 
     myName =
-    (answer || "Usuário")
-    .trim()
-    .slice(0,30);
+      (answer || "Usuário")
+        .trim()
+        .slice(0,30);
 
     if(!myName){
       myName = "Usuário";
@@ -1311,7 +1396,6 @@ function loadName(){
   }
 
   updateProfile();
-
 }
 
 
@@ -1330,43 +1414,81 @@ function updateProfile(){
     "myRoleDisplay"
   ).textContent =
     myRole;
-
 }
 
 
 /* =====================================================
-ABRIR ANÁLISE
+SELECIONAR ANÁLISE
+
+IMPORTANTE:
+Aqui NÃO entra na sala.
+Apenas mostra o botão "Entrar na análise".
 ===================================================== */
 
-function openRoom(room){
+function selectAnalysis(room){
 
-  closeRules();
-  closeOwnerPanel();
-
-  currentRoom = room;
-
-  homeScreen.classList.add("hidden");
-
-  empty.style.display = "flex";
-
-  controls.classList.add("show");
+  selectedRoom = room;
 
   document
-  .querySelectorAll(".channel")
-  .forEach(el =>
-    el.classList.remove("active")
-  );
+    .querySelectorAll(".channel")
+    .forEach(el =>
+      el.classList.remove("active")
+    );
 
   const channel =
-  document.getElementById(
-    `channel-${room}`
-  );
+    document.getElementById(
+      `channel-${room}`
+    );
 
   if(channel){
     channel.classList.add("active");
   }
 
-  title.textContent =
+  previewTitle.textContent =
+    `Análise ${String(room).padStart(2,"0")}`;
+
+  main.classList.add("show");
+
+  analysisPreview.style.display =
+    "flex";
+
+  analysisRoom.classList.remove(
+    "show"
+  );
+
+}
+
+
+/* =====================================================
+ENTRAR NA ANÁLISE
+
+Só aqui a conexão começa.
+===================================================== */
+
+function enterSelectedAnalysis(){
+
+  if(!selectedRoom){
+    return;
+  }
+
+  enterRoom(selectedRoom);
+}
+
+
+function enterRoom(room){
+
+  currentRoom = room;
+
+  selectedRoom = room;
+
+  analysisPreview.style.display =
+    "none";
+
+  analysisRoom.classList.add(
+    "show"
+  );
+
+  roomTitle.textContent =
     `🔎 Análise ${String(room).padStart(2,"0")}`;
 
   description.textContent =
@@ -1396,16 +1518,20 @@ function connectServer(room){
   }
 
   socket =
-  new WebSocket(SERVER_URL);
+    new WebSocket(SERVER_URL);
 
 
   socket.onopen = () => {
 
     socket.send(
       JSON.stringify({
+
         type:"join",
+
         room:String(room),
+
         name:myName
+
       })
     );
 
@@ -1413,195 +1539,209 @@ function connectServer(room){
 
 
   socket.onmessage =
-  async(event) => {
+    async(event) => {
 
-    let data;
+      let data;
 
-    try{
+      try{
 
-      data =
-      JSON.parse(event.data);
+        data =
+          JSON.parse(event.data);
 
-    }catch{
+      }catch{
 
-      return;
-
-    }
-
-
-    if(data.type === "joined"){
-
-      myId = data.id;
-
-      myRole =
-      data.role || "MEMBRO";
-
-      updateProfile();
-
-      description.textContent =
-        "Você está conectado.";
-
-      for(
-        const peer
-        of data.peers || []
-      ){
-
-        await createPeerConnection(
-          peer.id,
-          peer,
-          true
-        );
+        return;
 
       }
 
-      updateOwnerPanel();
 
-      return;
-    }
+      if(data.type === "joined"){
 
+        myId =
+          data.id;
 
-    if(data.type === "peer-joined"){
-
-      await createPeerConnection(
-        data.user.id,
-        data.user,
-        false
-      );
-
-      return;
-    }
-
-
-    if(data.type === "offer"){
-
-      await receiveOffer(
-        data.from,
-        data.data
-      );
-
-      return;
-    }
-
-
-    if(data.type === "answer"){
-
-      await receiveAnswer(
-        data.from,
-        data.data
-      );
-
-      return;
-    }
-
-
-    if(data.type === "ice-candidate"){
-
-      await receiveIce(
-        data.from,
-        data.data
-      );
-
-      return;
-    }
-
-
-    if(data.type === "peer-left"){
-
-      removePeer(data.id);
-
-      return;
-    }
-
-
-    if(data.type === "users"){
-
-      updateUsers(
-        data.users || []
-      );
-
-      updateOwnerPanel();
-
-      return;
-    }
-
-
-    if(data.type === "force-mute"){
-
-      forceMute();
-
-      return;
-    }
-
-
-    if(data.type === "force-unmute"){
-
-      forceUnmute();
-
-      return;
-    }
-
-
-    if(data.type === "role-changed"){
-
-      myRole =
-      data.role;
-
-      updateProfile();
-
-      updateOwnerPanel();
-
-      return;
-    }
-
-
-    if(data.type === "owner-login-result"){
-
-      if(data.success){
-
-        ownerAuthenticated = true;
-
-        myRole = "DONO";
+        myRole =
+          data.role || "MEMBRO";
 
         updateProfile();
 
-        alert("Você entrou como Dono.");
+        description.textContent =
+          "Você está conectado.";
 
-      }else{
+        for(
+          const peer
+          of data.peers || []
+        ){
+
+          await createPeerConnection(
+            peer.id,
+            peer,
+            true
+          );
+
+        }
+
+        updateOwnerPanel();
+
+        return;
+      }
+
+
+      if(data.type === "peer-joined"){
+
+        await createPeerConnection(
+          data.user.id,
+          data.user,
+          false
+        );
+
+        return;
+      }
+
+
+      if(data.type === "offer"){
+
+        await receiveOffer(
+          data.from,
+          data.data
+        );
+
+        return;
+      }
+
+
+      if(data.type === "answer"){
+
+        await receiveAnswer(
+          data.from,
+          data.data
+        );
+
+        return;
+      }
+
+
+      if(data.type === "ice-candidate"){
+
+        await receiveIce(
+          data.from,
+          data.data
+        );
+
+        return;
+      }
+
+
+      if(data.type === "peer-left"){
+
+        removePeer(
+          data.id
+        );
+
+        return;
+      }
+
+
+      if(data.type === "users"){
+
+        updateUsers(
+          data.users || []
+        );
+
+        updateOwnerPanel();
+
+        return;
+      }
+
+
+      if(data.type === "force-mute"){
+
+        forceMute();
+
+        return;
+      }
+
+
+      if(data.type === "force-unmute"){
+
+        forceUnmute();
+
+        return;
+      }
+
+
+      if(data.type === "role-changed"){
+
+        myRole =
+          data.role;
+
+        updateProfile();
+
+        updateOwnerPanel();
+
+        return;
+      }
+
+
+      if(data.type === "owner-login-result"){
+
+        if(data.success){
+
+          ownerAuthenticated =
+            true;
+
+          myRole =
+            "DONO";
+
+          updateProfile();
+
+          alert(
+            "Você entrou como Dono."
+          );
+
+        }else{
+
+          alert(
+            data.message ||
+            "Código incorreto."
+          );
+
+        }
+
+        updateOwnerPanel();
+
+        return;
+      }
+
+
+      if(data.type === "room-full"){
 
         alert(
           data.message ||
-          "Código incorreto."
+          "A análise está cheia."
+        );
+
+        return;
+      }
+
+
+      if(data.type === "error"){
+
+        alert(
+          data.message ||
+          "Erro."
         );
 
       }
 
-      updateOwnerPanel();
-
-      return;
-    }
-
-
-    if(data.type === "room-full"){
-
-      alert(data.message);
-
-      return;
-    }
-
-
-    if(data.type === "error"){
-
-      alert(data.message);
-
-      return;
-    }
-
-  };
+    };
 
 
   socket.onclose = () => {
 
-    if(currentRoom !== null){
+    if(
+      analysisRoom.classList.contains("show")
+    ){
 
       description.textContent =
         "Conexão encerrada.";
@@ -1631,18 +1771,22 @@ const rtcConfig = {
 
     {
       urls:
-      "stun:stun.l.google.com:19302"
+        "stun:stun.l.google.com:19302"
     },
 
     {
       urls:
-      "stun:stun1.l.google.com:19302"
+        "stun:stun1.l.google.com:19302"
     }
 
   ]
 
 };
 
+
+/* =====================================================
+CRIAR PEER
+===================================================== */
 
 async function createPeerConnection(
   peerId,
@@ -1658,18 +1802,19 @@ async function createPeerConnection(
 
 
   const pc =
-  new RTCPeerConnection(
-    rtcConfig
-  );
+    new RTCPeerConnection(
+      rtcConfig
+    );
 
 
   peerConnections[peerId] =
-  pc;
+    pc;
 
 
   polite[peerId] =
     String(myId) >
     String(peerId);
+
 
   makingOffer[peerId] =
     false;
@@ -1712,107 +1857,107 @@ async function createPeerConnection(
   }
 
 
-  pc.ontrack = event => {
+  pc.ontrack =
+    event => {
 
-    const stream =
-    event.streams[0];
+      const stream =
+        event.streams[0];
 
-    if(!stream){
+      if(!stream){
+        return;
+      }
 
-      return;
+      showRemoteVideo(
+        peerId,
+        peerUser,
+        stream
+      );
 
-    }
-
-    showRemoteVideo(
-      peerId,
-      peerUser,
-      stream
-    );
-
-  };
+    };
 
 
   pc.onicecandidate =
-  event => {
+    event => {
 
-    if(!event.candidate){
-
-      return;
-
-    }
-
-    sendSignal({
-
-      type:"ice-candidate",
-
-      target:peerId,
-
-      data:event.candidate
-
-    });
-
-  };
-
-
-  pc.onnegotiationneeded =
-  async() => {
-
-    try{
-
-      makingOffer[peerId] = true;
-
-      await pc.setLocalDescription();
+      if(!event.candidate){
+        return;
+      }
 
       sendSignal({
 
-        type:"offer",
+        type:"ice-candidate",
 
         target:peerId,
 
-        data:pc.localDescription
+        data:event.candidate
 
       });
 
-    }catch(error){
+    };
 
-      console.log(
-        "Negotiation error",
-        error
-      );
 
-    }finally{
+  pc.onnegotiationneeded =
+    async() => {
 
-      makingOffer[peerId] = false;
+      try{
 
-    }
+        makingOffer[peerId] =
+          true;
 
-  };
+        await pc.setLocalDescription();
+
+        sendSignal({
+
+          type:"offer",
+
+          target:peerId,
+
+          data:pc.localDescription
+
+        });
+
+      }catch(error){
+
+        console.log(
+          "Negotiation error",
+          error
+        );
+
+      }finally{
+
+        makingOffer[peerId] =
+          false;
+
+      }
+
+    };
 
 
   pc.onconnectionstatechange =
-  () => {
+    () => {
 
-    const state =
-    pc.connectionState;
+      const state =
+        pc.connectionState;
 
-    if(
-      state === "failed" ||
-      state === "closed" ||
-      state === "disconnected"
-    ){
+      if(
+        state === "failed" ||
+        state === "closed" ||
+        state === "disconnected"
+      ){
 
-      removePeer(peerId);
+        removePeer(peerId);
 
-    }
+      }
 
-  };
+    };
 
 
   if(createOffer){
 
     try{
 
-      makingOffer[peerId] = true;
+      makingOffer[peerId] =
+        true;
 
       await pc.setLocalDescription();
 
@@ -1832,7 +1977,8 @@ async function createPeerConnection(
 
     }finally{
 
-      makingOffer[peerId] = false;
+      makingOffer[peerId] =
+        false;
 
     }
 
@@ -1876,13 +2022,13 @@ async function receiveOffer(
 ){
 
   const pc =
-  await createPeerConnection(
-    peerId,
-    {
-      name:"Usuário"
-    },
-    false
-  );
+    await createPeerConnection(
+      peerId,
+      {
+        name:"Usuário"
+      },
+      false
+    );
 
 
   const offerCollision =
@@ -1896,9 +2042,7 @@ async function receiveOffer(
 
 
   if(ignoreOffer[peerId]){
-
     return;
-
   }
 
 
@@ -1942,12 +2086,10 @@ async function receiveAnswer(
 ){
 
   const pc =
-  peerConnections[peerId];
+    peerConnections[peerId];
 
   if(!pc){
-
     return;
-
   }
 
   try{
@@ -1978,12 +2120,10 @@ async function receiveIce(
 ){
 
   const pc =
-  peerConnections[peerId];
+    peerConnections[peerId];
 
   if(!pc){
-
     return;
-
   }
 
   try{
@@ -2014,20 +2154,13 @@ CÂMERA
 
 async function toggleCamera(){
 
-  if(!currentRoom){
-
-    return;
-
-  }
-
-
   if(localCameraStream){
 
     localCameraStream
-    .getTracks()
-    .forEach(
-      track => track.stop()
-    );
+      .getTracks()
+      .forEach(
+        track => track.stop()
+      );
 
     localCameraStream = null;
 
@@ -2052,17 +2185,15 @@ async function toggleCamera(){
   try{
 
     localCameraStream =
-    await navigator
-    .mediaDevices
-    .getUserMedia({
+      await navigator.mediaDevices.getUserMedia({
 
-      video:{
-        facingMode:"user"
-      },
+        video:{
+          facingMode:"user"
+        },
 
-      audio:true
+        audio:true
 
-    });
+      });
 
 
     for(
@@ -2078,7 +2209,6 @@ async function toggleCamera(){
 
     cameraButton.textContent =
       "📷 Fechar câmera";
-
 
     showLocalVideo();
 
@@ -2100,25 +2230,18 @@ async function toggleCamera(){
 
 
 /* =====================================================
-TELA
+COMPARTILHAR TELA
 ===================================================== */
 
 async function toggleScreen(){
 
-  if(!currentRoom){
-
-    return;
-
-  }
-
-
   if(localScreenStream){
 
     localScreenStream
-    .getTracks()
-    .forEach(
-      track => track.stop()
-    );
+      .getTracks()
+      .forEach(
+        track => track.stop()
+      );
 
     localScreenStream = null;
 
@@ -2157,15 +2280,13 @@ async function toggleScreen(){
   try{
 
     localScreenStream =
-    await navigator
-    .mediaDevices
-    .getDisplayMedia({
+      await navigator.mediaDevices.getDisplayMedia({
 
-      video:true,
+        video:true,
 
-      audio:true
+        audio:true
 
-    });
+      });
 
 
     screenButton.textContent =
@@ -2173,31 +2294,30 @@ async function toggleScreen(){
 
 
     const track =
-    localScreenStream
-    .getVideoTracks()[0];
+      localScreenStream.getVideoTracks()[0];
 
 
     if(track){
 
       track.onended =
-      async() => {
+        async() => {
 
-        localScreenStream = null;
+          localScreenStream = null;
 
-        screenButton.textContent =
-          "🖥️ Compartilhar tela";
+          screenButton.textContent =
+            "🖥️ Compartilhar tela";
 
-        await renegotiateAll();
+          await renegotiateAll();
 
-        sendStatus();
+          sendStatus();
 
-        if(!localCameraStream){
+          if(!localCameraStream){
 
-          hideLocalVideo();
+            hideLocalVideo();
 
-        }
+          }
 
-      };
+        };
 
     }
 
@@ -2281,6 +2401,7 @@ function forceMute(){
 
   microphoneMuted = true;
 
+
   if(localCameraStream){
 
     for(
@@ -2288,11 +2409,13 @@ function forceMute(){
       of localCameraStream.getAudioTracks()
     ){
 
-      track.enabled = false;
+      track.enabled =
+        false;
 
     }
 
   }
+
 
   updateMicButton();
 
@@ -2305,6 +2428,7 @@ function forceUnmute(){
 
   microphoneMuted = false;
 
+
   if(localCameraStream){
 
     for(
@@ -2312,11 +2436,13 @@ function forceUnmute(){
       of localCameraStream.getAudioTracks()
     ){
 
-      track.enabled = true;
+      track.enabled =
+        true;
 
     }
 
   }
+
 
   updateMicButton();
 
@@ -2362,7 +2488,7 @@ function sendStatus(){
 
 
 /* =====================================================
-RENEGOCIAÇÃO
+RENEGOCIAR
 ===================================================== */
 
 async function renegotiateAll(){
@@ -2373,12 +2499,10 @@ async function renegotiateAll(){
   ){
 
     const pc =
-    peerConnections[peerId];
+      peerConnections[peerId];
 
     if(!pc){
-
       continue;
-
     }
 
 
@@ -2443,21 +2567,22 @@ VÍDEO LOCAL
 function showLocalVideo(){
 
   const id =
-  `local-${myId}`;
+    `local-${myId}`;
 
   let card =
-  document.getElementById(id);
+    document.getElementById(id);
 
 
   if(!card){
 
     card =
-    document.createElement("div");
+      document.createElement("div");
 
     card.className =
-    "video-card";
+      "video-card";
 
-    card.id = id;
+    card.id =
+      id;
 
     card.innerHTML = `
 
@@ -2487,9 +2612,9 @@ function showLocalVideo(){
 
 
   const video =
-  document.getElementById(
-    `${id}-video`
-  );
+    document.getElementById(
+      `${id}-video`
+    );
 
 
   if(localScreenStream){
@@ -2514,9 +2639,9 @@ function showLocalVideo(){
 function hideLocalVideo(){
 
   const card =
-  document.getElementById(
-    `local-${myId}`
-  );
+    document.getElementById(
+      `local-${myId}`
+    );
 
   if(card){
 
@@ -2540,21 +2665,22 @@ function showRemoteVideo(
 ){
 
   const id =
-  `remote-${peerId}`;
+    `remote-${peerId}`;
 
   let card =
-  document.getElementById(id);
+    document.getElementById(id);
 
 
   if(!card){
 
     card =
-    document.createElement("div");
+      document.createElement("div");
 
     card.className =
-    "video-card";
+      "video-card";
 
-    card.id = id;
+    card.id =
+      id;
 
     card.innerHTML = `
 
@@ -2565,7 +2691,9 @@ function showRemoteVideo(
       ></video>
 
       <div class="video-label">
-        ${escapeHTML(user.name || "Usuário")}
+        ${escapeHTML(
+          user.name || "Usuário"
+        )}
       </div>
 
       <div
@@ -2583,9 +2711,9 @@ function showRemoteVideo(
 
 
   const video =
-  document.getElementById(
-    `${id}-video`
-  );
+    document.getElementById(
+      `${id}-video`
+    );
 
 
   if(video.srcObject !== stream){
@@ -2620,15 +2748,16 @@ function removePeer(peerId){
 
 
   const card =
-  document.getElementById(
-    `remote-${peerId}`
-  );
+    document.getElementById(
+      `remote-${peerId}`
+    );
 
   if(card){
 
     card.remove();
 
   }
+
 
   updateEmpty();
 
@@ -2652,14 +2781,23 @@ function updateEmpty(){
 }
 
 
+/* =====================================================
+LIMPAR VÍDEOS
+===================================================== */
+
 function clearVideos(){
 
-  videoGrid.innerHTML = "";
+  videoGrid.innerHTML =
+    "";
 
   updateEmpty();
 
 }
 
+
+/* =====================================================
+FECHAR PEERS
+===================================================== */
 
 function closeAllPeerConnections(){
 
@@ -2694,23 +2832,21 @@ function updateUsers(users){
     users;
 
 
-  for(let i=1;i<=20;i++){
+  for(let i = 1; i <= 20; i++){
 
     const count =
-    document.getElementById(
-      `count-${i}`
-    );
+      document.getElementById(
+        `count-${i}`
+      );
 
     const members =
-    document.getElementById(
-      `members-${i}`
-    );
+      document.getElementById(
+        `members-${i}`
+      );
 
 
     if(!count || !members){
-
       continue;
-
     }
 
 
@@ -2719,42 +2855,53 @@ function updateUsers(users){
       count.textContent =
         `${users.length}/8`;
 
-      members.innerHTML = "";
+      members.innerHTML =
+        "";
 
 
       users.forEach(
         user => {
 
           const item =
-          document.createElement("div");
+            document.createElement("div");
 
           item.className =
             "member";
 
 
-          let status = "";
+          let status =
+            "";
 
 
           if(user.camera){
 
-            status +=
-              `<span class="status-icon camera">📷</span>`;
+            status += `
+              <span class="status-icon camera">
+                📷
+              </span>
+            `;
 
           }
 
 
           if(user.screen){
 
-            status +=
-              `<span class="status-icon screen">🖥️</span>`;
+            status += `
+              <span class="status-icon screen">
+                🖥️
+              </span>
+            `;
 
           }
 
 
           if(user.muted){
 
-            status +=
-              `<span class="status-icon muted">🎙️</span>`;
+            status += `
+              <span class="status-icon muted">
+                🎙️
+              </span>
+            `;
 
           }
 
@@ -2764,8 +2911,8 @@ function updateUsers(users){
             <span class="avatar">
               ${escapeHTML(
                 (user.name || "U")
-                .charAt(0)
-                .toUpperCase()
+                  .charAt(0)
+                  .toUpperCase()
               )}
             </span>
 
@@ -2799,20 +2946,29 @@ function updateUsers(users){
 
 
 /* =====================================================
-REGRAS EM TELA CHEIA
+REGRAS
 ===================================================== */
 
 function openRules(){
 
-  closeOwnerPanel();
+  /*
+  Se estiver dentro de uma análise,
+  primeiro sai da análise.
+  */
 
-  rulesPanel.classList.add("show");
+  if(
+    analysisRoom.classList.contains("show")
+  ){
 
-  document
-  .querySelectorAll(".channel")
-  .forEach(
-    el =>
-      el.classList.remove("active")
+    leaveRoom(false);
+
+  }
+
+
+  main.classList.remove("show");
+
+  rulesFullscreen.classList.add(
+    "show"
   );
 
 }
@@ -2820,20 +2976,32 @@ function openRules(){
 
 function closeRules(){
 
-  rulesPanel.classList.remove("show");
+  rulesFullscreen.classList.remove(
+    "show"
+  );
 
 }
 
 
 /* =====================================================
-ÁREA DOS DONOS EM TELA CHEIA
+ÁREA DOS DONOS
 ===================================================== */
 
 function openOwnerPanel(){
 
-  closeRules();
+  if(
+    analysisRoom.classList.contains("show")
+  ){
 
-  ownerPanel.classList.add("show");
+    leaveRoom(false);
+
+  }
+
+  main.classList.remove("show");
+
+  ownerPanel.classList.add(
+    "show"
+  );
 
   updateOwnerPanel();
 
@@ -2842,7 +3010,9 @@ function openOwnerPanel(){
 
 function closeOwnerPanel(){
 
-  ownerPanel.classList.remove("show");
+  ownerPanel.classList.remove(
+    "show"
+  );
 
 }
 
@@ -2854,9 +3024,9 @@ LOGIN DONO
 function ownerLogin(){
 
   const code =
-  document.getElementById(
-    "ownerCode"
-  ).value.trim();
+    document.getElementById(
+      "ownerCode"
+    ).value.trim();
 
 
   if(!code){
@@ -2875,8 +3045,14 @@ function ownerLogin(){
     socket.readyState !== WebSocket.OPEN
   ){
 
+    /*
+    Para login funcionar,
+    é necessário estar conectado
+    a uma análise.
+    */
+
     alert(
-      "Entre em uma Análise primeiro."
+      "Entre em uma Análise primeiro para administrar os membros."
     );
 
     return;
@@ -2927,11 +3103,8 @@ function updateOwnerPanel(){
   let html = `
 
     <h3 style="margin:15px 0 10px">
-      👥 Pessoas na Análise ${
-        currentRoom
-        ? String(currentRoom).padStart(2,"0")
-        : "--"
-      }
+      👥 Pessoas na Análise
+      ${String(currentRoom).padStart(2,"0")}
     </h3>
 
   `;
@@ -2961,8 +3134,8 @@ function updateOwnerPanel(){
           <span class="avatar">
             ${escapeHTML(
               (user.name || "U")
-              .charAt(0)
-              .toUpperCase()
+                .charAt(0)
+                .toUpperCase()
             )}
           </span>
 
@@ -3039,9 +3212,7 @@ function updateOwnerPanel(){
 
 
       html += `
-
         </div>
-
       `;
 
     }
@@ -3113,6 +3284,11 @@ function muteMember(userId){
   }
 
 
+  if(!socket){
+    return;
+  }
+
+
   socket.send(
     JSON.stringify({
 
@@ -3143,6 +3319,11 @@ function unmuteMember(userId){
   }
 
 
+  if(!socket){
+    return;
+  }
+
+
   socket.send(
     JSON.stringify({
 
@@ -3160,15 +3341,15 @@ function unmuteMember(userId){
 SAIR DA ANÁLISE
 ===================================================== */
 
-function leaveRoom(){
+function leaveRoom(showHome = true){
 
   if(localCameraStream){
 
     localCameraStream
-    .getTracks()
-    .forEach(
-      track => track.stop()
-    );
+      .getTracks()
+      .forEach(
+        track => track.stop()
+      );
 
     localCameraStream = null;
 
@@ -3178,10 +3359,10 @@ function leaveRoom(){
   if(localScreenStream){
 
     localScreenStream
-    .getTracks()
-    .forEach(
-      track => track.stop()
-    );
+      .getTracks()
+      .forEach(
+        track => track.stop()
+      );
 
     localScreenStream = null;
 
@@ -3194,17 +3375,13 @@ function leaveRoom(){
   if(socket){
 
     try{
-
       socket.close();
-
     }catch{}
 
     socket = null;
 
   }
 
-
-  currentRoom = null;
 
   clearVideos();
 
@@ -3215,31 +3392,29 @@ function leaveRoom(){
   screenButton.textContent =
     "🖥️ Compartilhar tela";
 
-  microphoneMuted = false;
+  microphoneMuted =
+    false;
 
   updateMicButton();
 
 
-  controls.classList.remove("show");
-
-  homeScreen.classList.remove("hidden");
-
-  empty.style.display = "none";
-
-
-  title.textContent =
-    "🔥 FF Arena";
-
-  description.textContent =
-    "Selecione uma Análise para entrar.";
-
-
-  document
-  .querySelectorAll(".channel")
-  .forEach(
-    el =>
-      el.classList.remove("active")
+  analysisRoom.classList.remove(
+    "show"
   );
+
+
+  if(showHome){
+
+    /*
+    Aqui está o comportamento importante:
+    ao sair, o quadrado desaparece completamente.
+    */
+
+    main.classList.remove(
+      "show"
+    );
+
+  }
 
 }
 
@@ -3263,32 +3438,15 @@ function escapeHTML(value){
 
 /* =====================================================
 INICIAR
+
+IMPORTANTE:
+NÃO chama openRoom(1).
+O site começa na tela inicial.
 ===================================================== */
 
 loadName();
 
-/*
-IMPORTANTE:
-Não abre Análise 01 automaticamente.
-O usuário começa na tela inicial.
-*/
-
-currentRoom = null;
-
-homeScreen.classList.remove("hidden");
-
-controls.classList.remove("show");
-
-empty.style.display = "none";
-
-title.textContent =
-  "🔥 FF Arena";
-
-description.textContent =
-  "Selecione uma Análise para entrar.";
-
 </script>
 
 </body>
-
 </html>
