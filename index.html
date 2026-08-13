@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
 <meta charset="UTF-8">
 
@@ -25,13 +24,13 @@ html,
 body{
   width:100%;
   height:100%;
+  overflow:hidden;
 }
 
 body{
   font-family:Arial,sans-serif;
   background:#111318;
   color:white;
-  overflow:hidden;
 }
 
 button{
@@ -39,9 +38,9 @@ button{
   cursor:pointer;
 }
 
-/* =====================================================
+/* =========================================
 APP
-===================================================== */
+========================================= */
 
 .app{
   display:flex;
@@ -49,18 +48,18 @@ APP
   height:100vh;
 }
 
-/* =====================================================
+/* =========================================
 SIDEBAR
-===================================================== */
+========================================= */
 
 .sidebar{
   width:285px;
-  height:100vh;
+  height:100%;
   background:#181b22;
   border-right:1px solid #292d36;
   display:flex;
   flex-direction:column;
-  overflow-y:auto;
+  overflow:auto;
   flex-shrink:0;
 }
 
@@ -78,10 +77,6 @@ SIDEBAR
   color:#858c99;
 }
 
-/* =====================================================
-CANAIS
-===================================================== */
-
 .channel{
   display:flex;
   align-items:center;
@@ -91,7 +86,6 @@ CANAIS
   border-radius:6px;
   color:#b8bec9;
   cursor:pointer;
-  transition:.15s;
 }
 
 .channel:hover,
@@ -157,10 +151,6 @@ CANAIS
   margin-left:auto;
 }
 
-/* =====================================================
-USUÁRIO
-===================================================== */
-
 .user-area{
   margin-top:auto;
   padding:12px;
@@ -168,7 +158,6 @@ USUÁRIO
   display:flex;
   gap:9px;
   align-items:center;
-  flex-shrink:0;
 }
 
 .user-info{
@@ -190,26 +179,67 @@ USUÁRIO
   margin-top:3px;
 }
 
-/* =====================================================
+/* =========================================
 MAIN
-===================================================== */
+========================================= */
 
 .main{
   flex:1;
   min-width:0;
-  height:100vh;
+  height:100%;
   display:flex;
   flex-direction:column;
-  overflow:hidden;
 }
 
-/* =====================================================
-HEADER
-===================================================== */
+/* =========================================
+TELA INICIAL
+========================================= */
+
+.home-screen{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:20px;
+}
+
+.home-content{
+  max-width:500px;
+}
+
+.home-icon{
+  font-size:55px;
+  margin-bottom:15px;
+}
+
+.home-content h2{
+  font-size:22px;
+  margin-bottom:8px;
+}
+
+.home-content p{
+  color:#858c99;
+  font-size:13px;
+}
+
+/* =========================================
+HEADER DA ANÁLISE
+========================================= */
+
+.analysis-view{
+  display:none;
+  flex-direction:column;
+  width:100%;
+  height:100%;
+}
+
+.analysis-view.show{
+  display:flex;
+}
 
 .header{
   height:70px;
-  min-height:70px;
   border-bottom:1px solid #292d36;
   display:flex;
   align-items:center;
@@ -227,73 +257,21 @@ HEADER
   margin-top:4px;
 }
 
-/* =====================================================
-TELA INICIAL
-===================================================== */
+/* =========================================
+QUADRADO DA ANÁLISE
+========================================= */
 
-.home-screen{
+.analysis-content{
   flex:1;
   display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:20px;
-}
-
-.home-content{
-  max-width:420px;
-}
-
-.home-icon{
-  font-size:55px;
-  margin-bottom:12px;
-}
-
-.home-content h2{
-  font-size:20px;
-  margin-bottom:8px;
-}
-
-.home-content p{
-  color:#858c99;
-  font-size:13px;
-  line-height:1.5;
-}
-
-/* =====================================================
-ÁREA DA ANÁLISE
-===================================================== */
-
-/*
-IMPORTANTE:
-O stage começa completamente fora do layout.
-Assim ele NÃO deixa quadrado, espaço ou área vazia
-na tela inicial.
-*/
-
-.analysis-area{
-  display:none;
-  flex:1;
   flex-direction:column;
   min-height:0;
 }
 
-/*
-Só aparece quando o usuário realmente entra.
-*/
-
-.analysis-area.show{
-  display:flex;
-}
-
-/*
-O quadrado da análise fica pequeno,
-não ocupa a tela inteira.
-*/
-
 .stage{
+  position:relative;
   width:calc(100% - 30px);
-  height:300px;
+  height:280px;
   flex:none;
   margin:15px;
   border:1px solid #292d36;
@@ -315,7 +293,7 @@ não ocupa a tela inteira.
 }
 
 .empty-icon{
-  font-size:40px;
+  font-size:45px;
   margin-bottom:10px;
 }
 
@@ -328,13 +306,13 @@ não ocupa a tela inteira.
   font-size:12px;
 }
 
-/* =====================================================
+/* =========================================
 VIDEO GRID
-===================================================== */
+========================================= */
 
 .video-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:10px;
   width:100%;
 }
@@ -373,27 +351,26 @@ VIDEO GRID
   font-size:13px;
 }
 
-/* =====================================================
-CONTROLES
-===================================================== */
+/* =========================================
+CONTROLES 2x2
+========================================= */
 
 .controls{
-  display:none;
-  justify-content:center;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(140px,1fr));
   gap:8px;
   padding:10px 15px 18px;
-  flex-wrap:wrap;
+  width:100%;
+  max-width:500px;
+  margin:0 auto;
   flex-shrink:0;
 }
 
-.controls.show{
-  display:flex;
-}
-
 .control{
+  width:100%;
   border:0;
   border-radius:7px;
-  padding:11px 15px;
+  padding:11px 10px;
   background:#292e3a;
   color:white;
   font-weight:bold;
@@ -415,29 +392,16 @@ CONTROLES
   background:#b52e3b;
 }
 
-.enter-button{
-  border:0;
-  background:#5865f2;
-  color:white;
-  border-radius:7px;
-  padding:11px 18px;
-  font-weight:bold;
-  margin-top:15px;
-}
-
-.enter-button:hover{
-  background:#4752c4;
-}
-
-/* =====================================================
-REGRAS
-===================================================== */
+/* =========================================
+REGRAS TELA CHEIA
+========================================= */
 
 .rules{
   display:none;
-  flex:1;
+  width:100%;
+  height:100%;
   overflow:auto;
-  padding:20px;
+  padding:25px;
 }
 
 .rules.show{
@@ -445,11 +409,12 @@ REGRAS
 }
 
 .rule-box{
+  width:100%;
+  min-height:100%;
   background:#181b22;
   border:1px solid #292d36;
   border-radius:10px;
-  padding:20px;
-  margin-bottom:15px;
+  padding:25px;
 }
 
 .rule-box h2{
@@ -467,37 +432,36 @@ REGRAS
   margin:9px 0;
 }
 
-/* =====================================================
-ÁREA DOS DONOS
-===================================================== */
+/* =========================================
+ÁREA DOS DONOS TELA CHEIA
+========================================= */
 
-.owner-view{
+.owner-panel{
   display:none;
-  flex:1;
-  overflow:auto;
-  padding:20px;
-}
-
-.owner-view.show{
-  display:block;
-}
-
-.owner-content-box{
+  position:fixed;
+  inset:0;
   width:100%;
-  min-height:100%;
+  height:100%;
+  background:#111318;
+  z-index:100;
+  align-items:stretch;
+  justify-content:stretch;
+  padding:0;
+}
+
+.owner-panel.show{
+  display:flex;
+}
+
+.owner-box{
+  width:100%;
+  height:100%;
+  overflow:auto;
   background:#181b22;
-  border:1px solid #292d36;
-  border-radius:10px;
-  padding:20px;
+  padding:25px;
 }
 
-.owner-content-box h2{
-  margin-bottom:8px;
-}
-
-.owner-description{
-  color:#858c99;
-  font-size:12px;
+.owner-box h2{
   margin-bottom:15px;
 }
 
@@ -519,6 +483,14 @@ REGRAS
   margin-bottom:15px;
 }
 
+.close-button{
+  border:0;
+  background:#d83b4b;
+  color:white;
+  padding:9px 12px;
+  border-radius:6px;
+}
+
 .admin-user{
   display:flex;
   align-items:center;
@@ -527,7 +499,6 @@ REGRAS
   background:#22262f;
   border-radius:7px;
   margin:5px 0;
-  flex-wrap:wrap;
 }
 
 .admin-user-name{
@@ -543,70 +514,34 @@ REGRAS
   font-size:11px;
 }
 
-.close-button{
+/* =========================================
+BOTÃO VOLTAR
+========================================= */
+
+.back-button{
   border:0;
-  background:#d83b4b;
+  border-radius:7px;
+  background:#292e3a;
   color:white;
-  padding:9px 12px;
-  border-radius:6px;
+  padding:9px 13px;
+  margin-left:auto;
 }
 
-/* =====================================================
-TELA DE ENTRADA DA ANÁLISE
-===================================================== */
-
-.join-analysis{
-  display:none;
-  flex:1;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:20px;
-}
-
-.join-analysis.show{
-  display:flex;
-}
-
-.join-box{
-  background:#181b22;
-  border:1px solid #292d36;
-  border-radius:10px;
-  padding:25px;
-  width:min(400px,100%);
-}
-
-.join-box .icon{
-  font-size:45px;
-  margin-bottom:12px;
-}
-
-.join-box h2{
-  margin-bottom:8px;
-}
-
-.join-box p{
-  color:#858c99;
-  font-size:12px;
-  margin-bottom:15px;
-}
-
-/* =====================================================
+/* =========================================
 MOBILE
-===================================================== */
+========================================= */
 
 @media(max-width:700px){
 
-  .app{
-    flex-direction:column;
-  }
-
   .sidebar{
     width:100%;
-    height:43%;
-    min-height:0;
+    height:100%;
     border-right:0;
-    border-bottom:1px solid #292d36;
+    border-bottom:0;
+  }
+
+  .app{
+    flex-direction:column;
   }
 
   .logo{
@@ -623,19 +558,13 @@ MOBILE
   }
 
   .main{
-    height:57%;
-    min-height:0;
-  }
-
-  .header{
-    height:58px;
-    min-height:58px;
-    padding:10px 15px;
+    width:100%;
+    height:100%;
   }
 
   .stage{
+    height:230px;
     width:calc(100% - 14px);
-    height:220px;
     margin:7px;
     padding:7px;
   }
@@ -646,59 +575,57 @@ MOBILE
   }
 
   .video-card{
-    min-height:100px;
+    min-height:105px;
   }
 
   .video-card video{
-    min-height:100px;
+    min-height:105px;
+  }
+
+  .controls{
+    grid-template-columns:1fr 1fr;
+    gap:6px;
+    padding:8px;
   }
 
   .control{
-    flex:1;
-    min-width:130px;
+    min-width:0;
     font-size:12px;
+    padding:10px 5px;
+  }
+
+  .rules{
     padding:10px;
   }
 
-  .rules,
-  .owner-view{
-    padding:10px;
+  .rule-box{
+    padding:15px;
   }
 
-  .rule-box,
-  .owner-content-box{
+  .owner-box{
     padding:15px;
   }
 
 }
 
-/* =====================================================
-DESKTOP: ANÁLISE PEQUENA
-===================================================== */
+/* =========================================
+ESCONDER ELEMENTOS
+========================================= */
 
-@media(min-width:701px){
-
-  .analysis-area{
-    align-items:flex-start;
-  }
-
-  .stage{
-    max-width:850px;
-  }
-
+.hidden{
+  display:none !important;
 }
 
 </style>
-
 </head>
 
 <body>
 
 <div class="app">
 
-<!-- ==================================================
+<!-- =========================================
 SIDEBAR
-================================================== -->
+========================================= -->
 
 <aside class="sidebar">
 
@@ -706,12 +633,10 @@ SIDEBAR
     🔥 FF Arena
   </div>
 
-  <!-- ÁREA DOS DONOS PRIMEIRO -->
-
+  <!-- ÁREA DOS DONOS -->
   <div
     class="channel"
-    id="ownerButton"
-    onclick="openOwnerView()"
+    onclick="openOwnerPanel()"
   >
     👑
     <span class="channel-name">
@@ -720,7 +645,6 @@ SIDEBAR
   </div>
 
   <!-- REGRAS -->
-
   <div
     class="channel"
     id="rulesButton"
@@ -732,8 +656,7 @@ SIDEBAR
     </span>
   </div>
 
-  <!-- ANÁLISES ABAIXO -->
-
+  <!-- ANÁLISES -->
   <div class="category">
     🔎 ANÁLISES
   </div>
@@ -742,7 +665,10 @@ SIDEBAR
 
   <div class="user-area">
 
-    <div class="avatar" id="myAvatar">
+    <div
+      class="avatar"
+      id="myAvatar"
+    >
       U
     </div>
 
@@ -769,322 +695,434 @@ SIDEBAR
 </aside>
 
 
-<!-- ==================================================
+<!-- =========================================
 MAIN
-================================================== -->
+========================================= -->
 
 <main class="main">
 
-<header class="header">
-
-  <div>
-
-    <h2 id="title">
-      🔥 FF Arena
-    </h2>
-
-    <p id="description">
-      Selecione uma opção no menu.
-    </p>
-
-  </div>
-
-</header>
-
-
-<!-- ==================================================
-TELA INICIAL
-================================================== -->
-
-<section
-  class="home-screen"
-  id="homeScreen"
->
-
-  <div class="home-content">
-
-    <div class="home-icon">
-      🔥
-    </div>
-
-    <h2>
-      FF Arena
-    </h2>
-
-    <p>
-      Selecione uma Análise, Regras ou Área dos Donos.
-    </p>
-
-  </div>
-
-</section>
-
-
-<!-- ==================================================
-CONFIRMAÇÃO DA ANÁLISE
-================================================== -->
-
-<section
-  class="join-analysis"
-  id="joinAnalysis"
->
-
-  <div class="join-box">
-
-    <div class="icon">
-      🔎
-    </div>
-
-    <h2 id="joinTitle">
-      Análise 01
-    </h2>
-
-    <p>
-      Você selecionou esta análise.
-      Clique em entrar para acessar a sala.
-    </p>
-
-    <button
-      class="enter-button"
-      onclick="enterSelectedRoom()"
-    >
-      Entrar na Análise
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- ==================================================
-ÁREA DA ANÁLISE
-================================================== -->
-
-<section
-  class="analysis-area"
-  id="analysisArea"
->
-
+  <!-- TELA INICIAL -->
   <section
-    class="stage"
-    id="stage"
+    class="home-screen"
+    id="homeScreen"
   >
 
-    <div
-      class="empty"
-      id="empty"
-    >
+    <div class="home-content">
 
-      <div class="empty-icon">
-        🎥
+      <div class="home-icon">
+        🔥
       </div>
 
-      <h3>
-        Nenhuma transmissão ativa
-      </h3>
+      <h2>
+        FF Arena
+      </h2>
 
       <p>
-        Abra a câmera ou compartilhe sua tela.
+        Selecione uma opção no menu.
       </p>
 
     </div>
 
-    <div
-      class="video-grid"
-      id="videoGrid"
-    ></div>
+  </section>
+
+
+  <!-- =======================================
+  REGRAS
+  ======================================== -->
+
+  <section
+    class="rules"
+    id="rules"
+  >
+
+    <div class="rule-box">
+
+      <h2>
+        📜 REGRAS
+      </h2>
+
+      <h3>
+        📱 ANDROID
+      </h3>
+
+      <div class="rule">
+        🔹 PROIBIDO ROOT.
+      </div>
+
+      <div class="rule">
+        🔹 PROIBIDO MT MANAGER.
+      </div>
+
+      <div class="rule">
+        🔹 PLAY STORE PÓS-PARTIDA PODE RESULTAR EM W.O CASO O ANALISTA ACHE NECESSÁRIO.
+      </div>
+
+      <div class="rule">
+        🔹 PROIBIDO JOGAR QUALQUER MODO QUE SALVE REPLAY PÓS-PARTIDA.
+      </div>
+
+      <div class="rule">
+        🔹 PROIBIDO QUALQUER TIPO DE ARQUIVO OU PROGRAMA QUE DÊ VANTAGEM SOBRE OUTROS JOGADORES.
+      </div>
+
+      <div class="rule">
+        🔹 PROIBIDO ACESSAR GOOGLE DRIVE E ZARCHIVER PÓS-PARTIDA.
+      </div>
+
+      <div class="rule">
+        🔹 NAVEGADOR SÓ SERÁ W.O CASO O HISTÓRICO ESTEJA LIMPO.
+      </div>
+
+      <div class="rule">
+        🔹 QUALQUER TIPO DE ARQUIVO, PROGRAMA OU RASTRO SUSPEITO DO DIA 01 DE JANEIRO DE 2026 EM DIANTE SERÁ APLICADO W.O.
+      </div>
+
+      <div class="rule">
+        🔹 SHADERS MODIFICADA É W.O.
+      </div>
+
+      <div class="rule">
+        🔹 QUALQUER TIPO DE VPN QUE NÃO SEJA DO GOVERNO OU APOSTAS ESPORTIVAS SERÁ APLICADO W.O.
+      </div>
+
+      <div class="rule">
+        🔹 OBRIGATÓRIO TER APP USAGE INSTALADO COM TODAS AS PERMISSÕES CONCEDIDAS.
+      </div>
+
+      <div class="rule">
+        🔹 APP USAGE DESINSTALADO — W.O APENAS SE ESTIVER COM REPLAY SUSPEITO.
+      </div>
+
+      <div class="rule">
+        🔹 EM CASOS DE REPLAY SUSPEITO COM BUFFER DE LOG 256KB — PASSÍVEL DE W.O.
+      </div>
+
+
+      <h3>
+        🍎 IOS
+      </h3>
+
+      <div class="rule">
+        🔹 VPN É W.O. (EXCETO VPN ESCOLAR).
+      </div>
+
+      <div class="rule">
+        🔹 IPHONE É PROIBIDO REINICIAR DURANTE/APÓS A PARTIDA.
+      </div>
+
+      <div class="rule">
+        🔹 IPHONE OBRIGATÓRIO JOGAR COM TEMPO DE USO E RELATÓRIO DE PRIVACIDADE ATIVADO.
+      </div>
+
+      <div class="rule">
+        🔹 PROIBIDO SCARLET, ESIGN, KSIGN, GBOX E SIMILARES.
+      </div>
+
+      <div class="rule">
+        🔹 IPHONE VERSÃO 15.X A 16.X EM APOSTAS ACIMA DE R$50 (MD3): DEVE ABRIR TELA REINSTALANDO O JOGO E ENTRANDO NA SALA.
+      </div>
+
+      <div class="rule">
+        🔹 IPHONES 15.X–16.X COM APP STORE NA BATERIA APÓS A PARTIDA SÃO PASSÍVEIS DE W.O.
+      </div>
+
+      <div class="rule">
+        🔹 IPHONES 15.X–16.X COM REPLAY SUSPEITO SÃO PASSÍVEIS DE W.O.
+      </div>
+
+      <div class="rule">
+        🔹 IPHONES COM MODO DEVELOPER ATIVADO RESULTAM EM W.O.
+      </div>
+
+      <div class="rule">
+        🔹 É PROIBIDO RELOGAR COM REPLAY SUSPEITO.
+      </div>
+
+      <div class="rule">
+        🔹 RELATÓRIO DE PRIVACIDADE OU TEMPO DE USO DESATIVADO — W.O APENAS SE REPLAY ESTIVER SUSPEITO.
+      </div>
+
+
+      <h3>
+        🖥️ EMULADO
+      </h3>
+
+      <div class="rule">
+        🔹 PROIBIDO USO DE INJEÇÕES OU MODIFICAÇÕES DE DLL DURANTE/APÓS A PARTIDA.
+      </div>
+
+      <div class="rule">
+        🔹 PROIBIDO REMOVER PENDRIVE PÓS BOOT.
+      </div>
+
+      <div class="rule">
+        🔹 TODOS OS DISCOS DEVEM SER NTFS COM USNJOURNAL ATIVO.
+      </div>
+
+      <div class="rule">
+        🔹 PROIBIDO REINICIAR O EMULADOR APÓS A PARTIDA.
+      </div>
+
+      <div class="rule">
+        🔹 TEMP, PREFETCH, RECENT LIMPAS PÓS BOOT DO PC = W.O.
+      </div>
+
+      <div class="rule">
+        🔹 BAM PAUSADA/LIMPA = W.O.
+      </div>
+
+      <div class="rule">
+        🔹 WINDOWS MODIFICADO QUE IMPOSSIBILITE TELAGEM = W.O.
+      </div>
+
+      <div class="rule">
+        🔹 NEGAR ACESSO VIA ANYDESK/TEAMVIEWER = W.O.
+      </div>
+
+      <div class="rule">
+        🔹 SYSMON ATIVADA APÓS BOOT = W.O.
+      </div>
+
+      <div class="rule">
+        🔹 RASTRO DE SERVIÇO PAUSADO MESMO QUE TEMPORARIAMENTE = W.O.
+      </div>
+
+      <div class="rule">
+        🔹 SEMPRE CONFIRA ATUALIZAÇÕES DA SYSMON.
+      </div>
+
+      <div class="rule">
+        🔹 PLACAS-MÃES X99: AVISAR O SS CASO NÃO TENHA SECURE BOOT/TPM.
+      </div>
+
+      <div class="rule">
+        🔹 PROIBIDO USO DE EMULADORES PROTEGIDOS POR KERNEL.
+      </div>
+
+      <div class="rule">
+        🔹 CASO ALGUM SERVIÇO NECESSÁRIO ESTEJA DESABILITADO, SERÁ W.O EM REPLAYS SUSPEITOS.
+      </div>
+
+      <div class="rule">
+        🔹 EM CASOS PARA CONFERIR SE O EMULADOR É PERMITIDO OU NÃO, INSTALE O ARQUIVO QUE CONFERE O EMULADOR.
+      </div>
+
+
+      <h3>
+        ⚠️ REGRA FINAL
+      </h3>
+
+      <div class="rule">
+        🔹 BREVENT PAREADO SERÁ W.O.
+      </div>
+
+    </div>
 
   </section>
 
-</section>
 
+  <!-- =======================================
+  ANÁLISE
+  ======================================== -->
 
-<!-- ==================================================
-REGRAS
-================================================== -->
-
-<section
-  class="rules"
-  id="rules"
->
-
-<div class="rule-box">
-
-<h2>
-📜 REGRAS
-</h2>
-
-<h3>
-📱 ANDROID
-</h3>
-
-<div class="rule">🔹 PROIBIDO ROOT.</div>
-<div class="rule">🔹 PROIBIDO MT MANAGER.</div>
-<div class="rule">🔹 PLAY STORE PÓS-PARTIDA PODE RESULTAR EM W.O CASO O ANALISTA ACHE NECESSÁRIO.</div>
-<div class="rule">🔹 PROIBIDO JOGAR QUALQUER MODO QUE SALVE REPLAY PÓS-PARTIDA.</div>
-<div class="rule">🔹 PROIBIDO QUALQUER TIPO DE ARQUIVO OU PROGRAMA QUE DÊ VANTAGEM SOBRE OUTROS JOGADORES.</div>
-<div class="rule">🔹 PROIBIDO ACESSAR GOOGLE DRIVE E ZARCHIVER PÓS-PARTIDA.</div>
-<div class="rule">🔹 NAVEGADOR SÓ SERÁ W.O CASO O HISTÓRICO ESTEJA LIMPO.</div>
-<div class="rule">🔹 QUALQUER TIPO DE ARQUIVO, PROGRAMA OU RASTRO SUSPEITO DO DIA 01 DE JANEIRO DE 2026 EM DIANTE SERÁ APLICADO W.O.</div>
-<div class="rule">🔹 SHADERS MODIFICADA É W.O.</div>
-<div class="rule">🔹 QUALQUER TIPO DE VPN QUE NÃO SEJA DO GOVERNO OU APOSTAS ESPORTIVAS SERÁ APLICADO W.O.</div>
-<div class="rule">🔹 OBRIGATÓRIO TER APP USAGE INSTALADO COM TODAS AS PERMISSÕES CONCEDIDAS.</div>
-<div class="rule">🔹 APP USAGE DESINSTALADO — W.O APENAS SE ESTIVER COM REPLAY SUSPEITO.</div>
-<div class="rule">🔹 EM CASOS DE REPLAY SUSPEITO COM BUFFER DE LOG 256KB — PASSÍVEL DE W.O.</div>
-
-<h3>
-🍎 IOS
-</h3>
-
-<div class="rule">🔹 VPN É W.O. (EXCETO VPN ESCOLAR).</div>
-<div class="rule">🔹 IPHONE É PROIBIDO REINICIAR DURANTE/APÓS A PARTIDA.</div>
-<div class="rule">🔹 IPHONE OBRIGATÓRIO JOGAR COM TEMPO DE USO E RELATÓRIO DE PRIVACIDADE ATIVADO.</div>
-<div class="rule">🔹 PROIBIDO SCARLET, ESIGN, KSIGN, GBOX E SIMILARES.</div>
-<div class="rule">🔹 IPHONE VERSÃO 15.X A 16.X EM APOSTAS ACIMA DE R$50 (MD3): DEVE ABRIR TELA REINSTALANDO O JOGO E ENTRANDO NA SALA.</div>
-<div class="rule">🔹 IPHONES 15.X–16.X COM APP STORE NA BATERIA APÓS A PARTIDA SÃO PASSÍVEIS DE W.O.</div>
-<div class="rule">🔹 IPHONES 15.X–16.X COM REPLAY SUSPEITO SÃO PASSÍVEIS DE W.O.</div>
-<div class="rule">🔹 IPHONES COM MODO DEVELOPER ATIVADO RESULTAM EM W.O.</div>
-<div class="rule">🔹 É PROIBIDO RELOGAR COM REPLAY SUSPEITO.</div>
-<div class="rule">🔹 RELATÓRIO DE PRIVACIDADE OU TEMPO DE USO DESATIVADO — W.O APENAS SE REPLAY ESTIVER SUSPEITO.</div>
-
-<h3>
-🖥️ EMULADO
-</h3>
-
-<div class="rule">🔹 PROIBIDO USO DE INJEÇÕES OU MODIFICAÇÕES DE DLL DURANTE/APÓS A PARTIDA.</div>
-<div class="rule">🔹 PROIBIDO REMOVER PENDRIVE PÓS BOOT.</div>
-<div class="rule">🔹 TODOS OS DISCOS DEVEM SER NTFS COM USNJOURNAL ATIVO.</div>
-<div class="rule">🔹 PROIBIDO REINICIAR O EMULADOR APÓS A PARTIDA.</div>
-<div class="rule">🔹 TEMP, PREFETCH, RECENT LIMPAS PÓS BOOT DO PC = W.O.</div>
-<div class="rule">🔹 BAM PAUSADA/LIMPA = W.O.</div>
-<div class="rule">🔹 WINDOWS MODIFICADO QUE IMPOSSIBILITE TELAGEM = W.O.</div>
-<div class="rule">🔹 NEGAR ACESSO VIA ANYDESK/TEAMVIEWER = W.O.</div>
-<div class="rule">🔹 SYSMON ATIVADA APÓS BOOT = W.O.</div>
-<div class="rule">🔹 RASTRO DE SERVIÇO PAUSADO MESMO QUE TEMPORARIAMENTE = W.O.</div>
-<div class="rule">🔹 SEMPRE CONFIRA ATUALIZAÇÕES DA SYSMON.</div>
-<div class="rule">🔹 PLACAS-MÃES X99: AVISAR O SS CASO NÃO TENHA SECURE BOOT/TPM.</div>
-<div class="rule">🔹 PROIBIDO USO DE EMULADORES PROTEGIDOS POR KERNEL.</div>
-<div class="rule">🔹 CASO ALGUM SERVIÇO NECESSÁRIO ESTEJA DESABILITADO, SERÁ W.O EM REPLAYS SUSPEITOS.</div>
-<div class="rule">🔹 EM CASOS PARA CONFERIR SE O EMULADOR É PERMITIDO OU NÃO, INSTALE O ARQUIVO QUE CONFERE O EMULADOR.</div>
-
-<h3>
-⚠️ REGRA FINAL
-</h3>
-
-<div class="rule">
-🔹 BREVENT PAREADO SERÁ W.O.
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ==================================================
-ÁREA DOS DONOS
-================================================== -->
-
-<section
-  class="owner-view"
-  id="ownerView"
->
-
-<div class="owner-content-box">
-
-  <h2>
-    👑 Área dos Donos
-  </h2>
-
-  <p class="owner-description">
-    Entre com o código do Dono para administrar a sala.
-  </p>
-
-  <input
-    class="input"
-    id="ownerCode"
-    type="password"
-    placeholder="Código do Dono"
+  <section
+    class="analysis-view"
+    id="analysisView"
   >
 
-  <div class="owner-actions">
+    <header class="header">
 
-    <button
-      class="control"
-      onclick="ownerLogin()"
-    >
-      Entrar
-    </button>
+      <div>
 
-  </div>
+        <h2 id="title">
+          🔎 Análise
+        </h2>
 
-  <div id="ownerContent"></div>
+        <p id="description">
+          Entre na análise para participar.
+        </p>
 
-</div>
+      </div>
 
-</section>
+      <button
+        class="back-button"
+        onclick="leaveRoom()"
+      >
+        ← Voltar
+      </button>
+
+    </header>
 
 
-<!-- ==================================================
-CONTROLES
-================================================== -->
+    <div class="analysis-content">
 
-<footer
-  class="controls"
-  id="controls"
->
+      <!-- QUADRADO PEQUENO DA ANÁLISE -->
 
-<button
-  class="control"
-  id="cameraButton"
-  onclick="toggleCamera()"
->
-📷 Abrir câmera
-</button>
+      <section
+        class="stage"
+        id="stage"
+      >
 
-<button
-  class="control"
-  id="screenButton"
-  onclick="toggleScreen()"
->
-🖥️ Compartilhar tela
-</button>
+        <div
+          class="empty"
+          id="empty"
+        >
 
-<button
-  class="control"
-  id="micButton"
-  onclick="toggleMicrophone()"
->
-🎙️ Microfone
-</button>
+          <div class="empty-icon">
+            🎥
+          </div>
 
-<button
-  class="control danger"
-  onclick="leaveRoom()"
->
-⏹ Sair
-</button>
+          <h3>
+            Nenhuma transmissão ativa
+          </h3>
 
-</footer>
+          <p>
+            Abra a câmera ou compartilhe sua tela.
+          </p>
+
+        </div>
+
+        <div
+          class="video-grid"
+          id="videoGrid"
+        ></div>
+
+      </section>
+
+
+      <!-- CONTROLES -->
+
+      <footer class="controls">
+
+        <button
+          class="control"
+          id="cameraButton"
+          onclick="toggleCamera()"
+        >
+          📷 Abrir câmera
+        </button>
+
+        <button
+          class="control"
+          id="flipButton"
+          onclick="flipCamera()"
+        >
+          🔄 Virar câmera
+        </button>
+
+        <button
+          class="control"
+          id="screenButton"
+          onclick="toggleScreen()"
+        >
+          🖥️ Compartilhar tela
+        </button>
+
+        <button
+          class="control"
+          id="micButton"
+          onclick="toggleMicrophone()"
+        >
+          🎙️ Microfone
+        </button>
+
+        <button
+          class="control danger"
+          onclick="leaveRoom()"
+        >
+          ⏹ Sair
+        </button>
+
+      </footer>
+
+    </div>
+
+  </section>
 
 </main>
 
 </div>
 
 
+<!-- =========================================
+ÁREA DOS DONOS
+========================================= -->
+
+<div
+  class="owner-panel"
+  id="ownerPanel"
+>
+
+  <div class="owner-box">
+
+    <div
+      style="
+        display:flex;
+        align-items:center;
+        margin-bottom:20px;
+      "
+    >
+
+      <h2>
+        👑 Área dos Donos
+      </h2>
+
+      <button
+        class="back-button"
+        onclick="closeOwnerPanel()"
+      >
+        ← Voltar
+      </button>
+
+    </div>
+
+    <p
+      style="
+        color:#858c99;
+        font-size:12px;
+        margin-bottom:15px;
+      "
+    >
+      Entre com o código do Dono para administrar a sala.
+    </p>
+
+    <input
+      class="input"
+      id="ownerCode"
+      type="password"
+      placeholder="Código do Dono"
+    >
+
+    <div class="owner-actions">
+
+      <button
+        class="control"
+        onclick="ownerLogin()"
+      >
+        Entrar
+      </button>
+
+    </div>
+
+    <div id="ownerContent"></div>
+
+  </div>
+
+</div>
+
+
 <script>
 
-/* =====================================================
-CONFIGURAÇÃO
-===================================================== */
+/* =========================================
+CONFIG
+========================================= */
 
 const SERVER_URL =
 "wss://ff-arena-serve.onrender.com";
 
 let socket = null;
 
-let currentRoom = 1;
-
-let selectedRoom = null;
+let currentRoom = null;
 
 let myId = null;
 
@@ -1098,6 +1136,10 @@ let localScreenStream = null;
 
 let microphoneMuted = false;
 
+let ownerAuthenticated = false;
+
+let cameraFacingMode = "user";
+
 const peerConnections = {};
 
 const makingOffer = {};
@@ -1106,31 +1148,27 @@ const ignoreOffer = {};
 
 const polite = {};
 
+let currentUsers = [];
 
-/* =====================================================
+
+/* =========================================
 ELEMENTOS
-===================================================== */
+========================================= */
 
 const channels =
 document.getElementById("channels");
+
+const homeScreen =
+document.getElementById("homeScreen");
+
+const analysisView =
+document.getElementById("analysisView");
 
 const title =
 document.getElementById("title");
 
 const description =
 document.getElementById("description");
-
-const homeScreen =
-document.getElementById("homeScreen");
-
-const joinAnalysis =
-document.getElementById("joinAnalysis");
-
-const joinTitle =
-document.getElementById("joinTitle");
-
-const analysisArea =
-document.getElementById("analysisArea");
 
 const videoGrid =
 document.getElementById("videoGrid");
@@ -1141,14 +1179,11 @@ document.getElementById("empty");
 const rules =
 document.getElementById("rules");
 
-const ownerView =
-document.getElementById("ownerView");
-
-const controls =
-document.getElementById("controls");
-
 const cameraButton =
 document.getElementById("cameraButton");
+
+const flipButton =
+document.getElementById("flipButton");
 
 const screenButton =
 document.getElementById("screenButton");
@@ -1156,13 +1191,16 @@ document.getElementById("screenButton");
 const micButton =
 document.getElementById("micButton");
 
+const ownerPanel =
+document.getElementById("ownerPanel");
+
 const ownerContent =
 document.getElementById("ownerContent");
 
 
-/* =====================================================
+/* =========================================
 20 ANÁLISES
-===================================================== */
+========================================= */
 
 for(let i=1;i<=20;i++){
 
@@ -1174,7 +1212,7 @@ for(let i=1;i<=20;i++){
     <div
       class="channel"
       id="channel-${i}"
-      onclick="selectRoom(${i})"
+      onclick="selectAnalysis(${i})"
     >
 
       <span>🔎</span>
@@ -1204,14 +1242,14 @@ for(let i=1;i<=20;i++){
 }
 
 
-/* =====================================================
+/* =========================================
 NOME
-===================================================== */
+========================================= */
 
 function loadName(){
 
   const saved =
-    localStorage.getItem("ffArenaName");
+  localStorage.getItem("ffArenaName");
 
   if(saved){
 
@@ -1220,12 +1258,12 @@ function loadName(){
   }else{
 
     const answer =
-      prompt("Digite seu nome:");
+    prompt("Digite seu nome:");
 
     myName =
-      (answer || "Usuário")
-      .trim()
-      .slice(0,30);
+    (answer || "Usuário")
+    .trim()
+    .slice(0,30);
 
     if(!myName){
       myName = "Usuário";
@@ -1262,96 +1300,45 @@ function updateProfile(){
 }
 
 
-/* =====================================================
-TELA INICIAL
-===================================================== */
+/* =========================================
+SELECIONAR ANÁLISE
+========================================= */
 
-function showHome(){
+function selectAnalysis(room){
 
-  homeScreen.style.display =
-    "flex";
-
-  joinAnalysis.classList.remove(
-    "show"
-  );
-
-  analysisArea.classList.remove(
-    "show"
-  );
-
-  rules.classList.remove(
-    "show"
-  );
-
-  ownerView.classList.remove(
-    "show"
-  );
-
-  controls.classList.remove(
-    "show"
-  );
-
-  title.textContent =
-    "🔥 FF Arena";
-
-  description.textContent =
-    "Selecione uma opção no menu.";
-
-  document
-    .querySelectorAll(".channel")
-    .forEach(
-      el =>
-        el.classList.remove("active")
+  const confirmed =
+    confirm(
+      `Entrar na Análise ${String(room).padStart(2,"0")}?`
     );
+
+  if(!confirmed){
+    return;
+  }
+
+  openRoom(room);
 
 }
 
 
-/* =====================================================
-SELECIONAR ANÁLISE
-===================================================== */
+/* =========================================
+ABRIR ANÁLISE
+========================================= */
 
-function selectRoom(room){
+function openRoom(room){
 
-  selectedRoom = room;
+  currentRoom = room;
 
   homeScreen.style.display =
     "none";
 
-  analysisArea.classList.remove(
-    "show"
-  );
+  rules.classList.remove("show");
 
-  rules.classList.remove(
-    "show"
-  );
-
-  ownerView.classList.remove(
-    "show"
-  );
-
-  controls.classList.remove(
-    "show"
-  );
-
-  joinAnalysis.classList.add(
-    "show"
-  );
-
-  joinTitle.textContent =
-    `🔎 Análise ${String(room).padStart(2,"0")}`;
-
-  title.textContent =
-    `🔎 Análise ${String(room).padStart(2,"0")}`;
-
-  description.textContent =
-    "Confirme para entrar na análise.";
+  analysisView.classList.add("show");
 
   document
     .querySelectorAll(".channel")
-    .forEach(
-      el =>
-        el.classList.remove("active")
+    .forEach(el =>
+      el.classList.remove("active")
     );
 
   const channel =
@@ -1360,58 +1347,11 @@ function selectRoom(room){
     );
 
   if(channel){
-
-    channel.classList.add(
-      "active"
-    );
-
+    channel.classList.add("active");
   }
-
-}
-
-
-/* =====================================================
-ENTRAR NA ANÁLISE
-===================================================== */
-
-function enterSelectedRoom(){
-
-  if(!selectedRoom){
-    return;
-  }
-
-  currentRoom =
-    selectedRoom;
-
-  joinAnalysis.classList.remove(
-    "show"
-  );
-
-  homeScreen.style.display =
-    "none";
-
-  rules.classList.remove(
-    "show"
-  );
-
-  ownerView.classList.remove(
-    "show"
-  );
-
-  /*
-  SOMENTE AQUI o quadrado aparece.
-  */
-
-  analysisArea.classList.add(
-    "show"
-  );
-
-  controls.classList.add(
-    "show"
-  );
 
   title.textContent =
-    `🔎 Análise ${String(currentRoom).padStart(2,"0")}`;
+    `🔎 Análise ${String(room).padStart(2,"0")}`;
 
   description.textContent =
     "Conectando à análise...";
@@ -1420,14 +1360,14 @@ function enterSelectedRoom(){
 
   closeAllPeerConnections();
 
-  connectServer(currentRoom);
+  connectServer(room);
 
 }
 
 
-/* =====================================================
+/* =========================================
 WEBSOCKET
-===================================================== */
+========================================= */
 
 function connectServer(room){
 
@@ -1555,9 +1495,7 @@ function connectServer(room){
 
     if(data.type === "peer-left"){
 
-      removePeer(
-        data.id
-      );
+      removePeer(data.id);
 
       return;
     }
@@ -1608,6 +1546,8 @@ function connectServer(room){
 
       if(data.success){
 
+        ownerAuthenticated = true;
+
         myRole = "DONO";
 
         updateProfile();
@@ -1633,10 +1573,9 @@ function connectServer(room){
 
     if(data.type === "room-full"){
 
-      alert(
-        data.message ||
-        "A análise está cheia."
-      );
+      alert(data.message);
+
+      leaveRoom();
 
       return;
     }
@@ -1644,10 +1583,7 @@ function connectServer(room){
 
     if(data.type === "error"){
 
-      alert(
-        data.message ||
-        "Erro."
-      );
+      alert(data.message);
 
       return;
     }
@@ -1657,8 +1593,12 @@ function connectServer(room){
 
   socket.onclose = () => {
 
-    description.textContent =
-      "Conexão encerrada.";
+    if(currentRoom !== null){
+
+      description.textContent =
+        "Conexão encerrada.";
+
+    }
 
   };
 
@@ -1673,9 +1613,9 @@ function connectServer(room){
 }
 
 
-/* =====================================================
+/* =========================================
 WEBRTC
-===================================================== */
+========================================= */
 
 const rtcConfig = {
 
@@ -1764,7 +1704,8 @@ async function createPeerConnection(
   }
 
 
-  pc.ontrack = event => {
+  pc.ontrack =
+  event => {
 
     const stream =
       event.streams[0];
@@ -1851,9 +1792,7 @@ async function createPeerConnection(
       state === "disconnected"
     ){
 
-      removePeer(
-        peerId
-      );
+      removePeer(peerId);
 
     }
 
@@ -1898,9 +1837,9 @@ async function createPeerConnection(
 }
 
 
-/* =====================================================
+/* =========================================
 SINAL
-===================================================== */
+========================================= */
 
 function sendSignal(message){
 
@@ -1920,9 +1859,9 @@ function sendSignal(message){
 }
 
 
-/* =====================================================
+/* =========================================
 OFFER
-===================================================== */
+========================================= */
 
 async function receiveOffer(
   peerId,
@@ -1984,9 +1923,9 @@ async function receiveOffer(
 }
 
 
-/* =====================================================
+/* =========================================
 ANSWER
-===================================================== */
+========================================= */
 
 async function receiveAnswer(
   peerId,
@@ -2018,9 +1957,9 @@ async function receiveAnswer(
 }
 
 
-/* =====================================================
+/* =========================================
 ICE
-===================================================== */
+========================================= */
 
 async function receiveIce(
   peerId,
@@ -2056,9 +1995,9 @@ async function receiveIce(
 }
 
 
-/* =====================================================
+/* =========================================
 CÂMERA
-===================================================== */
+========================================= */
 
 async function toggleCamera(){
 
@@ -2067,15 +2006,15 @@ async function toggleCamera(){
     localCameraStream
       .getTracks()
       .forEach(
-        track =>
-          track.stop()
+        track => track.stop()
       );
 
-    localCameraStream =
-      null;
+    localCameraStream = null;
 
     cameraButton.textContent =
       "📷 Abrir câmera";
+
+    flipButton.disabled = true;
 
     await renegotiateAll();
 
@@ -2088,7 +2027,6 @@ async function toggleCamera(){
     }
 
     return;
-
   }
 
 
@@ -2100,7 +2038,8 @@ async function toggleCamera(){
         .getUserMedia({
 
           video:{
-            facingMode:"user"
+            facingMode:
+              cameraFacingMode
           },
 
           audio:true
@@ -2122,6 +2061,8 @@ async function toggleCamera(){
     cameraButton.textContent =
       "📷 Fechar câmera";
 
+    flipButton.disabled = false;
+
     showLocalVideo();
 
     await renegotiateAll();
@@ -2141,9 +2082,85 @@ async function toggleCamera(){
 }
 
 
-/* =====================================================
+/* =========================================
+VIRAR CÂMERA
+========================================= */
+
+async function flipCamera(){
+
+  if(!localCameraStream){
+
+    alert(
+      "Abra a câmera primeiro."
+    );
+
+    return;
+  }
+
+
+  try{
+
+    localCameraStream
+      .getTracks()
+      .forEach(
+        track => track.stop()
+      );
+
+
+    cameraFacingMode =
+      cameraFacingMode === "user"
+        ? "environment"
+        : "user";
+
+
+    localCameraStream =
+      await navigator
+        .mediaDevices
+        .getUserMedia({
+
+          video:{
+            facingMode:
+              cameraFacingMode
+          },
+
+          audio:true
+
+        });
+
+
+    for(
+      const track
+      of localCameraStream.getAudioTracks()
+    ){
+
+      track.enabled =
+        !microphoneMuted;
+
+    }
+
+
+    showLocalVideo();
+
+    await renegotiateAll();
+
+    sendStatus();
+
+  }catch(error){
+
+    console.log(error);
+
+    alert(
+      "Não foi possível virar a câmera neste dispositivo."
+    );
+
+  }
+
+}
+
+
+/* =========================================
 TELA
-===================================================== */
+========================================= */
 
 async function toggleScreen(){
 
@@ -2152,12 +2169,10 @@ async function toggleScreen(){
     localScreenStream
       .getTracks()
       .forEach(
-        track =>
-          track.stop()
+        track => track.stop()
       );
 
-    localScreenStream =
-      null;
+    localScreenStream = null;
 
     screenButton.textContent =
       "🖥️ Compartilhar tela";
@@ -2173,7 +2188,6 @@ async function toggleScreen(){
     }
 
     return;
-
   }
 
 
@@ -2183,11 +2197,10 @@ async function toggleScreen(){
   ){
 
     alert(
-      "Este navegador não disponibiliza compartilhamento de tela por esta página."
+      "Este navegador/dispositivo não disponibiliza compartilhamento de tela."
     );
 
     return;
-
   }
 
 
@@ -2255,9 +2268,9 @@ async function toggleScreen(){
 }
 
 
-/* =====================================================
+/* =========================================
 MICROFONE
-===================================================== */
+========================================= */
 
 function toggleMicrophone(){
 
@@ -2268,7 +2281,6 @@ function toggleMicrophone(){
     );
 
     return;
-
   }
 
 
@@ -2311,14 +2323,15 @@ function updateMicButton(){
 }
 
 
-/* =====================================================
-MUTE
-===================================================== */
+/* =========================================
+MUTE ADM
+========================================= */
 
 function forceMute(){
 
   microphoneMuted =
     true;
+
 
   if(localCameraStream){
 
@@ -2334,6 +2347,7 @@ function forceMute(){
 
   }
 
+
   updateMicButton();
 
   sendStatus();
@@ -2345,6 +2359,7 @@ function forceUnmute(){
 
   microphoneMuted =
     false;
+
 
   if(localCameraStream){
 
@@ -2360,6 +2375,7 @@ function forceUnmute(){
 
   }
 
+
   updateMicButton();
 
   sendStatus();
@@ -2367,9 +2383,9 @@ function forceUnmute(){
 }
 
 
-/* =====================================================
+/* =========================================
 STATUS
-===================================================== */
+========================================= */
 
 function sendStatus(){
 
@@ -2381,6 +2397,7 @@ function sendStatus(){
     return;
 
   }
+
 
   socket.send(
     JSON.stringify({
@@ -2402,9 +2419,9 @@ function sendStatus(){
 }
 
 
-/* =====================================================
+/* =========================================
 RENEGOCIAR
-===================================================== */
+========================================= */
 
 async function renegotiateAll(){
 
@@ -2475,9 +2492,9 @@ async function renegotiateAll(){
 }
 
 
-/* =====================================================
+/* =========================================
 VÍDEO LOCAL
-===================================================== */
+========================================= */
 
 function showLocalVideo(){
 
@@ -2496,8 +2513,7 @@ function showLocalVideo(){
     card.className =
       "video-card";
 
-    card.id =
-      id;
+    card.id = id;
 
     card.innerHTML = `
 
@@ -2569,9 +2585,9 @@ function hideLocalVideo(){
 }
 
 
-/* =====================================================
+/* =========================================
 VÍDEO REMOTO
-===================================================== */
+========================================= */
 
 function showRemoteVideo(
   peerId,
@@ -2606,10 +2622,7 @@ function showRemoteVideo(
       ></video>
 
       <div class="video-label">
-        ${escapeHTML(
-          user.name ||
-          "Usuário"
-        )}
+        ${escapeHTML(user.name || "Usuário")}
       </div>
 
       <div
@@ -2672,6 +2685,7 @@ function removePeer(peerId){
 
   }
 
+
   updateEmpty();
 
 }
@@ -2694,15 +2708,22 @@ function updateEmpty(){
 }
 
 
+/* =========================================
+VÍDEOS
+========================================= */
+
 function clearVideos(){
 
-  videoGrid.innerHTML =
-    "";
+  videoGrid.innerHTML = "";
 
   updateEmpty();
 
 }
 
+
+/* =========================================
+PEERS
+========================================= */
 
 function closeAllPeerConnections(){
 
@@ -2724,12 +2745,9 @@ function closeAllPeerConnections(){
 }
 
 
-/* =====================================================
+/* =========================================
 USUÁRIOS
-===================================================== */
-
-let currentUsers = [];
-
+========================================= */
 
 function updateUsers(users){
 
@@ -2760,8 +2778,7 @@ function updateUsers(users){
       count.textContent =
         `${users.length}/8`;
 
-      members.innerHTML =
-        "";
+      members.innerHTML = "";
 
 
       users.forEach(
@@ -2813,8 +2830,7 @@ function updateUsers(users){
 
             <span>
               ${escapeHTML(
-                user.name ||
-                "Usuário"
+                user.name || "Usuário"
               )}
             </span>
 
@@ -2822,8 +2838,7 @@ function updateUsers(users){
 
             <span class="role">
               ${escapeHTML(
-                user.role ||
-                "MEMBRO"
+                user.role || "MEMBRO"
               )}
             </span>
 
@@ -2842,114 +2857,39 @@ function updateUsers(users){
 }
 
 
-/* =====================================================
-REGRAS
-===================================================== */
-
-function openRules(){
-
-  /*
-  Se estiver em uma análise,
-  fecha completamente a sala.
-  */
-
-  cleanupRoom();
-
-  homeScreen.style.display =
-    "none";
-
-  joinAnalysis.classList.remove(
-    "show"
-  );
-
-  analysisArea.classList.remove(
-    "show"
-  );
-
-  ownerView.classList.remove(
-    "show"
-  );
-
-  rules.classList.add(
-    "show"
-  );
-
-  controls.classList.remove(
-    "show"
-  );
-
-  title.textContent =
-    "📜 Regras";
-
-  description.textContent =
-    "Regras da FF Arena.";
-
-  document
-    .querySelectorAll(".channel")
-    .forEach(
-      el =>
-        el.classList.remove(
-          "active"
-        )
-    );
-
-}
-
-
-/* =====================================================
+/* =========================================
 ÁREA DOS DONOS
-===================================================== */
+========================================= */
 
-function openOwnerView(){
+function openOwnerPanel(){
 
-  cleanupRoom();
+  closeAnalysis();
 
-  homeScreen.style.display =
-    "none";
+  rules.classList.remove("show");
 
-  joinAnalysis.classList.remove(
+  ownerPanel.classList.add(
     "show"
   );
-
-  analysisArea.classList.remove(
-    "show"
-  );
-
-  rules.classList.remove(
-    "show"
-  );
-
-  ownerView.classList.add(
-    "show"
-  );
-
-  controls.classList.remove(
-    "show"
-  );
-
-  title.textContent =
-    "👑 Área dos Donos";
-
-  description.textContent =
-    "Gerenciamento da FF Arena.";
-
-  document
-    .querySelectorAll(".channel")
-    .forEach(
-      el =>
-        el.classList.remove(
-          "active"
-        )
-    );
 
   updateOwnerPanel();
 
 }
 
 
-/* =====================================================
+function closeOwnerPanel(){
+
+  ownerPanel.classList.remove(
+    "show"
+  );
+
+  showHome();
+
+}
+
+
+/* =========================================
 LOGIN DONO
-===================================================== */
+========================================= */
 
 function ownerLogin(){
 
@@ -2970,21 +2910,13 @@ function ownerLogin(){
   }
 
 
-  /*
-  A área de dono pode precisar
-  da conexão com o servidor.
-  Se não estiver conectado,
-  abrimos temporariamente a conexão
-  com a sala selecionada.
-  */
-
   if(
     !socket ||
     socket.readyState !== WebSocket.OPEN
   ){
 
     alert(
-      "Entre em uma Análise primeiro para autenticar como Dono."
+      "Entre em uma Análise primeiro."
     );
 
     return;
@@ -3005,9 +2937,9 @@ function ownerLogin(){
 }
 
 
-/* =====================================================
-PAINEL DONO
-===================================================== */
+/* =========================================
+PAINEL ADMIN
+========================================= */
 
 function updateOwnerPanel(){
 
@@ -3020,11 +2952,7 @@ function updateOwnerPanel(){
     ownerContent.innerHTML = `
 
       <p
-        style="
-          color:#858c99;
-          font-size:12px;
-          line-height:1.5;
-        "
+        style="color:#858c99;font-size:12px"
       >
         Faça login como Dono para administrar os membros.
       </p>
@@ -3040,7 +2968,11 @@ function updateOwnerPanel(){
 
     <h3 style="margin:15px 0 10px">
       👥 Pessoas na Análise
-      ${String(currentRoom).padStart(2,"0")}
+      ${
+        currentRoom
+          ? String(currentRoom).padStart(2,"0")
+          : "-"
+      }
     </h3>
 
   `;
@@ -3076,20 +3008,12 @@ function updateOwnerPanel(){
           </span>
 
           <span class="admin-user-name">
-            ${escapeHTML(
-              user.name ||
-              "Usuário"
-            )}
-
+            ${escapeHTML(user.name)}
             <small
               style="color:#777;margin-left:4px"
             >
-              ${escapeHTML(
-                user.role ||
-                "MEMBRO"
-              )}
+              ${escapeHTML(user.role)}
             </small>
-
           </span>
 
       `;
@@ -3148,8 +3072,7 @@ function updateOwnerPanel(){
       }
 
 
-      html +=
-        `</div>`;
+      html += `</div>`;
 
     }
   );
@@ -3161,9 +3084,9 @@ function updateOwnerPanel(){
 }
 
 
-/* =====================================================
-ALTERAR CARGO
-===================================================== */
+/* =========================================
+CARGO
+========================================= */
 
 function changeRole(
   userId,
@@ -3178,11 +3101,6 @@ function changeRole(
 
     return;
 
-  }
-
-
-  if(!socket){
-    return;
   }
 
 
@@ -3201,9 +3119,9 @@ function changeRole(
 }
 
 
-/* =====================================================
+/* =========================================
 MUTAR
-===================================================== */
+========================================= */
 
 function muteMember(userId){
 
@@ -3215,11 +3133,6 @@ function muteMember(userId){
 
     return;
 
-  }
-
-
-  if(!socket){
-    return;
   }
 
 
@@ -3236,10 +3149,6 @@ function muteMember(userId){
 }
 
 
-/* =====================================================
-DESMUTAR
-===================================================== */
-
 function unmuteMember(userId){
 
   if(
@@ -3250,11 +3159,6 @@ function unmuteMember(userId){
 
     return;
 
-  }
-
-
-  if(!socket){
-    return;
   }
 
 
@@ -3271,117 +3175,24 @@ function unmuteMember(userId){
 }
 
 
-/* =====================================================
-LIMPAR SALA
-===================================================== */
+/* =========================================
+REGRAS
+========================================= */
 
-function cleanupRoom(){
+function openRules(){
 
-  if(localCameraStream){
+  closeAnalysis();
 
-    localCameraStream
-      .getTracks()
-      .forEach(
-        track =>
-          track.stop()
-      );
-
-    localCameraStream =
-      null;
-
-  }
-
-
-  if(localScreenStream){
-
-    localScreenStream
-      .getTracks()
-      .forEach(
-        track =>
-          track.stop()
-      );
-
-    localScreenStream =
-      null;
-
-  }
-
-
-  closeAllPeerConnections();
-
-
-  if(socket){
-
-    try{
-      socket.close();
-    }catch{}
-
-    socket =
-      null;
-
-  }
-
-
-  clearVideos();
-
-  cameraButton.textContent =
-    "📷 Abrir câmera";
-
-  screenButton.textContent =
-    "🖥️ Compartilhar tela";
-
-  microphoneMuted =
-    false;
-
-  updateMicButton();
-
-}
-
-
-/* =====================================================
-SAIR DA ANÁLISE
-===================================================== */
-
-function leaveRoom(){
-
-  cleanupRoom();
-
-  selectedRoom =
-    null;
+  ownerPanel.classList.remove(
+    "show"
+  );
 
   homeScreen.style.display =
-    "flex";
+    "none";
 
-  joinAnalysis.classList.remove(
+  rules.classList.add(
     "show"
   );
-
-  analysisArea.classList.remove(
-    "show"
-  );
-
-  rules.classList.remove(
-    "show"
-  );
-
-  ownerView.classList.remove(
-    "show"
-  );
-
-  /*
-  MUITO IMPORTANTE:
-  os controles também desaparecem.
-  */
-
-  controls.classList.remove(
-    "show"
-  );
-
-  title.textContent =
-    "🔥 FF Arena";
-
-  description.textContent =
-    "Selecione uma opção no menu.";
 
   document
     .querySelectorAll(".channel")
@@ -3395,9 +3206,139 @@ function leaveRoom(){
 }
 
 
-/* =====================================================
+/* =========================================
+FECHAR ANÁLISE
+========================================= */
+
+function closeAnalysis(){
+
+  if(!analysisView.classList.contains("show")){
+    return;
+  }
+
+  stopLocalStreams();
+
+  closeAllPeerConnections();
+
+  if(socket){
+
+    try{
+      socket.close();
+    }catch{}
+
+    socket = null;
+
+  }
+
+  currentRoom = null;
+
+  analysisView.classList.remove(
+    "show"
+  );
+
+  clearVideos();
+
+}
+
+
+/* =========================================
+VOLTAR PARA HOME
+========================================= */
+
+function showHome(){
+
+  closeAnalysis();
+
+  rules.classList.remove(
+    "show"
+  );
+
+  ownerPanel.classList.remove(
+    "show"
+  );
+
+  homeScreen.style.display =
+    "flex";
+
+}
+
+
+/* =========================================
+SAIR DA ANÁLISE
+========================================= */
+
+function leaveRoom(){
+
+  closeAnalysis();
+
+  homeScreen.style.display =
+    "flex";
+
+  rules.classList.remove(
+    "show"
+  );
+
+  ownerPanel.classList.remove(
+    "show"
+  );
+
+  cameraButton.textContent =
+    "📷 Abrir câmera";
+
+  screenButton.textContent =
+    "🖥️ Compartilhar tela";
+
+  microphoneMuted =
+    false;
+
+  cameraFacingMode =
+    "user";
+
+  flipButton.disabled =
+    true;
+
+  updateMicButton();
+
+}
+
+
+/* =========================================
+PARAR STREAMS
+========================================= */
+
+function stopLocalStreams(){
+
+  if(localCameraStream){
+
+    localCameraStream
+      .getTracks()
+      .forEach(
+        track => track.stop()
+      );
+
+    localCameraStream = null;
+
+  }
+
+
+  if(localScreenStream){
+
+    localScreenStream
+      .getTracks()
+      .forEach(
+        track => track.stop()
+      );
+
+    localScreenStream = null;
+
+  }
+
+}
+
+
+/* =========================================
 ESCAPE HTML
-===================================================== */
+========================================= */
 
 function escapeHTML(value){
 
@@ -3412,15 +3353,16 @@ function escapeHTML(value){
 }
 
 
-/* =====================================================
+/* =========================================
 INICIAR
-===================================================== */
+========================================= */
 
 loadName();
 
 /*
-NÃO abre a Análise 01 automaticamente.
-A tela inicial fica limpa.
+IMPORTANTE:
+não abre nenhuma análise automaticamente.
+A tela inicial começa limpa.
 */
 
 showHome();
