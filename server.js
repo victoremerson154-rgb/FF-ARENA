@@ -24,7 +24,7 @@ function cleanName(name) {
 }
 
 function send(ws, data) {
-  if (ws && ws.readyState === WebSocket.OPEN) {
+  if (ws.readyState === WebSocket.OPEN) {
     ws.send(JSON.stringify(data));
   }
 }
@@ -93,15 +93,9 @@ wss.on("connection", (ws) => {
         break;
 
       case "offer":
-        relayToPeer(client, message, "offer");
-        break;
-
       case "answer":
-        relayToPeer(client, message, "answer");
-        break;
-
       case "ice-candidate":
-        relayToPeer(client, message, "ice-candidate");
+        relayToPeer(client, message, message.type);
         break;
 
       case "owner-login":
@@ -219,6 +213,7 @@ function relayToPeer(client, message, type) {
   if (!room) return;
 
   const target = room.get(String(message.target || ""));
+
   if (!target) return;
 
   send(target.ws, {
@@ -272,7 +267,6 @@ function setRole(client, message) {
       type: "error",
       message: "Somente o Dono pode alterar cargos."
     });
-
     return;
   }
 
@@ -284,15 +278,11 @@ function setRole(client, message) {
   const target = room.get(String(message.target || ""));
   if (!target) return;
 
-  const allowedRoles = [
-    "MEMBRO",
-    "TELADOR",
-    "ADM"
-  ];
-
   const role = String(message.role || "MEMBRO");
 
-  if (!allowedRoles.includes(role)) return;
+  if (!["MEMBRO", "TELADOR", "ADM"].includes(role)) {
+    return;
+  }
 
   target.role = role;
 
@@ -310,7 +300,6 @@ function muteUser(client, message) {
       type: "error",
       message: "Você não tem permissão para mutar."
     });
-
     return;
   }
 
@@ -325,8 +314,7 @@ function muteUser(client, message) {
   target.muted = true;
 
   send(target.ws, {
-    type: "force-mute",
-    by: client.id
+    type: "force-mute"
   });
 
   broadcastRoomUsers(client.room);
@@ -334,6 +322,7 @@ function muteUser(client, message) {
 
 function unmuteUser(client, message) {
   if (!canModerate(client)) return;
+
   if (!client.room) return;
 
   const room = rooms.get(client.room);
@@ -345,8 +334,7 @@ function unmuteUser(client, message) {
   target.muted = false;
 
   send(target.ws, {
-    type: "force-unmute",
-    by: client.id
+    type: "force-unmute"
   });
 
   broadcastRoomUsers(client.room);
