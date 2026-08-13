@@ -1,1 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111318">
+  <title>FF Arena</title>
 
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #111318;
+      color: white;
+      height: 100vh;
+    }
+
+    .app {
+      display: flex;
+      height: 100vh;
+    }
+
+    /* MENU */
+
+    .sidebar {
+      width: 230px;
+      background: #181b22;
+      padding: 20px 12px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 25px;
+      padding: 0 10px;
+    }
+
+    .title {
+      color: #777d89;
+      font-size: 12px;
+      margin: 10px;
+    }
+
+    .room {
+      background: transparent;
+      color: #bbbfc8;
+      border: none;
+      padding: 13px;
+      text-align: left;
+      border-radius: 8px;
+      margin-bottom: 3px;
+      font-size: 15px;
+    }
+
+    .room:active,
+    .room.active {
+      background: #292e3a;
+      color: white;
+    }
+
+    /* CONTEÚDO */
+
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    header {
+      height: 70px;
+      border-bottom: 1px solid #292d36;
+      display: flex;
+      align-items: center;
+      padding: 15px 20px;
+    }
+
+    header h2 {
+      font-size: 18px;
+    }
+
+    header p {
+      color: #858b97;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .screen {
+      flex: 1;
+      margin: 15px;
+      background: #0b0d11;
+      border: 1px solid #292d36;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .welcome {
+      text-align: center;
+      color: #858b97;
+      padding: 20px;
+    }
+
+    .welcome span {
+      font-size: 45px;
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* BOTÕES */
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px;
+      flex-wrap: wrap;
+    }
+
+    button.control {
+      background: #292e3a;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 15px;
+      font-weight: bold;
+      font-size: 13px;
+    }
+
+    button.control:active {
+      transform: scale(.97);
+    }
+
+    .red {
+      background: #d83b4b !important;
+    }
+
+    /* CELULAR */
+
+    @media (max-width: 700px) {
+
+      .app {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        height: auto;
+        padding: 10px;
+      }
+
+      .logo {
+        margin-bottom: 8px;
+      }
+
+      .title {
+        display: none;
+      }
+
+      .rooms {
+        display: flex;
+        gap: 5px;
+        overflow-x: auto;
+      }
+
+      .room {
+        white-space: nowrap;
+        margin: 0;
+      }
+
+      header {
+        height: 65px;
+      }
+
+      .screen {
+        margin: 8px;
+      }
+
+      .controls {
+        padding-bottom: 20px;
+      }
+
+      button.control {
+        flex: 1;
+        min-width: 140px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <aside class="sidebar">
+
+    <div class="logo">
+      🔥 FF Arena
+    </div>
+
+    <div class="title">
+      SALAS
+    </div>
+
+    <div class="rooms">
+
+      <button class="room active">
+        🎮 Sala 1
+      </button>
+
+      <button class="room">
+        🎮 Sala 2
+      </button>
+
+      <button class="room">
+        ⚔️ Partidas
+      </button>
+
+      <button class="room">
+        🛠️ Suporte
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <main class="main">
+
+    <header>
+
+      <div>
+        <h2 id="roomName">
+          🎮 Sala 1
+        </h2>
+
+        <p>
+          Sala de transmissão
+        </p>
+      </div>
+
+    </header>
+
+
+    <section class="screen">
+
+      <div class="welcome" id="welcome">
+
+        <span>🎥</span>
+
+        <h3>
+          Nenhuma transmissão
+        </h3>
+
+        <p>
+          Abra sua câmera ou compartilhe sua tela.
+        </p>
+
+      </div>
+
+      <video
+        id="video"
+        autoplay
+        playsinline
+        muted
+        hidden>
+      </video>
+
+    </section>
+
+
+    <div class="controls">
+
+      <button
+        class="control"
+        id="camera">
+        📷 Abrir câmera
+      </button>
+
+      <button
+        class="control"
+        id="screen">
+        🖥️ Compartilhar tela
+      </button>
+
+      <button
+        class="control"
+        id="microphone">
+        🎙️ Microfone
+      </button>
+
+      <button
+        class="control red"
+        id="leave">
+        ⏹ Sair
+      </button>
+
+    </div>
+
+  </main>
+
+</div>
+
+
+<script>
+
+const video = document.getElementById("video");
+const welcome = document.getElementById("welcome");
+
+const cameraButton =
+document.getElementById("camera");
+
+const screenButton =
+document.getElementById("screen");
+
+const microphoneButton =
+document.getElementById("microphone");
+
+const leaveButton =
+document.getElementById("leave");
+
+let stream = null;
+
+
+/* CÂMERA */
+
+cameraButton.onclick = async () => {
+
+  try {
+
+    if (stream) {
+
+      stream.getTracks().forEach(
+        track => track.stop()
+      );
+
+      stream = null;
+
+      video.hidden = true;
+      welcome.hidden = false;
+
+      cameraButton.textContent =
+        "📷 Abrir câmera";
+
+      return;
+    }
+
+    stream =
+      await navigator.mediaDevices.getUserMedia({
+        video: true,
+        audio: true
+      });
+
+    video.srcObject = stream;
+
+    video.hidden = false;
+    welcome.hidden = true;
+
+    cameraButton.textContent =
+      "📷 Fechar câmera";
+
+  } catch (error) {
+
+    alert(
+      "Permissão da câmera/microfone não concedida."
+    );
+
+  }
+
+};
+
+
+/* COMPARTILHAR TELA */
+
+screenButton.onclick = async () => {
+
+  try {
+
+    if (!navigator.mediaDevices.getDisplayMedia) {
+
+      alert(
+        "O compartilhamento de tela não está disponível neste navegador/dispositivo."
+      );
+
+      return;
+    }
+
+    const screenStream =
+      await navigator.mediaDevices.getDisplayMedia({
+        video: true,
+        audio: true
+      });
+
+    video.srcObject = screenStream;
+
+    video.hidden = false;
+    welcome.hidden = true;
+
+    screenStream
+      .getVideoTracks()[0]
+      .addEventListener("ended", () => {
+
+        video.srcObject = null;
+
+        video.hidden = true;
+        welcome.hidden = false;
+
+      });
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+};
+
+
+/* MICROFONE */
+
+microphoneButton.onclick = () => {
+
+  if (!stream) {
+
+    alert(
+      "Abra a câmera primeiro."
+    );
+
+    return;
+  }
+
+  const audio =
+    stream.getAudioTracks()[0];
+
+  if (!audio) return;
+
+  audio.enabled =
+    !audio.enabled;
+
+  microphoneButton.textContent =
+    audio.enabled
+      ? "🎙️ Microfone"
+      : "🔇 Microfone desligado";
+
+};
+
+
+/* SAIR */
+
+leaveButton.onclick = () => {
+
+  if (stream) {
+
+    stream.getTracks().forEach(
+      track => track.stop()
+    );
+
+    stream = null;
+  }
+
+  video.srcObject = null;
+
+  video.hidden = true;
+  welcome.hidden = false;
+
+  cameraButton.textContent =
+    "📷 Abrir câmera";
+
+};
+
+
+/* SALAS */
+
+document
+.querySelectorAll(".room")
+.forEach(room => {
+
+  room.onclick = () => {
+
+    document
+    .querySelectorAll(".room")
+    .forEach(r =>
+      r.classList.remove("active")
+    );
+
+    room.classList.add("active");
+
+    document
+    .getElementById("roomName")
+    .textContent = room.textContent.trim();
+
+  };
+
+});
+
+</script>
+
+</body>
+</html>
