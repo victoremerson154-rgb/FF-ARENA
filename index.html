@@ -2,18 +2,11 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
->
-
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="theme-color" content="#111318">
-
 <title>FF Arena</title>
 
 <style>
-
 *{
   box-sizing:border-box;
   margin:0;
@@ -38,9 +31,9 @@ button{
   height:100vh;
 }
 
-/* ==============================
+/* =========================
 SIDEBAR
-============================== */
+========================= */
 
 .sidebar{
   width:285px;
@@ -49,6 +42,7 @@ SIDEBAR
   display:flex;
   flex-direction:column;
   overflow:auto;
+  flex-shrink:0;
 }
 
 .logo{
@@ -139,10 +133,6 @@ SIDEBAR
   margin-left:auto;
 }
 
-/* ==============================
-USER
-============================== */
-
 .user-area{
   margin-top:auto;
   padding:12px;
@@ -171,9 +161,9 @@ USER
   margin-top:3px;
 }
 
-/* ==============================
+/* =========================
 MAIN
-============================== */
+========================= */
 
 .main{
   flex:1;
@@ -188,6 +178,7 @@ MAIN
   display:flex;
   align-items:center;
   padding:12px 20px;
+  flex-shrink:0;
 }
 
 .header h2{
@@ -199,10 +190,6 @@ MAIN
   color:#858c99;
   margin-top:4px;
 }
-
-/* ==============================
-STAGE
-============================== */
 
 .stage{
   position:relative;
@@ -239,9 +226,9 @@ STAGE
   font-size:12px;
 }
 
-/* ==============================
-VIDEO GRID
-============================== */
+/* =========================
+VIDEO
+========================= */
 
 .video-grid{
   display:grid;
@@ -284,9 +271,9 @@ VIDEO GRID
   font-size:13px;
 }
 
-/* ==============================
+/* =========================
 CONTROLES
-============================== */
+========================= */
 
 .controls{
   display:none;
@@ -325,66 +312,97 @@ CONTROLES
   background:#b52e3b;
 }
 
-/* ==============================
-ANÁLISES
-============================== */
-
-.analysis-list{
-  display:none;
-}
-
-.analysis-list.show{
-  display:block;
-}
-
-/* ==============================
+/* =========================
 TELA INICIAL
-============================== */
+========================= */
 
-.home{
-  min-height:100%;
+.home-screen{
   display:flex;
+  flex:1;
   align-items:center;
   justify-content:center;
-  flex-direction:column;
   text-align:center;
-  color:#858c99;
+  padding:30px;
+}
+
+.home-content{
+  max-width:600px;
 }
 
 .home-icon{
-  font-size:50px;
+  font-size:65px;
+  margin-bottom:15px;
+}
+
+.home-content h1{
+  font-size:28px;
   margin-bottom:10px;
 }
 
-.home h3{
-  color:#e5e7ec;
-  margin-bottom:7px;
+.home-content p{
+  color:#858c99;
+  font-size:14px;
+  line-height:1.6;
 }
 
-.home p{
-  font-size:12px;
-}
-
-/* ==============================
-REGRAS
-============================== */
+/* =========================
+REGRAS — TELA CHEIA
+========================= */
 
 .rules{
   display:none;
-  flex:1;
+  position:fixed;
+  inset:0;
+  z-index:200;
+  background:#111318;
   overflow:auto;
-  padding:20px;
 }
 
 .rules.show{
   display:block;
 }
 
+.rules-header{
+  position:sticky;
+  top:0;
+  z-index:5;
+  height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 22px;
+  background:#181b22;
+  border-bottom:1px solid #292d36;
+}
+
+.rules-header h2{
+  font-size:20px;
+}
+
+.fullscreen-close{
+  border:0;
+  background:#292e3a;
+  color:white;
+  border-radius:7px;
+  padding:10px 15px;
+  font-weight:bold;
+}
+
+.fullscreen-close:hover{
+  background:#353b49;
+}
+
+.rules-content{
+  max-width:1000px;
+  margin:0 auto;
+  padding:25px;
+}
+
 .rule-box{
   background:#181b22;
   border:1px solid #292d36;
   border-radius:10px;
-  padding:20px;
+  padding:25px;
   margin-bottom:15px;
 }
 
@@ -393,43 +411,63 @@ REGRAS
 }
 
 .rule-box h3{
-  margin:20px 0 10px;
+  margin:25px 0 10px;
+  color:#fff;
 }
 
 .rule{
   font-size:13px;
-  line-height:1.5;
+  line-height:1.6;
   color:#c5c9d1;
   margin:9px 0;
 }
 
-/* ==============================
-DONOS
-============================== */
+/* =========================
+ÁREA DOS DONOS — TELA CHEIA
+========================= */
 
 .owner-panel{
   display:none;
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.75);
-  z-index:100;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
+  background:#111318;
+  z-index:300;
+  overflow:auto;
 }
 
 .owner-panel.show{
+  display:block;
+}
+
+.owner-header{
+  position:sticky;
+  top:0;
+  z-index:5;
+  height:70px;
   display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 22px;
+  background:#181b22;
+  border-bottom:1px solid #292d36;
+}
+
+.owner-header h2{
+  font-size:20px;
+}
+
+.owner-page{
+  width:min(1000px,100%);
+  margin:0 auto;
+  padding:25px;
 }
 
 .owner-box{
-  width:min(600px,100%);
-  max-height:90vh;
-  overflow:auto;
+  width:100%;
   background:#181b22;
   border:1px solid #343944;
   border-radius:12px;
-  padding:20px;
+  padding:25px;
 }
 
 .owner-box h2{
@@ -462,10 +500,12 @@ DONOS
   background:#22262f;
   border-radius:7px;
   margin:5px 0;
+  flex-wrap:wrap;
 }
 
 .admin-user-name{
   flex:1;
+  min-width:150px;
 }
 
 .small-button{
@@ -477,29 +517,25 @@ DONOS
   font-size:11px;
 }
 
-.close-button{
-  border:0;
-  background:#d83b4b;
-  color:white;
-  padding:9px 12px;
-  border-radius:6px;
+.small-button:hover{
+  background:#454c5c;
 }
 
-/* ==============================
+/* =========================
 MOBILE
-============================== */
+========================= */
 
 @media(max-width:700px){
+
+  .app{
+    flex-direction:column;
+  }
 
   .sidebar{
     width:100%;
     height:43%;
     border-right:0;
     border-bottom:1px solid #292d36;
-  }
-
-  .app{
-    flex-direction:column;
   }
 
   .logo{
@@ -549,12 +585,50 @@ MOBILE
     padding:10px;
   }
 
-  .rules{
+  .rules-content,
+  .owner-page{
     padding:10px;
+  }
+
+  .rule-box,
+  .owner-box{
+    padding:16px;
+  }
+
+  .rules-header,
+  .owner-header{
+    height:60px;
+    padding:10px 15px;
+  }
+
+  .rules-header h2,
+  .owner-header h2{
+    font-size:17px;
+  }
+
+  .fullscreen-close{
+    padding:8px 11px;
+    font-size:12px;
   }
 
 }
 
+/* =========================
+SCROLLBAR
+========================= */
+
+::-webkit-scrollbar{
+  width:7px;
+}
+
+::-webkit-scrollbar-track{
+  background:#111318;
+}
+
+::-webkit-scrollbar-thumb{
+  background:#343944;
+  border-radius:10px;
+}
 </style>
 </head>
 
@@ -562,9 +636,9 @@ MOBILE
 
 <div class="app">
 
-<!-- ==============================
+<!-- =========================
 SIDEBAR
-============================== -->
+========================= -->
 
 <aside class="sidebar">
 
@@ -572,34 +646,19 @@ SIDEBAR
     🔥 FF Arena
   </div>
 
-  <div
-    class="channel"
-    onclick="showHome()"
-  >
-    🏠
-    <span class="channel-name">
-      Início
-    </span>
+  <div class="category">
+    NAVEGAÇÃO
   </div>
 
   <div
     class="channel"
-    id="analysesButton"
-    onclick="showAnalyses()"
+    id="ownerButton"
+    onclick="openOwnerPanel()"
   >
-    🔎
+    👑
     <span class="channel-name">
-      ANÁLISES
+      Área dos Donos
     </span>
-  </div>
-
-  <div
-    class="analysis-list"
-    id="analysisList"
-  >
-
-    <div id="channels"></div>
-
   </div>
 
   <div
@@ -613,22 +672,15 @@ SIDEBAR
     </span>
   </div>
 
-  <div
-    class="channel"
-    onclick="openOwnerPanel()"
-  >
-    👑
-    <span class="channel-name">
-      Área dos Donos
-    </span>
+  <div class="category">
+    🔎 ANÁLISES
   </div>
+
+  <div id="channels"></div>
 
   <div class="user-area">
 
-    <div
-      class="avatar"
-      id="myAvatar"
-    >
+    <div class="avatar" id="myAvatar">
       U
     </div>
 
@@ -655,9 +707,9 @@ SIDEBAR
 </aside>
 
 
-<!-- ==============================
+<!-- =========================
 MAIN
-============================== -->
+========================= -->
 
 <main class="main">
 
@@ -670,7 +722,7 @@ MAIN
       </h2>
 
       <p id="description">
-        Selecione uma Análise para entrar.
+        Selecione uma opção no menu para começar.
       </p>
 
     </div>
@@ -678,35 +730,45 @@ MAIN
   </header>
 
 
+  <!-- TELA INICIAL -->
+
   <section
-    class="stage"
-    id="stage"
+    class="home-screen"
+    id="homeScreen"
   >
 
-    <div
-      class="home"
-      id="home"
-    >
+    <div class="home-content">
 
       <div class="home-icon">
         🔥
       </div>
 
-      <h3>
-        Bem-vindo à FF Arena
-      </h3>
+      <h1>
+        FF Arena
+      </h1>
 
       <p>
-        Selecione uma Análise, Regras ou Área dos Donos.
+        Bem-vindo à FF Arena.<br>
+        Selecione uma <b>Análise</b>, consulte as
+        <b>Regras</b> ou acesse a <b>Área dos Donos</b>.
       </p>
 
     </div>
 
+  </section>
+
+
+  <!-- ÁREA DA ANÁLISE -->
+
+  <section
+    class="stage"
+    id="stage"
+    style="display:none;"
+  >
 
     <div
       class="empty"
       id="empty"
-      style="display:none"
     >
 
       <div class="empty-icon">
@@ -718,11 +780,10 @@ MAIN
       </h3>
 
       <p>
-        Selecione uma Análise para entrar.
+        Abra a câmera ou compartilhe sua tela.
       </p>
 
     </div>
-
 
     <div
       class="video-grid"
@@ -732,20 +793,84 @@ MAIN
   </section>
 
 
-  <!-- ==============================
-  REGRAS
-  ============================== -->
+  <!-- CONTROLES -->
 
-  <div
-    class="rules"
-    id="rules"
+  <footer
+    class="controls"
+    id="controls"
   >
+
+    <button
+      class="control"
+      id="cameraButton"
+      onclick="toggleCamera()"
+    >
+      📷 Abrir câmera
+    </button>
+
+    <button
+      class="control"
+      id="screenButton"
+      onclick="toggleScreen()"
+    >
+      🖥️ Compartilhar tela
+    </button>
+
+    <button
+      class="control"
+      id="micButton"
+      onclick="toggleMicrophone()"
+    >
+      🎙️ Microfone
+    </button>
+
+    <button
+      class="control danger"
+      onclick="leaveRoom()"
+    >
+      ⏹ Sair
+    </button>
+
+  </footer>
+
+</main>
+
+</div>
+
+
+<!-- =========================
+REGRAS TELA CHEIA
+========================= -->
+
+<div
+  class="rules"
+  id="rules"
+>
+
+  <div class="rules-header">
+
+    <h2>
+      📜 Regras da FF Arena
+    </h2>
+
+    <button
+      class="fullscreen-close"
+      onclick="closeRules()"
+    >
+      ✕ Fechar
+    </button>
+
+  </div>
+
+
+  <div class="rules-content">
 
     <div class="rule-box">
 
       <h2>
         📜 REGRAS
       </h2>
+
 
       <h3>
         📱 ANDROID
@@ -926,101 +1051,69 @@ MAIN
 
   </div>
 
-
-  <!-- ==============================
-  CONTROLES
-  ============================== -->
-
-  <footer
-    class="controls"
-    id="controls"
-  >
-
-    <button
-      class="control"
-      id="cameraButton"
-      onclick="toggleCamera()"
-    >
-      📷 Abrir câmera
-    </button>
-
-    <button
-      class="control"
-      id="screenButton"
-      onclick="toggleScreen()"
-    >
-      🖥️ Compartilhar tela
-    </button>
-
-    <button
-      class="control"
-      id="micButton"
-      onclick="toggleMicrophone()"
-    >
-      🎙️ Microfone
-    </button>
-
-    <button
-      class="control danger"
-      onclick="leaveRoom()"
-    >
-      ⏹ Sair
-    </button>
-
-  </footer>
-
-</main>
-
 </div>
 
 
-<!-- ==============================
-DONOS
-============================== -->
+<!-- =========================
+ÁREA DOS DONOS TELA CHEIA
+========================= -->
 
 <div
   class="owner-panel"
   id="ownerPanel"
 >
 
-  <div class="owner-box">
+  <div class="owner-header">
 
     <h2>
       👑 Área dos Donos
     </h2>
 
-    <p
-      style="color:#858c99;font-size:12px;margin-bottom:15px"
+    <button
+      class="fullscreen-close"
+      onclick="closeOwnerPanel()"
     >
-      Entre com o código do Dono para administrar a sala.
-    </p>
+      ✕ Fechar
+    </button>
 
-    <input
-      class="input"
-      id="ownerCode"
-      type="password"
-      placeholder="Código do Dono"
-    >
+  </div>
 
-    <div class="owner-actions">
 
-      <button
-        class="control"
-        onclick="ownerLogin()"
+  <div class="owner-page">
+
+    <div class="owner-box">
+
+      <h2>
+        👑 Administração
+      </h2>
+
+      <p
+        style="color:#858c99;font-size:12px;margin-bottom:15px"
       >
-        Entrar
-      </button>
+        Entre com o código do Dono para administrar a sala.
+      </p>
 
-      <button
-        class="close-button"
-        onclick="closeOwnerPanel()"
+      <input
+        class="input"
+        id="ownerCode"
+        type="password"
+        placeholder="Código do Dono"
       >
-        Fechar
-      </button>
+
+      <div class="owner-actions">
+
+        <button
+          class="control"
+          onclick="ownerLogin()"
+        >
+          Entrar
+        </button>
+
+      </div>
+
+      <div id="ownerContent"></div>
 
     </div>
-
-    <div id="ownerContent"></div>
 
   </div>
 
@@ -1037,35 +1130,22 @@ const SERVER_URL =
 "wss://ff-arena-serve.onrender.com";
 
 let socket = null;
-
 let currentRoom = null;
-
 let myId = null;
-
 let myName = "Usuário";
-
 let myRole = "MEMBRO";
 
 let localCameraStream = null;
-
 let localScreenStream = null;
-
 let microphoneMuted = false;
-
 let ownerAuthenticated = false;
 
-
-/* =====================================================
-WEBRTC
-===================================================== */
-
 const peerConnections = {};
-
 const makingOffer = {};
-
 const ignoreOffer = {};
-
 const polite = {};
+
+let currentUsers = [];
 
 
 /* =====================================================
@@ -1081,23 +1161,20 @@ document.getElementById("title");
 const description =
 document.getElementById("description");
 
+const homeScreen =
+document.getElementById("homeScreen");
+
+const stage =
+document.getElementById("stage");
+
 const videoGrid =
 document.getElementById("videoGrid");
 
 const empty =
 document.getElementById("empty");
 
-const home =
-document.getElementById("home");
-
-const rules =
-document.getElementById("rules");
-
 const controls =
 document.getElementById("controls");
-
-const analysisList =
-document.getElementById("analysisList");
 
 const cameraButton =
 document.getElementById("cameraButton");
@@ -1108,6 +1185,9 @@ document.getElementById("screenButton");
 const micButton =
 document.getElementById("micButton");
 
+const rules =
+document.getElementById("rules");
+
 const ownerPanel =
 document.getElementById("ownerPanel");
 
@@ -1116,10 +1196,10 @@ document.getElementById("ownerContent");
 
 
 /* =====================================================
-20 ANÁLISES
+CRIAR 20 ANÁLISES
 ===================================================== */
 
-for(let i = 1; i <= 20; i++){
+for(let i=1;i<=20;i++){
 
   const container =
   document.createElement("div");
@@ -1132,9 +1212,7 @@ for(let i = 1; i <= 20; i++){
       onclick="openRoom(${i})"
     >
 
-      <span>
-        🔎
-      </span>
+      <span>🔎</span>
 
       <span class="channel-name">
         Análise ${String(i).padStart(2,"0")}
@@ -1161,7 +1239,7 @@ for(let i = 1; i <= 20; i++){
 
 
 /* =====================================================
-PERFIL
+NOME
 ===================================================== */
 
 function loadName(){
@@ -1184,9 +1262,7 @@ function loadName(){
     .slice(0,30);
 
     if(!myName){
-
       myName = "Usuário";
-
     }
 
     localStorage.setItem(
@@ -1197,7 +1273,6 @@ function loadName(){
   }
 
   updateProfile();
-
 }
 
 
@@ -1205,144 +1280,78 @@ function updateProfile(){
 
   document.getElementById(
     "myNameDisplay"
-  ).textContent =
-  myName;
+  ).textContent = myName;
 
   document.getElementById(
     "myAvatar"
   ).textContent =
-  myName
-  .charAt(0)
-  .toUpperCase();
+    myName.charAt(0).toUpperCase();
 
   document.getElementById(
     "myRoleDisplay"
   ).textContent =
-  myRole;
-
+    myRole;
 }
 
 
 /* =====================================================
-NAVEGAÇÃO — INÍCIO
+TELA INICIAL
 ===================================================== */
 
 function showHome(){
 
   currentRoom = null;
 
-  rules.classList.remove("show");
+  homeScreen.style.display =
+    "flex";
 
-  analysisList.classList.remove("show");
+  stage.style.display =
+    "none";
 
-  controls.classList.remove("show");
-
-  document
-    .querySelectorAll(".channel")
-    .forEach(
-      el =>
-        el.classList.remove("active")
-    );
+  controls.classList.remove(
+    "show"
+  );
 
   title.textContent =
     "🔥 FF Arena";
 
   description.textContent =
-    "Selecione uma Análise para entrar.";
-
-  home.style.display =
-    "flex";
-
-  empty.style.display =
-    "none";
-
-  videoGrid.innerHTML = "";
-
-}
-
-
-/* =====================================================
-NAVEGAÇÃO — ANÁLISES
-===================================================== */
-
-function showAnalyses(){
-
-  rules.classList.remove("show");
-
-  analysisList.classList.add("show");
-
-  controls.classList.remove("show");
-
-  home.style.display =
-    "none";
-
-  empty.style.display =
-    "flex";
-
-  videoGrid.innerHTML = "";
+    "Selecione uma opção no menu para começar.";
 
   document
     .querySelectorAll(".channel")
-    .forEach(
-      el =>
-        el.classList.remove("active")
+    .forEach(el =>
+      el.classList.remove("active")
     );
-
-  document
-    .getElementById("analysesButton")
-    .classList.add("active");
-
-  title.textContent =
-    "🔎 ANÁLISES";
-
-  description.textContent =
-    "Selecione uma Análise para entrar.";
-
-  empty.innerHTML = `
-
-    <div class="empty-icon">
-      🎥
-    </div>
-
-    <h3>
-      Nenhuma análise aberta
-    </h3>
-
-    <p>
-      Selecione uma Análise para entrar.
-    </p>
-
-  `;
 
 }
 
 
 /* =====================================================
-ABRIR SALA
+ABRIR ANÁLISE
 ===================================================== */
 
 function openRoom(room){
 
-  currentRoom =
-    room;
+  closeRules();
+  closeOwnerPanel();
 
-  rules.classList.remove("show");
+  currentRoom = room;
 
-  analysisList.classList.add("show");
-
-  controls.classList.add("show");
-
-  home.style.display =
+  homeScreen.style.display =
     "none";
 
-  empty.style.display =
-    "flex";
+  stage.style.display =
+    "block";
+
+  controls.classList.add(
+    "show"
+  );
 
   document
     .querySelectorAll(".channel")
-    .forEach(
-      el =>
-        el.classList.remove("active")
+    .forEach(el =>
+      el.classList.remove("active")
     );
 
   const channel =
@@ -1351,9 +1360,7 @@ function openRoom(room){
     );
 
   if(channel){
-
     channel.classList.add("active");
-
   }
 
   title.textContent =
@@ -1367,7 +1374,6 @@ function openRoom(room){
   closeAllPeerConnections();
 
   connectServer(room);
-
 }
 
 
@@ -1380,30 +1386,22 @@ function connectServer(room){
   if(socket){
 
     try{
-
       socket.close();
-
     }catch{}
 
   }
 
   socket =
-    new WebSocket(
-      SERVER_URL
-    );
+    new WebSocket(SERVER_URL);
 
 
   socket.onopen = () => {
 
     socket.send(
       JSON.stringify({
-
         type:"join",
-
         room:String(room),
-
         name:myName
-
       })
     );
 
@@ -1416,27 +1414,18 @@ function connectServer(room){
     let data;
 
     try{
-
-      data =
-        JSON.parse(
-          event.data
-        );
-
+      data = JSON.parse(event.data);
     }catch{
-
       return;
-
     }
 
 
     if(data.type === "joined"){
 
-      myId =
-        data.id;
+      myId = data.id;
 
       myRole =
-        data.role ||
-        "MEMBRO";
+        data.role || "MEMBRO";
 
       updateProfile();
 
@@ -1459,7 +1448,6 @@ function connectServer(room){
       updateOwnerPanel();
 
       return;
-
     }
 
 
@@ -1472,7 +1460,6 @@ function connectServer(room){
       );
 
       return;
-
     }
 
 
@@ -1484,7 +1471,6 @@ function connectServer(room){
       );
 
       return;
-
     }
 
 
@@ -1496,7 +1482,6 @@ function connectServer(room){
       );
 
       return;
-
     }
 
 
@@ -1508,18 +1493,14 @@ function connectServer(room){
       );
 
       return;
-
     }
 
 
     if(data.type === "peer-left"){
 
-      removePeer(
-        data.id
-      );
+      removePeer(data.id);
 
       return;
-
     }
 
 
@@ -1532,7 +1513,6 @@ function connectServer(room){
       updateOwnerPanel();
 
       return;
-
     }
 
 
@@ -1541,7 +1521,6 @@ function connectServer(room){
       forceMute();
 
       return;
-
     }
 
 
@@ -1550,7 +1529,6 @@ function connectServer(room){
       forceUnmute();
 
       return;
-
     }
 
 
@@ -1560,11 +1538,9 @@ function connectServer(room){
         data.role;
 
       updateProfile();
-
       updateOwnerPanel();
 
       return;
-
     }
 
 
@@ -1572,11 +1548,9 @@ function connectServer(room){
 
       if(data.success){
 
-        ownerAuthenticated =
-          true;
+        ownerAuthenticated = true;
 
-        myRole =
-          "DONO";
+        myRole = "DONO";
 
         updateProfile();
 
@@ -1596,7 +1570,6 @@ function connectServer(room){
       updateOwnerPanel();
 
       return;
-
     }
 
 
@@ -1606,8 +1579,9 @@ function connectServer(room){
         data.message
       );
 
-      return;
+      leaveRoom();
 
+      return;
     }
 
 
@@ -1618,7 +1592,6 @@ function connectServer(room){
       );
 
       return;
-
     }
 
   };
@@ -1647,31 +1620,22 @@ function connectServer(room){
 
 
 /* =====================================================
-WEBRTC CONFIG
+WEBRTC
 ===================================================== */
 
 const rtcConfig = {
 
   iceServers:[
-
     {
-      urls:
-        "stun:stun.l.google.com:19302"
+      urls:"stun:stun.l.google.com:19302"
     },
-
     {
-      urls:
-        "stun:stun1.l.google.com:19302"
+      urls:"stun:stun1.l.google.com:19302"
     }
-
   ]
 
 };
 
-
-/* =====================================================
-CRIAR PEER
-===================================================== */
 
 async function createPeerConnection(
   peerId,
@@ -1679,24 +1643,17 @@ async function createPeerConnection(
   createOffer
 ){
 
-  if(
-    peerConnections[peerId]
-  ){
-
+  if(peerConnections[peerId]){
     return peerConnections[peerId];
-
   }
-
 
   const pc =
     new RTCPeerConnection(
       rtcConfig
     );
 
-
   peerConnections[peerId] =
     pc;
-
 
   polite[peerId] =
     String(myId) >
@@ -1743,16 +1700,13 @@ async function createPeerConnection(
   }
 
 
-  pc.ontrack =
-  event => {
+  pc.ontrack = event => {
 
     const stream =
       event.streams[0];
 
     if(!stream){
-
       return;
-
     }
 
     showRemoteVideo(
@@ -1768,17 +1722,13 @@ async function createPeerConnection(
   event => {
 
     if(!event.candidate){
-
       return;
-
     }
 
     sendSignal({
 
       type:"ice-candidate",
-
       target:peerId,
-
       data:event.candidate
 
     });
@@ -1799,9 +1749,7 @@ async function createPeerConnection(
       sendSignal({
 
         type:"offer",
-
         target:peerId,
-
         data:pc.localDescription
 
       });
@@ -1835,9 +1783,7 @@ async function createPeerConnection(
       state === "disconnected"
     ){
 
-      removePeer(
-        peerId
-      );
+      removePeer(peerId);
 
     }
 
@@ -1856,9 +1802,7 @@ async function createPeerConnection(
       sendSignal({
 
         type:"offer",
-
         target:peerId,
-
         data:pc.localDescription
 
       });
@@ -1878,7 +1822,6 @@ async function createPeerConnection(
 
 
   return pc;
-
 }
 
 
@@ -1890,12 +1833,10 @@ function sendSignal(message){
 
   if(
     !socket ||
-    socket.readyState !==
-      WebSocket.OPEN
+    socket.readyState !== WebSocket.OPEN
   ){
 
     return;
-
   }
 
   socket.send(
@@ -1917,30 +1858,21 @@ async function receiveOffer(
   const pc =
     await createPeerConnection(
       peerId,
-      {
-        name:"Usuário"
-      },
+      {name:"Usuário"},
       false
     );
 
-
   const offerCollision =
     makingOffer[peerId] ||
-    pc.signalingState !==
-      "stable";
-
+    pc.signalingState !== "stable";
 
   ignoreOffer[peerId] =
     !polite[peerId] &&
     offerCollision;
 
-
   if(ignoreOffer[peerId]){
-
     return;
-
   }
-
 
   try{
 
@@ -1953,9 +1885,7 @@ async function receiveOffer(
     sendSignal({
 
       type:"answer",
-
       target:peerId,
-
       data:pc.localDescription
 
     });
@@ -1985,9 +1915,7 @@ async function receiveAnswer(
     peerConnections[peerId];
 
   if(!pc){
-
     return;
-
   }
 
   try{
@@ -2021,9 +1949,7 @@ async function receiveIce(
     peerConnections[peerId];
 
   if(!pc){
-
     return;
-
   }
 
   try{
@@ -2034,9 +1960,7 @@ async function receiveIce(
 
   }catch(error){
 
-    if(
-      !ignoreOffer[peerId]
-    ){
+    if(!ignoreOffer[peerId]){
 
       console.log(
         "ICE error",
@@ -2061,12 +1985,10 @@ async function toggleCamera(){
     localCameraStream
       .getTracks()
       .forEach(
-        track =>
-          track.stop()
+        track => track.stop()
       );
 
-    localCameraStream =
-      null;
+    localCameraStream = null;
 
     cameraButton.textContent =
       "📷 Abrir câmera";
@@ -2075,39 +1997,34 @@ async function toggleCamera(){
 
     sendStatus();
 
-    if(
-      !localScreenStream
-    ){
+    if(!localScreenStream){
 
       hideLocalVideo();
 
     }
 
     return;
-
   }
 
 
   try{
 
     localCameraStream =
-      await navigator
-        .mediaDevices
-        .getUserMedia({
+      await navigator.mediaDevices
+      .getUserMedia({
 
-          video:{
-            facingMode:"user"
-          },
+        video:{
+          facingMode:"user"
+        },
 
-          audio:true
+        audio:true
 
-        });
+      });
 
 
     for(
       const track
-      of localCameraStream
-        .getAudioTracks()
+      of localCameraStream.getAudioTracks()
     ){
 
       track.enabled =
@@ -2130,7 +2047,7 @@ async function toggleCamera(){
     console.log(error);
 
     alert(
-      "Não foi possível abrir a câmera. Verifique a permissão do Safari."
+      "Não foi possível abrir a câmera. Verifique a permissão do navegador."
     );
 
   }
@@ -2139,7 +2056,7 @@ async function toggleCamera(){
 
 
 /* =====================================================
-TELA
+COMPARTILHAR TELA
 ===================================================== */
 
 async function toggleScreen(){
@@ -2149,12 +2066,10 @@ async function toggleScreen(){
     localScreenStream
       .getTracks()
       .forEach(
-        track =>
-          track.stop()
+        track => track.stop()
       );
 
-    localScreenStream =
-      null;
+    localScreenStream = null;
 
     screenButton.textContent =
       "🖥️ Compartilhar tela";
@@ -2163,16 +2078,13 @@ async function toggleScreen(){
 
     sendStatus();
 
-    if(
-      !localCameraStream
-    ){
+    if(!localCameraStream){
 
       hideLocalVideo();
 
     }
 
     return;
-
   }
 
 
@@ -2186,22 +2098,19 @@ async function toggleScreen(){
     );
 
     return;
-
   }
 
 
   try{
 
     localScreenStream =
-      await navigator
-        .mediaDevices
-        .getDisplayMedia({
+      await navigator.mediaDevices
+      .getDisplayMedia({
 
-          video:true,
+        video:true,
+        audio:true
 
-          audio:true
-
-        });
+      });
 
 
     screenButton.textContent =
@@ -2210,7 +2119,7 @@ async function toggleScreen(){
 
     const track =
       localScreenStream
-        .getVideoTracks()[0];
+      .getVideoTracks()[0];
 
 
     if(track){
@@ -2228,9 +2137,7 @@ async function toggleScreen(){
 
         sendStatus();
 
-        if(
-          !localCameraStream
-        ){
+        if(!localCameraStream){
 
           hideLocalVideo();
 
@@ -2269,9 +2176,7 @@ function toggleMicrophone(){
     );
 
     return;
-
   }
-
 
   microphoneMuted =
     !microphoneMuted;
@@ -2279,8 +2184,7 @@ function toggleMicrophone(){
 
   for(
     const track
-    of localCameraStream
-      .getAudioTracks()
+    of localCameraStream.getAudioTracks()
   ){
 
     track.enabled =
@@ -2288,11 +2192,9 @@ function toggleMicrophone(){
 
   }
 
-
   updateMicButton();
 
   sendStatus();
-
 }
 
 
@@ -2314,21 +2216,18 @@ function updateMicButton(){
 
 
 /* =====================================================
-MUTE FORÇADO
+MUTE
 ===================================================== */
 
 function forceMute(){
 
-  microphoneMuted =
-    true;
-
+  microphoneMuted = true;
 
   if(localCameraStream){
 
     for(
       const track
-      of localCameraStream
-        .getAudioTracks()
+      of localCameraStream.getAudioTracks()
     ){
 
       track.enabled =
@@ -2338,26 +2237,20 @@ function forceMute(){
 
   }
 
-
   updateMicButton();
-
   sendStatus();
-
 }
 
 
 function forceUnmute(){
 
-  microphoneMuted =
-    false;
-
+  microphoneMuted = false;
 
   if(localCameraStream){
 
     for(
       const track
-      of localCameraStream
-        .getAudioTracks()
+      of localCameraStream.getAudioTracks()
     ){
 
       track.enabled =
@@ -2367,11 +2260,8 @@ function forceUnmute(){
 
   }
 
-
   updateMicButton();
-
   sendStatus();
-
 }
 
 
@@ -2383,14 +2273,11 @@ function sendStatus(){
 
   if(
     !socket ||
-    socket.readyState !==
-      WebSocket.OPEN
+    socket.readyState !== WebSocket.OPEN
   ){
 
     return;
-
   }
-
 
   socket.send(
     JSON.stringify({
@@ -2413,27 +2300,22 @@ function sendStatus(){
 
 
 /* =====================================================
-RENEGOCIAR
+RENEGOCIAÇÃO
 ===================================================== */
 
 async function renegotiateAll(){
 
   for(
     const peerId
-    of Object.keys(
-      peerConnections
-    )
+    of Object.keys(peerConnections)
   ){
 
     const pc =
       peerConnections[peerId];
 
     if(!pc){
-
       continue;
-
     }
-
 
     for(
       const sender
@@ -2455,8 +2337,7 @@ async function renegotiateAll(){
 
       for(
         const track
-        of localCameraStream
-          .getTracks()
+        of localCameraStream.getTracks()
       ){
 
         pc.addTrack(
@@ -2473,8 +2354,7 @@ async function renegotiateAll(){
 
       for(
         const track
-        of localScreenStream
-          .getTracks()
+        of localScreenStream.getTracks()
       ){
 
         pc.addTrack(
@@ -2537,9 +2417,7 @@ function showLocalVideo(){
 
     `;
 
-    videoGrid.appendChild(
-      card
-    );
+    videoGrid.appendChild(card);
 
   }
 
@@ -2565,7 +2443,6 @@ function showLocalVideo(){
 
   empty.style.display =
     "none";
-
 }
 
 
@@ -2583,7 +2460,6 @@ function hideLocalVideo(){
   }
 
   updateEmpty();
-
 }
 
 
@@ -2625,8 +2501,7 @@ function showRemoteVideo(
 
       <div class="video-label">
         ${escapeHTML(
-          user.name ||
-          "Usuário"
+          user.name || "Usuário"
         )}
       </div>
 
@@ -2639,9 +2514,7 @@ function showRemoteVideo(
 
     `;
 
-    videoGrid.appendChild(
-      card
-    );
+    videoGrid.appendChild(card);
 
   }
 
@@ -2652,42 +2525,29 @@ function showRemoteVideo(
     );
 
 
-  if(
-    video.srcObject !==
-    stream
-  ){
+  if(video.srcObject !== stream){
 
     video.srcObject =
       stream;
 
   }
 
-
   empty.style.display =
     "none";
-
 }
 
 
-function removePeer(
-  peerId
-){
+function removePeer(peerId){
 
-  if(
-    peerConnections[peerId]
-  ){
+  if(peerConnections[peerId]){
 
     try{
 
-      peerConnections[
-        peerId
-      ].close();
+      peerConnections[peerId].close();
 
     }catch{}
 
-    delete peerConnections[
-      peerId
-    ];
+    delete peerConnections[peerId];
 
   }
 
@@ -2703,17 +2563,13 @@ function removePeer(
 
   }
 
-
   updateEmpty();
-
 }
 
 
 function updateEmpty(){
 
-  if(
-    videoGrid.children.length
-  ){
+  if(videoGrid.children.length){
 
     empty.style.display =
       "none";
@@ -2730,34 +2586,30 @@ function updateEmpty(){
 
 function clearVideos(){
 
-  videoGrid.innerHTML =
-    "";
+  videoGrid.innerHTML = "";
 
   updateEmpty();
-
 }
 
+
+/* =====================================================
+PEERS
+===================================================== */
 
 function closeAllPeerConnections(){
 
   for(
     const id
-    of Object.keys(
-      peerConnections
-    )
+    of Object.keys(peerConnections)
   ){
 
     try{
 
-      peerConnections[
-        id
-      ].close();
+      peerConnections[id].close();
 
     }catch{}
 
-    delete peerConnections[
-      id
-    ];
+    delete peerConnections[id];
 
   }
 
@@ -2768,22 +2620,13 @@ function closeAllPeerConnections(){
 USUÁRIOS
 ===================================================== */
 
-let currentUsers = [];
-
-
-function updateUsers(
-  users
-){
+function updateUsers(users){
 
   currentUsers =
     users;
 
 
-  for(
-    let i = 1;
-    i <= 20;
-    i++
-  ){
+  for(let i=1;i<=20;i++){
 
     const count =
       document.getElementById(
@@ -2795,42 +2638,33 @@ function updateUsers(
         `members-${i}`
       );
 
-
-    if(
-      !count ||
-      !members
-    ){
-
+    if(!count || !members){
       continue;
-
     }
 
 
     if(
+      currentRoom !== null &&
       i === currentRoom
     ){
 
       count.textContent =
         `${users.length}/8`;
 
-      members.innerHTML =
-        "";
+      members.innerHTML = "";
 
 
       users.forEach(
         user => {
 
           const item =
-            document.createElement(
-              "div"
-            );
+            document.createElement("div");
 
           item.className =
             "member";
 
 
-          let status =
-            "";
+          let status = "";
 
 
           if(user.camera){
@@ -2869,8 +2703,7 @@ function updateUsers(
 
             <span>
               ${escapeHTML(
-                user.name ||
-                "Usuário"
+                user.name || "Usuário"
               )}
             </span>
 
@@ -2878,17 +2711,14 @@ function updateUsers(
 
             <span class="role">
               ${escapeHTML(
-                user.role ||
-                "MEMBRO"
+                user.role || "MEMBRO"
               )}
             </span>
 
           `;
 
 
-          members.appendChild(
-            item
-          );
+          members.appendChild(item);
 
         }
       );
@@ -2901,17 +2731,73 @@ function updateUsers(
 
 
 /* =====================================================
-DONOS
+REGRAS
+===================================================== */
+
+function openRules(){
+
+  if(currentRoom !== null){
+
+    leaveRoom();
+
+  }
+
+  rules.classList.add("show");
+
+  title.textContent =
+    "📜 Regras";
+
+  description.textContent =
+    "Regras da FF Arena.";
+
+  document
+    .querySelectorAll(".channel")
+    .forEach(
+      el =>
+        el.classList.remove("active")
+    );
+
+}
+
+
+function closeRules(){
+
+  rules.classList.remove("show");
+
+  showHome();
+}
+
+
+/* =====================================================
+ÁREA DOS DONOS
 ===================================================== */
 
 function openOwnerPanel(){
+
+  if(currentRoom !== null){
+
+    leaveRoom();
+
+  }
 
   ownerPanel.classList.add(
     "show"
   );
 
-  updateOwnerPanel();
+  title.textContent =
+    "👑 Área dos Donos";
 
+  description.textContent =
+    "Área administrativa da FF Arena.";
+
+  document
+    .querySelectorAll(".channel")
+    .forEach(
+      el =>
+        el.classList.remove("active")
+    );
+
+  updateOwnerPanel();
 }
 
 
@@ -2921,6 +2807,7 @@ function closeOwnerPanel(){
     "show"
   );
 
+  showHome();
 }
 
 
@@ -2939,14 +2826,12 @@ function ownerLogin(){
     );
 
     return;
-
   }
 
 
   if(
     !socket ||
-    socket.readyState !==
-      WebSocket.OPEN
+    socket.readyState !== WebSocket.OPEN
   ){
 
     alert(
@@ -2954,7 +2839,6 @@ function ownerLogin(){
     );
 
     return;
-
   }
 
 
@@ -2994,24 +2878,35 @@ function updateOwnerPanel(){
     `;
 
     return;
-
   }
 
 
   let html = `
 
-    <h3
-      style="margin:15px 0 10px"
-    >
-      👥 Pessoas na Análise
-      ${
+    <h3 style="margin:15px 0 10px">
+      👥 Pessoas na Análise ${
         currentRoom
         ? String(currentRoom).padStart(2,"0")
-        : "-"
+        : "--"
       }
     </h3>
 
   `;
+
+
+  if(!currentUsers.length){
+
+    html += `
+
+      <p
+        style="color:#858c99;font-size:13px"
+      >
+        Nenhuma pessoa conectada em uma análise.
+      </p>
+
+    `;
+
+  }
 
 
   currentUsers.forEach(
@@ -3044,19 +2939,17 @@ function updateOwnerPanel(){
           </span>
 
           <span class="admin-user-name">
-
             ${escapeHTML(
-              user.name
+              user.name || "Usuário"
             )}
 
             <small
               style="color:#777;margin-left:4px"
             >
               ${escapeHTML(
-                user.role
+                user.role || "MEMBRO"
               )}
             </small>
-
           </span>
 
       `;
@@ -3115,9 +3008,7 @@ function updateOwnerPanel(){
       }
 
 
-      html += `
-        </div>
-      `;
+      html += `</div>`;
 
     }
   );
@@ -3125,7 +3016,6 @@ function updateOwnerPanel(){
 
   ownerContent.innerHTML =
     html;
-
 }
 
 
@@ -3138,16 +3028,22 @@ function changeRole(
   role
 ){
 
-  if(
-    myRole !== "DONO"
-  ){
+  if(myRole !== "DONO"){
 
     alert(
       "Somente o Dono pode alterar cargos."
     );
 
     return;
+  }
 
+
+  if(
+    !socket ||
+    socket.readyState !== WebSocket.OPEN
+  ){
+
+    return;
   }
 
 
@@ -3170,9 +3066,7 @@ function changeRole(
 MUTAR
 ===================================================== */
 
-function muteMember(
-  userId
-){
+function muteMember(userId){
 
   if(
     myRole !== "DONO" &&
@@ -3181,7 +3075,12 @@ function muteMember(
   ){
 
     return;
+  }
 
+
+  if(!socket){
+
+    return;
   }
 
 
@@ -3202,9 +3101,7 @@ function muteMember(
 DESMUTAR
 ===================================================== */
 
-function unmuteMember(
-  userId
-){
+function unmuteMember(userId){
 
   if(
     myRole !== "DONO" &&
@@ -3213,7 +3110,12 @@ function unmuteMember(
   ){
 
     return;
+  }
 
+
+  if(!socket){
+
+    return;
   }
 
 
@@ -3231,59 +3133,6 @@ function unmuteMember(
 
 
 /* =====================================================
-REGRAS
-===================================================== */
-
-function openRules(){
-
-  rules.classList.add(
-    "show"
-  );
-
-  analysisList.classList.remove(
-    "show"
-  );
-
-  controls.classList.remove(
-    "show"
-  );
-
-  home.style.display =
-    "none";
-
-  empty.style.display =
-    "none";
-
-  videoGrid.innerHTML =
-    "";
-
-  title.textContent =
-    "📜 Regras";
-
-  description.textContent =
-    "Regras da FF Arena.";
-
-  document
-    .querySelectorAll(".channel")
-    .forEach(
-      el =>
-        el.classList.remove(
-          "active"
-        )
-    );
-
-  document
-    .getElementById(
-      "rulesButton"
-    )
-    .classList.add(
-      "active"
-    );
-
-}
-
-
-/* =====================================================
 SAIR DA ANÁLISE
 ===================================================== */
 
@@ -3294,8 +3143,7 @@ function leaveRoom(){
     localCameraStream
       .getTracks()
       .forEach(
-        track =>
-          track.stop()
+        track => track.stop()
       );
 
     localCameraStream =
@@ -3309,8 +3157,7 @@ function leaveRoom(){
     localScreenStream
       .getTracks()
       .forEach(
-        track =>
-          track.stop()
+        track => track.stop()
       );
 
     localScreenStream =
@@ -3325,15 +3172,16 @@ function leaveRoom(){
   if(socket){
 
     try{
-
       socket.close();
-
     }catch{}
 
     socket =
       null;
 
   }
+
+
+  clearVideos();
 
 
   cameraButton.textContent =
@@ -3347,7 +3195,15 @@ function leaveRoom(){
 
   updateMicButton();
 
-  clearVideos();
+
+  currentRoom =
+    null;
+
+
+  /*
+  Aqui está a mudança principal:
+  depois de sair, volta para a tela inicial.
+  */
 
   showHome();
 
@@ -3358,19 +3214,13 @@ function leaveRoom(){
 ESCAPE HTML
 ===================================================== */
 
-function escapeHTML(
-  value
-){
+function escapeHTML(value){
 
   const div =
-    document.createElement(
-      "div"
-    );
+    document.createElement("div");
 
   div.textContent =
-    String(
-      value || ""
-    );
+    String(value || "");
 
   return div.innerHTML;
 
@@ -3382,6 +3232,11 @@ INICIAR
 ===================================================== */
 
 loadName();
+
+/*
+NÃO usamos openRoom(1).
+O site começa na tela inicial.
+*/
 
 showHome();
 
