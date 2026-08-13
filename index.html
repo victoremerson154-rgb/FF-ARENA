@@ -21,7 +21,7 @@ html,body{
 body{
   font-family:Arial,sans-serif;
   background:#111318;
-  color:#fff;
+  color:white;
   overflow:hidden;
 }
 
@@ -74,7 +74,7 @@ button{
 .channel:hover,
 .channel.active{
   background:#292e3a;
-  color:#fff;
+  color:white;
 }
 
 .channel-name{
@@ -112,8 +112,10 @@ button{
   flex-shrink:0;
 }
 
-.status-icon{
-  margin-left:2px;
+.role{
+  font-size:9px;
+  color:#858c99;
+  margin-left:auto;
 }
 
 .muted{
@@ -126,12 +128,6 @@ button{
 
 .screen{
   color:#65d79a;
-}
-
-.role{
-  font-size:9px;
-  color:#858c99;
-  margin-left:auto;
 }
 
 .user-area{
@@ -192,12 +188,16 @@ button{
   font-size:13px;
 }
 
-/* ANÁLISE */
+/* =========================
+ANÁLISE
+========================= */
+
 .analysis-screen{
   display:none;
-  flex:1;
-  min-height:0;
+  width:100%;
+  height:100%;
   flex-direction:column;
+  background:#111318;
 }
 
 .analysis-screen.show{
@@ -205,54 +205,49 @@ button{
 }
 
 .analysis-header{
-  height:65px;
+  height:58px;
   flex-shrink:0;
   border-bottom:1px solid #292d36;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:10px 18px;
+  padding:8px 14px;
+  background:#181b22;
 }
 
 .analysis-header h2{
-  font-size:18px;
+  font-size:17px;
 }
 
 .analysis-header p{
-  font-size:12px;
+  font-size:11px;
   color:#858c99;
-  margin-top:4px;
+  margin-top:3px;
 }
 
 .header-actions{
   display:flex;
-  gap:7px;
+  gap:6px;
 }
 
 .header-button{
   border:0;
-  border-radius:7px;
-  padding:9px 11px;
+  border-radius:6px;
+  padding:8px 10px;
   background:#292e3a;
-  color:#fff;
+  color:white;
+  font-size:12px;
 }
 
-.header-button:hover{
-  background:#353b49;
-}
-
-/*
-O quadrado só existe quando a análise está aberta.
-*/
 .stage{
   flex:1;
   min-height:0;
-  margin:10px;
+  margin:7px;
   border:1px solid #292d36;
-  border-radius:10px;
+  border-radius:9px;
   background:#090b0f;
   overflow:auto;
-  padding:8px;
+  padding:7px;
 }
 
 .empty{
@@ -267,7 +262,7 @@ O quadrado só existe quando a análise está aberta.
 }
 
 .empty-icon{
-  font-size:40px;
+  font-size:38px;
   margin-bottom:8px;
 }
 
@@ -282,8 +277,8 @@ O quadrado só existe quando a análise está aberta.
 
 .video-grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:8px;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:7px;
   width:100%;
 }
 
@@ -292,13 +287,13 @@ O quadrado só existe quando a análise está aberta.
   background:#151820;
   border-radius:8px;
   overflow:hidden;
-  min-height:160px;
+  min-height:150px;
+  aspect-ratio:16/10;
 }
 
 .video-card video{
   width:100%;
   height:100%;
-  min-height:160px;
   object-fit:cover;
   background:#050608;
   display:block;
@@ -306,40 +301,45 @@ O quadrado só existe quando a análise está aberta.
 
 .video-label{
   position:absolute;
-  bottom:7px;
-  left:7px;
-  background:rgba(0,0,0,.65);
-  padding:5px 8px;
+  bottom:6px;
+  left:6px;
+  background:rgba(0,0,0,.7);
+  padding:5px 7px;
   border-radius:5px;
-  font-size:11px;
+  font-size:10px;
 }
 
 .video-status{
   position:absolute;
-  right:7px;
-  bottom:7px;
-  font-size:13px;
+  right:6px;
+  bottom:6px;
+  font-size:12px;
 }
+
+/* =========================
+CONTROLES
+========================= */
 
 .controls{
   width:min(430px,100%);
   margin:0 auto;
-  padding:7px 10px 12px;
+  padding:6px 9px 10px;
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:7px;
+  gap:6px;
   flex-shrink:0;
 }
 
 .control{
   width:100%;
-  min-height:44px;
+  min-height:42px;
   border:0;
   border-radius:7px;
-  padding:10px;
+  padding:9px;
   background:#292e3a;
-  color:#fff;
+  color:white;
   font-weight:bold;
+  font-size:12px;
 }
 
 .control:hover{
@@ -354,17 +354,20 @@ O quadrado só existe quando a análise está aberta.
   background:#d83b4b;
 }
 
-.control.danger:hover{
-  background:#b52e3b;
+.minimize{
+  background:#5865f2;
 }
 
-/* CONFIRMAÇÃO */
+/* =========================
+ENTRAR
+========================= */
+
 .enter-panel{
   display:none;
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.78);
-  z-index:50;
+  z-index:100;
   align-items:center;
   justify-content:center;
   padding:20px;
@@ -399,26 +402,29 @@ O quadrado só existe quando a análise está aberta.
   gap:8px;
 }
 
-/* TELAS SOBRE A ANÁLISE */
-.overlay-page{
+/* =========================
+TELAS REGRAS / DONO
+========================= */
+
+.fullscreen-page{
   display:none;
   position:fixed;
   inset:0;
-  z-index:100;
+  z-index:200;
   background:#111318;
   overflow:auto;
 }
 
-.overlay-page.show{
+.fullscreen-page.show{
   display:block;
 }
 
-.overlay-header{
-  min-height:65px;
+.fullscreen-header{
+  height:60px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:12px 18px;
+  padding:10px 15px;
   border-bottom:1px solid #292d36;
   background:#181b22;
   position:sticky;
@@ -426,22 +432,22 @@ O quadrado só existe quando a análise está aberta.
   z-index:2;
 }
 
-.overlay-header h2{
+.fullscreen-header h2{
   font-size:18px;
-}
-
-.overlay-content{
-  max-width:900px;
-  margin:0 auto;
-  padding:20px;
 }
 
 .close-fullscreen{
   border:0;
   background:#d83b4b;
-  color:#fff;
+  color:white;
   border-radius:6px;
-  padding:9px 13px;
+  padding:8px 12px;
+}
+
+.fullscreen-content{
+  max-width:900px;
+  margin:0 auto;
+  padding:20px;
 }
 
 .rule-box,
@@ -473,7 +479,7 @@ O quadrado só existe quando a análise está aberta.
   border:1px solid #343944;
   border-radius:7px;
   background:#101218;
-  color:#fff;
+  color:white;
   margin-bottom:10px;
   outline:none;
 }
@@ -482,13 +488,12 @@ O quadrado só existe quando a análise está aberta.
   display:flex;
   gap:8px;
   flex-wrap:wrap;
-  margin-bottom:15px;
 }
 
 .admin-user{
   display:flex;
   align-items:center;
-  gap:8px;
+  gap:7px;
   padding:9px;
   background:#22262f;
   border-radius:7px;
@@ -506,9 +511,33 @@ O quadrado só existe quando a análise está aberta.
   border-radius:5px;
   padding:7px 9px;
   background:#343a48;
-  color:#fff;
+  color:white;
   font-size:11px;
 }
+
+/* =========================
+MINIMIZADO
+========================= */
+
+body.analysis-minimized .analysis-screen{
+  display:none;
+}
+
+body.analysis-minimized .sidebar{
+  display:flex;
+}
+
+body.analysis-minimized .main{
+  display:flex;
+}
+
+body.analysis-minimized .home-screen{
+  display:flex;
+}
+
+/* =========================
+MOBILE
+========================= */
 
 @media(max-width:700px){
 
@@ -520,19 +549,6 @@ O quadrado só existe quando a análise está aberta.
     width:100%;
     height:100%;
     border:0;
-  }
-
-  .logo{
-    padding:15px;
-    font-size:20px;
-  }
-
-  .category{
-    padding-top:12px;
-  }
-
-  .user-area{
-    display:none;
   }
 
   .main{
@@ -549,71 +565,52 @@ O quadrado só existe quando a análise está aberta.
     height:100%;
   }
 
-  .analysis-header{
-    height:58px;
-    padding:9px 10px;
+  body.analysis-open.analysis-minimized .sidebar{
+    display:flex;
   }
 
-  .analysis-header h2{
-    font-size:15px;
+  body.analysis-open.analysis-minimized .main{
+    display:none;
+  }
+
+  .analysis-header{
+    height:55px;
   }
 
   .stage{
-    margin:6px;
-    padding:6px;
+    margin:5px;
+    padding:5px;
   }
 
   .video-grid{
     grid-template-columns:1fr 1fr;
-    gap:6px;
+    gap:5px;
   }
 
   .video-card{
-    min-height:120px;
-  }
-
-  .video-card video{
-    min-height:120px;
+    min-height:110px;
   }
 
   .controls{
     width:100%;
-    padding:6px 8px 10px;
+    padding:5px 7px 8px;
     grid-template-columns:1fr 1fr;
   }
 
   .control{
-    min-height:43px;
-    font-size:12px;
+    min-height:41px;
   }
 
-  .overlay-content{
-    padding:10px;
+  .fullscreen-content{
+    padding:9px;
   }
 
   .rule-box,
   .owner-box{
-    border-radius:8px;
-    padding:15px;
+    border-radius:7px;
+    padding:14px;
   }
 
-  .header-actions{
-    gap:4px;
-  }
-
-  .header-button{
-    padding:7px 8px;
-    font-size:11px;
-  }
-}
-
-body:not(.analysis-open) .analysis-screen{
-  display:none!important;
-}
-
-body:not(.analysis-open) .stage,
-body:not(.analysis-open) .controls{
-  display:none!important;
 }
 </style>
 </head>
@@ -624,98 +621,49 @@ body:not(.analysis-open) .controls{
 
 <aside class="sidebar">
 
-  <div class="logo">
-    🔥 FF Arena
-  </div>
+  <div class="logo">🔥 FF Arena</div>
 
-  <div
-    class="channel"
-    onclick="openOwnerPanel()"
-  >
+  <div class="channel" onclick="openOwnerPanel()">
     👑
-    <span class="channel-name">
-      Área dos Donos
-    </span>
+    <span class="channel-name">Área dos Donos</span>
   </div>
 
-  <div
-    class="channel"
-    onclick="openRules()"
-  >
+  <div class="channel" onclick="openRules()">
     📜
-    <span class="channel-name">
-      Regras
-    </span>
+    <span class="channel-name">Regras</span>
   </div>
 
-  <div class="category">
-    🔎 ANÁLISES
-  </div>
+  <div class="category">🔎 ANÁLISES</div>
 
   <div id="channels"></div>
 
   <div class="user-area">
-
     <div class="avatar" id="myAvatar">U</div>
 
     <div class="user-info">
-
-      <div
-        class="user-name"
-        id="myNameDisplay"
-      >
-        Usuário
-      </div>
-
-      <div
-        class="user-role"
-        id="myRoleDisplay"
-      >
-        MEMBRO
-      </div>
-
+      <div class="user-name" id="myNameDisplay">Usuário</div>
+      <div class="user-role" id="myRoleDisplay">MEMBRO</div>
     </div>
-
   </div>
 
 </aside>
 
 <main class="main">
 
-  <div
-    class="home-screen"
-    id="homeScreen"
-  >
-
+  <div class="home-screen" id="homeScreen">
     <div class="home-content">
-
       <h2>🔥 FF Arena</h2>
-
-      <p>
-        Selecione uma Análise para entrar.
-      </p>
-
+      <p>Selecione uma Análise para entrar.</p>
     </div>
-
   </div>
 
-  <section
-    class="analysis-screen"
-    id="analysisScreen"
-  >
+  <section class="analysis-screen" id="analysisScreen">
 
     <header class="analysis-header">
 
       <div>
-
-        <h2 id="title">
-          🔎 Análise
-        </h2>
-
-        <p id="description">
-          Entre na análise para participar.
-        </p>
-
+        <h2 id="title">🔎 Análise</h2>
+        <p id="description">Conectando...</p>
       </div>
 
       <div class="header-actions">
@@ -734,36 +682,32 @@ body:not(.analysis-open) .controls{
           👑 Donos
         </button>
 
+        <button
+          class="header-button minimize"
+          onclick="minimizeAnalysis()"
+        >
+          ⬇️ Minimizar
+        </button>
+
       </div>
 
     </header>
 
-    <section
-      class="stage"
-      id="stage"
-    >
+    <section class="stage" id="stage">
 
-      <div
-        class="empty"
-        id="empty"
-      >
+      <div class="empty" id="empty">
 
         <div class="empty-icon">🎥</div>
 
-        <h3>
-          Nenhuma transmissão ativa
-        </h3>
+        <h3>Nenhuma transmissão ativa</h3>
 
         <p>
-          Abra a câmera ou compartilhe sua tela.
+          As pessoas conectadas aparecem aqui.
         </p>
 
       </div>
 
-      <div
-        class="video-grid"
-        id="videoGrid"
-      ></div>
+      <div class="video-grid" id="videoGrid"></div>
 
     </section>
 
@@ -816,17 +760,13 @@ body:not(.analysis-open) .controls{
 
 </div>
 
-<!-- CONFIRMAÇÃO -->
-<div
-  class="enter-panel"
-  id="enterPanel"
->
+<!-- ENTRAR -->
+
+<div class="enter-panel" id="enterPanel">
 
   <div class="enter-box">
 
-    <h2 id="enterTitle">
-      🔎 Análise
-    </h2>
+    <h2 id="enterTitle">🔎 Análise</h2>
 
     <p>
       Você selecionou esta análise.
@@ -835,17 +775,11 @@ body:not(.analysis-open) .controls{
 
     <div class="enter-actions">
 
-      <button
-        class="control"
-        onclick="confirmEnterRoom()"
-      >
+      <button class="control" onclick="confirmEnterRoom()">
         Entrar
       </button>
 
-      <button
-        class="control danger"
-        onclick="closeEnterPanel()"
-      >
+      <button class="control danger" onclick="closeEnterPanel()">
         Cancelar
       </button>
 
@@ -856,12 +790,10 @@ body:not(.analysis-open) .controls{
 </div>
 
 <!-- REGRAS -->
-<div
-  class="overlay-page"
-  id="rulesPage"
->
 
-  <div class="overlay-header">
+<div class="fullscreen-page" id="rulesPage">
+
+  <div class="fullscreen-header">
 
     <h2>📜 Regras</h2>
 
@@ -874,7 +806,7 @@ body:not(.analysis-open) .controls{
 
   </div>
 
-  <div class="overlay-content">
+  <div class="fullscreen-content">
 
     <div class="rule-box">
 
@@ -893,8 +825,6 @@ body:not(.analysis-open) .controls{
       <div class="rule">🔹 SHADERS MODIFICADA É W.O.</div>
       <div class="rule">🔹 QUALQUER TIPO DE VPN QUE NÃO SEJA DO GOVERNO OU APOSTAS ESPORTIVAS SERÁ APLICADO W.O.</div>
       <div class="rule">🔹 OBRIGATÓRIO TER APP USAGE INSTALADO COM TODAS AS PERMISSÕES CONCEDIDAS.</div>
-      <div class="rule">🔹 APP USAGE DESINSTALADO — W.O APENAS SE ESTIVER COM REPLAY SUSPEITO.</div>
-      <div class="rule">🔹 EM CASOS DE REPLAY SUSPEITO COM BUFFER DE LOG 256KB — PASSÍVEL DE W.O.</div>
 
       <h3>🍎 IOS</h3>
 
@@ -902,12 +832,8 @@ body:not(.analysis-open) .controls{
       <div class="rule">🔹 IPHONE É PROIBIDO REINICIAR DURANTE/APÓS A PARTIDA.</div>
       <div class="rule">🔹 IPHONE OBRIGATÓRIO JOGAR COM TEMPO DE USO E RELATÓRIO DE PRIVACIDADE ATIVADO.</div>
       <div class="rule">🔹 PROIBIDO SCARLET, ESIGN, KSIGN, GBOX E SIMILARES.</div>
-      <div class="rule">🔹 IPHONE VERSÃO 15.X A 16.X EM APOSTAS ACIMA DE R$50 (MD3): DEVE ABRIR TELA REINSTALANDO O JOGO E ENTRANDO NA SALA.</div>
-      <div class="rule">🔹 IPHONES 15.X–16.X COM APP STORE NA BATERIA APÓS A PARTIDA SÃO PASSÍVEIS DE W.O.</div>
-      <div class="rule">🔹 IPHONES 15.X–16.X COM REPLAY SUSPEITO SÃO PASSÍVEIS DE W.O.</div>
       <div class="rule">🔹 IPHONES COM MODO DEVELOPER ATIVADO RESULTAM EM W.O.</div>
       <div class="rule">🔹 É PROIBIDO RELOGAR COM REPLAY SUSPEITO.</div>
-      <div class="rule">🔹 RELATÓRIO DE PRIVACIDADE OU TEMPO DE USO DESATIVADO — W.O APENAS SE REPLAY ESTIVER SUSPEITO.</div>
 
       <h3>🖥️ EMULADO</h3>
 
@@ -915,17 +841,10 @@ body:not(.analysis-open) .controls{
       <div class="rule">🔹 PROIBIDO REMOVER PENDRIVE PÓS BOOT.</div>
       <div class="rule">🔹 TODOS OS DISCOS DEVEM SER NTFS COM USNJOURNAL ATIVO.</div>
       <div class="rule">🔹 PROIBIDO REINICIAR O EMULADOR APÓS A PARTIDA.</div>
-      <div class="rule">🔹 TEMP, PREFETCH, RECENT LIMPAS PÓS BOOT DO PC = W.O.</div>
-      <div class="rule">🔹 BAM PAUSADA/LIMPA = W.O.</div>
       <div class="rule">🔹 WINDOWS MODIFICADO QUE IMPOSSIBILITE TELAGEM = W.O.</div>
       <div class="rule">🔹 NEGAR ACESSO VIA ANYDESK/TEAMVIEWER = W.O.</div>
-      <div class="rule">🔹 SYSMON ATIVADA APÓS BOOT = W.O.</div>
-      <div class="rule">🔹 RASTRO DE SERVIÇO PAUSADO MESMO QUE TEMPORARIAMENTE = W.O.</div>
       <div class="rule">🔹 SEMPRE CONFIRA ATUALIZAÇÕES DA SYSMON.</div>
-      <div class="rule">🔹 PLACAS-MÃES X99: AVISAR O SS CASO NÃO TENHA SECURE BOOT/TPM.</div>
       <div class="rule">🔹 PROIBIDO USO DE EMULADORES PROTEGIDOS POR KERNEL.</div>
-      <div class="rule">🔹 CASO ALGUM SERVIÇO NECESSÁRIO ESTEJA DESABILITADO, SERÁ W.O EM REPLAYS SUSPEITOS.</div>
-      <div class="rule">🔹 EM CASOS PARA CONFERIR SE O EMULADOR É PERMITIDO OU NÃO, INSTALE O ARQUIVO QUE CONFERE O EMULADOR.</div>
 
       <h3>⚠️ REGRA FINAL</h3>
 
@@ -939,13 +858,11 @@ body:not(.analysis-open) .controls{
 
 </div>
 
-<!-- ÁREA DOS DONOS -->
-<div
-  class="overlay-page"
-  id="ownerPage"
->
+<!-- ÁREA DONOS -->
 
-  <div class="overlay-header">
+<div class="fullscreen-page" id="ownerPage">
+
+  <div class="fullscreen-header">
 
     <h2>👑 Área dos Donos</h2>
 
@@ -958,16 +875,12 @@ body:not(.analysis-open) .controls{
 
   </div>
 
-  <div class="overlay-content">
+  <div class="fullscreen-content">
 
     <div class="owner-box">
 
-      <p style="
-        color:#858c99;
-        font-size:12px;
-        margin-bottom:15px
-      ">
-        Entre com o código do Dono para administrar a sala.
+      <p style="color:#858c99;font-size:12px;margin-bottom:15px">
+        Entre com o código do Dono para administrar.
       </p>
 
       <input
@@ -997,52 +910,82 @@ body:not(.analysis-open) .controls{
 </div>
 
 <script>
-const SERVER_URL="wss://ff-arena-serve.onrender.com";
+const SERVER_URL =
+  "wss://ff-arena-serve.onrender.com";
 
-let socket=null;
-let currentRoom=null;
-let selectedRoom=null;
-let myId=null;
-let myName="Usuário";
-let myRole="MEMBRO";
+let socket = null;
+let currentRoom = null;
+let selectedRoom = null;
+let myId = null;
+let myName = "Usuário";
+let myRole = "MEMBRO";
 
-let localCameraStream=null;
-let localScreenStream=null;
-let microphoneMuted=false;
-let cameraFacingMode="user";
+let localCameraStream = null;
+let localAudioStream = null;
+let localScreenStream = null;
 
-let currentUsers=[];
+let microphoneMuted = false;
+let cameraFacingMode = "user";
 
-const peerConnections={};
-const makingOffer={};
-const ignoreOffer={};
-const polite={};
-const remoteUsers={};
+let currentUsers = [];
 
-const channels=document.getElementById("channels");
-const enterPanel=document.getElementById("enterPanel");
-const enterTitle=document.getElementById("enterTitle");
-const analysisScreen=document.getElementById("analysisScreen");
-const homeScreen=document.getElementById("homeScreen");
-const title=document.getElementById("title");
-const description=document.getElementById("description");
-const videoGrid=document.getElementById("videoGrid");
-const empty=document.getElementById("empty");
+const peerConnections = {};
+const peerUsers = {};
+const makingOffer = {};
+const ignoreOffer = {};
+const polite = {};
 
-const cameraButton=document.getElementById("cameraButton");
-const screenButton=document.getElementById("screenButton");
-const micButton=document.getElementById("micButton");
-const flipButton=document.getElementById("flipButton");
+const channels = document.getElementById("channels");
+const enterPanel = document.getElementById("enterPanel");
+const enterTitle = document.getElementById("enterTitle");
 
-const rulesPage=document.getElementById("rulesPage");
-const ownerPage=document.getElementById("ownerPage");
-const ownerContent=document.getElementById("ownerContent");
+const analysisScreen =
+  document.getElementById("analysisScreen");
+
+const homeScreen =
+  document.getElementById("homeScreen");
+
+const title =
+  document.getElementById("title");
+
+const description =
+  document.getElementById("description");
+
+const videoGrid =
+  document.getElementById("videoGrid");
+
+const empty =
+  document.getElementById("empty");
+
+const cameraButton =
+  document.getElementById("cameraButton");
+
+const screenButton =
+  document.getElementById("screenButton");
+
+const micButton =
+  document.getElementById("micButton");
+
+const rulesPage =
+  document.getElementById("rulesPage");
+
+const ownerPage =
+  document.getElementById("ownerPage");
+
+const ownerContent =
+  document.getElementById("ownerContent");
+
+
+/* =========================
+ANÁLISES
+========================= */
 
 for(let i=1;i<=20;i++){
 
-  const container=document.createElement("div");
+  const container =
+    document.createElement("div");
 
-  container.innerHTML=`
+  container.innerHTML = `
     <div
       class="channel"
       id="channel-${i}"
@@ -1071,22 +1014,32 @@ for(let i=1;i<=20;i++){
   channels.appendChild(container);
 }
 
+
+/* =========================
+NOME
+========================= */
+
 function loadName(){
 
-  const saved=localStorage.getItem("ffArenaName");
+  const saved =
+    localStorage.getItem("ffArenaName");
 
   if(saved){
-    myName=saved;
+
+    myName = saved;
+
   }else{
 
-    const answer=prompt("Digite seu nome:");
+    const answer =
+      prompt("Digite seu nome:");
 
-    myName=(answer||"Usuário")
-      .trim()
-      .slice(0,30);
+    myName =
+      String(answer || "Usuário")
+        .trim()
+        .slice(0,30);
 
     if(!myName){
-      myName="Usuário";
+      myName = "Usuário";
     }
 
     localStorage.setItem(
@@ -1098,81 +1051,103 @@ function loadName(){
   updateProfile();
 }
 
+
 function updateProfile(){
 
-  const name=document.getElementById("myNameDisplay");
-  const avatar=document.getElementById("myAvatar");
-  const role=document.getElementById("myRoleDisplay");
+  const name =
+    document.getElementById("myNameDisplay");
 
-  if(name) name.textContent=myName;
+  const avatar =
+    document.getElementById("myAvatar");
+
+  const role =
+    document.getElementById("myRoleDisplay");
+
+  if(name){
+    name.textContent = myName;
+  }
 
   if(avatar){
-    avatar.textContent=
+    avatar.textContent =
       myName.charAt(0).toUpperCase();
   }
 
   if(role){
-    role.textContent=myRole;
+    role.textContent = myRole;
   }
 }
 
+
+/* =========================
+SELECIONAR
+========================= */
+
 function selectRoom(room){
 
-  selectedRoom=room;
+  selectedRoom = room;
 
   document
     .querySelectorAll(".channel")
-    .forEach(el=>el.classList.remove("active"));
+    .forEach(el=>{
+      el.classList.remove("active");
+    });
 
-  const channel=document.getElementById(
-    `channel-${room}`
-  );
+  const channel =
+    document.getElementById(
+      `channel-${room}`
+    );
 
   if(channel){
     channel.classList.add("active");
   }
 
-  enterTitle.textContent=
+  enterTitle.textContent =
     `🔎 Análise ${String(room).padStart(2,"0")}`;
 
   enterPanel.classList.add("show");
 }
 
+
 function closeEnterPanel(){
 
   enterPanel.classList.remove("show");
-
-  selectedRoom=null;
+  selectedRoom = null;
 }
+
 
 function confirmEnterRoom(){
 
-  if(!selectedRoom) return;
+  if(!selectedRoom){
+    return;
+  }
 
-  const room=selectedRoom;
+  const room = selectedRoom;
 
   closeEnterPanel();
 
   openRoom(room);
 }
 
+
+/* =========================
+ABRIR ANÁLISE
+========================= */
+
 function openRoom(room){
 
-  currentRoom=room;
-
-  rulesPage.classList.remove("show");
-  ownerPage.classList.remove("show");
+  currentRoom = room;
 
   document.body.classList.add("analysis-open");
+  document.body.classList.remove("analysis-minimized");
 
-  homeScreen.style.display="none";
+  homeScreen.style.display = "none";
 
   analysisScreen.classList.add("show");
 
-  title.textContent=
+  title.textContent =
     `🔎 Análise ${String(room).padStart(2,"0")}`;
 
-  description.textContent=
+  description.textContent =
     "Conectando à análise...";
 
   clearVideos();
@@ -1180,6 +1155,54 @@ function openRoom(room){
 
   connectServer(room);
 }
+
+
+/* =========================
+MINIMIZAR
+========================= */
+
+function minimizeAnalysis(){
+
+  if(!currentRoom){
+    return;
+  }
+
+  document.body.classList.add(
+    "analysis-minimized"
+  );
+
+  /*
+  A conexão continua ativa.
+  Apenas a interface da análise é escondida.
+  */
+
+  homeScreen.style.display = "flex";
+}
+
+
+/* =========================
+VOLTAR PARA ANÁLISE
+========================= */
+
+function restoreAnalysis(){
+
+  if(!currentRoom){
+    return;
+  }
+
+  document.body.classList.remove(
+    "analysis-minimized"
+  );
+
+  homeScreen.style.display = "none";
+
+  analysisScreen.classList.add("show");
+}
+
+
+/* =========================
+WEBSOCKET
+========================= */
 
 function connectServer(room){
 
@@ -1191,187 +1214,226 @@ function connectServer(room){
 
   }
 
-  socket=new WebSocket(SERVER_URL);
+  socket =
+    new WebSocket(SERVER_URL);
 
-  socket.onopen=()=>{
+  socket.onopen = () => {
 
-    socket.send(JSON.stringify({
-      type:"join",
-      room:String(room),
-      name:myName
-    }));
+    socket.send(
+      JSON.stringify({
+        type:"join",
+        room:String(room),
+        name:myName
+      })
+    );
 
   };
 
-  socket.onmessage=async(event)=>{
 
-    let data;
+  socket.onmessage =
+    async event => {
 
-    try{
-      data=JSON.parse(event.data);
-    }catch{
-      return;
-    }
+      let data;
 
-    if(data.type==="joined"){
-
-      myId=data.id;
-      myRole=data.role||"MEMBRO";
-
-      updateProfile();
-
-      description.textContent=
-        "Você está conectado.";
-
-      for(const peer of data.peers||[]){
-
-        remoteUsers[peer.id]=peer;
-
-        await createPeerConnection(
-          peer.id,
-          peer,
-          true
-        );
+      try{
+        data = JSON.parse(event.data);
+      }catch{
+        return;
       }
 
-      updateOwnerPanel();
-      return;
-    }
 
-    if(data.type==="peer-joined"){
+      if(data.type === "joined"){
 
-      remoteUsers[data.user.id]=data.user;
-
-      await createPeerConnection(
-        data.user.id,
-        data.user,
-        false
-      );
-
-      return;
-    }
-
-    if(data.type==="offer"){
-
-      await receiveOffer(
-        data.from,
-        data.data
-      );
-
-      return;
-    }
-
-    if(data.type==="answer"){
-
-      await receiveAnswer(
-        data.from,
-        data.data
-      );
-
-      return;
-    }
-
-    if(data.type==="ice-candidate"){
-
-      await receiveIce(
-        data.from,
-        data.data
-      );
-
-      return;
-    }
-
-    if(data.type==="peer-left"){
-
-      delete remoteUsers[data.id];
-
-      removePeer(data.id);
-
-      return;
-    }
-
-    if(data.type==="users"){
-
-      updateUsers(data.users||[]);
-      updateOwnerPanel();
-
-      return;
-    }
-
-    if(data.type==="force-mute"){
-
-      forceMute();
-      return;
-    }
-
-    if(data.type==="force-unmute"){
-
-      forceUnmute();
-      return;
-    }
-
-    if(data.type==="role-changed"){
-
-      myRole=data.role;
-
-      updateProfile();
-      updateOwnerPanel();
-
-      return;
-    }
-
-    if(data.type==="owner-login-result"){
-
-      if(data.success){
-
-        myRole="DONO";
+        myId = data.id;
+        myRole = data.role || "MEMBRO";
 
         updateProfile();
 
-        alert("Você entrou como Dono.");
+        description.textContent =
+          "Você está conectado.";
 
-      }else{
+        for(const peer of data.peers || []){
 
-        alert(
-          data.message||
-          "Código incorreto."
-        );
+          peerUsers[peer.id] = peer;
+
+          await createPeerConnection(
+            peer.id,
+            peer,
+            true
+          );
+        }
+
+        updateOwnerPanel();
+
+        return;
       }
 
-      updateOwnerPanel();
 
-      return;
-    }
+      if(data.type === "peer-joined"){
 
-    if(data.type==="room-full"){
+        peerUsers[data.user.id] =
+          data.user;
 
-      alert(data.message);
-      return;
-    }
+        await createPeerConnection(
+          data.user.id,
+          data.user,
+          false
+        );
 
-    if(data.type==="error"){
+        return;
+      }
 
-      alert(data.message);
-    }
-  };
 
-  socket.onclose=()=>{
+      if(data.type === "offer"){
 
-    if(document.body.classList.contains("analysis-open")){
+        await receiveOffer(
+          data.from,
+          data.data
+        );
 
-      description.textContent=
+        return;
+      }
+
+
+      if(data.type === "answer"){
+
+        await receiveAnswer(
+          data.from,
+          data.data
+        );
+
+        return;
+      }
+
+
+      if(data.type === "ice-candidate"){
+
+        await receiveIce(
+          data.from,
+          data.data
+        );
+
+        return;
+      }
+
+
+      if(data.type === "peer-left"){
+
+        removePeer(data.id);
+
+        return;
+      }
+
+
+      if(data.type === "users"){
+
+        updateUsers(data.users || []);
+
+        updateOwnerPanel();
+
+        return;
+      }
+
+
+      if(data.type === "force-mute"){
+
+        forceMute();
+
+        return;
+      }
+
+
+      if(data.type === "force-unmute"){
+
+        forceUnmute();
+
+        return;
+      }
+
+
+      if(data.type === "role-changed"){
+
+        myRole = data.role;
+
+        updateProfile();
+        updateOwnerPanel();
+
+        return;
+      }
+
+
+      if(data.type === "owner-login-result"){
+
+        if(data.success){
+
+          myRole = "DONO";
+
+          updateProfile();
+
+          alert("Você entrou como Dono.");
+
+        }else{
+
+          alert(
+            data.message ||
+            "Código incorreto."
+          );
+
+        }
+
+        updateOwnerPanel();
+
+        return;
+      }
+
+
+      if(data.type === "room-full"){
+
+        alert(data.message);
+
+        return;
+      }
+
+
+      if(data.type === "error"){
+
+        alert(data.message);
+
+      }
+
+    };
+
+
+  socket.onclose = () => {
+
+    if(
+      document.body.classList.contains(
+        "analysis-open"
+      )
+    ){
+
+      description.textContent =
         "Conexão encerrada.";
+
     }
+
   };
 
-  socket.onerror=()=>{
 
-    description.textContent=
+  socket.onerror = () => {
+
+    description.textContent =
       "Erro de conexão com o servidor.";
+
   };
 }
 
-const rtcConfig={
+
+/* =========================
+WEBRTC
+========================= */
+
+const rtcConfig = {
   iceServers:[
     {
       urls:"stun:stun.l.google.com:19302"
@@ -1381,6 +1443,7 @@ const rtcConfig={
     }
   ]
 };
+
 
 async function createPeerConnection(
   peerId,
@@ -1392,39 +1455,50 @@ async function createPeerConnection(
     return peerConnections[peerId];
   }
 
-  const pc=new RTCPeerConnection(rtcConfig);
+  peerUsers[peerId] =
+    peerUser || {
+      name:"Usuário"
+    };
 
-  peerConnections[peerId]=pc;
+  const pc =
+    new RTCPeerConnection(
+      rtcConfig
+    );
 
-  remoteUsers[peerId]={
-    ...(remoteUsers[peerId]||{}),
-    ...(peerUser||{})
-  };
+  peerConnections[peerId] = pc;
 
-  polite[peerId]=
-    String(myId)>String(peerId);
+  polite[peerId] =
+    String(myId) > String(peerId);
 
-  makingOffer[peerId]=false;
-  ignoreOffer[peerId]=false;
+  makingOffer[peerId] = false;
+  ignoreOffer[peerId] = false;
+
 
   addLocalTracks(pc);
 
-  pc.ontrack=event=>{
 
-    const stream=event.streams[0];
+  pc.ontrack = event => {
 
-    if(!stream) return;
+    const stream =
+      event.streams[0];
+
+    if(!stream){
+      return;
+    }
 
     showRemoteVideo(
       peerId,
-      remoteUsers[peerId]||peerUser,
+      peerUsers[peerId],
       stream
     );
   };
 
-  pc.onicecandidate=event=>{
 
-    if(!event.candidate) return;
+  pc.onicecandidate = event => {
+
+    if(!event.candidate){
+      return;
+    }
 
     sendSignal({
       type:"ice-candidate",
@@ -1433,46 +1507,54 @@ async function createPeerConnection(
     });
   };
 
-  pc.onnegotiationneeded=async()=>{
 
-    try{
+  pc.onnegotiationneeded =
+    async() => {
 
-      makingOffer[peerId]=true;
+      try{
 
-      await pc.setLocalDescription();
+        makingOffer[peerId] = true;
 
-      sendSignal({
-        type:"offer",
-        target:peerId,
-        data:pc.localDescription
-      });
+        await pc.setLocalDescription();
 
-    }catch(error){
+        sendSignal({
+          type:"offer",
+          target:peerId,
+          data:pc.localDescription
+        });
 
-      console.log(error);
+      }catch(error){
 
-    }finally{
+        console.log(error);
 
-      makingOffer[peerId]=false;
-    }
-  };
+      }finally{
 
-  pc.onconnectionstatechange=()=>{
+        makingOffer[peerId] = false;
+
+      }
+    };
+
+
+  pc.onconnectionstatechange = () => {
+
+    const state =
+      pc.connectionState;
 
     if(
-      pc.connectionState==="failed"||
-      pc.connectionState==="closed"
+      state === "failed" ||
+      state === "closed"
     ){
 
       removePeer(peerId);
     }
   };
 
+
   if(createOffer){
 
     try{
 
-      makingOffer[peerId]=true;
+      makingOffer[peerId] = true;
 
       await pc.setLocalDescription();
 
@@ -1488,85 +1570,194 @@ async function createPeerConnection(
 
     }finally{
 
-      makingOffer[peerId]=false;
+      makingOffer[peerId] = false;
+
     }
   }
 
   return pc;
 }
 
+
+/* =========================
+ADICIONAR TRACKS
+========================= */
+
 function addLocalTracks(pc){
 
+  const streams = [];
+
   if(localCameraStream){
+    streams.push(localCameraStream);
+  }
 
-    for(
-      const track
-      of localCameraStream.getTracks()
-    ){
-
-      if(
-        !pc.getSenders()
-          .some(sender=>sender.track===track)
-      ){
-
-        pc.addTrack(
-          track,
-          localCameraStream
-        );
-      }
-    }
+  if(localAudioStream){
+    streams.push(localAudioStream);
   }
 
   if(localScreenStream){
+    streams.push(localScreenStream);
+  }
 
-    for(
-      const track
-      of localScreenStream.getTracks()
-    ){
+  for(const stream of streams){
 
-      if(
-        !pc.getSenders()
-          .some(sender=>sender.track===track)
-      ){
+    for(const track of stream.getTracks()){
+
+      const already =
+        pc.getSenders().some(
+          sender =>
+            sender.track &&
+            sender.track.kind === track.kind &&
+            sender.track === track
+        );
+
+      if(!already){
 
         pc.addTrack(
           track,
-          localScreenStream
+          stream
         );
       }
     }
   }
 }
+
+
+/* =========================
+ATUALIZAR TRACKS
+========================= */
+
+async function refreshPeerTracks(){
+
+  for(const peerId of Object.keys(peerConnections)){
+
+    const pc =
+      peerConnections[peerId];
+
+    if(!pc) continue;
+
+    const desired = [];
+
+    if(localCameraStream){
+      desired.push(
+        ...localCameraStream.getVideoTracks()
+      );
+    }
+
+    if(localAudioStream){
+      desired.push(
+        ...localAudioStream.getAudioTracks()
+      );
+    }
+
+    if(localScreenStream){
+      desired.push(
+        ...localScreenStream.getVideoTracks()
+      );
+    }
+
+    const senders =
+      pc.getSenders();
+
+    for(const sender of senders){
+
+      if(
+        sender.track &&
+        !desired.includes(sender.track)
+      ){
+
+        try{
+          await sender.replaceTrack(null);
+        }catch{}
+      }
+    }
+
+    for(const track of desired){
+
+      const sender =
+        senders.find(
+          s =>
+            s.track &&
+            s.track.kind === track.kind &&
+            desired.includes(s.track)
+        );
+
+      if(!sender){
+
+        const emptySender =
+          senders.find(
+            s =>
+              !s.track &&
+              s.kind === track.kind
+          );
+
+        if(emptySender){
+
+          try{
+            await emptySender.replaceTrack(track);
+          }catch{}
+
+        }else{
+
+          try{
+            pc.addTrack(
+              track,
+              localCameraStream ||
+              localAudioStream ||
+              localScreenStream
+            );
+          }catch{}
+        }
+      }
+    }
+  }
+}
+
+
+/* =========================
+SINAL
+========================= */
 
 function sendSignal(message){
 
   if(
-    !socket||
-    socket.readyState!==WebSocket.OPEN
+    !socket ||
+    socket.readyState !== WebSocket.OPEN
   ){
     return;
   }
 
-  socket.send(JSON.stringify(message));
+  socket.send(
+    JSON.stringify(message)
+  );
 }
+
+
+/* =========================
+OFFER
+========================= */
 
 async function receiveOffer(
   peerId,
   descriptionData
 ){
 
-  const pc=await createPeerConnection(
-    peerId,
-    remoteUsers[peerId]||{name:"Usuário"},
-    false
-  );
+  const pc =
+    await createPeerConnection(
+      peerId,
+      peerUsers[peerId] || {
+        name:"Usuário"
+      },
+      false
+    );
 
-  const offerCollision=
-    makingOffer[peerId]||
-    pc.signalingState!=="stable";
+  const offerCollision =
+    makingOffer[peerId] ||
+    pc.signalingState !== "stable";
 
-  ignoreOffer[peerId]=
-    !polite[peerId]&&offerCollision;
+  ignoreOffer[peerId] =
+    !polite[peerId] &&
+    offerCollision;
 
   if(ignoreOffer[peerId]){
     return;
@@ -1589,17 +1780,26 @@ async function receiveOffer(
   }catch(error){
 
     console.log(error);
+
   }
 }
+
+
+/* =========================
+ANSWER
+========================= */
 
 async function receiveAnswer(
   peerId,
   descriptionData
 ){
 
-  const pc=peerConnections[peerId];
+  const pc =
+    peerConnections[peerId];
 
-  if(!pc) return;
+  if(!pc){
+    return;
+  }
 
   try{
 
@@ -1610,21 +1810,32 @@ async function receiveAnswer(
   }catch(error){
 
     console.log(error);
+
   }
 }
+
+
+/* =========================
+ICE
+========================= */
 
 async function receiveIce(
   peerId,
   candidate
 ){
 
-  const pc=peerConnections[peerId];
+  const pc =
+    peerConnections[peerId];
 
-  if(!pc) return;
+  if(!pc){
+    return;
+  }
 
   try{
 
-    await pc.addIceCandidate(candidate);
+    await pc.addIceCandidate(
+      candidate
+    );
 
   }catch(error){
 
@@ -1634,57 +1845,51 @@ async function receiveIce(
   }
 }
 
+
+/* =========================
+CÂMERA
+========================= */
+
 async function toggleCamera(){
 
   if(localCameraStream){
 
     localCameraStream
       .getTracks()
-      .forEach(track=>track.stop());
+      .forEach(
+        track => track.stop()
+      );
 
-    localCameraStream=null;
+    localCameraStream = null;
 
-    cameraButton.textContent=
+    cameraButton.textContent =
       "📷 Abrir câmera";
 
-    await renegotiateAll();
+    await refreshPeerTracks();
 
     sendStatus();
 
-    if(!localScreenStream){
-      hideLocalVideo();
-    }
+    updateLocalVideo();
 
     return;
   }
 
+
   try{
 
-    localCameraStream=
+    localCameraStream =
       await navigator.mediaDevices.getUserMedia({
-
         video:{
           facingMode:cameraFacingMode
-        },
-
-        audio:true
-
+        }
       });
 
-    for(
-      const track
-      of localCameraStream.getAudioTracks()
-    ){
-
-      track.enabled=!microphoneMuted;
-    }
-
-    cameraButton.textContent=
+    cameraButton.textContent =
       "📷 Fechar câmera";
 
     showLocalVideo();
 
-    await renegotiateAll();
+    await refreshPeerTracks();
 
     sendStatus();
 
@@ -1693,94 +1898,56 @@ async function toggleCamera(){
     console.log(error);
 
     alert(
-      "Não foi possível abrir a câmera. Verifique a permissão do navegador."
+      "Não foi possível abrir a câmera. Verifique a permissão."
     );
   }
 }
+
+
+/* =========================
+VIRAR CÂMERA
+========================= */
 
 async function flipCamera(){
 
   if(!localCameraStream){
 
-    alert("Abra a câmera primeiro.");
+    alert(
+      "Abra a câmera primeiro."
+    );
 
     return;
   }
 
-  cameraFacingMode=
-    cameraFacingMode==="user"
-      ?"environment"
-      :"user";
+  cameraFacingMode =
+    cameraFacingMode === "user"
+    ? "environment"
+    : "user";
 
   try{
 
-    const oldAudio=
-      localCameraStream
-        .getAudioTracks();
+    localCameraStream
+      .getTracks()
+      .forEach(
+        track => track.stop()
+      );
 
-    const newStream=
+    localCameraStream =
       await navigator.mediaDevices.getUserMedia({
-
         video:{
           facingMode:cameraFacingMode
-        },
-
-        audio:false
+        }
       });
 
-    const newVideoTrack=
-      newStream.getVideoTracks()[0];
-
-    for(
-      const pc
-      of Object.values(peerConnections)
-    ){
-
-      const sender=
-        pc.getSenders()
-          .find(s=>
-            s.track &&
-            s.track.kind==="video"
-          );
-
-      if(sender){
-
-        await sender.replaceTrack(
-          newVideoTrack
-        );
-      }
-    }
-
-    oldAudio.forEach(track=>{
-      track.stop();
-    });
-
-    const combined=
-      new MediaStream();
-
-    combined.addTrack(newVideoTrack);
-
-    for(const audio of oldAudio){
-
-      audio.enabled=!microphoneMuted;
-
-      combined.addTrack(audio);
-    }
-
-    localCameraStream=combined;
-
     showLocalVideo();
+
+    await refreshPeerTracks();
 
     sendStatus();
 
   }catch(error){
 
     console.log(error);
-
-    cameraFacingMode=
-      cameraFacingMode==="user"
-        ?"environment"
-        :"user";
 
     alert(
       "Não foi possível virar a câmera."
@@ -1788,78 +1955,192 @@ async function flipCamera(){
   }
 }
 
+
+/* =========================
+MICROFONE INDEPENDENTE
+========================= */
+
+async function toggleMicrophone(){
+
+  if(!localAudioStream){
+
+    try{
+
+      localAudioStream =
+        await navigator.mediaDevices.getUserMedia({
+          audio:true
+        });
+
+      microphoneMuted = false;
+
+      updateMicButton();
+
+      await refreshPeerTracks();
+
+      sendStatus();
+
+      return;
+
+    }catch(error){
+
+      console.log(error);
+
+      alert(
+        "Não foi possível acessar o microfone."
+      );
+
+      return;
+    }
+  }
+
+
+  microphoneMuted =
+    !microphoneMuted;
+
+  localAudioStream
+    .getAudioTracks()
+    .forEach(
+      track =>
+        track.enabled = !microphoneMuted
+    );
+
+  updateMicButton();
+
+  sendStatus();
+}
+
+
+function updateMicButton(){
+
+  if(!localAudioStream){
+
+    micButton.textContent =
+      "🎙️ Abrir microfone";
+
+    return;
+  }
+
+  micButton.textContent =
+    microphoneMuted
+    ? "🔇 Microfone desligado"
+    : "🎙️ Microfone ligado";
+}
+
+
+function forceMute(){
+
+  microphoneMuted = true;
+
+  if(localAudioStream){
+
+    localAudioStream
+      .getAudioTracks()
+      .forEach(
+        track => track.enabled = false
+      );
+  }
+
+  updateMicButton();
+  sendStatus();
+}
+
+
+function forceUnmute(){
+
+  microphoneMuted = false;
+
+  if(localAudioStream){
+
+    localAudioStream
+      .getAudioTracks()
+      .forEach(
+        track => track.enabled = true
+      );
+  }
+
+  updateMicButton();
+  sendStatus();
+}
+
+
+/* =========================
+COMPARTILHAR TELA
+========================= */
+
 async function toggleScreen(){
 
   if(localScreenStream){
 
     localScreenStream
       .getTracks()
-      .forEach(track=>track.stop());
+      .forEach(
+        track => track.stop()
+      );
 
-    localScreenStream=null;
+    localScreenStream = null;
 
-    screenButton.textContent=
+    screenButton.textContent =
       "🖥️ Compartilhar tela";
 
-    await renegotiateAll();
+    await refreshPeerTracks();
 
     sendStatus();
 
-    if(!localCameraStream){
-      hideLocalVideo();
-    }
+    updateLocalVideo();
 
     return;
   }
 
+
   if(
-    !navigator.mediaDevices||
+    !navigator.mediaDevices ||
     !navigator.mediaDevices.getDisplayMedia
   ){
 
     alert(
-      "Este navegador não disponibiliza compartilhamento de tela."
+      "Seu navegador não disponibiliza compartilhamento de tela."
     );
 
     return;
   }
 
+
   try{
 
-    localScreenStream=
+    localScreenStream =
       await navigator.mediaDevices.getDisplayMedia({
         video:true,
         audio:true
       });
 
-    screenButton.textContent=
+    screenButton.textContent =
       "🖥️ Parar tela";
 
-    const track=
-      localScreenStream.getVideoTracks()[0];
+    const track =
+      localScreenStream
+        .getVideoTracks()[0];
 
     if(track){
 
-      track.onended=async()=>{
+      track.onended =
+        async() => {
 
-        localScreenStream=null;
+          localScreenStream = null;
 
-        screenButton.textContent=
-          "🖥️ Compartilhar tela";
+          screenButton.textContent =
+            "🖥️ Compartilhar tela";
 
-        await renegotiateAll();
+          await refreshPeerTracks();
 
-        sendStatus();
+          sendStatus();
 
-        if(!localCameraStream){
-          hideLocalVideo();
-        }
-      };
+          updateLocalVideo();
+        };
     }
 
     showLocalVideo();
 
-    await renegotiateAll();
+    await refreshPeerTracks();
 
     sendStatus();
 
@@ -1869,143 +2150,67 @@ async function toggleScreen(){
   }
 }
 
-function toggleMicrophone(){
 
-  if(!localCameraStream){
-
-    alert(
-      "Abra a câmera para usar o microfone."
-    );
-
-    return;
-  }
-
-  microphoneMuted=!microphoneMuted;
-
-  for(
-    const track
-    of localCameraStream.getAudioTracks()
-  ){
-
-    track.enabled=!microphoneMuted;
-  }
-
-  updateMicButton();
-  sendStatus();
-}
-
-function updateMicButton(){
-
-  micButton.textContent=
-    microphoneMuted
-      ?"🔇 Microfone"
-      :"🎙️ Microfone";
-}
-
-function forceMute(){
-
-  microphoneMuted=true;
-
-  if(localCameraStream){
-
-    localCameraStream
-      .getAudioTracks()
-      .forEach(
-        track=>track.enabled=false
-      );
-  }
-
-  updateMicButton();
-  sendStatus();
-}
-
-function forceUnmute(){
-
-  microphoneMuted=false;
-
-  if(localCameraStream){
-
-    localCameraStream
-      .getAudioTracks()
-      .forEach(
-        track=>track.enabled=true
-      );
-  }
-
-  updateMicButton();
-  sendStatus();
-}
+/* =========================
+STATUS
+========================= */
 
 function sendStatus(){
 
   if(
-    !socket||
-    socket.readyState!==WebSocket.OPEN
+    !socket ||
+    socket.readyState !== WebSocket.OPEN
   ){
     return;
   }
 
-  socket.send(JSON.stringify({
+  socket.send(
+    JSON.stringify({
 
-    type:"status",
+      type:"status",
 
-    camera:!!localCameraStream,
+      camera:
+        !!localCameraStream,
 
-    screen:!!localScreenStream,
+      screen:
+        !!localScreenStream,
 
-    muted:microphoneMuted
+      muted:
+        !localAudioStream ||
+        microphoneMuted
 
-  }));
+    })
+  );
 }
 
-async function renegotiateAll(){
 
-  for(
-    const peerId
-    of Object.keys(peerConnections)
-  ){
-
-    const pc=peerConnections[peerId];
-
-    if(!pc) continue;
-
-    addLocalTracks(pc);
-
-    try{
-
-      if(pc.signalingState==="stable"){
-
-        await pc.setLocalDescription();
-
-        sendSignal({
-          type:"offer",
-          target:peerId,
-          data:pc.localDescription
-        });
-      }
-
-    }catch(error){
-
-      console.log(error);
-    }
-  }
-}
+/* =========================
+VÍDEO LOCAL
+========================= */
 
 function showLocalVideo(){
 
-  const id=`local-${myId}`;
+  if(!myId){
+    return;
+  }
 
-  let card=document.getElementById(id);
+  const id =
+    `local-${myId}`;
+
+  let card =
+    document.getElementById(id);
 
   if(!card){
 
-    card=document.createElement("div");
+    card =
+      document.createElement("div");
 
-    card.className="video-card";
-    card.id=id;
+    card.className =
+      "video-card";
 
-    card.innerHTML=`
+    card.id = id;
 
+    card.innerHTML = `
       <video
         id="${id}-video"
         autoplay
@@ -2014,7 +2219,7 @@ function showLocalVideo(){
       ></video>
 
       <div class="video-label">
-        ${escapeHTML(myName)}
+        ${escapeHTML(myName)} (Você)
       </div>
 
       <div
@@ -2028,38 +2233,90 @@ function showLocalVideo(){
     videoGrid.appendChild(card);
   }
 
-  const video=
+  const video =
     document.getElementById(
       `${id}-video`
     );
 
   if(localScreenStream){
 
-    video.srcObject=
+    video.srcObject =
       localScreenStream;
+
+  }else if(localCameraStream){
+
+    video.srcObject =
+      localCameraStream;
 
   }else{
 
-    video.srcObject=
-      localCameraStream;
+    video.srcObject = null;
   }
 
-  empty.style.display="none";
+  updateLocalStatus();
+
+  empty.style.display = "none";
 }
 
-function hideLocalVideo(){
 
-  const card=
+function updateLocalVideo(){
+
+  const card =
     document.getElementById(
       `local-${myId}`
     );
 
-  if(card){
-    card.remove();
+  if(
+    !localCameraStream &&
+    !localScreenStream
+  ){
+
+    if(card){
+      card.remove();
+    }
+
+    updateEmpty();
+
+    return;
   }
 
-  updateEmpty();
+  showLocalVideo();
 }
+
+
+function updateLocalStatus(){
+
+  const status =
+    document.getElementById(
+      `local-${myId}-status`
+    );
+
+  if(!status){
+    return;
+  }
+
+  let value = "";
+
+  if(localCameraStream){
+    value += "📷";
+  }
+
+  if(localScreenStream){
+    value += " 🖥️";
+  }
+
+  if(localAudioStream && !microphoneMuted){
+    value += " 🎙️";
+  }
+
+  status.textContent =
+    value || "👤";
+}
+
+
+/* =========================
+VÍDEO REMOTO
+========================= */
 
 function showRemoteVideo(
   peerId,
@@ -2067,19 +2324,23 @@ function showRemoteVideo(
   stream
 ){
 
-  const id=`remote-${peerId}`;
+  const id =
+    `remote-${peerId}`;
 
-  let card=document.getElementById(id);
+  let card =
+    document.getElementById(id);
 
   if(!card){
 
-    card=document.createElement("div");
+    card =
+      document.createElement("div");
 
-    card.className="video-card";
-    card.id=id;
+    card.className =
+      "video-card";
 
-    card.innerHTML=`
+    card.id = id;
 
+    card.innerHTML = `
       <video
         id="${id}-video"
         autoplay
@@ -2088,7 +2349,7 @@ function showRemoteVideo(
 
       <div class="video-label">
         ${escapeHTML(
-          user?.name||"Usuário"
+          user?.name || "Usuário"
         )}
       </div>
 
@@ -2096,24 +2357,72 @@ function showRemoteVideo(
         class="video-status"
         id="${id}-status"
       >
-        📷
+        👤
       </div>
     `;
 
     videoGrid.appendChild(card);
   }
 
-  const video=
+  const video =
     document.getElementById(
       `${id}-video`
     );
 
-  if(video.srcObject!==stream){
-    video.srcObject=stream;
+  if(video.srcObject !== stream){
+
+    video.srcObject =
+      stream;
   }
 
-  empty.style.display="none";
+  updateRemoteStatus(
+    peerId
+  );
+
+  empty.style.display = "none";
 }
+
+
+function updateRemoteStatus(peerId){
+
+  const status =
+    document.getElementById(
+      `remote-${peerId}-status`
+    );
+
+  if(!status){
+    return;
+  }
+
+  const user =
+    currentUsers.find(
+      u => u.id === peerId
+    );
+
+  if(!user){
+
+    status.textContent = "👤";
+    return;
+  }
+
+  let text = "";
+
+  if(user.camera){
+    text += "📷";
+  }
+
+  if(user.screen){
+    text += " 🖥️";
+  }
+
+  if(!user.muted){
+    text += " 🎙️";
+  }
+
+  status.textContent =
+    text || "👤";
+}
+
 
 function removePeer(peerId){
 
@@ -2126,9 +2435,9 @@ function removePeer(peerId){
     delete peerConnections[peerId];
   }
 
-  delete remoteUsers[peerId];
+  delete peerUsers[peerId];
 
-  const card=
+  const card =
     document.getElementById(
       `remote-${peerId}`
     );
@@ -2140,20 +2449,29 @@ function removePeer(peerId){
   updateEmpty();
 }
 
+
 function updateEmpty(){
 
-  empty.style.display=
-    videoGrid.children.length
-      ?"none"
-      :"flex";
+  if(videoGrid.children.length){
+
+    empty.style.display =
+      "none";
+
+  }else{
+
+    empty.style.display =
+      "flex";
+  }
 }
+
 
 function clearVideos(){
 
-  videoGrid.innerHTML="";
+  videoGrid.innerHTML = "";
 
   updateEmpty();
 }
+
 
 function closeAllPeerConnections(){
 
@@ -2171,80 +2489,82 @@ function closeAllPeerConnections(){
 
   for(
     const id
-    of Object.keys(remoteUsers)
+    of Object.keys(peerUsers)
   ){
 
-    delete remoteUsers[id];
+    delete peerUsers[id];
   }
 }
 
+
+/* =========================
+USUÁRIOS
+========================= */
+
 function updateUsers(users){
 
-  currentUsers=users;
+  currentUsers = users;
 
   for(let i=1;i<=20;i++){
 
-    const count=
+    const count =
       document.getElementById(
         `count-${i}`
       );
 
-    const members=
+    const members =
       document.getElementById(
         `members-${i}`
       );
 
-    if(!count||!members) continue;
+    if(!count || !members){
+      continue;
+    }
 
-    /*
-    Mostra participantes de cada análise.
-    Não depende de câmera estar aberta.
-    */
+    if(i === currentRoom){
 
-    if(i===currentRoom){
-
-      count.textContent=
+      count.textContent =
         `${users.length}/8`;
 
-      members.innerHTML="";
+      members.innerHTML = "";
 
       users.forEach(user=>{
 
-        const item=
+        const item =
           document.createElement("div");
 
-        item.className="member";
+        item.className =
+          "member";
 
-        let status="";
+        let status = "";
 
         if(user.camera){
-          status+=
-            `<span class="status-icon camera">📷</span>`;
+          status +=
+            `<span class="camera">📷</span>`;
         }
 
         if(user.screen){
-          status+=
-            `<span class="status-icon screen">🖥️</span>`;
+          status +=
+            `<span class="screen">🖥️</span>`;
         }
 
         if(user.muted){
-          status+=
-            `<span class="status-icon muted">🎙️</span>`;
+          status +=
+            `<span class="muted">🔇</span>`;
         }
 
-        item.innerHTML=`
-
+        item.innerHTML = `
           <span class="avatar">
             ${escapeHTML(
-              (user.name||"U")
-                .charAt(0)
-                .toUpperCase()
+              (user.name || "U")
+              .charAt(0)
+              .toUpperCase()
             )}
           </span>
 
           <span>
             ${escapeHTML(
-              user.name||"Usuário"
+              user.name || "Usuário"
             )}
           </span>
 
@@ -2252,70 +2572,80 @@ function updateUsers(users){
 
           <span class="role">
             ${escapeHTML(
-              user.role||"MEMBRO"
+              user.role || "MEMBRO"
             )}
           </span>
         `;
 
         members.appendChild(item);
+
+        if(user.id !== myId){
+          peerUsers[user.id] = user;
+        }
+
+        updateRemoteStatus(user.id);
       });
-
-    }else{
-
-      /*
-      Não deixa os espaços de membros
-      ocupando a tela nas outras análises.
-      */
-
-      members.innerHTML="";
     }
   }
+
+  updateOwnerPanel();
 }
 
-/* REGRAS */
+
+/* =========================
+REGRAS
+========================= */
 
 function openRules(){
 
   /*
-  Se estiver em uma análise,
-  NÃO sai dela.
-  Apenas coloca as regras por cima.
-  */
+   * NÃO desconecta da análise.
+   * As regras ficam por cima.
+   */
 
   rulesPage.classList.add("show");
 }
+
 
 function closeRules(){
 
   rulesPage.classList.remove("show");
 }
 
-/* DONOS */
+
+/* =========================
+ÁREA DOS DONOS
+========================= */
 
 function openOwnerPanel(){
 
   /*
-  Pode abrir Área dos Donos
-  sem sair da análise.
-  */
+   * NÃO sai da análise.
+   * A área dos donos abre por cima.
+   */
 
   ownerPage.classList.add("show");
 
   updateOwnerPanel();
 }
 
+
 function closeOwnerPanel(){
 
   ownerPage.classList.remove("show");
 }
 
+
+/* =========================
+LOGIN DONO
+========================= */
+
 function ownerLogin(){
 
-  const code=
-    document
-      .getElementById("ownerCode")
-      .value
-      .trim();
+  const code =
+    document.getElementById(
+      "ownerCode"
+    ).value.trim();
 
   if(!code){
 
@@ -2326,15 +2656,9 @@ function ownerLogin(){
     return;
   }
 
-  /*
-  Para administrar enquanto está
-  dentro de uma análise, precisa
-  estar conectado à sala.
-  */
-
   if(
-    !socket||
-    socket.readyState!==WebSocket.OPEN
+    !socket ||
+    socket.readyState !== WebSocket.OPEN
   ){
 
     alert(
@@ -2344,25 +2668,28 @@ function ownerLogin(){
     return;
   }
 
-  socket.send(JSON.stringify({
-
-    type:"owner-login",
-
-    code
-
-  }));
+  socket.send(
+    JSON.stringify({
+      type:"owner-login",
+      code
+    })
+  );
 }
+
+
+/* =========================
+PAINEL DONO
+========================= */
 
 function updateOwnerPanel(){
 
   if(
-    myRole!=="DONO"&&
-    myRole!=="ADM"&&
-    myRole!=="TELADOR"
+    myRole !== "DONO" &&
+    myRole !== "ADM" &&
+    myRole !== "TELADOR"
   ){
 
-    ownerContent.innerHTML=`
-
+    ownerContent.innerHTML = `
       <p style="
         color:#858c99;
         font-size:12px;
@@ -2374,74 +2701,65 @@ function updateOwnerPanel(){
     return;
   }
 
-  let html=`
-
+  let html = `
     <h3 style="margin:15px 0 10px">
       👥 Pessoas na Análise
       ${
         currentRoom
-          ?String(currentRoom).padStart(2,"0")
-          :"—"
+        ? String(currentRoom).padStart(2,"0")
+        : "—"
       }
     </h3>
   `;
 
   if(!currentUsers.length){
 
-    html+=`
-
+    html += `
       <p style="
         color:#858c99;
         font-size:12px;
       ">
-        Nenhuma pessoa na análise.
+        Nenhuma pessoa conectada.
       </p>
     `;
   }
 
   currentUsers.forEach(user=>{
 
-    const canRole=
-      myRole==="DONO" &&
-      user.id!==myId;
+    const canRole =
+      myRole === "DONO" &&
+      user.id !== myId;
 
-    const canMute=
+    const canMute =
       (
-        myRole==="DONO"||
-        myRole==="ADM"||
-        myRole==="TELADOR"
+        myRole === "DONO" ||
+        myRole === "ADM" ||
+        myRole === "TELADOR"
       ) &&
-      user.id!==myId;
+      user.id !== myId;
 
-    html+=`
-
+    html += `
       <div class="admin-user">
 
         <span class="avatar">
           ${escapeHTML(
-            (user.name||"U")
-              .charAt(0)
-              .toUpperCase()
+            (user.name || "U")
+            .charAt(0)
+            .toUpperCase()
           )}
         </span>
 
         <span class="admin-user-name">
-
           ${escapeHTML(user.name)}
-
-          <small
-            style="color:#777;margin-left:4px"
-          >
+          <small style="color:#777;margin-left:4px">
             ${escapeHTML(user.role)}
           </small>
-
         </span>
     `;
 
     if(canMute){
 
-      html+=`
-
+      html += `
         <button
           class="small-button"
           onclick="muteMember('${user.id}')"
@@ -2460,8 +2778,7 @@ function updateOwnerPanel(){
 
     if(canRole){
 
-      html+=`
-
+      html += `
         <button
           class="small-button"
           onclick="changeRole('${user.id}','ADM')"
@@ -2485,15 +2802,25 @@ function updateOwnerPanel(){
       `;
     }
 
-    html+=`</div>`;
+    html += `
+      </div>
+    `;
   });
 
-  ownerContent.innerHTML=html;
+  ownerContent.innerHTML = html;
 }
 
-function changeRole(userId,role){
 
-  if(myRole!=="DONO"){
+/* =========================
+CARGOS
+========================= */
+
+function changeRole(
+  userId,
+  role
+){
+
+  if(myRole !== "DONO"){
 
     alert(
       "Somente o Dono pode alterar cargos."
@@ -2503,90 +2830,116 @@ function changeRole(userId,role){
   }
 
   if(
-    !socket||
-    socket.readyState!==WebSocket.OPEN
-  ) return;
+    !socket ||
+    socket.readyState !== WebSocket.OPEN
+  ){
+    return;
+  }
 
-  socket.send(JSON.stringify({
-
-    type:"set-role",
-
-    target:userId,
-
-    role
-
-  }));
+  socket.send(
+    JSON.stringify({
+      type:"set-role",
+      target:userId,
+      role
+    })
+  );
 }
+
+
+/* =========================
+MUTE
+========================= */
 
 function muteMember(userId){
 
   if(
-    myRole!=="DONO"&&
-    myRole!=="ADM"&&
-    myRole!=="TELADOR"
+    myRole !== "DONO" &&
+    myRole !== "ADM" &&
+    myRole !== "TELADOR"
   ){
     return;
   }
 
-  if(
-    !socket||
-    socket.readyState!==WebSocket.OPEN
-  ) return;
+  if(!socket){
+    return;
+  }
 
-  socket.send(JSON.stringify({
-
-    type:"mute-user",
-
-    target:userId
-
-  }));
+  socket.send(
+    JSON.stringify({
+      type:"mute-user",
+      target:userId
+    })
+  );
 }
+
 
 function unmuteMember(userId){
 
   if(
-    myRole!=="DONO"&&
-    myRole!=="ADM"&&
-    myRole!=="TELADOR"
+    myRole !== "DONO" &&
+    myRole !== "ADM" &&
+    myRole !== "TELADOR"
   ){
     return;
   }
 
-  if(
-    !socket||
-    socket.readyState!==WebSocket.OPEN
-  ) return;
+  if(!socket){
+    return;
+  }
 
-  socket.send(JSON.stringify({
-
-    type:"unmute-user",
-
-    target:userId
-
-  }));
+  socket.send(
+    JSON.stringify({
+      type:"unmute-user",
+      target:userId
+    })
+  );
 }
 
-function leaveRoom(showMessage=true){
+
+/* =========================
+SAIR
+========================= */
+
+function leaveRoom(){
 
   if(localCameraStream){
 
     localCameraStream
       .getTracks()
-      .forEach(track=>track.stop());
+      .forEach(
+        track => track.stop()
+      );
 
-    localCameraStream=null;
+    localCameraStream = null;
   }
+
+
+  if(localAudioStream){
+
+    localAudioStream
+      .getTracks()
+      .forEach(
+        track => track.stop()
+      );
+
+    localAudioStream = null;
+  }
+
 
   if(localScreenStream){
 
     localScreenStream
       .getTracks()
-      .forEach(track=>track.stop());
+      .forEach(
+        track => track.stop()
+      );
 
-    localScreenStream=null;
+    localScreenStream = null;
   }
 
+
   closeAllPeerConnections();
+
 
   if(socket){
 
@@ -2594,59 +2947,68 @@ function leaveRoom(showMessage=true){
       socket.close();
     }catch{}
 
-    socket=null;
+    socket = null;
   }
+
 
   clearVideos();
 
-  cameraButton.textContent=
+  cameraButton.textContent =
     "📷 Abrir câmera";
 
-  screenButton.textContent=
+  screenButton.textContent =
     "🖥️ Compartilhar tela";
 
-  microphoneMuted=false;
-  cameraFacingMode="user";
+  microphoneMuted = false;
+
+  cameraFacingMode = "user";
 
   updateMicButton();
 
+
   document.body.classList.remove(
-    "analysis-open"
+    "analysis-open",
+    "analysis-minimized"
   );
 
   analysisScreen.classList.remove(
     "show"
   );
 
-  homeScreen.style.display="flex";
+  homeScreen.style.display =
+    "flex";
 
-  currentRoom=null;
-  currentUsers=[];
 
-  rulesPage.classList.remove("show");
-  ownerPage.classList.remove("show");
+  currentRoom = null;
+
+  currentUsers = [];
+
+  updateOwnerPanel();
 }
+
+
+/* =========================
+ESCAPE
+========================= */
 
 function escapeHTML(value){
 
-  const div=
+  const div =
     document.createElement("div");
 
-  div.textContent=
-    String(value||"");
+  div.textContent =
+    String(value || "");
 
   return div.innerHTML;
 }
 
-/*
-Impede que o botão voltar do navegador
-feche a conexão sem limpar a interface.
-*/
-window.addEventListener("beforeunload",()=>{
-  leaveRoom(false);
-});
+
+/* =========================
+INICIAR
+========================= */
 
 loadName();
+
 </script>
 
 </body>
