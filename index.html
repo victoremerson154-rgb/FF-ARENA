@@ -1,368 +1,2653 @@
-const express = require("express");
-const http = require("http");
-const WebSocket = require("ws");
-const crypto = require("crypto");
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#111318">
+<title>🔥 FF Arena</title>
 
-const app = express();
-const server = http.createServer(app);
-const wss = new WebSocket.Server({ server });
-
-const PORT = process.env.PORT || 10000;
-const ADMIN_CODE = process.env.ADMIN_CODE || "troque-este-codigo";
-
-const rooms = new Map();
-
-function createId() {
-  return crypto.randomBytes(8).toString("hex");
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
-function cleanName(name) {
-  return String(name || "Usuário")
-    .replace(/[<>]/g, "")
-    .trim()
-    .slice(0, 30) || "Usuário";
+html,body{
+  width:100%;
+  height:100%;
 }
 
-function send(ws, data) {
-  if (ws && ws.readyState === WebSocket.OPEN) {
-    ws.send(JSON.stringify(data));
+body{
+  font-family:Arial,sans-serif;
+  background:#111318;
+  color:#fff;
+  overflow:hidden;
+}
+
+button{
+  font:inherit;
+  cursor:pointer;
+}
+
+.app{
+  width:100%;
+  height:100vh;
+  display:flex;
+}
+
+.sidebar{
+  width:285px;
+  height:100%;
+  background:#181b22;
+  border-right:1px solid #292d36;
+  display:flex;
+  flex-direction:column;
+  overflow-y:auto;
+}
+
+.logo{
+  padding:20px;
+  font-size:22px;
+  font-weight:800;
+  border-bottom:1px solid #292d36;
+}
+
+.category{
+  padding:16px 15px 7px;
+  font-size:12px;
+  font-weight:bold;
+  color:#858c99;
+}
+
+.channel{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:2px 8px;
+  padding:10px;
+  border-radius:6px;
+  color:#b8bec9;
+  cursor:pointer;
+}
+
+.channel:hover,
+.channel.active{
+  background:#292e3a;
+  color:#fff;
+}
+
+.channel-name{
+  flex:1;
+}
+
+.count{
+  font-size:11px;
+  color:#777f8d;
+}
+
+.members{
+  padding:2px 12px 8px 38px;
+}
+
+.member{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:5px 0;
+  font-size:12px;
+  color:#b7bdc8;
+}
+
+.avatar{
+  width:25px;
+  height:25px;
+  border-radius:50%;
+  background:#5865f2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:11px;
+  font-weight:bold;
+  flex-shrink:0;
+}
+
+.status-icon{
+  margin-left:2px;
+}
+
+.muted{
+  color:#ff414f;
+}
+
+.camera{
+  color:#5fa7ff;
+}
+
+.screen{
+  color:#65d79a;
+}
+
+.role{
+  font-size:9px;
+  color:#858c99;
+  margin-left:auto;
+}
+
+.user-area{
+  margin-top:auto;
+  padding:12px;
+  background:#20242d;
+  display:flex;
+  gap:9px;
+  align-items:center;
+}
+
+.user-info{
+  flex:1;
+  min-width:0;
+}
+
+.user-name{
+  font-size:13px;
+  font-weight:bold;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.user-role{
+  font-size:10px;
+  color:#858c99;
+  margin-top:3px;
+}
+
+.main{
+  flex:1;
+  min-width:0;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+}
+
+.home-screen{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:20px;
+}
+
+.home-content{
+  color:#858c99;
+}
+
+.home-content h2{
+  color:#e5e7ec;
+  margin-bottom:8px;
+}
+
+.home-content p{
+  font-size:13px;
+}
+
+/* ANÁLISE */
+.analysis-screen{
+  display:none;
+  flex:1;
+  min-height:0;
+  flex-direction:column;
+}
+
+.analysis-screen.show{
+  display:flex;
+}
+
+.analysis-header{
+  height:65px;
+  flex-shrink:0;
+  border-bottom:1px solid #292d36;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:10px 18px;
+}
+
+.analysis-header h2{
+  font-size:18px;
+}
+
+.analysis-header p{
+  font-size:12px;
+  color:#858c99;
+  margin-top:4px;
+}
+
+.header-actions{
+  display:flex;
+  gap:7px;
+}
+
+.header-button{
+  border:0;
+  border-radius:7px;
+  padding:9px 11px;
+  background:#292e3a;
+  color:#fff;
+}
+
+.header-button:hover{
+  background:#353b49;
+}
+
+/*
+O quadrado só existe quando a análise está aberta.
+*/
+.stage{
+  flex:1;
+  min-height:0;
+  margin:10px;
+  border:1px solid #292d36;
+  border-radius:10px;
+  background:#090b0f;
+  overflow:auto;
+  padding:8px;
+}
+
+.empty{
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  color:#858c99;
+  text-align:center;
+}
+
+.empty-icon{
+  font-size:40px;
+  margin-bottom:8px;
+}
+
+.empty h3{
+  color:#e5e7ec;
+  margin-bottom:5px;
+}
+
+.empty p{
+  font-size:12px;
+}
+
+.video-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:8px;
+  width:100%;
+}
+
+.video-card{
+  position:relative;
+  background:#151820;
+  border-radius:8px;
+  overflow:hidden;
+  min-height:160px;
+}
+
+.video-card video{
+  width:100%;
+  height:100%;
+  min-height:160px;
+  object-fit:cover;
+  background:#050608;
+  display:block;
+}
+
+.video-label{
+  position:absolute;
+  bottom:7px;
+  left:7px;
+  background:rgba(0,0,0,.65);
+  padding:5px 8px;
+  border-radius:5px;
+  font-size:11px;
+}
+
+.video-status{
+  position:absolute;
+  right:7px;
+  bottom:7px;
+  font-size:13px;
+}
+
+.controls{
+  width:min(430px,100%);
+  margin:0 auto;
+  padding:7px 10px 12px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+  flex-shrink:0;
+}
+
+.control{
+  width:100%;
+  min-height:44px;
+  border:0;
+  border-radius:7px;
+  padding:10px;
+  background:#292e3a;
+  color:#fff;
+  font-weight:bold;
+}
+
+.control:hover{
+  background:#353b49;
+}
+
+.control.active{
+  background:#5865f2;
+}
+
+.control.danger{
+  background:#d83b4b;
+}
+
+.control.danger:hover{
+  background:#b52e3b;
+}
+
+/* CONFIRMAÇÃO */
+.enter-panel{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.78);
+  z-index:50;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.enter-panel.show{
+  display:flex;
+}
+
+.enter-box{
+  width:min(420px,100%);
+  background:#181b22;
+  border:1px solid #343944;
+  border-radius:12px;
+  padding:22px;
+  text-align:center;
+}
+
+.enter-box h2{
+  margin-bottom:8px;
+}
+
+.enter-box p{
+  color:#858c99;
+  font-size:13px;
+  margin-bottom:18px;
+}
+
+.enter-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+/* TELAS SOBRE A ANÁLISE */
+.overlay-page{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:100;
+  background:#111318;
+  overflow:auto;
+}
+
+.overlay-page.show{
+  display:block;
+}
+
+.overlay-header{
+  min-height:65px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 18px;
+  border-bottom:1px solid #292d36;
+  background:#181b22;
+  position:sticky;
+  top:0;
+  z-index:2;
+}
+
+.overlay-header h2{
+  font-size:18px;
+}
+
+.overlay-content{
+  max-width:900px;
+  margin:0 auto;
+  padding:20px;
+}
+
+.close-fullscreen{
+  border:0;
+  background:#d83b4b;
+  color:#fff;
+  border-radius:6px;
+  padding:9px 13px;
+}
+
+.rule-box,
+.owner-box{
+  background:#181b22;
+  border:1px solid #292d36;
+  border-radius:10px;
+  padding:20px;
+}
+
+.rule-box h2{
+  margin-bottom:18px;
+}
+
+.rule-box h3{
+  margin:20px 0 10px;
+}
+
+.rule{
+  font-size:13px;
+  line-height:1.5;
+  color:#c5c9d1;
+  margin:9px 0;
+}
+
+.input{
+  width:100%;
+  padding:12px;
+  border:1px solid #343944;
+  border-radius:7px;
+  background:#101218;
+  color:#fff;
+  margin-bottom:10px;
+  outline:none;
+}
+
+.owner-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:15px;
+}
+
+.admin-user{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:9px;
+  background:#22262f;
+  border-radius:7px;
+  margin:5px 0;
+  flex-wrap:wrap;
+}
+
+.admin-user-name{
+  flex:1;
+  min-width:100px;
+}
+
+.small-button{
+  border:0;
+  border-radius:5px;
+  padding:7px 9px;
+  background:#343a48;
+  color:#fff;
+  font-size:11px;
+}
+
+@media(max-width:700px){
+
+  .app{
+    display:block;
+  }
+
+  .sidebar{
+    width:100%;
+    height:100%;
+    border:0;
+  }
+
+  .logo{
+    padding:15px;
+    font-size:20px;
+  }
+
+  .category{
+    padding-top:12px;
+  }
+
+  .user-area{
+    display:none;
+  }
+
+  .main{
+    display:none;
+  }
+
+  body.analysis-open .sidebar{
+    display:none;
+  }
+
+  body.analysis-open .main{
+    display:flex;
+    width:100%;
+    height:100%;
+  }
+
+  .analysis-header{
+    height:58px;
+    padding:9px 10px;
+  }
+
+  .analysis-header h2{
+    font-size:15px;
+  }
+
+  .stage{
+    margin:6px;
+    padding:6px;
+  }
+
+  .video-grid{
+    grid-template-columns:1fr 1fr;
+    gap:6px;
+  }
+
+  .video-card{
+    min-height:120px;
+  }
+
+  .video-card video{
+    min-height:120px;
+  }
+
+  .controls{
+    width:100%;
+    padding:6px 8px 10px;
+    grid-template-columns:1fr 1fr;
+  }
+
+  .control{
+    min-height:43px;
+    font-size:12px;
+  }
+
+  .overlay-content{
+    padding:10px;
+  }
+
+  .rule-box,
+  .owner-box{
+    border-radius:8px;
+    padding:15px;
+  }
+
+  .header-actions{
+    gap:4px;
+  }
+
+  .header-button{
+    padding:7px 8px;
+    font-size:11px;
   }
 }
 
-function getRoom(roomId) {
-  if (!rooms.has(roomId)) {
-    rooms.set(roomId, new Map());
-  }
-
-  return rooms.get(roomId);
+body:not(.analysis-open) .analysis-screen{
+  display:none!important;
 }
 
-function publicUser(client) {
-  return {
-    id: client.id,
-    name: client.name,
-    role: client.role,
-    camera: client.camera,
-    screen: client.screen,
-    muted: client.muted
+body:not(.analysis-open) .stage,
+body:not(.analysis-open) .controls{
+  display:none!important;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<aside class="sidebar">
+
+  <div class="logo">
+    🔥 FF Arena
+  </div>
+
+  <div
+    class="channel"
+    onclick="openOwnerPanel()"
+  >
+    👑
+    <span class="channel-name">
+      Área dos Donos
+    </span>
+  </div>
+
+  <div
+    class="channel"
+    onclick="openRules()"
+  >
+    📜
+    <span class="channel-name">
+      Regras
+    </span>
+  </div>
+
+  <div class="category">
+    🔎 ANÁLISES
+  </div>
+
+  <div id="channels"></div>
+
+  <div class="user-area">
+
+    <div class="avatar" id="myAvatar">U</div>
+
+    <div class="user-info">
+
+      <div
+        class="user-name"
+        id="myNameDisplay"
+      >
+        Usuário
+      </div>
+
+      <div
+        class="user-role"
+        id="myRoleDisplay"
+      >
+        MEMBRO
+      </div>
+
+    </div>
+
+  </div>
+
+</aside>
+
+<main class="main">
+
+  <div
+    class="home-screen"
+    id="homeScreen"
+  >
+
+    <div class="home-content">
+
+      <h2>🔥 FF Arena</h2>
+
+      <p>
+        Selecione uma Análise para entrar.
+      </p>
+
+    </div>
+
+  </div>
+
+  <section
+    class="analysis-screen"
+    id="analysisScreen"
+  >
+
+    <header class="analysis-header">
+
+      <div>
+
+        <h2 id="title">
+          🔎 Análise
+        </h2>
+
+        <p id="description">
+          Entre na análise para participar.
+        </p>
+
+      </div>
+
+      <div class="header-actions">
+
+        <button
+          class="header-button"
+          onclick="openRules()"
+        >
+          📜 Regras
+        </button>
+
+        <button
+          class="header-button"
+          onclick="openOwnerPanel()"
+        >
+          👑 Donos
+        </button>
+
+      </div>
+
+    </header>
+
+    <section
+      class="stage"
+      id="stage"
+    >
+
+      <div
+        class="empty"
+        id="empty"
+      >
+
+        <div class="empty-icon">🎥</div>
+
+        <h3>
+          Nenhuma transmissão ativa
+        </h3>
+
+        <p>
+          Abra a câmera ou compartilhe sua tela.
+        </p>
+
+      </div>
+
+      <div
+        class="video-grid"
+        id="videoGrid"
+      ></div>
+
+    </section>
+
+    <footer class="controls">
+
+      <button
+        class="control"
+        id="cameraButton"
+        onclick="toggleCamera()"
+      >
+        📷 Abrir câmera
+      </button>
+
+      <button
+        class="control"
+        id="flipButton"
+        onclick="flipCamera()"
+      >
+        🔄 Virar câmera
+      </button>
+
+      <button
+        class="control"
+        id="screenButton"
+        onclick="toggleScreen()"
+      >
+        🖥️ Compartilhar tela
+      </button>
+
+      <button
+        class="control"
+        id="micButton"
+        onclick="toggleMicrophone()"
+      >
+        🎙️ Microfone
+      </button>
+
+      <button
+        class="control danger"
+        onclick="leaveRoom()"
+      >
+        ⏹ Sair
+      </button>
+
+    </footer>
+
+  </section>
+
+</main>
+
+</div>
+
+<!-- CONFIRMAÇÃO -->
+<div
+  class="enter-panel"
+  id="enterPanel"
+>
+
+  <div class="enter-box">
+
+    <h2 id="enterTitle">
+      🔎 Análise
+    </h2>
+
+    <p>
+      Você selecionou esta análise.
+      Clique em <b>Entrar</b> para abrir.
+    </p>
+
+    <div class="enter-actions">
+
+      <button
+        class="control"
+        onclick="confirmEnterRoom()"
+      >
+        Entrar
+      </button>
+
+      <button
+        class="control danger"
+        onclick="closeEnterPanel()"
+      >
+        Cancelar
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- REGRAS -->
+<div
+  class="overlay-page"
+  id="rulesPage"
+>
+
+  <div class="overlay-header">
+
+    <h2>📜 Regras</h2>
+
+    <button
+      class="close-fullscreen"
+      onclick="closeRules()"
+    >
+      ✕ Fechar
+    </button>
+
+  </div>
+
+  <div class="overlay-content">
+
+    <div class="rule-box">
+
+      <h2>📜 REGRAS</h2>
+
+      <h3>📱 ANDROID</h3>
+
+      <div class="rule">🔹 PROIBIDO ROOT.</div>
+      <div class="rule">🔹 PROIBIDO MT MANAGER.</div>
+      <div class="rule">🔹 PLAY STORE PÓS-PARTIDA PODE RESULTAR EM W.O CASO O ANALISTA ACHE NECESSÁRIO.</div>
+      <div class="rule">🔹 PROIBIDO JOGAR QUALQUER MODO QUE SALVE REPLAY PÓS-PARTIDA.</div>
+      <div class="rule">🔹 PROIBIDO QUALQUER TIPO DE ARQUIVO OU PROGRAMA QUE DÊ VANTAGEM SOBRE OUTROS JOGADORES.</div>
+      <div class="rule">🔹 PROIBIDO ACESSAR GOOGLE DRIVE E ZARCHIVER PÓS-PARTIDA.</div>
+      <div class="rule">🔹 NAVEGADOR SÓ SERÁ W.O CASO O HISTÓRICO ESTEJA LIMPO.</div>
+      <div class="rule">🔹 QUALQUER TIPO DE ARQUIVO, PROGRAMA OU RASTRO SUSPEITO DO DIA 01 DE JANEIRO DE 2026 EM DIANTE SERÁ APLICADO W.O.</div>
+      <div class="rule">🔹 SHADERS MODIFICADA É W.O.</div>
+      <div class="rule">🔹 QUALQUER TIPO DE VPN QUE NÃO SEJA DO GOVERNO OU APOSTAS ESPORTIVAS SERÁ APLICADO W.O.</div>
+      <div class="rule">🔹 OBRIGATÓRIO TER APP USAGE INSTALADO COM TODAS AS PERMISSÕES CONCEDIDAS.</div>
+      <div class="rule">🔹 APP USAGE DESINSTALADO — W.O APENAS SE ESTIVER COM REPLAY SUSPEITO.</div>
+      <div class="rule">🔹 EM CASOS DE REPLAY SUSPEITO COM BUFFER DE LOG 256KB — PASSÍVEL DE W.O.</div>
+
+      <h3>🍎 IOS</h3>
+
+      <div class="rule">🔹 VPN É W.O. (EXCETO VPN ESCOLAR).</div>
+      <div class="rule">🔹 IPHONE É PROIBIDO REINICIAR DURANTE/APÓS A PARTIDA.</div>
+      <div class="rule">🔹 IPHONE OBRIGATÓRIO JOGAR COM TEMPO DE USO E RELATÓRIO DE PRIVACIDADE ATIVADO.</div>
+      <div class="rule">🔹 PROIBIDO SCARLET, ESIGN, KSIGN, GBOX E SIMILARES.</div>
+      <div class="rule">🔹 IPHONE VERSÃO 15.X A 16.X EM APOSTAS ACIMA DE R$50 (MD3): DEVE ABRIR TELA REINSTALANDO O JOGO E ENTRANDO NA SALA.</div>
+      <div class="rule">🔹 IPHONES 15.X–16.X COM APP STORE NA BATERIA APÓS A PARTIDA SÃO PASSÍVEIS DE W.O.</div>
+      <div class="rule">🔹 IPHONES 15.X–16.X COM REPLAY SUSPEITO SÃO PASSÍVEIS DE W.O.</div>
+      <div class="rule">🔹 IPHONES COM MODO DEVELOPER ATIVADO RESULTAM EM W.O.</div>
+      <div class="rule">🔹 É PROIBIDO RELOGAR COM REPLAY SUSPEITO.</div>
+      <div class="rule">🔹 RELATÓRIO DE PRIVACIDADE OU TEMPO DE USO DESATIVADO — W.O APENAS SE REPLAY ESTIVER SUSPEITO.</div>
+
+      <h3>🖥️ EMULADO</h3>
+
+      <div class="rule">🔹 PROIBIDO USO DE INJEÇÕES OU MODIFICAÇÕES DE DLL DURANTE/APÓS A PARTIDA.</div>
+      <div class="rule">🔹 PROIBIDO REMOVER PENDRIVE PÓS BOOT.</div>
+      <div class="rule">🔹 TODOS OS DISCOS DEVEM SER NTFS COM USNJOURNAL ATIVO.</div>
+      <div class="rule">🔹 PROIBIDO REINICIAR O EMULADOR APÓS A PARTIDA.</div>
+      <div class="rule">🔹 TEMP, PREFETCH, RECENT LIMPAS PÓS BOOT DO PC = W.O.</div>
+      <div class="rule">🔹 BAM PAUSADA/LIMPA = W.O.</div>
+      <div class="rule">🔹 WINDOWS MODIFICADO QUE IMPOSSIBILITE TELAGEM = W.O.</div>
+      <div class="rule">🔹 NEGAR ACESSO VIA ANYDESK/TEAMVIEWER = W.O.</div>
+      <div class="rule">🔹 SYSMON ATIVADA APÓS BOOT = W.O.</div>
+      <div class="rule">🔹 RASTRO DE SERVIÇO PAUSADO MESMO QUE TEMPORARIAMENTE = W.O.</div>
+      <div class="rule">🔹 SEMPRE CONFIRA ATUALIZAÇÕES DA SYSMON.</div>
+      <div class="rule">🔹 PLACAS-MÃES X99: AVISAR O SS CASO NÃO TENHA SECURE BOOT/TPM.</div>
+      <div class="rule">🔹 PROIBIDO USO DE EMULADORES PROTEGIDOS POR KERNEL.</div>
+      <div class="rule">🔹 CASO ALGUM SERVIÇO NECESSÁRIO ESTEJA DESABILITADO, SERÁ W.O EM REPLAYS SUSPEITOS.</div>
+      <div class="rule">🔹 EM CASOS PARA CONFERIR SE O EMULADOR É PERMITIDO OU NÃO, INSTALE O ARQUIVO QUE CONFERE O EMULADOR.</div>
+
+      <h3>⚠️ REGRA FINAL</h3>
+
+      <div class="rule">
+        🔹 BREVENT PAREADO SERÁ W.O.
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ÁREA DOS DONOS -->
+<div
+  class="overlay-page"
+  id="ownerPage"
+>
+
+  <div class="overlay-header">
+
+    <h2>👑 Área dos Donos</h2>
+
+    <button
+      class="close-fullscreen"
+      onclick="closeOwnerPanel()"
+    >
+      ✕ Fechar
+    </button>
+
+  </div>
+
+  <div class="overlay-content">
+
+    <div class="owner-box">
+
+      <p style="
+        color:#858c99;
+        font-size:12px;
+        margin-bottom:15px
+      ">
+        Entre com o código do Dono para administrar a sala.
+      </p>
+
+      <input
+        class="input"
+        id="ownerCode"
+        type="password"
+        placeholder="Código do Dono"
+      >
+
+      <div class="owner-actions">
+
+        <button
+          class="control"
+          onclick="ownerLogin()"
+        >
+          Entrar
+        </button>
+
+      </div>
+
+      <div id="ownerContent"></div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+const SERVER_URL="wss://ff-arena-serve.onrender.com";
+
+let socket=null;
+let currentRoom=null;
+let selectedRoom=null;
+let myId=null;
+let myName="Usuário";
+let myRole="MEMBRO";
+
+let localCameraStream=null;
+let localScreenStream=null;
+let microphoneMuted=false;
+let cameraFacingMode="user";
+
+let currentUsers=[];
+
+const peerConnections={};
+const makingOffer={};
+const ignoreOffer={};
+const polite={};
+const remoteUsers={};
+
+const channels=document.getElementById("channels");
+const enterPanel=document.getElementById("enterPanel");
+const enterTitle=document.getElementById("enterTitle");
+const analysisScreen=document.getElementById("analysisScreen");
+const homeScreen=document.getElementById("homeScreen");
+const title=document.getElementById("title");
+const description=document.getElementById("description");
+const videoGrid=document.getElementById("videoGrid");
+const empty=document.getElementById("empty");
+
+const cameraButton=document.getElementById("cameraButton");
+const screenButton=document.getElementById("screenButton");
+const micButton=document.getElementById("micButton");
+const flipButton=document.getElementById("flipButton");
+
+const rulesPage=document.getElementById("rulesPage");
+const ownerPage=document.getElementById("ownerPage");
+const ownerContent=document.getElementById("ownerContent");
+
+for(let i=1;i<=20;i++){
+
+  const container=document.createElement("div");
+
+  container.innerHTML=`
+    <div
+      class="channel"
+      id="channel-${i}"
+      onclick="selectRoom(${i})"
+    >
+      <span>🔎</span>
+
+      <span class="channel-name">
+        Análise ${String(i).padStart(2,"0")}
+      </span>
+
+      <span
+        class="count"
+        id="count-${i}"
+      >
+        0/8
+      </span>
+    </div>
+
+    <div
+      class="members"
+      id="members-${i}"
+    ></div>
+  `;
+
+  channels.appendChild(container);
+}
+
+function loadName(){
+
+  const saved=localStorage.getItem("ffArenaName");
+
+  if(saved){
+    myName=saved;
+  }else{
+
+    const answer=prompt("Digite seu nome:");
+
+    myName=(answer||"Usuário")
+      .trim()
+      .slice(0,30);
+
+    if(!myName){
+      myName="Usuário";
+    }
+
+    localStorage.setItem(
+      "ffArenaName",
+      myName
+    );
+  }
+
+  updateProfile();
+}
+
+function updateProfile(){
+
+  const name=document.getElementById("myNameDisplay");
+  const avatar=document.getElementById("myAvatar");
+  const role=document.getElementById("myRoleDisplay");
+
+  if(name) name.textContent=myName;
+
+  if(avatar){
+    avatar.textContent=
+      myName.charAt(0).toUpperCase();
+  }
+
+  if(role){
+    role.textContent=myRole;
+  }
+}
+
+function selectRoom(room){
+
+  selectedRoom=room;
+
+  document
+    .querySelectorAll(".channel")
+    .forEach(el=>el.classList.remove("active"));
+
+  const channel=document.getElementById(
+    `channel-${room}`
+  );
+
+  if(channel){
+    channel.classList.add("active");
+  }
+
+  enterTitle.textContent=
+    `🔎 Análise ${String(room).padStart(2,"0")}`;
+
+  enterPanel.classList.add("show");
+}
+
+function closeEnterPanel(){
+
+  enterPanel.classList.remove("show");
+
+  selectedRoom=null;
+}
+
+function confirmEnterRoom(){
+
+  if(!selectedRoom) return;
+
+  const room=selectedRoom;
+
+  closeEnterPanel();
+
+  openRoom(room);
+}
+
+function openRoom(room){
+
+  currentRoom=room;
+
+  rulesPage.classList.remove("show");
+  ownerPage.classList.remove("show");
+
+  document.body.classList.add("analysis-open");
+
+  homeScreen.style.display="none";
+
+  analysisScreen.classList.add("show");
+
+  title.textContent=
+    `🔎 Análise ${String(room).padStart(2,"0")}`;
+
+  description.textContent=
+    "Conectando à análise...";
+
+  clearVideos();
+  closeAllPeerConnections();
+
+  connectServer(room);
+}
+
+function connectServer(room){
+
+  if(socket){
+
+    try{
+      socket.close();
+    }catch{}
+
+  }
+
+  socket=new WebSocket(SERVER_URL);
+
+  socket.onopen=()=>{
+
+    socket.send(JSON.stringify({
+      type:"join",
+      room:String(room),
+      name:myName
+    }));
+
   };
-}
 
-function broadcastRoomUsers(roomId) {
-  const room = rooms.get(roomId);
-  if (!room) return;
+  socket.onmessage=async(event)=>{
 
-  const users = [...room.values()].map(publicUser);
+    let data;
 
-  for (const client of room.values()) {
-    send(client.ws, {
-      type: "users",
-      users
-    });
-  }
-}
-
-wss.on("connection", (ws) => {
-  const client = {
-    ws,
-    id: createId(),
-    name: "Usuário",
-    room: null,
-    role: "MEMBRO",
-    camera: false,
-    screen: false,
-    muted: false
-  };
-
-  ws.on("message", (raw) => {
-    let message;
-
-    try {
-      message = JSON.parse(raw.toString());
-    } catch {
+    try{
+      data=JSON.parse(event.data);
+    }catch{
       return;
     }
 
-    switch (message.type) {
-      case "join":
-        joinRoom(client, message);
-        break;
+    if(data.type==="joined"){
 
-      case "status":
-        updateStatus(client, message);
-        break;
+      myId=data.id;
+      myRole=data.role||"MEMBRO";
 
-      case "offer":
-        relayToPeer(client, message, "offer");
-        break;
+      updateProfile();
 
-      case "answer":
-        relayToPeer(client, message, "answer");
-        break;
+      description.textContent=
+        "Você está conectado.";
 
-      case "ice-candidate":
-        relayToPeer(client, message, "ice-candidate");
-        break;
+      for(const peer of data.peers||[]){
 
-      case "owner-login":
-        ownerLogin(client, message);
-        break;
+        remoteUsers[peer.id]=peer;
 
-      case "set-role":
-        setRole(client, message);
-        break;
+        await createPeerConnection(
+          peer.id,
+          peer,
+          true
+        );
+      }
 
-      case "mute-user":
-        muteUser(client, message);
-        break;
-
-      case "unmute-user":
-        unmuteUser(client, message);
-        break;
+      updateOwnerPanel();
+      return;
     }
-  });
 
-  ws.on("close", () => leaveRoom(client));
-  ws.on("error", () => leaveRoom(client));
-});
+    if(data.type==="peer-joined"){
 
-function joinRoom(client, message) {
-  const roomId = String(message.room || "1");
+      remoteUsers[data.user.id]=data.user;
 
-  if (client.room) {
-    leaveRoom(client);
+      await createPeerConnection(
+        data.user.id,
+        data.user,
+        false
+      );
+
+      return;
+    }
+
+    if(data.type==="offer"){
+
+      await receiveOffer(
+        data.from,
+        data.data
+      );
+
+      return;
+    }
+
+    if(data.type==="answer"){
+
+      await receiveAnswer(
+        data.from,
+        data.data
+      );
+
+      return;
+    }
+
+    if(data.type==="ice-candidate"){
+
+      await receiveIce(
+        data.from,
+        data.data
+      );
+
+      return;
+    }
+
+    if(data.type==="peer-left"){
+
+      delete remoteUsers[data.id];
+
+      removePeer(data.id);
+
+      return;
+    }
+
+    if(data.type==="users"){
+
+      updateUsers(data.users||[]);
+      updateOwnerPanel();
+
+      return;
+    }
+
+    if(data.type==="force-mute"){
+
+      forceMute();
+      return;
+    }
+
+    if(data.type==="force-unmute"){
+
+      forceUnmute();
+      return;
+    }
+
+    if(data.type==="role-changed"){
+
+      myRole=data.role;
+
+      updateProfile();
+      updateOwnerPanel();
+
+      return;
+    }
+
+    if(data.type==="owner-login-result"){
+
+      if(data.success){
+
+        myRole="DONO";
+
+        updateProfile();
+
+        alert("Você entrou como Dono.");
+
+      }else{
+
+        alert(
+          data.message||
+          "Código incorreto."
+        );
+      }
+
+      updateOwnerPanel();
+
+      return;
+    }
+
+    if(data.type==="room-full"){
+
+      alert(data.message);
+      return;
+    }
+
+    if(data.type==="error"){
+
+      alert(data.message);
+    }
+  };
+
+  socket.onclose=()=>{
+
+    if(document.body.classList.contains("analysis-open")){
+
+      description.textContent=
+        "Conexão encerrada.";
+    }
+  };
+
+  socket.onerror=()=>{
+
+    description.textContent=
+      "Erro de conexão com o servidor.";
+  };
+}
+
+const rtcConfig={
+  iceServers:[
+    {
+      urls:"stun:stun.l.google.com:19302"
+    },
+    {
+      urls:"stun:stun1.l.google.com:19302"
+    }
+  ]
+};
+
+async function createPeerConnection(
+  peerId,
+  peerUser,
+  createOffer
+){
+
+  if(peerConnections[peerId]){
+    return peerConnections[peerId];
   }
 
-  const room = getRoom(roomId);
+  const pc=new RTCPeerConnection(rtcConfig);
 
-  if (room.size >= 8) {
-    send(client.ws, {
-      type: "room-full",
-      message: "Esta análise já está cheia."
+  peerConnections[peerId]=pc;
+
+  remoteUsers[peerId]={
+    ...(remoteUsers[peerId]||{}),
+    ...(peerUser||{})
+  };
+
+  polite[peerId]=
+    String(myId)>String(peerId);
+
+  makingOffer[peerId]=false;
+  ignoreOffer[peerId]=false;
+
+  addLocalTracks(pc);
+
+  pc.ontrack=event=>{
+
+    const stream=event.streams[0];
+
+    if(!stream) return;
+
+    showRemoteVideo(
+      peerId,
+      remoteUsers[peerId]||peerUser,
+      stream
+    );
+  };
+
+  pc.onicecandidate=event=>{
+
+    if(!event.candidate) return;
+
+    sendSignal({
+      type:"ice-candidate",
+      target:peerId,
+      data:event.candidate
     });
+  };
 
+  pc.onnegotiationneeded=async()=>{
+
+    try{
+
+      makingOffer[peerId]=true;
+
+      await pc.setLocalDescription();
+
+      sendSignal({
+        type:"offer",
+        target:peerId,
+        data:pc.localDescription
+      });
+
+    }catch(error){
+
+      console.log(error);
+
+    }finally{
+
+      makingOffer[peerId]=false;
+    }
+  };
+
+  pc.onconnectionstatechange=()=>{
+
+    if(
+      pc.connectionState==="failed"||
+      pc.connectionState==="closed"
+    ){
+
+      removePeer(peerId);
+    }
+  };
+
+  if(createOffer){
+
+    try{
+
+      makingOffer[peerId]=true;
+
+      await pc.setLocalDescription();
+
+      sendSignal({
+        type:"offer",
+        target:peerId,
+        data:pc.localDescription
+      });
+
+    }catch(error){
+
+      console.log(error);
+
+    }finally{
+
+      makingOffer[peerId]=false;
+    }
+  }
+
+  return pc;
+}
+
+function addLocalTracks(pc){
+
+  if(localCameraStream){
+
+    for(
+      const track
+      of localCameraStream.getTracks()
+    ){
+
+      if(
+        !pc.getSenders()
+          .some(sender=>sender.track===track)
+      ){
+
+        pc.addTrack(
+          track,
+          localCameraStream
+        );
+      }
+    }
+  }
+
+  if(localScreenStream){
+
+    for(
+      const track
+      of localScreenStream.getTracks()
+    ){
+
+      if(
+        !pc.getSenders()
+          .some(sender=>sender.track===track)
+      ){
+
+        pc.addTrack(
+          track,
+          localScreenStream
+        );
+      }
+    }
+  }
+}
+
+function sendSignal(message){
+
+  if(
+    !socket||
+    socket.readyState!==WebSocket.OPEN
+  ){
     return;
   }
 
-  client.room = roomId;
-  client.name = cleanName(message.name);
-
-  room.set(client.id, client);
-
-  const peers = [...room.values()]
-    .filter(peer => peer.id !== client.id)
-    .map(publicUser);
-
-  send(client.ws, {
-    type: "joined",
-    id: client.id,
-    room: roomId,
-    role: client.role,
-    peers
-  });
-
-  for (const peer of room.values()) {
-    if (peer.id === client.id) continue;
-
-    send(peer.ws, {
-      type: "peer-joined",
-      user: publicUser(client)
-    });
-  }
-
-  broadcastRoomUsers(roomId);
+  socket.send(JSON.stringify(message));
 }
 
-function leaveRoom(client) {
-  if (!client.room) return;
+async function receiveOffer(
+  peerId,
+  descriptionData
+){
 
-  const roomId = client.room;
-  const room = rooms.get(roomId);
-
-  if (!room) {
-    client.room = null;
-    return;
-  }
-
-  room.delete(client.id);
-
-  for (const peer of room.values()) {
-    send(peer.ws, {
-      type: "peer-left",
-      id: client.id
-    });
-  }
-
-  if (room.size === 0) {
-    rooms.delete(roomId);
-  } else {
-    broadcastRoomUsers(roomId);
-  }
-
-  client.room = null;
-}
-
-function updateStatus(client, message) {
-  if (!client.room) return;
-
-  client.camera = Boolean(message.camera);
-  client.screen = Boolean(message.screen);
-  client.muted = Boolean(message.muted);
-
-  broadcastRoomUsers(client.room);
-}
-
-function relayToPeer(client, message, type) {
-  if (!client.room) return;
-
-  const room = rooms.get(client.room);
-  if (!room) return;
-
-  const target = room.get(String(message.target || ""));
-  if (!target) return;
-
-  send(target.ws, {
-    type,
-    from: client.id,
-    data: message.data || null
-  });
-}
-
-function ownerLogin(client, message) {
-  const code = String(message.code || "");
-
-  if (code !== ADMIN_CODE) {
-    send(client.ws, {
-      type: "owner-login-result",
-      success: false,
-      message: "Código incorreto."
-    });
-
-    return;
-  }
-
-  client.role = "DONO";
-
-  send(client.ws, {
-    type: "owner-login-result",
-    success: true,
-    role: "DONO"
-  });
-
-  if (client.room) {
-    broadcastRoomUsers(client.room);
-  }
-}
-
-function canManageRoles(client) {
-  return client.role === "DONO";
-}
-
-function canModerate(client) {
-  return (
-    client.role === "DONO" ||
-    client.role === "ADM" ||
-    client.role === "TELADOR"
+  const pc=await createPeerConnection(
+    peerId,
+    remoteUsers[peerId]||{name:"Usuário"},
+    false
   );
+
+  const offerCollision=
+    makingOffer[peerId]||
+    pc.signalingState!=="stable";
+
+  ignoreOffer[peerId]=
+    !polite[peerId]&&offerCollision;
+
+  if(ignoreOffer[peerId]){
+    return;
+  }
+
+  try{
+
+    await pc.setRemoteDescription(
+      descriptionData
+    );
+
+    await pc.setLocalDescription();
+
+    sendSignal({
+      type:"answer",
+      target:peerId,
+      data:pc.localDescription
+    });
+
+  }catch(error){
+
+    console.log(error);
+  }
 }
 
-function setRole(client, message) {
-  if (!canManageRoles(client)) {
-    send(client.ws, {
-      type: "error",
-      message: "Somente o Dono pode alterar cargos."
-    });
+async function receiveAnswer(
+  peerId,
+  descriptionData
+){
+
+  const pc=peerConnections[peerId];
+
+  if(!pc) return;
+
+  try{
+
+    await pc.setRemoteDescription(
+      descriptionData
+    );
+
+  }catch(error){
+
+    console.log(error);
+  }
+}
+
+async function receiveIce(
+  peerId,
+  candidate
+){
+
+  const pc=peerConnections[peerId];
+
+  if(!pc) return;
+
+  try{
+
+    await pc.addIceCandidate(candidate);
+
+  }catch(error){
+
+    if(!ignoreOffer[peerId]){
+      console.log(error);
+    }
+  }
+}
+
+async function toggleCamera(){
+
+  if(localCameraStream){
+
+    localCameraStream
+      .getTracks()
+      .forEach(track=>track.stop());
+
+    localCameraStream=null;
+
+    cameraButton.textContent=
+      "📷 Abrir câmera";
+
+    await renegotiateAll();
+
+    sendStatus();
+
+    if(!localScreenStream){
+      hideLocalVideo();
+    }
 
     return;
   }
 
-  if (!client.room) return;
+  try{
 
-  const room = rooms.get(client.room);
-  if (!room) return;
+    localCameraStream=
+      await navigator.mediaDevices.getUserMedia({
 
-  const target = room.get(String(message.target || ""));
-  if (!target) return;
+        video:{
+          facingMode:cameraFacingMode
+        },
 
-  const allowedRoles = [
-    "MEMBRO",
-    "TELADOR",
-    "ADM"
-  ];
+        audio:true
 
-  const role = String(message.role || "MEMBRO");
+      });
 
-  if (!allowedRoles.includes(role)) return;
+    for(
+      const track
+      of localCameraStream.getAudioTracks()
+    ){
 
-  target.role = role;
+      track.enabled=!microphoneMuted;
+    }
 
-  send(target.ws, {
-    type: "role-changed",
+    cameraButton.textContent=
+      "📷 Fechar câmera";
+
+    showLocalVideo();
+
+    await renegotiateAll();
+
+    sendStatus();
+
+  }catch(error){
+
+    console.log(error);
+
+    alert(
+      "Não foi possível abrir a câmera. Verifique a permissão do navegador."
+    );
+  }
+}
+
+async function flipCamera(){
+
+  if(!localCameraStream){
+
+    alert("Abra a câmera primeiro.");
+
+    return;
+  }
+
+  cameraFacingMode=
+    cameraFacingMode==="user"
+      ?"environment"
+      :"user";
+
+  try{
+
+    const oldAudio=
+      localCameraStream
+        .getAudioTracks();
+
+    const newStream=
+      await navigator.mediaDevices.getUserMedia({
+
+        video:{
+          facingMode:cameraFacingMode
+        },
+
+        audio:false
+      });
+
+    const newVideoTrack=
+      newStream.getVideoTracks()[0];
+
+    for(
+      const pc
+      of Object.values(peerConnections)
+    ){
+
+      const sender=
+        pc.getSenders()
+          .find(s=>
+            s.track &&
+            s.track.kind==="video"
+          );
+
+      if(sender){
+
+        await sender.replaceTrack(
+          newVideoTrack
+        );
+      }
+    }
+
+    oldAudio.forEach(track=>{
+      track.stop();
+    });
+
+    const combined=
+      new MediaStream();
+
+    combined.addTrack(newVideoTrack);
+
+    for(const audio of oldAudio){
+
+      audio.enabled=!microphoneMuted;
+
+      combined.addTrack(audio);
+    }
+
+    localCameraStream=combined;
+
+    showLocalVideo();
+
+    sendStatus();
+
+  }catch(error){
+
+    console.log(error);
+
+    cameraFacingMode=
+      cameraFacingMode==="user"
+        ?"environment"
+        :"user";
+
+    alert(
+      "Não foi possível virar a câmera."
+    );
+  }
+}
+
+async function toggleScreen(){
+
+  if(localScreenStream){
+
+    localScreenStream
+      .getTracks()
+      .forEach(track=>track.stop());
+
+    localScreenStream=null;
+
+    screenButton.textContent=
+      "🖥️ Compartilhar tela";
+
+    await renegotiateAll();
+
+    sendStatus();
+
+    if(!localCameraStream){
+      hideLocalVideo();
+    }
+
+    return;
+  }
+
+  if(
+    !navigator.mediaDevices||
+    !navigator.mediaDevices.getDisplayMedia
+  ){
+
+    alert(
+      "Este navegador não disponibiliza compartilhamento de tela."
+    );
+
+    return;
+  }
+
+  try{
+
+    localScreenStream=
+      await navigator.mediaDevices.getDisplayMedia({
+        video:true,
+        audio:true
+      });
+
+    screenButton.textContent=
+      "🖥️ Parar tela";
+
+    const track=
+      localScreenStream.getVideoTracks()[0];
+
+    if(track){
+
+      track.onended=async()=>{
+
+        localScreenStream=null;
+
+        screenButton.textContent=
+          "🖥️ Compartilhar tela";
+
+        await renegotiateAll();
+
+        sendStatus();
+
+        if(!localCameraStream){
+          hideLocalVideo();
+        }
+      };
+    }
+
+    showLocalVideo();
+
+    await renegotiateAll();
+
+    sendStatus();
+
+  }catch(error){
+
+    console.log(error);
+  }
+}
+
+function toggleMicrophone(){
+
+  if(!localCameraStream){
+
+    alert(
+      "Abra a câmera para usar o microfone."
+    );
+
+    return;
+  }
+
+  microphoneMuted=!microphoneMuted;
+
+  for(
+    const track
+    of localCameraStream.getAudioTracks()
+  ){
+
+    track.enabled=!microphoneMuted;
+  }
+
+  updateMicButton();
+  sendStatus();
+}
+
+function updateMicButton(){
+
+  micButton.textContent=
+    microphoneMuted
+      ?"🔇 Microfone"
+      :"🎙️ Microfone";
+}
+
+function forceMute(){
+
+  microphoneMuted=true;
+
+  if(localCameraStream){
+
+    localCameraStream
+      .getAudioTracks()
+      .forEach(
+        track=>track.enabled=false
+      );
+  }
+
+  updateMicButton();
+  sendStatus();
+}
+
+function forceUnmute(){
+
+  microphoneMuted=false;
+
+  if(localCameraStream){
+
+    localCameraStream
+      .getAudioTracks()
+      .forEach(
+        track=>track.enabled=true
+      );
+  }
+
+  updateMicButton();
+  sendStatus();
+}
+
+function sendStatus(){
+
+  if(
+    !socket||
+    socket.readyState!==WebSocket.OPEN
+  ){
+    return;
+  }
+
+  socket.send(JSON.stringify({
+
+    type:"status",
+
+    camera:!!localCameraStream,
+
+    screen:!!localScreenStream,
+
+    muted:microphoneMuted
+
+  }));
+}
+
+async function renegotiateAll(){
+
+  for(
+    const peerId
+    of Object.keys(peerConnections)
+  ){
+
+    const pc=peerConnections[peerId];
+
+    if(!pc) continue;
+
+    addLocalTracks(pc);
+
+    try{
+
+      if(pc.signalingState==="stable"){
+
+        await pc.setLocalDescription();
+
+        sendSignal({
+          type:"offer",
+          target:peerId,
+          data:pc.localDescription
+        });
+      }
+
+    }catch(error){
+
+      console.log(error);
+    }
+  }
+}
+
+function showLocalVideo(){
+
+  const id=`local-${myId}`;
+
+  let card=document.getElementById(id);
+
+  if(!card){
+
+    card=document.createElement("div");
+
+    card.className="video-card";
+    card.id=id;
+
+    card.innerHTML=`
+
+      <video
+        id="${id}-video"
+        autoplay
+        playsinline
+        muted
+      ></video>
+
+      <div class="video-label">
+        ${escapeHTML(myName)}
+      </div>
+
+      <div
+        class="video-status"
+        id="${id}-status"
+      >
+        📷
+      </div>
+    `;
+
+    videoGrid.appendChild(card);
+  }
+
+  const video=
+    document.getElementById(
+      `${id}-video`
+    );
+
+  if(localScreenStream){
+
+    video.srcObject=
+      localScreenStream;
+
+  }else{
+
+    video.srcObject=
+      localCameraStream;
+  }
+
+  empty.style.display="none";
+}
+
+function hideLocalVideo(){
+
+  const card=
+    document.getElementById(
+      `local-${myId}`
+    );
+
+  if(card){
+    card.remove();
+  }
+
+  updateEmpty();
+}
+
+function showRemoteVideo(
+  peerId,
+  user,
+  stream
+){
+
+  const id=`remote-${peerId}`;
+
+  let card=document.getElementById(id);
+
+  if(!card){
+
+    card=document.createElement("div");
+
+    card.className="video-card";
+    card.id=id;
+
+    card.innerHTML=`
+
+      <video
+        id="${id}-video"
+        autoplay
+        playsinline
+      ></video>
+
+      <div class="video-label">
+        ${escapeHTML(
+          user?.name||"Usuário"
+        )}
+      </div>
+
+      <div
+        class="video-status"
+        id="${id}-status"
+      >
+        📷
+      </div>
+    `;
+
+    videoGrid.appendChild(card);
+  }
+
+  const video=
+    document.getElementById(
+      `${id}-video`
+    );
+
+  if(video.srcObject!==stream){
+    video.srcObject=stream;
+  }
+
+  empty.style.display="none";
+}
+
+function removePeer(peerId){
+
+  if(peerConnections[peerId]){
+
+    try{
+      peerConnections[peerId].close();
+    }catch{}
+
+    delete peerConnections[peerId];
+  }
+
+  delete remoteUsers[peerId];
+
+  const card=
+    document.getElementById(
+      `remote-${peerId}`
+    );
+
+  if(card){
+    card.remove();
+  }
+
+  updateEmpty();
+}
+
+function updateEmpty(){
+
+  empty.style.display=
+    videoGrid.children.length
+      ?"none"
+      :"flex";
+}
+
+function clearVideos(){
+
+  videoGrid.innerHTML="";
+
+  updateEmpty();
+}
+
+function closeAllPeerConnections(){
+
+  for(
+    const id
+    of Object.keys(peerConnections)
+  ){
+
+    try{
+      peerConnections[id].close();
+    }catch{}
+
+    delete peerConnections[id];
+  }
+
+  for(
+    const id
+    of Object.keys(remoteUsers)
+  ){
+
+    delete remoteUsers[id];
+  }
+}
+
+function updateUsers(users){
+
+  currentUsers=users;
+
+  for(let i=1;i<=20;i++){
+
+    const count=
+      document.getElementById(
+        `count-${i}`
+      );
+
+    const members=
+      document.getElementById(
+        `members-${i}`
+      );
+
+    if(!count||!members) continue;
+
+    /*
+    Mostra participantes de cada análise.
+    Não depende de câmera estar aberta.
+    */
+
+    if(i===currentRoom){
+
+      count.textContent=
+        `${users.length}/8`;
+
+      members.innerHTML="";
+
+      users.forEach(user=>{
+
+        const item=
+          document.createElement("div");
+
+        item.className="member";
+
+        let status="";
+
+        if(user.camera){
+          status+=
+            `<span class="status-icon camera">📷</span>`;
+        }
+
+        if(user.screen){
+          status+=
+            `<span class="status-icon screen">🖥️</span>`;
+        }
+
+        if(user.muted){
+          status+=
+            `<span class="status-icon muted">🎙️</span>`;
+        }
+
+        item.innerHTML=`
+
+          <span class="avatar">
+            ${escapeHTML(
+              (user.name||"U")
+                .charAt(0)
+                .toUpperCase()
+            )}
+          </span>
+
+          <span>
+            ${escapeHTML(
+              user.name||"Usuário"
+            )}
+          </span>
+
+          ${status}
+
+          <span class="role">
+            ${escapeHTML(
+              user.role||"MEMBRO"
+            )}
+          </span>
+        `;
+
+        members.appendChild(item);
+      });
+
+    }else{
+
+      /*
+      Não deixa os espaços de membros
+      ocupando a tela nas outras análises.
+      */
+
+      members.innerHTML="";
+    }
+  }
+}
+
+/* REGRAS */
+
+function openRules(){
+
+  /*
+  Se estiver em uma análise,
+  NÃO sai dela.
+  Apenas coloca as regras por cima.
+  */
+
+  rulesPage.classList.add("show");
+}
+
+function closeRules(){
+
+  rulesPage.classList.remove("show");
+}
+
+/* DONOS */
+
+function openOwnerPanel(){
+
+  /*
+  Pode abrir Área dos Donos
+  sem sair da análise.
+  */
+
+  ownerPage.classList.add("show");
+
+  updateOwnerPanel();
+}
+
+function closeOwnerPanel(){
+
+  ownerPage.classList.remove("show");
+}
+
+function ownerLogin(){
+
+  const code=
+    document
+      .getElementById("ownerCode")
+      .value
+      .trim();
+
+  if(!code){
+
+    alert(
+      "Digite o código do Dono."
+    );
+
+    return;
+  }
+
+  /*
+  Para administrar enquanto está
+  dentro de uma análise, precisa
+  estar conectado à sala.
+  */
+
+  if(
+    !socket||
+    socket.readyState!==WebSocket.OPEN
+  ){
+
+    alert(
+      "Entre em uma Análise primeiro."
+    );
+
+    return;
+  }
+
+  socket.send(JSON.stringify({
+
+    type:"owner-login",
+
+    code
+
+  }));
+}
+
+function updateOwnerPanel(){
+
+  if(
+    myRole!=="DONO"&&
+    myRole!=="ADM"&&
+    myRole!=="TELADOR"
+  ){
+
+    ownerContent.innerHTML=`
+
+      <p style="
+        color:#858c99;
+        font-size:12px;
+      ">
+        Faça login como Dono para administrar os membros.
+      </p>
+    `;
+
+    return;
+  }
+
+  let html=`
+
+    <h3 style="margin:15px 0 10px">
+      👥 Pessoas na Análise
+      ${
+        currentRoom
+          ?String(currentRoom).padStart(2,"0")
+          :"—"
+      }
+    </h3>
+  `;
+
+  if(!currentUsers.length){
+
+    html+=`
+
+      <p style="
+        color:#858c99;
+        font-size:12px;
+      ">
+        Nenhuma pessoa na análise.
+      </p>
+    `;
+  }
+
+  currentUsers.forEach(user=>{
+
+    const canRole=
+      myRole==="DONO" &&
+      user.id!==myId;
+
+    const canMute=
+      (
+        myRole==="DONO"||
+        myRole==="ADM"||
+        myRole==="TELADOR"
+      ) &&
+      user.id!==myId;
+
+    html+=`
+
+      <div class="admin-user">
+
+        <span class="avatar">
+          ${escapeHTML(
+            (user.name||"U")
+              .charAt(0)
+              .toUpperCase()
+          )}
+        </span>
+
+        <span class="admin-user-name">
+
+          ${escapeHTML(user.name)}
+
+          <small
+            style="color:#777;margin-left:4px"
+          >
+            ${escapeHTML(user.role)}
+          </small>
+
+        </span>
+    `;
+
+    if(canMute){
+
+      html+=`
+
+        <button
+          class="small-button"
+          onclick="muteMember('${user.id}')"
+        >
+          🔇 Mutar
+        </button>
+
+        <button
+          class="small-button"
+          onclick="unmuteMember('${user.id}')"
+        >
+          🎙️ Liberar
+        </button>
+      `;
+    }
+
+    if(canRole){
+
+      html+=`
+
+        <button
+          class="small-button"
+          onclick="changeRole('${user.id}','ADM')"
+        >
+          ADM
+        </button>
+
+        <button
+          class="small-button"
+          onclick="changeRole('${user.id}','TELADOR')"
+        >
+          Telador
+        </button>
+
+        <button
+          class="small-button"
+          onclick="changeRole('${user.id}','MEMBRO')"
+        >
+          Membro
+        </button>
+      `;
+    }
+
+    html+=`</div>`;
+  });
+
+  ownerContent.innerHTML=html;
+}
+
+function changeRole(userId,role){
+
+  if(myRole!=="DONO"){
+
+    alert(
+      "Somente o Dono pode alterar cargos."
+    );
+
+    return;
+  }
+
+  if(
+    !socket||
+    socket.readyState!==WebSocket.OPEN
+  ) return;
+
+  socket.send(JSON.stringify({
+
+    type:"set-role",
+
+    target:userId,
+
     role
-  });
 
-  broadcastRoomUsers(client.room);
+  }));
 }
 
-function muteUser(client, message) {
-  if (!canModerate(client)) {
-    send(client.ws, {
-      type: "error",
-      message: "Você não tem permissão para mutar."
-    });
+function muteMember(userId){
 
+  if(
+    myRole!=="DONO"&&
+    myRole!=="ADM"&&
+    myRole!=="TELADOR"
+  ){
     return;
   }
 
-  if (!client.room) return;
+  if(
+    !socket||
+    socket.readyState!==WebSocket.OPEN
+  ) return;
 
-  const room = rooms.get(client.room);
-  if (!room) return;
+  socket.send(JSON.stringify({
 
-  const target = room.get(String(message.target || ""));
-  if (!target) return;
+    type:"mute-user",
 
-  target.muted = true;
+    target:userId
 
-  send(target.ws, {
-    type: "force-mute",
-    by: client.id
-  });
-
-  broadcastRoomUsers(client.room);
+  }));
 }
 
-function unmuteUser(client, message) {
-  if (!canModerate(client)) return;
-  if (!client.room) return;
+function unmuteMember(userId){
 
-  const room = rooms.get(client.room);
-  if (!room) return;
+  if(
+    myRole!=="DONO"&&
+    myRole!=="ADM"&&
+    myRole!=="TELADOR"
+  ){
+    return;
+  }
 
-  const target = room.get(String(message.target || ""));
-  if (!target) return;
+  if(
+    !socket||
+    socket.readyState!==WebSocket.OPEN
+  ) return;
 
-  target.muted = false;
+  socket.send(JSON.stringify({
 
-  send(target.ws, {
-    type: "force-unmute",
-    by: client.id
-  });
+    type:"unmute-user",
 
-  broadcastRoomUsers(client.room);
+    target:userId
+
+  }));
 }
 
-app.get("/", (req, res) => {
-  res.status(200).send("FF Arena Server online!");
+function leaveRoom(showMessage=true){
+
+  if(localCameraStream){
+
+    localCameraStream
+      .getTracks()
+      .forEach(track=>track.stop());
+
+    localCameraStream=null;
+  }
+
+  if(localScreenStream){
+
+    localScreenStream
+      .getTracks()
+      .forEach(track=>track.stop());
+
+    localScreenStream=null;
+  }
+
+  closeAllPeerConnections();
+
+  if(socket){
+
+    try{
+      socket.close();
+    }catch{}
+
+    socket=null;
+  }
+
+  clearVideos();
+
+  cameraButton.textContent=
+    "📷 Abrir câmera";
+
+  screenButton.textContent=
+    "🖥️ Compartilhar tela";
+
+  microphoneMuted=false;
+  cameraFacingMode="user";
+
+  updateMicButton();
+
+  document.body.classList.remove(
+    "analysis-open"
+  );
+
+  analysisScreen.classList.remove(
+    "show"
+  );
+
+  homeScreen.style.display="flex";
+
+  currentRoom=null;
+  currentUsers=[];
+
+  rulesPage.classList.remove("show");
+  ownerPage.classList.remove("show");
+}
+
+function escapeHTML(value){
+
+  const div=
+    document.createElement("div");
+
+  div.textContent=
+    String(value||"");
+
+  return div.innerHTML;
+}
+
+/*
+Impede que o botão voltar do navegador
+feche a conexão sem limpar a interface.
+*/
+window.addEventListener("beforeunload",()=>{
+  leaveRoom(false);
 });
 
-app.get("/health", (req, res) => {
-  res.json({
-    online: true,
-    rooms: rooms.size
-  });
-});
+loadName();
+</script>
 
-server.listen(PORT, "0.0.0.0", () => {
-  console.log(`FF Arena Server rodando na porta ${PORT}`);
-});
+</body>
+</html>
