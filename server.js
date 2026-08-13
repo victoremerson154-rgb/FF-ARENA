@@ -8,23 +8,9 @@ const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
 const PORT = process.env.PORT || 10000;
-
-// Código usado pelo Dono para entrar na área administrativa.
-// No Render, crie a variável:
-// ADMIN_CODE
 const ADMIN_CODE = process.env.ADMIN_CODE || "troque-este-codigo";
 
-// ======================================================
-// SALAS
-// ======================================================
-
 const rooms = new Map();
-
-// roomId -> Map(userId -> client)
-
-// ======================================================
-// UTILIDADES
-// ======================================================
 
 function createId() {
   return crypto.randomBytes(8).toString("hex");
@@ -38,7 +24,7 @@ function cleanName(name) {
 }
 
 function send(ws, data) {
-  if (ws.readyState === WebSocket.OPEN) {
+  if (ws && ws.readyState === WebSocket.OPEN) {
     ws.send(JSON.stringify(data));
   }
 }
@@ -64,7 +50,6 @@ function publicUser(client) {
 
 function broadcastRoomUsers(roomId) {
   const room = rooms.get(roomId);
-
   if (!room) return;
 
   const users = [...room.values()].map(publicUser);
@@ -76,36 +61,6 @@ function broadcastRoomUsers(roomId) {
     });
   }
 }
-
-function sendRoomUsersTo(client) {
-  const room = rooms.get(client.room);
-
-  if (!room) return;
-
-  send(client.ws, {
-    type: "users",
-    users: [...room.values()].map(publicUser)
-  });
-}
-
-// ======================================================
-// HTTP
-// ======================================================
-
-app.get("/", (req, res) => {
-  res.status(200).send("FF Arena Server online!");
-});
-
-app.get("/health", (req, res) => {
-  res.json({
-    online: true,
-    rooms: rooms.size
-  });
-});
-
-// ======================================================
-// WEBSOCKET
-// ======================================================
 
 wss.on("connection", (ws) => {
   const client = {
@@ -119,10 +74,6 @@ wss.on("connection", (ws) => {
     muted: false
   };
 
-  // ----------------------------------------------------
-  // MENSAGENS
-  // ----------------------------------------------------
-
   ws.on("message", (raw) => {
     let message;
 
@@ -132,96 +83,48 @@ wss.on("connection", (ws) => {
       return;
     }
 
-    // ==================================================
-    // ENTRAR NA SALA
-    // ==================================================
+    switch (message.type) {
+      case "join":
+        joinRoom(client, message);
+        break;
 
-    if (message.type === "join") {
-      joinRoom(client, message);
-      return;
-    }
+      case "status":
+        updateStatus(client, message);
+        break;
 
-    // ==================================================
-    // STATUS
-    // ==================================================
+      case "offer":
+        relayToPeer(client, message, "offer");
+        break;
 
-    if (message.type === "status") {
-      updateStatus(client, message);
-      return;
-    }
+      case "answer":
+        relayToPeer(client, message, "answer");
+        break;
 
-    // ==================================================
-    // SINALIZAÇÃO WEBRTC
-    // ==================================================
+      case "ice-candidate":
+        relayToPeer(client, message, "ice-candidate");
+        break;
 
-    if (message.type === "offer") {
-      relayToPeer(client, message, "offer");
-      return;
-    }
+      case "owner-login":
+        ownerLogin(client, message);
+        break;
 
-    if (message.type === "answer") {
-      relayToPeer(client, message, "answer");
-      return;
-    }
+      case "set-role":
+        setRole(client, message);
+        break;
 
-    if (message.type === "ice-candidate") {
-      relayToPeer(client, message, "ice-candidate");
-      return;
-    }
+      case "mute-user":
+        muteUser(client, message);
+        break;
 
-    // ==================================================
-    // AUTENTICAR DONO
-    // ==================================================
-
-    if (message.type === "owner-login") {
-      ownerLogin(client, message);
-      return;
-    }
-
-    // ==================================================
-    // PROMOVER MEMBRO
-    // ==================================================
-
-    if (message.type === "set-role") {
-      setRole(client, message);
-      return;
-    }
-
-    // ==================================================
-    // MUTE
-    // ==================================================
-
-    if (message.type === "mute-user") {
-      muteUser(client, message);
-      return;
-    }
-
-    // ==================================================
-    // DESMUTE
-    // ==================================================
-
-    if (message.type === "unmute-user") {
-      unmuteUser(client, message);
-      return;
+      case "unmute-user":
+        unmuteUser(client, message);
+        break;
     }
   });
 
-  // ----------------------------------------------------
-  // DESCONECTOU
-  // ----------------------------------------------------
-
-  ws.on("close", () => {
-    leaveRoom(client);
-  });
-
-  ws.on("error", () => {
-    leaveRoom(client);
-  });
+  ws.on("close", () => leaveRoom(client));
+  ws.on("error", () => leaveRoom(client));
 });
-
-// ======================================================
-// ENTRAR NA SALA
-// ======================================================
 
 function joinRoom(client, message) {
   const roomId = String(message.room || "1");
@@ -230,38 +133,34 @@ function joinRoom(client, message) {
     leaveRoom(client);
   }
 
-  client.room = roomId;
-  client.name = cleanName(message.name);
-
   const room = getRoom(roomId);
 
-  // Limite de 8 pessoas por análise
   if (room.size >= 8) {
     send(client.ws, {
       type: "room-full",
       message: "Esta análise já está cheia."
     });
 
-    client.room = null;
     return;
   }
 
+  client.room = roomId;
+  client.name = cleanName(message.name);
+
   room.set(client.id, client);
 
-  // Mandamos para o novo usuário quem já estava na sala.
-  const existingPeers = [...room.values()]
+  const peers = [...room.values()]
     .filter(peer => peer.id !== client.id)
-    .map(peer => publicUser(peer));
+    .map(publicUser);
 
   send(client.ws, {
     type: "joined",
     id: client.id,
     room: roomId,
     role: client.role,
-    peers: existingPeers
+    peers
   });
 
-  // Avisamos aos outros que uma pessoa entrou.
   for (const peer of room.values()) {
     if (peer.id === client.id) continue;
 
@@ -273,10 +172,6 @@ function joinRoom(client, message) {
 
   broadcastRoomUsers(roomId);
 }
-
-// ======================================================
-// SAIR DA SALA
-// ======================================================
 
 function leaveRoom(client) {
   if (!client.room) return;
@@ -307,36 +202,23 @@ function leaveRoom(client) {
   client.room = null;
 }
 
-// ======================================================
-// STATUS
-// ======================================================
-
 function updateStatus(client, message) {
   if (!client.room) return;
 
   client.camera = Boolean(message.camera);
   client.screen = Boolean(message.screen);
-
-  // O mute local pode ser informado ao servidor.
   client.muted = Boolean(message.muted);
 
   broadcastRoomUsers(client.room);
 }
 
-// ======================================================
-// WEBRTC
-// ======================================================
-
 function relayToPeer(client, message, type) {
   if (!client.room) return;
 
-  const targetId = String(message.target || "");
   const room = rooms.get(client.room);
-
   if (!room) return;
 
-  const target = room.get(targetId);
-
+  const target = room.get(String(message.target || ""));
   if (!target) return;
 
   send(target.ws, {
@@ -345,10 +227,6 @@ function relayToPeer(client, message, type) {
     data: message.data || null
   });
 }
-
-// ======================================================
-// DONO
-// ======================================================
 
 function ownerLogin(client, message) {
   const code = String(message.code || "");
@@ -376,10 +254,6 @@ function ownerLogin(client, message) {
   }
 }
 
-// ======================================================
-// DEFINIR CARGO
-// ======================================================
-
 function canManageRoles(client) {
   return client.role === "DONO";
 }
@@ -404,8 +278,11 @@ function setRole(client, message) {
 
   if (!client.room) return;
 
-  const targetId = String(message.target || "");
-  const role = String(message.role || "MEMBRO");
+  const room = rooms.get(client.room);
+  if (!room) return;
+
+  const target = room.get(String(message.target || ""));
+  if (!target) return;
 
   const allowedRoles = [
     "MEMBRO",
@@ -413,17 +290,9 @@ function setRole(client, message) {
     "ADM"
   ];
 
-  if (!allowedRoles.includes(role)) {
-    return;
-  }
+  const role = String(message.role || "MEMBRO");
 
-  const room = rooms.get(client.room);
-
-  if (!room) return;
-
-  const target = room.get(targetId);
-
-  if (!target) return;
+  if (!allowedRoles.includes(role)) return;
 
   target.role = role;
 
@@ -434,10 +303,6 @@ function setRole(client, message) {
 
   broadcastRoomUsers(client.room);
 }
-
-// ======================================================
-// MUTE
-// ======================================================
 
 function muteUser(client, message) {
   if (!canModerate(client)) {
@@ -451,13 +316,10 @@ function muteUser(client, message) {
 
   if (!client.room) return;
 
-  const targetId = String(message.target || "");
   const room = rooms.get(client.room);
-
   if (!room) return;
 
-  const target = room.get(targetId);
-
+  const target = room.get(String(message.target || ""));
   if (!target) return;
 
   target.muted = true;
@@ -470,24 +332,14 @@ function muteUser(client, message) {
   broadcastRoomUsers(client.room);
 }
 
-// ======================================================
-// DESMUTE
-// ======================================================
-
 function unmuteUser(client, message) {
-  if (!canModerate(client)) {
-    return;
-  }
-
+  if (!canModerate(client)) return;
   if (!client.room) return;
 
-  const targetId = String(message.target || "");
   const room = rooms.get(client.room);
-
   if (!room) return;
 
-  const target = room.get(targetId);
-
+  const target = room.get(String(message.target || ""));
   if (!target) return;
 
   target.muted = false;
@@ -500,12 +352,17 @@ function unmuteUser(client, message) {
   broadcastRoomUsers(client.room);
 }
 
-// ======================================================
-// INICIAR
-// ======================================================
+app.get("/", (req, res) => {
+  res.status(200).send("FF Arena Server online!");
+});
+
+app.get("/health", (req, res) => {
+  res.json({
+    online: true,
+    rooms: rooms.size
+  });
+});
 
 server.listen(PORT, "0.0.0.0", () => {
-  console.log(
-    `FF Arena Server rodando na porta ${PORT}`
-  );
+  console.log(`FF Arena Server rodando na porta ${PORT}`);
 });
