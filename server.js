@@ -1,98 +1,511 @@
 const express = require("express");
 const http = require("http");
 const WebSocket = require("ws");
+const crypto = require("crypto");
 
 const app = express();
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
+const PORT = process.env.PORT || 10000;
+
+// Código usado pelo Dono para entrar na área administrativa.
+// No Render, crie a variável:
+// ADMIN_CODE
+const ADMIN_CODE = process.env.ADMIN_CODE || "troque-este-codigo";
+
+// ======================================================
+// SALAS
+// ======================================================
+
 const rooms = new Map();
 
-app.get("/", (req, res) => {
-  res.send("FF Arena Server online!");
-});
+// roomId -> Map(userId -> client)
 
-wss.on("connection", (ws) => {
-  let room = null;
-  let user = null;
+// ======================================================
+// UTILIDADES
+// ======================================================
 
-  ws.on("message", (data) => {
-    try {
-      const message = JSON.parse(data);
+function createId() {
+  return crypto.randomBytes(8).toString("hex");
+}
 
-      if (message.type === "join") {
-        room = String(message.room);
-        user = {
-          id: Math.random().toString(36).slice(2),
-          name: message.name || "Usuário",
-          camera: false,
-          screen: false,
-          muted: false
-        };
+function cleanName(name) {
+  return String(name || "Usuário")
+    .replace(/[<>]/g, "")
+    .trim()
+    .slice(0, 30) || "Usuário";
+}
 
-        if (!rooms.has(room)) {
-          rooms.set(room, new Map());
-        }
+function send(ws, data) {
+  if (ws.readyState === WebSocket.OPEN) {
+    ws.send(JSON.stringify(data));
+  }
+}
 
-        rooms.get(room).set(user.id, {
-          ws,
-          user
-        });
+function getRoom(roomId) {
+  if (!rooms.has(roomId)) {
+    rooms.set(roomId, new Map());
+  }
 
-        broadcastUsers(room);
-      }
+  return rooms.get(roomId);
+}
 
-      if (message.type === "status" && room && user) {
-        user.camera = !!message.camera;
-        user.screen = !!message.screen;
-        user.muted = !!message.muted;
+function publicUser(client) {
+  return {
+    id: client.id,
+    name: client.name,
+    role: client.role,
+    camera: client.camera,
+    screen: client.screen,
+    muted: client.muted
+  };
+}
 
-        broadcastUsers(room);
-      }
-    } catch (error) {
-      console.log("Mensagem inválida");
-    }
-  });
+function broadcastRoomUsers(roomId) {
+  const room = rooms.get(roomId);
 
-  ws.on("close", () => {
-    if (!room || !user) return;
+  if (!room) return;
 
-    const roomUsers = rooms.get(room);
+  const users = [...room.values()].map(publicUser);
 
-    if (roomUsers) {
-      roomUsers.delete(user.id);
+  for (const client of room.values()) {
+    send(client.ws, {
+      type: "users",
+      users
+    });
+  }
+}
 
-      if (roomUsers.size === 0) {
-        rooms.delete(room);
-      } else {
-        broadcastUsers(room);
-      }
-    }
-  });
-});
+function sendRoomUsersTo(client) {
+  const room = rooms.get(client.room);
 
-function broadcastUsers(room) {
-  const roomUsers = rooms.get(room);
+  if (!room) return;
 
-  if (!roomUsers) return;
-
-  const users = [...roomUsers.values()]
-    .map(item => item.user);
-
-  const message = JSON.stringify({
+  send(client.ws, {
     type: "users",
-    users
-  });
-
-  roomUsers.forEach(item => {
-    if (item.ws.readyState === WebSocket.OPEN) {
-      item.ws.send(message);
-    }
+    users: [...room.values()].map(publicUser)
   });
 }
 
-const PORT = process.env.PORT || 10000;
+// ======================================================
+// HTTP
+// ======================================================
+
+app.get("/", (req, res) => {
+  res.status(200).send("FF Arena Server online!");
+});
+
+app.get("/health", (req, res) => {
+  res.json({
+    online: true,
+    rooms: rooms.size
+  });
+});
+
+// ======================================================
+// WEBSOCKET
+// ======================================================
+
+wss.on("connection", (ws) => {
+  const client = {
+    ws,
+    id: createId(),
+    name: "Usuário",
+    room: null,
+    role: "MEMBRO",
+    camera: false,
+    screen: false,
+    muted: false
+  };
+
+  // ----------------------------------------------------
+  // MENSAGENS
+  // ----------------------------------------------------
+
+  ws.on("message", (raw) => {
+    let message;
+
+    try {
+      message = JSON.parse(raw.toString());
+    } catch {
+      return;
+    }
+
+    // ==================================================
+    // ENTRAR NA SALA
+    // ==================================================
+
+    if (message.type === "join") {
+      joinRoom(client, message);
+      return;
+    }
+
+    // ==================================================
+    // STATUS
+    // ==================================================
+
+    if (message.type === "status") {
+      updateStatus(client, message);
+      return;
+    }
+
+    // ==================================================
+    // SINALIZAÇÃO WEBRTC
+    // ==================================================
+
+    if (message.type === "offer") {
+      relayToPeer(client, message, "offer");
+      return;
+    }
+
+    if (message.type === "answer") {
+      relayToPeer(client, message, "answer");
+      return;
+    }
+
+    if (message.type === "ice-candidate") {
+      relayToPeer(client, message, "ice-candidate");
+      return;
+    }
+
+    // ==================================================
+    // AUTENTICAR DONO
+    // ==================================================
+
+    if (message.type === "owner-login") {
+      ownerLogin(client, message);
+      return;
+    }
+
+    // ==================================================
+    // PROMOVER MEMBRO
+    // ==================================================
+
+    if (message.type === "set-role") {
+      setRole(client, message);
+      return;
+    }
+
+    // ==================================================
+    // MUTE
+    // ==================================================
+
+    if (message.type === "mute-user") {
+      muteUser(client, message);
+      return;
+    }
+
+    // ==================================================
+    // DESMUTE
+    // ==================================================
+
+    if (message.type === "unmute-user") {
+      unmuteUser(client, message);
+      return;
+    }
+  });
+
+  // ----------------------------------------------------
+  // DESCONECTOU
+  // ----------------------------------------------------
+
+  ws.on("close", () => {
+    leaveRoom(client);
+  });
+
+  ws.on("error", () => {
+    leaveRoom(client);
+  });
+});
+
+// ======================================================
+// ENTRAR NA SALA
+// ======================================================
+
+function joinRoom(client, message) {
+  const roomId = String(message.room || "1");
+
+  if (client.room) {
+    leaveRoom(client);
+  }
+
+  client.room = roomId;
+  client.name = cleanName(message.name);
+
+  const room = getRoom(roomId);
+
+  // Limite de 8 pessoas por análise
+  if (room.size >= 8) {
+    send(client.ws, {
+      type: "room-full",
+      message: "Esta análise já está cheia."
+    });
+
+    client.room = null;
+    return;
+  }
+
+  room.set(client.id, client);
+
+  // Mandamos para o novo usuário quem já estava na sala.
+  const existingPeers = [...room.values()]
+    .filter(peer => peer.id !== client.id)
+    .map(peer => publicUser(peer));
+
+  send(client.ws, {
+    type: "joined",
+    id: client.id,
+    room: roomId,
+    role: client.role,
+    peers: existingPeers
+  });
+
+  // Avisamos aos outros que uma pessoa entrou.
+  for (const peer of room.values()) {
+    if (peer.id === client.id) continue;
+
+    send(peer.ws, {
+      type: "peer-joined",
+      user: publicUser(client)
+    });
+  }
+
+  broadcastRoomUsers(roomId);
+}
+
+// ======================================================
+// SAIR DA SALA
+// ======================================================
+
+function leaveRoom(client) {
+  if (!client.room) return;
+
+  const roomId = client.room;
+  const room = rooms.get(roomId);
+
+  if (!room) {
+    client.room = null;
+    return;
+  }
+
+  room.delete(client.id);
+
+  for (const peer of room.values()) {
+    send(peer.ws, {
+      type: "peer-left",
+      id: client.id
+    });
+  }
+
+  if (room.size === 0) {
+    rooms.delete(roomId);
+  } else {
+    broadcastRoomUsers(roomId);
+  }
+
+  client.room = null;
+}
+
+// ======================================================
+// STATUS
+// ======================================================
+
+function updateStatus(client, message) {
+  if (!client.room) return;
+
+  client.camera = Boolean(message.camera);
+  client.screen = Boolean(message.screen);
+
+  // O mute local pode ser informado ao servidor.
+  client.muted = Boolean(message.muted);
+
+  broadcastRoomUsers(client.room);
+}
+
+// ======================================================
+// WEBRTC
+// ======================================================
+
+function relayToPeer(client, message, type) {
+  if (!client.room) return;
+
+  const targetId = String(message.target || "");
+  const room = rooms.get(client.room);
+
+  if (!room) return;
+
+  const target = room.get(targetId);
+
+  if (!target) return;
+
+  send(target.ws, {
+    type,
+    from: client.id,
+    data: message.data || null
+  });
+}
+
+// ======================================================
+// DONO
+// ======================================================
+
+function ownerLogin(client, message) {
+  const code = String(message.code || "");
+
+  if (code !== ADMIN_CODE) {
+    send(client.ws, {
+      type: "owner-login-result",
+      success: false,
+      message: "Código incorreto."
+    });
+
+    return;
+  }
+
+  client.role = "DONO";
+
+  send(client.ws, {
+    type: "owner-login-result",
+    success: true,
+    role: "DONO"
+  });
+
+  if (client.room) {
+    broadcastRoomUsers(client.room);
+  }
+}
+
+// ======================================================
+// DEFINIR CARGO
+// ======================================================
+
+function canManageRoles(client) {
+  return client.role === "DONO";
+}
+
+function canModerate(client) {
+  return (
+    client.role === "DONO" ||
+    client.role === "ADM" ||
+    client.role === "TELADOR"
+  );
+}
+
+function setRole(client, message) {
+  if (!canManageRoles(client)) {
+    send(client.ws, {
+      type: "error",
+      message: "Somente o Dono pode alterar cargos."
+    });
+
+    return;
+  }
+
+  if (!client.room) return;
+
+  const targetId = String(message.target || "");
+  const role = String(message.role || "MEMBRO");
+
+  const allowedRoles = [
+    "MEMBRO",
+    "TELADOR",
+    "ADM"
+  ];
+
+  if (!allowedRoles.includes(role)) {
+    return;
+  }
+
+  const room = rooms.get(client.room);
+
+  if (!room) return;
+
+  const target = room.get(targetId);
+
+  if (!target) return;
+
+  target.role = role;
+
+  send(target.ws, {
+    type: "role-changed",
+    role
+  });
+
+  broadcastRoomUsers(client.room);
+}
+
+// ======================================================
+// MUTE
+// ======================================================
+
+function muteUser(client, message) {
+  if (!canModerate(client)) {
+    send(client.ws, {
+      type: "error",
+      message: "Você não tem permissão para mutar."
+    });
+
+    return;
+  }
+
+  if (!client.room) return;
+
+  const targetId = String(message.target || "");
+  const room = rooms.get(client.room);
+
+  if (!room) return;
+
+  const target = room.get(targetId);
+
+  if (!target) return;
+
+  target.muted = true;
+
+  send(target.ws, {
+    type: "force-mute",
+    by: client.id
+  });
+
+  broadcastRoomUsers(client.room);
+}
+
+// ======================================================
+// DESMUTE
+// ======================================================
+
+function unmuteUser(client, message) {
+  if (!canModerate(client)) {
+    return;
+  }
+
+  if (!client.room) return;
+
+  const targetId = String(message.target || "");
+  const room = rooms.get(client.room);
+
+  if (!room) return;
+
+  const target = room.get(targetId);
+
+  if (!target) return;
+
+  target.muted = false;
+
+  send(target.ws, {
+    type: "force-unmute",
+    by: client.id
+  });
+
+  broadcastRoomUsers(client.room);
+}
+
+// ======================================================
+// INICIAR
+// ======================================================
 
 server.listen(PORT, "0.0.0.0", () => {
-  console.log(`FF Arena Server rodando na porta ${PORT}`);
+  console.log(
+    `FF Arena Server rodando na porta ${PORT}`
+  );
 });
