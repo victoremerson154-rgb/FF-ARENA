@@ -2,14 +2,8 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
->
-
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="theme-color" content="#111318">
-
 <title>🔥 FF Arena</title>
 
 <style>
@@ -19,8 +13,7 @@
   padding:0;
 }
 
-html,
-body{
+html,body{
   width:100%;
   height:100%;
 }
@@ -38,7 +31,7 @@ button{
 }
 
 /* =====================================================
-APP
+ APP
 ===================================================== */
 
 .app{
@@ -48,7 +41,7 @@ APP
 }
 
 /* =====================================================
-SIDEBAR
+ SIDEBAR
 ===================================================== */
 
 .sidebar{
@@ -59,6 +52,7 @@ SIDEBAR
   display:flex;
   flex-direction:column;
   overflow-y:auto;
+  flex-shrink:0;
 }
 
 .logo{
@@ -150,7 +144,7 @@ SIDEBAR
 }
 
 /* =====================================================
-USUÁRIO
+ USUÁRIO
 ===================================================== */
 
 .user-area{
@@ -182,7 +176,7 @@ USUÁRIO
 }
 
 /* =====================================================
-MAIN
+ MAIN
 ===================================================== */
 
 .main{
@@ -194,11 +188,12 @@ MAIN
 }
 
 /* =====================================================
-TELA INICIAL
+ HOME
 ===================================================== */
 
 .home-screen{
-  flex:1;
+  width:100%;
+  height:100%;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -220,192 +215,192 @@ TELA INICIAL
 }
 
 /* =====================================================
-ANÁLISE
+ ANÁLISE
 ===================================================== */
 
 .analysis-screen{
-  display:none;
-  flex:1;
-  min-width:0;
+  display:none !important;
+  width:100%;
+  height:100%;
   min-height:0;
-
-  align-items:center;
-  justify-content:center;
-
   flex-direction:column;
-
-  padding:18px;
-
-  background:#111318;
 }
 
-.analysis-screen.show{
-  display:flex;
+body.analysis-open .analysis-screen{
+  display:flex !important;
 }
 
-/* Cabeçalho */
+body.analysis-open .home-screen{
+  display:none !important;
+}
+
+/* =====================================================
+ HEADER DA ANÁLISE
+===================================================== */
 
 .analysis-header{
-  width:min(760px,100%);
   min-height:60px;
-
   flex-shrink:0;
-
-  border:1px solid #292d36;
-  border-radius:10px 10px 0 0;
-
-  background:#181b22;
-
+  border-bottom:1px solid #292d36;
   display:flex;
   align-items:center;
-  justify-content:space-between;
-
   gap:10px;
-
-  padding:10px 14px;
+  padding:8px 12px;
+  background:#181b22;
 }
 
-.analysis-title h2{
+.analysis-title{
+  flex:1;
+  min-width:0;
+}
+
+.analysis-header h2{
   font-size:17px;
 }
 
-.analysis-title p{
+.analysis-header p{
   font-size:11px;
   color:#858c99;
-  margin-top:4px;
+  margin-top:3px;
 }
 
-/* Botões do cabeçalho */
-
-.analysis-header-actions{
+.header-actions{
   display:flex;
-  align-items:center;
-  justify-content:flex-end;
   gap:5px;
-  flex-wrap:wrap;
+  flex-shrink:0;
 }
 
-.header-button{
+.header-btn{
   border:0;
+  border-radius:6px;
   background:#292e3a;
   color:#fff;
-
-  border-radius:6px;
-
   padding:8px 9px;
-
-  font-size:10px;
-  font-weight:bold;
+  font-size:11px;
 }
 
-.header-button:hover{
+.header-btn:hover{
   background:#353b49;
 }
 
 /* =====================================================
-PARTICIPANTES
+ PESSOAS
 ===================================================== */
 
-.participants-panel{
-  width:min(760px,100%);
-
-  background:#181b22;
-
-  border-left:1px solid #292d36;
-  border-right:1px solid #292d36;
-
-  padding:8px 10px;
+.people-bar{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  padding:7px 10px;
+  border-bottom:1px solid #292d36;
+  background:#151820;
+  flex-shrink:0;
+  overflow-x:auto;
 }
 
-.participants-title{
+.people-title{
   font-size:11px;
-  font-weight:bold;
-  color:#dfe3ea;
-  margin-bottom:6px;
+  color:#858c99;
+  white-space:nowrap;
 }
 
-#analysisParticipants{
+.people-list{
   display:flex;
-  flex-wrap:wrap;
   gap:5px;
+  align-items:center;
 }
 
-.participant{
+.people-chip{
   display:flex;
   align-items:center;
   gap:5px;
-
-  background:#242934;
-
+  padding:4px 7px;
+  background:#242933;
   border-radius:6px;
-
-  padding:5px 7px;
-
   font-size:10px;
+  white-space:nowrap;
 }
 
-.participant-avatar{
-  width:21px;
-  height:21px;
-
+.people-dot{
+  width:7px;
+  height:7px;
   border-radius:50%;
-
-  background:#5865f2;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  font-size:9px;
-  font-weight:bold;
+  background:#65d79a;
 }
 
-.participant-icons{
-  display:flex;
-  gap:2px;
+.people-dot.camera-on{
+  background:#5fa7ff;
 }
 
 /* =====================================================
-STAGE
+ STAGE
 ===================================================== */
 
 .stage{
-  width:min(760px,100%);
-
-  height:min(400px,50vh);
-
-  flex:none;
-
-  margin:0;
-
+  flex:1;
+  min-height:0;
+  margin:8px;
   border:1px solid #292d36;
-
-  border-radius:0 0 10px 10px;
-
+  border-radius:10px;
   background:#090b0f;
-
   overflow:auto;
-
   padding:8px;
+}
+
+.video-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:8px;
+  width:100%;
+}
+
+.video-card{
+  position:relative;
+  background:#151820;
+  border-radius:8px;
+  overflow:hidden;
+  min-height:150px;
+}
+
+.video-card video{
+  width:100%;
+  height:100%;
+  min-height:150px;
+  object-fit:cover;
+  background:#050608;
+  display:block;
+}
+
+.video-label{
+  position:absolute;
+  bottom:7px;
+  left:7px;
+  background:rgba(0,0,0,.65);
+  padding:5px 8px;
+  border-radius:5px;
+  font-size:11px;
+}
+
+.video-status{
+  position:absolute;
+  right:7px;
+  bottom:7px;
+  font-size:13px;
 }
 
 .empty{
   width:100%;
-  height:100%;
-
+  min-height:180px;
   display:flex;
   align-items:center;
   justify-content:center;
-
   flex-direction:column;
-
   color:#858c99;
-
   text-align:center;
 }
 
 .empty-icon{
-  font-size:38px;
+  font-size:35px;
   margin-bottom:8px;
 }
 
@@ -415,110 +410,33 @@ STAGE
 }
 
 .empty p{
-  font-size:11px;
-}
-
-/* =====================================================
-VÍDEOS
-===================================================== */
-
-.video-grid{
-  display:grid;
-
-  grid-template-columns:
-    repeat(2,minmax(0,1fr));
-
-  gap:7px;
-
-  width:100%;
-}
-
-.video-card{
-  position:relative;
-
-  background:#151820;
-
-  border-radius:8px;
-
-  overflow:hidden;
-
-  min-height:150px;
-}
-
-.video-card video{
-  width:100%;
-  height:100%;
-
-  min-height:150px;
-
-  object-fit:cover;
-
-  background:#050608;
-
-  display:block;
-}
-
-.video-label{
-  position:absolute;
-
-  bottom:7px;
-  left:7px;
-
-  background:rgba(0,0,0,.65);
-
-  padding:5px 8px;
-
-  border-radius:5px;
-
-  font-size:10px;
-}
-
-.video-status{
-  position:absolute;
-
-  right:7px;
-  bottom:7px;
-
   font-size:12px;
 }
 
 /* =====================================================
-CONTROLES 2X2
+ CONTROLES 2x2
 ===================================================== */
 
 .controls{
-  width:min(760px,100%);
-
-  padding:8px 0 0;
-
+  width:min(430px,100%);
+  margin:0 auto;
+  padding:6px 10px 10px;
   display:grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap:6px;
-
+  grid-template-columns:1fr 1fr;
+  gap:7px;
   flex-shrink:0;
 }
 
 .control{
   width:100%;
-
-  min-height:42px;
-
+  min-height:43px;
   border:0;
-
   border-radius:7px;
-
   padding:9px;
-
   background:#292e3a;
-
   color:#fff;
-
   font-weight:bold;
-
-  font-size:11px;
+  font-size:12px;
 }
 
 .control:hover{
@@ -538,23 +456,17 @@ CONTROLES 2X2
 }
 
 /* =====================================================
-PAINEL ENTRAR
+ PAINEL ENTRAR
 ===================================================== */
 
 .enter-panel{
   display:none;
-
   position:fixed;
-
   inset:0;
-
   background:rgba(0,0,0,.78);
-
-  z-index:50;
-
+  z-index:100;
   align-items:center;
   justify-content:center;
-
   padding:20px;
 }
 
@@ -564,15 +476,10 @@ PAINEL ENTRAR
 
 .enter-box{
   width:min(420px,100%);
-
   background:#181b22;
-
   border:1px solid #343944;
-
   border-radius:12px;
-
   padding:22px;
-
   text-align:center;
 }
 
@@ -582,36 +489,26 @@ PAINEL ENTRAR
 
 .enter-box p{
   color:#858c99;
-
   font-size:13px;
-
   margin-bottom:18px;
 }
 
 .enter-actions{
   display:grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
+  grid-template-columns:1fr 1fr;
   gap:8px;
 }
 
 /* =====================================================
-TELAS FULLSCREEN
+ TELAS FULLSCREEN
 ===================================================== */
 
 .fullscreen-page{
   display:none;
-
   position:fixed;
-
   inset:0;
-
-  z-index:80;
-
+  z-index:200;
   background:#111318;
-
   overflow:auto;
 }
 
@@ -620,25 +517,14 @@ TELAS FULLSCREEN
 }
 
 .fullscreen-header{
-  height:65px;
-
+  min-height:60px;
   display:flex;
-
   align-items:center;
-
   justify-content:space-between;
-
-  padding:12px 18px;
-
+  gap:10px;
+  padding:10px 15px;
   border-bottom:1px solid #292d36;
-
   background:#181b22;
-
-  position:sticky;
-
-  top:0;
-
-  z-index:2;
 }
 
 .fullscreen-header h2{
@@ -647,35 +533,26 @@ TELAS FULLSCREEN
 
 .close-fullscreen{
   border:0;
-
   background:#d83b4b;
-
   color:#fff;
-
   border-radius:6px;
-
   padding:9px 13px;
 }
 
 .fullscreen-content{
   max-width:900px;
-
   margin:0 auto;
-
   padding:20px;
 }
 
 /* =====================================================
-REGRAS
+ REGRAS
 ===================================================== */
 
 .rule-box{
   background:#181b22;
-
   border:1px solid #292d36;
-
   border-radius:10px;
-
   padding:20px;
 }
 
@@ -689,99 +566,69 @@ REGRAS
 
 .rule{
   font-size:13px;
-
   line-height:1.5;
-
   color:#c5c9d1;
-
   margin:9px 0;
 }
 
 /* =====================================================
-DONOS
+ DONOS
 ===================================================== */
 
 .owner-box{
   max-width:700px;
-
   margin:0 auto;
-
   background:#181b22;
-
   border:1px solid #343944;
-
   border-radius:12px;
-
   padding:20px;
 }
 
 .input{
   width:100%;
-
   padding:12px;
-
   border:1px solid #343944;
-
   border-radius:7px;
-
   background:#101218;
-
   color:#fff;
-
   margin-bottom:10px;
-
   outline:none;
 }
 
 .owner-actions{
   display:flex;
-
   gap:8px;
-
   flex-wrap:wrap;
-
   margin-bottom:15px;
 }
 
 .admin-user{
   display:flex;
-
   align-items:center;
-
   gap:8px;
-
   padding:9px;
-
   background:#22262f;
-
   border-radius:7px;
-
   margin:5px 0;
-
   flex-wrap:wrap;
 }
 
 .admin-user-name{
   flex:1;
-  min-width:120px;
+  min-width:100px;
 }
 
 .small-button{
   border:0;
-
   border-radius:5px;
-
   padding:7px 9px;
-
   background:#343a48;
-
   color:#fff;
-
   font-size:11px;
 }
 
 /* =====================================================
-MOBILE
+ MOBILE
 ===================================================== */
 
 @media(max-width:700px){
@@ -811,57 +658,46 @@ MOBILE
 
   .main{
     display:none;
-  }
-
-  body.analysis-open .sidebar{
-    display:none;
-  }
-
-  body.analysis-open .main{
-    display:flex;
-
     width:100%;
     height:100%;
   }
 
-  .analysis-screen{
-    padding:7px;
+  body.analysis-open .sidebar{
+    display:none !important;
+  }
+
+  body.analysis-open .main{
+    display:flex !important;
   }
 
   .analysis-header{
-    min-height:58px;
-    padding:8px 10px;
+    min-height:56px;
+    padding:7px 8px;
   }
 
-  .analysis-title h2{
+  .analysis-header h2{
     font-size:15px;
   }
 
-  .analysis-title p{
-    font-size:9px;
+  .analysis-header p{
+    font-size:10px;
   }
 
-  .analysis-header-actions{
+  .header-actions{
     gap:3px;
   }
 
-  .header-button{
+  .header-btn{
     padding:7px 6px;
-    font-size:9px;
+    font-size:10px;
   }
 
-  .participants-panel{
-    padding:6px 8px;
-  }
-
-  .participant{
-    padding:4px 6px;
-    font-size:9px;
+  .people-bar{
+    padding:6px 7px;
   }
 
   .stage{
-    height:calc(100vh - 275px);
-    min-height:180px;
+    margin:5px;
     padding:5px;
   }
 
@@ -871,22 +707,23 @@ MOBILE
   }
 
   .video-card{
-    min-height:110px;
+    min-height:115px;
   }
 
   .video-card video{
-    min-height:110px;
+    min-height:115px;
   }
 
   .controls{
     width:100%;
-    padding:6px 0 0;
+    padding:5px 7px 8px;
+    grid-template-columns:1fr 1fr;
     gap:5px;
   }
 
   .control{
-    min-height:40px;
-    font-size:10px;
+    min-height:41px;
+    font-size:11px;
   }
 
   .fullscreen-content{
@@ -895,7 +732,7 @@ MOBILE
 
   .rule-box{
     padding:15px;
-    border-radius:7px;
+    border-radius:8px;
   }
 
   .owner-box{
@@ -906,22 +743,27 @@ MOBILE
 }
 
 /* =====================================================
-NUNCA MOSTRAR ANÁLISE NA TELA INICIAL
+ GARANTIA: NADA DA ANÁLISE ANTES DE ENTRAR
 ===================================================== */
 
 body:not(.analysis-open) .analysis-screen{
-  display:none!important;
+  display:none !important;
 }
 
-/*
-Quando a análise estiver minimizada,
-não existe stage escondido no final da página.
-*/
+body:not(.analysis-open) .stage{
+  display:none !important;
+}
 
-body:not(.analysis-open) .stage,
-body:not(.analysis-open) .controls,
-body:not(.analysis-open) .participants-panel{
-  display:none!important;
+body:not(.analysis-open) .controls{
+  display:none !important;
+}
+
+body:not(.analysis-open) .people-bar{
+  display:none !important;
+}
+
+body.analysis-open .home-screen{
+  display:none !important;
 }
 </style>
 </head>
@@ -931,7 +773,7 @@ body:not(.analysis-open) .participants-panel{
 <div class="app">
 
 <!-- ===================================================
-SIDEBAR
+ SIDEBAR
 =================================================== -->
 
 <aside class="sidebar">
@@ -968,10 +810,7 @@ SIDEBAR
 
   <div class="user-area">
 
-    <div
-      class="avatar"
-      id="myAvatar"
-    >
+    <div class="avatar" id="myAvatar">
       U
     </div>
 
@@ -999,7 +838,7 @@ SIDEBAR
 
 
 <!-- ===================================================
-MAIN
+ MAIN
 =================================================== -->
 
 <main class="main">
@@ -1011,9 +850,7 @@ MAIN
 
     <div class="home-content">
 
-      <h2>
-        🔥 FF Arena
-      </h2>
+      <h2>🔥 FF Arena</h2>
 
       <p>
         Selecione uma Análise para entrar.
@@ -1023,10 +860,6 @@ MAIN
 
   </div>
 
-
-  <!-- =================================================
-  ANÁLISE
-  ================================================= -->
 
   <section
     class="analysis-screen"
@@ -1042,29 +875,29 @@ MAIN
         </h2>
 
         <p id="description">
-          Entre na análise para participar.
+          Conectando...
         </p>
 
       </div>
 
-      <div class="analysis-header-actions">
+      <div class="header-actions">
 
         <button
-          class="header-button"
-          onclick="openRules()"
+          class="header-btn"
+          onclick="openRulesFromAnalysis()"
         >
           📜 Regras
         </button>
 
         <button
-          class="header-button"
-          onclick="openOwnerPanel()"
+          class="header-btn"
+          onclick="openOwnerFromAnalysis()"
         >
-          👑 Donos
+          👑 Dono
         </button>
 
         <button
-          class="header-button"
+          class="header-btn"
           onclick="minimizeAnalysis()"
         >
           ⬇️ Minimizar
@@ -1075,35 +908,21 @@ MAIN
     </header>
 
 
-    <!-- =================================================
-    PARTICIPANTES
-    ================================================= -->
+    <!-- PESSOAS SEM PRECISAR ABRIR CÂMERA -->
 
-    <div class="participants-panel">
+    <div class="people-bar">
 
-      <div class="participants-title">
-        👥 Pessoas na análise
-      </div>
+      <span class="people-title">
+        👥 Pessoas:
+      </span>
 
-      <div id="analysisParticipants">
-
-        <span
-          style="
-            color:#858c99;
-            font-size:11px;
-          "
-        >
-          Nenhuma pessoa na análise.
-        </span>
-
-      </div>
+      <div
+        class="people-list"
+        id="peopleList"
+      ></div>
 
     </div>
 
-
-    <!-- =================================================
-    STAGE
-    ================================================= -->
 
     <section
       class="stage"
@@ -1136,10 +955,6 @@ MAIN
 
     </section>
 
-
-    <!-- =================================================
-    CONTROLES
-    ================================================= -->
 
     <footer class="controls">
 
@@ -1192,7 +1007,7 @@ MAIN
 
 
 <!-- ===================================================
-ENTRAR NA ANÁLISE
+ CONFIRMAÇÃO
 =================================================== -->
 
 <div
@@ -1235,7 +1050,7 @@ ENTRAR NA ANÁLISE
 
 
 <!-- ===================================================
-REGRAS
+ REGRAS
 =================================================== -->
 
 <div
@@ -1245,9 +1060,7 @@ REGRAS
 
   <div class="fullscreen-header">
 
-    <h2>
-      📜 Regras
-    </h2>
+    <h2>📜 Regras</h2>
 
     <button
       class="close-fullscreen"
@@ -1262,9 +1075,7 @@ REGRAS
 
     <div class="rule-box">
 
-      <h2>
-        📜 REGRAS
-      </h2>
+      <h2>📜 REGRAS</h2>
 
       <h3>📱 ANDROID</h3>
 
@@ -1327,7 +1138,7 @@ REGRAS
 
 
 <!-- ===================================================
-ÁREA DOS DONOS
+ ÁREA DOS DONOS
 =================================================== -->
 
 <div
@@ -1337,9 +1148,7 @@ REGRAS
 
   <div class="fullscreen-header">
 
-    <h2>
-      👑 Área dos Donos
-    </h2>
+    <h2>👑 Área dos Donos</h2>
 
     <button
       class="close-fullscreen"
@@ -1354,13 +1163,11 @@ REGRAS
 
     <div class="owner-box">
 
-      <p
-        style="
-          color:#858c99;
-          font-size:12px;
-          margin-bottom:15px
-        "
-      >
+      <p style="
+        color:#858c99;
+        font-size:12px;
+        margin-bottom:15px;
+      ">
         Entre com o código do Dono para administrar a sala.
       </p>
 
@@ -1394,7 +1201,7 @@ REGRAS
 <script>
 
 /* =====================================================
-CONFIG
+ CONFIGURAÇÃO
 ===================================================== */
 
 const SERVER_URL =
@@ -1403,17 +1210,13 @@ const SERVER_URL =
 let socket = null;
 
 let currentRoom = null;
-
 let selectedRoom = null;
 
 let myId = null;
-
 let myName = "Usuário";
-
 let myRole = "MEMBRO";
 
 let localCameraStream = null;
-
 let localScreenStream = null;
 
 let microphoneMuted = false;
@@ -1429,7 +1232,7 @@ const polite = {};
 
 
 /* =====================================================
-ELEMENTOS
+ ELEMENTOS
 ===================================================== */
 
 const channels =
@@ -1480,12 +1283,12 @@ const ownerPage =
 const ownerContent =
   document.getElementById("ownerContent");
 
-const analysisParticipants =
-  document.getElementById("analysisParticipants");
+const peopleList =
+  document.getElementById("peopleList");
 
 
 /* =====================================================
-CRIAR 20 ANÁLISES
+ CRIAR ANÁLISES
 ===================================================== */
 
 for(let i = 1; i <= 20; i++){
@@ -1494,7 +1297,6 @@ for(let i = 1; i <= 20; i++){
     document.createElement("div");
 
   container.innerHTML = `
-
     <div
       class="channel"
       id="channel-${i}"
@@ -1520,7 +1322,6 @@ for(let i = 1; i <= 20; i++){
       class="members"
       id="members-${i}"
     ></div>
-
   `;
 
   channels.appendChild(container);
@@ -1528,7 +1329,7 @@ for(let i = 1; i <= 20; i++){
 
 
 /* =====================================================
-NOME
+ NOME
 ===================================================== */
 
 function loadName(){
@@ -1546,7 +1347,7 @@ function loadName(){
       prompt("Digite seu nome:");
 
     myName =
-      (answer || "Usuário")
+      String(answer || "Usuário")
         .trim()
         .slice(0,30);
 
@@ -1568,19 +1369,13 @@ function loadName(){
 function updateProfile(){
 
   const name =
-    document.getElementById(
-      "myNameDisplay"
-    );
+    document.getElementById("myNameDisplay");
 
   const avatar =
-    document.getElementById(
-      "myAvatar"
-    );
+    document.getElementById("myAvatar");
 
   const role =
-    document.getElementById(
-      "myRoleDisplay"
-    );
+    document.getElementById("myRoleDisplay");
 
   if(name){
     name.textContent = myName;
@@ -1588,9 +1383,7 @@ function updateProfile(){
 
   if(avatar){
     avatar.textContent =
-      myName
-        .charAt(0)
-        .toUpperCase();
+      myName.charAt(0).toUpperCase();
   }
 
   if(role){
@@ -1601,7 +1394,7 @@ function updateProfile(){
 
 
 /* =====================================================
-SELECIONAR ANÁLISE
+ SELECIONAR ANÁLISE
 ===================================================== */
 
 function selectRoom(room){
@@ -1631,7 +1424,7 @@ function selectRoom(room){
 
 
 /* =====================================================
-FECHAR CONFIRMAÇÃO
+ FECHAR JANELA ENTRAR
 ===================================================== */
 
 function closeEnterPanel(){
@@ -1644,7 +1437,7 @@ function closeEnterPanel(){
 
 
 /* =====================================================
-ENTRAR
+ CONFIRMAR ENTRADA
 ===================================================== */
 
 function confirmEnterRoom(){
@@ -1662,7 +1455,7 @@ function confirmEnterRoom(){
 
 
 /* =====================================================
-ABRIR ANÁLISE
+ ABRIR ANÁLISE
 ===================================================== */
 
 function openRoom(room){
@@ -1692,17 +1485,14 @@ function openRoom(room){
 
 
 /* =====================================================
-MINIMIZAR ANÁLISE
+ MINIMIZAR ANÁLISE
 ===================================================== */
 
 function minimizeAnalysis(){
 
   /*
-   * IMPORTANTE:
-   * NÃO chama leaveRoom().
-   *
-   * A conexão continua ativa.
-   * Apenas escondemos a interface da análise.
+   * Minimiza a interface da análise,
+   * mas NÃO desconecta do servidor.
    */
 
   document.body.classList.remove(
@@ -1718,7 +1508,30 @@ function minimizeAnalysis(){
 
 
 /* =====================================================
-WEBSOCKET
+ REABRIR ANÁLISE ATUAL
+===================================================== */
+
+function reopenCurrentRoom(){
+
+  if(!currentRoom){
+    return;
+  }
+
+  document.body.classList.add(
+    "analysis-open"
+  );
+
+  analysisScreen.classList.add(
+    "show"
+  );
+
+  homeScreen.style.display =
+    "none";
+}
+
+
+/* =====================================================
+ WEBSOCKET
 ===================================================== */
 
 function connectServer(room){
@@ -1739,13 +1552,9 @@ function connectServer(room){
 
     socket.send(
       JSON.stringify({
-
         type:"join",
-
         room:String(room),
-
         name:myName
-
       })
     );
 
@@ -1758,14 +1567,10 @@ function connectServer(room){
       let data;
 
       try{
-
         data =
           JSON.parse(event.data);
-
       }catch{
-
         return;
-
       }
 
 
@@ -1782,8 +1587,7 @@ function connectServer(room){
           "Você está conectado.";
 
         for(
-          const peer
-          of data.peers || []
+          const peer of data.peers || []
         ){
 
           await createPeerConnection(
@@ -1883,7 +1687,8 @@ function connectServer(room){
 
       if(data.type === "role-changed"){
 
-        myRole = data.role;
+        myRole =
+          data.role;
 
         updateProfile();
 
@@ -1964,11 +1769,10 @@ function connectServer(room){
 
 
 /* =====================================================
-WEBRTC
+ WEBRTC
 ===================================================== */
 
 const rtcConfig = {
-
   iceServers:[
     {
       urls:"stun:stun.l.google.com:19302"
@@ -1977,7 +1781,6 @@ const rtcConfig = {
       urls:"stun:stun1.l.google.com:19302"
     }
   ]
-
 };
 
 
@@ -2002,42 +1805,10 @@ async function createPeerConnection(
     String(myId) > String(peerId);
 
   makingOffer[peerId] = false;
-
   ignoreOffer[peerId] = false;
 
 
-  if(localCameraStream){
-
-    for(
-      const track
-      of localCameraStream.getTracks()
-    ){
-
-      pc.addTrack(
-        track,
-        localCameraStream
-      );
-
-    }
-
-  }
-
-
-  if(localScreenStream){
-
-    for(
-      const track
-      of localScreenStream.getTracks()
-    ){
-
-      pc.addTrack(
-        track,
-        localScreenStream
-      );
-
-    }
-
-  }
+  addLocalTracks(pc);
 
 
   pc.ontrack = event => {
@@ -2058,23 +1829,20 @@ async function createPeerConnection(
   };
 
 
-  pc.onicecandidate = event => {
+  pc.onicecandidate =
+    event => {
 
-    if(!event.candidate){
-      return;
-    }
+      if(!event.candidate){
+        return;
+      }
 
-    sendSignal({
+      sendSignal({
+        type:"ice-candidate",
+        target:peerId,
+        data:event.candidate
+      });
 
-      type:"ice-candidate",
-
-      target:peerId,
-
-      data:event.candidate
-
-    });
-
-  };
+    };
 
 
   pc.onnegotiationneeded =
@@ -2087,13 +1855,9 @@ async function createPeerConnection(
         await pc.setLocalDescription();
 
         sendSignal({
-
           type:"offer",
-
           target:peerId,
-
           data:pc.localDescription
-
         });
 
       }catch(error){
@@ -2109,22 +1873,23 @@ async function createPeerConnection(
     };
 
 
-  pc.onconnectionstatechange = () => {
+  pc.onconnectionstatechange =
+    () => {
 
-    const state =
-      pc.connectionState;
+      const state =
+        pc.connectionState;
 
-    if(
-      state === "failed" ||
-      state === "closed" ||
-      state === "disconnected"
-    ){
+      if(
+        state === "failed" ||
+        state === "closed" ||
+        state === "disconnected"
+      ){
 
-      removePeer(peerId);
+        removePeer(peerId);
 
-    }
+      }
 
-  };
+    };
 
 
   if(createOffer){
@@ -2136,13 +1901,9 @@ async function createPeerConnection(
       await pc.setLocalDescription();
 
       sendSignal({
-
         type:"offer",
-
         target:peerId,
-
         data:pc.localDescription
-
       });
 
     }catch(error){
@@ -2162,7 +1923,48 @@ async function createPeerConnection(
 
 
 /* =====================================================
-SINAL
+ ADICIONAR TRACKS
+===================================================== */
+
+function addLocalTracks(pc){
+
+  if(localCameraStream){
+
+    for(
+      const track
+      of localCameraStream.getTracks()
+    ){
+
+      pc.addTrack(
+        track,
+        localCameraStream
+      );
+
+    }
+
+  }
+
+  if(localScreenStream){
+
+    for(
+      const track
+      of localScreenStream.getTracks()
+    ){
+
+      pc.addTrack(
+        track,
+        localScreenStream
+      );
+
+    }
+
+  }
+
+}
+
+
+/* =====================================================
+ SINAL
 ===================================================== */
 
 function sendSignal(message){
@@ -2182,7 +1984,7 @@ function sendSignal(message){
 
 
 /* =====================================================
-OFFER
+ OFFER
 ===================================================== */
 
 async function receiveOffer(
@@ -2193,7 +1995,7 @@ async function receiveOffer(
   const pc =
     await createPeerConnection(
       peerId,
-      {name:"Usuário"},
+      findUser(peerId),
       false
     );
 
@@ -2218,13 +2020,9 @@ async function receiveOffer(
     await pc.setLocalDescription();
 
     sendSignal({
-
       type:"answer",
-
       target:peerId,
-
       data:pc.localDescription
-
     });
 
   }catch(error){
@@ -2237,7 +2035,7 @@ async function receiveOffer(
 
 
 /* =====================================================
-ANSWER
+ ANSWER
 ===================================================== */
 
 async function receiveAnswer(
@@ -2268,7 +2066,7 @@ async function receiveAnswer(
 
 
 /* =====================================================
-ICE
+ ICE
 ===================================================== */
 
 async function receiveIce(
@@ -2301,7 +2099,29 @@ async function receiveIce(
 
 
 /* =====================================================
-CÂMERA
+ ENCONTRAR USUÁRIO
+===================================================== */
+
+function findUser(id){
+
+  return (
+    currentUsers.find(
+      user => user.id === id
+    ) || {
+      id,
+      name:"Usuário",
+      role:"MEMBRO",
+      camera:false,
+      screen:false,
+      muted:false
+    }
+  );
+
+}
+
+
+/* =====================================================
+ CÂMERA
 ===================================================== */
 
 async function toggleCamera(){
@@ -2334,16 +2154,17 @@ async function toggleCamera(){
   try{
 
     localCameraStream =
-      await navigator.mediaDevices.getUserMedia({
+      await navigator.mediaDevices
+        .getUserMedia({
 
-        video:{
-          facingMode:
-            cameraFacingMode
-        },
+          video:{
+            facingMode:
+              cameraFacingMode
+          },
 
-        audio:true
+          audio:true
 
-      });
+        });
 
 
     for(
@@ -2371,7 +2192,7 @@ async function toggleCamera(){
     console.log(error);
 
     alert(
-      "Não foi possível abrir a câmera. Verifique a permissão do navegador."
+      "Não foi possível abrir a câmera. Verifique a permissão."
     );
 
   }
@@ -2380,7 +2201,7 @@ async function toggleCamera(){
 
 
 /* =====================================================
-VIRAR CÂMERA
+ VIRAR CÂMERA
 ===================================================== */
 
 async function flipCamera(){
@@ -2403,75 +2224,66 @@ async function flipCamera(){
 
   try{
 
-    const newStream =
-      await navigator.mediaDevices.getUserMedia({
+    const oldAudioTracks =
+      localCameraStream
+        .getAudioTracks();
 
-        video:{
-          facingMode:
-            cameraFacingMode
-        },
 
-        audio:false
+    localCameraStream
+      .getVideoTracks()
+      .forEach(
+        track => track.stop()
+      );
 
-      });
+
+    const newVideoStream =
+      await navigator.mediaDevices
+        .getUserMedia({
+
+          video:{
+            facingMode:
+              cameraFacingMode
+          },
+
+          audio:false
+
+        });
 
 
     const newVideoTrack =
-      newStream.getVideoTracks()[0];
+      newVideoStream
+        .getVideoTracks()[0];
+
+
+    const audioTracks =
+      oldAudioTracks;
+
+
+    const combined =
+      new MediaStream([
+        newVideoTrack,
+        ...audioTracks
+      ]);
+
+
+    localCameraStream =
+      combined;
 
 
     for(
-      const peerId
-      of Object.keys(peerConnections)
+      const track
+      of localCameraStream.getAudioTracks()
     ){
 
-      const pc =
-        peerConnections[peerId];
-
-      const sender =
-        pc.getSenders().find(
-          s =>
-            s.track &&
-            s.track.kind === "video"
-        );
-
-
-      if(sender){
-
-        await sender.replaceTrack(
-          newVideoTrack
-        );
-
-      }
+      track.enabled =
+        !microphoneMuted;
 
     }
-
-
-    const oldTracks =
-      localCameraStream
-        .getVideoTracks();
-
-
-    oldTracks.forEach(
-      track => track.stop()
-    );
-
-
-    if(oldTracks[0]){
-
-      localCameraStream.removeTrack(
-        oldTracks[0]
-      );
-
-    }
-
-
-    localCameraStream.addTrack(
-      newVideoTrack
-    );
 
 
     showLocalVideo();
+
+    await renegotiateAll();
 
     sendStatus();
 
@@ -2489,7 +2301,7 @@ async function flipCamera(){
 
 
 /* =====================================================
-COMPARTILHAR TELA
+ COMPARTILHAR TELA
 ===================================================== */
 
 async function toggleScreen(){
@@ -2507,60 +2319,13 @@ async function toggleScreen(){
     screenButton.textContent =
       "🖥️ Compartilhar tela";
 
-
-    const cameraTrack =
-      localCameraStream
-        ?.getVideoTracks()[0];
-
-
-    for(
-      const peerId
-      of Object.keys(peerConnections)
-    ){
-
-      const pc =
-        peerConnections[peerId];
-
-      const sender =
-        pc.getSenders().find(
-          s =>
-            s.track &&
-            s.track.kind === "video"
-        );
-
-
-      if(sender){
-
-        if(cameraTrack){
-
-          await sender.replaceTrack(
-            cameraTrack
-          );
-
-        }else{
-
-          await sender.replaceTrack(
-            null
-          );
-
-        }
-
-      }
-
-    }
-
-
-    if(localCameraStream){
-
-      showLocalVideo();
-
-    }else{
-
-      hideLocalVideo();
-
-    }
+    await renegotiateAll();
 
     sendStatus();
+
+    if(!localCameraStream){
+      hideLocalVideo();
+    }
 
     return;
   }
@@ -2582,125 +2347,48 @@ async function toggleScreen(){
   try{
 
     localScreenStream =
-      await navigator.mediaDevices.getDisplayMedia({
-
-        video:true,
-
-        audio:true
-
-      });
+      await navigator.mediaDevices
+        .getDisplayMedia({
+          video:true,
+          audio:true
+        });
 
 
-    const screenTrack =
+    screenButton.textContent =
+      "🖥️ Parar tela";
+
+
+    const track =
       localScreenStream
         .getVideoTracks()[0];
 
 
-    screenButton.textContent =
-      "🛑 Parar tela";
+    if(track){
 
+      track.onended =
+        async() => {
 
-    for(
-      const peerId
-      of Object.keys(peerConnections)
-    ){
+          localScreenStream = null;
 
-      const pc =
-        peerConnections[peerId];
+          screenButton.textContent =
+            "🖥️ Compartilhar tela";
 
-      const sender =
-        pc.getSenders().find(
-          s =>
-            s.track &&
-            s.track.kind === "video"
-        );
+          await renegotiateAll();
 
+          sendStatus();
 
-      if(sender){
+          if(!localCameraStream){
+            hideLocalVideo();
+          }
 
-        await sender.replaceTrack(
-          screenTrack
-        );
-
-      }else{
-
-        pc.addTrack(
-          screenTrack,
-          localScreenStream
-        );
-
-      }
+        };
 
     }
 
 
-    screenTrack.onended =
-      async() => {
-
-        if(localScreenStream){
-
-          localScreenStream
-            .getTracks()
-            .forEach(
-              track => track.stop()
-            );
-
-          localScreenStream = null;
-
-        }
-
-        screenButton.textContent =
-          "🖥️ Compartilhar tela";
-
-
-        const cameraTrack =
-          localCameraStream
-            ?.getVideoTracks()[0];
-
-
-        for(
-          const peerId
-          of Object.keys(peerConnections)
-        ){
-
-          const pc =
-            peerConnections[peerId];
-
-          const sender =
-            pc.getSenders().find(
-              s =>
-                s.track &&
-                s.track.kind === "video"
-            );
-
-
-          if(sender){
-
-            await sender.replaceTrack(
-              cameraTrack || null
-            );
-
-          }
-
-        }
-
-
-        if(localCameraStream){
-
-          showLocalVideo();
-
-        }else{
-
-          hideLocalVideo();
-
-        }
-
-        sendStatus();
-
-      };
-
-
     showLocalVideo();
+
+    await renegotiateAll();
 
     sendStatus();
 
@@ -2714,7 +2402,7 @@ async function toggleScreen(){
 
 
 /* =====================================================
-MICROFONE
+ MICROFONE
 ===================================================== */
 
 function toggleMicrophone(){
@@ -2733,15 +2421,14 @@ function toggleMicrophone(){
     !microphoneMuted;
 
 
-  for(
-    const track
-    of localCameraStream.getAudioTracks()
-  ){
-
-    track.enabled =
-      !microphoneMuted;
-
-  }
+  localCameraStream
+    .getAudioTracks()
+    .forEach(
+      track => {
+        track.enabled =
+          !microphoneMuted;
+      }
+    );
 
 
   updateMicButton();
@@ -2762,7 +2449,7 @@ function updateMicButton(){
 
 
 /* =====================================================
-FORCE MUTE
+ MUTE
 ===================================================== */
 
 function forceMute(){
@@ -2774,19 +2461,19 @@ function forceMute(){
     localCameraStream
       .getAudioTracks()
       .forEach(
-        track => track.enabled = false
+        track => {
+          track.enabled = false;
+        }
       );
 
   }
 
   updateMicButton();
 
+  sendStatus();
+
 }
 
-
-/* =====================================================
-FORCE UNMUTE
-===================================================== */
 
 function forceUnmute(){
 
@@ -2797,18 +2484,22 @@ function forceUnmute(){
     localCameraStream
       .getAudioTracks()
       .forEach(
-        track => track.enabled = true
+        track => {
+          track.enabled = true;
+        }
       );
 
   }
 
   updateMicButton();
 
+  sendStatus();
+
 }
 
 
 /* =====================================================
-STATUS
+ STATUS
 ===================================================== */
 
 function sendStatus(){
@@ -2841,7 +2532,7 @@ function sendStatus(){
 
 
 /* =====================================================
-RENEGOCIAR
+ RENEGOCIAR
 ===================================================== */
 
 async function renegotiateAll(){
@@ -2859,77 +2550,27 @@ async function renegotiateAll(){
     }
 
 
-    const cameraTrack =
-      localCameraStream
-        ?.getVideoTracks()[0];
-
-    const screenTrack =
-      localScreenStream
-        ?.getVideoTracks()[0];
+    const senders =
+      pc.getSenders();
 
 
-    const videoTrack =
-      screenTrack ||
-      cameraTrack ||
-      null;
+    for(
+      const sender
+      of senders
+    ){
 
+      try{
 
-    const videoSender =
-      pc.getSenders().find(
-        sender =>
-          sender.track &&
-          sender.track.kind === "video"
-      );
+        pc.removeTrack(
+          sender
+        );
 
-
-    if(videoSender){
-
-      await videoSender.replaceTrack(
-        videoTrack
-      );
-
-    }else if(videoTrack){
-
-      const stream =
-        screenTrack
-          ? localScreenStream
-          : localCameraStream;
-
-      pc.addTrack(
-        videoTrack,
-        stream
-      );
+      }catch{}
 
     }
 
 
-    const audioTrack =
-      localCameraStream
-        ?.getAudioTracks()[0];
-
-
-    const audioSender =
-      pc.getSenders().find(
-        sender =>
-          sender.track &&
-          sender.track.kind === "audio"
-      );
-
-
-    if(audioSender){
-
-      await audioSender.replaceTrack(
-        audioTrack || null
-      );
-
-    }else if(audioTrack){
-
-      pc.addTrack(
-        audioTrack,
-        localCameraStream
-      );
-
-    }
+    addLocalTracks(pc);
 
   }
 
@@ -2937,14 +2578,10 @@ async function renegotiateAll(){
 
 
 /* =====================================================
-VÍDEO LOCAL
+ VÍDEO LOCAL
 ===================================================== */
 
 function showLocalVideo(){
-
-  if(!myId){
-    return;
-  }
 
   const id =
     `local-${myId}`;
@@ -3001,7 +2638,7 @@ function showLocalVideo(){
     video.srcObject =
       localScreenStream;
 
-  }else if(localCameraStream){
+  }else{
 
     video.srcObject =
       localCameraStream;
@@ -3016,7 +2653,7 @@ function showLocalVideo(){
 
 
 /* =====================================================
-ESCONDER VÍDEO LOCAL
+ ESCONDER VÍDEO LOCAL
 ===================================================== */
 
 function hideLocalVideo(){
@@ -3036,7 +2673,7 @@ function hideLocalVideo(){
 
 
 /* =====================================================
-VÍDEO REMOTO
+ VÍDEO REMOTO
 ===================================================== */
 
 function showRemoteVideo(
@@ -3111,7 +2748,7 @@ function showRemoteVideo(
 
 
 /* =====================================================
-REMOVER PEER
+ REMOVER PEER
 ===================================================== */
 
 function removePeer(peerId){
@@ -3119,9 +2756,7 @@ function removePeer(peerId){
   if(peerConnections[peerId]){
 
     try{
-
       peerConnections[peerId].close();
-
     }catch{}
 
     delete peerConnections[peerId];
@@ -3135,11 +2770,8 @@ function removePeer(peerId){
     );
 
   if(card){
-
     card.remove();
-
   }
-
 
   updateEmpty();
 
@@ -3147,7 +2779,7 @@ function removePeer(peerId){
 
 
 /* =====================================================
-EMPTY
+ EMPTY
 ===================================================== */
 
 function updateEmpty(){
@@ -3168,13 +2800,12 @@ function updateEmpty(){
 
 
 /* =====================================================
-LIMPAR VÍDEOS
+ LIMPAR VÍDEOS
 ===================================================== */
 
 function clearVideos(){
 
-  videoGrid.innerHTML =
-    "";
+  videoGrid.innerHTML = "";
 
   updateEmpty();
 
@@ -3182,7 +2813,7 @@ function clearVideos(){
 
 
 /* =====================================================
-FECHAR CONEXÕES
+ FECHAR PEERS
 ===================================================== */
 
 function closeAllPeerConnections(){
@@ -3193,9 +2824,7 @@ function closeAllPeerConnections(){
   ){
 
     try{
-
       peerConnections[id].close();
-
     }catch{}
 
     delete peerConnections[id];
@@ -3206,125 +2835,16 @@ function closeAllPeerConnections(){
 
 
 /* =====================================================
-ATUALIZAR PARTICIPANTES
-===================================================== */
-
-function updateAnalysisParticipants(
-  users
-){
-
-  if(!analysisParticipants){
-    return;
-  }
-
-
-  analysisParticipants.innerHTML =
-    "";
-
-
-  if(!users.length){
-
-    analysisParticipants.innerHTML = `
-
-      <span
-        style="
-          color:#858c99;
-          font-size:11px;
-        "
-      >
-        Nenhuma pessoa na análise.
-      </span>
-
-    `;
-
-    return;
-
-  }
-
-
-  users.forEach(user => {
-
-    const item =
-      document.createElement("div");
-
-    item.className =
-      "participant";
-
-
-    let icons = "";
-
-
-    if(user.camera){
-
-      icons +=
-        `<span class="camera">📷</span>`;
-
-    }
-
-
-    if(user.screen){
-
-      icons +=
-        `<span class="screen">🖥️</span>`;
-
-    }
-
-
-    if(user.muted){
-
-      icons +=
-        `<span class="muted">🔇</span>`;
-
-    }
-
-
-    item.innerHTML = `
-
-      <span class="participant-avatar">
-
-        ${escapeHTML(
-          (user.name || "U")
-            .charAt(0)
-            .toUpperCase()
-        )}
-
-      </span>
-
-      <span>
-        ${escapeHTML(
-          user.name || "Usuário"
-        )}
-      </span>
-
-      <span class="participant-icons">
-        ${icons}
-      </span>
-
-    `;
-
-
-    analysisParticipants.appendChild(
-      item
-    );
-
-  });
-
-}
-
-
-/* =====================================================
-USUÁRIOS
+ ATUALIZAR USUÁRIOS
 ===================================================== */
 
 function updateUsers(users){
 
-  currentUsers =
-    users;
+  currentUsers = users;
 
-  updateAnalysisParticipants(
-    users
-  );
-
+  /*
+   * CONTADORES DAS ANÁLISES
+   */
 
   for(let i = 1; i <= 20; i++){
 
@@ -3338,7 +2858,6 @@ function updateUsers(users){
         `members-${i}`
       );
 
-
     if(!count || !members){
       continue;
     }
@@ -3349,8 +2868,7 @@ function updateUsers(users){
       count.textContent =
         `${users.length}/8`;
 
-      members.innerHTML =
-        "";
+      members.innerHTML = "";
 
 
       users.forEach(user => {
@@ -3392,39 +2910,31 @@ function updateUsers(users){
         item.innerHTML = `
 
           <span class="avatar">
-
             ${escapeHTML(
               (user.name || "U")
                 .charAt(0)
                 .toUpperCase()
             )}
-
           </span>
 
           <span>
-
             ${escapeHTML(
               user.name || "Usuário"
             )}
-
           </span>
 
           ${status}
 
           <span class="role">
-
             ${escapeHTML(
               user.role || "MEMBRO"
             )}
-
           </span>
 
         `;
 
 
-        members.appendChild(
-          item
-        );
+        members.appendChild(item);
 
       });
 
@@ -3432,49 +2942,118 @@ function updateUsers(users){
 
   }
 
+
+  /*
+   * LISTA VISÍVEL DENTRO DA ANÁLISE
+   * MESMO SEM CÂMERA
+   */
+
+  peopleList.innerHTML = "";
+
+
+  if(!users.length){
+
+    peopleList.innerHTML =
+      `<span style="color:#777;font-size:10px">
+        Nenhuma pessoa
+      </span>`;
+
+    return;
+
+  }
+
+
+  users.forEach(user => {
+
+    const chip =
+      document.createElement("div");
+
+    chip.className =
+      "people-chip";
+
+
+    const dot =
+      document.createElement("span");
+
+    dot.className =
+      "people-dot";
+
+
+    if(user.camera){
+      dot.classList.add(
+        "camera-on"
+      );
+    }
+
+
+    const name =
+      document.createElement("span");
+
+    name.textContent =
+      user.name || "Usuário";
+
+
+    chip.appendChild(dot);
+
+    chip.appendChild(name);
+
+    peopleList.appendChild(chip);
+
+  });
+
 }
 
 
 /* =====================================================
-REGRAS
+ REGRAS
 ===================================================== */
 
 function openRules(){
 
   /*
    * NÃO sai da análise.
-   * Apenas abre a tela de regras por cima.
+   * Apenas abre as regras por cima.
    */
 
-  rulesPage.classList.add(
-    "show"
-  );
+  rulesPage.classList.add("show");
+
+}
+
+
+function openRulesFromAnalysis(){
+
+  rulesPage.classList.add("show");
 
 }
 
 
 function closeRules(){
 
-  rulesPage.classList.remove(
-    "show"
-  );
+  rulesPage.classList.remove("show");
 
 }
 
 
 /* =====================================================
-ÁREA DOS DONOS
+ ÁREA DOS DONOS
 ===================================================== */
 
 function openOwnerPanel(){
 
   /*
-   * NÃO sai da análise.
+   * Pode abrir mesmo estando dentro da análise.
    */
 
-  ownerPage.classList.add(
-    "show"
-  );
+  ownerPage.classList.add("show");
+
+  updateOwnerPanel();
+
+}
+
+
+function openOwnerFromAnalysis(){
+
+  ownerPage.classList.add("show");
 
   updateOwnerPanel();
 
@@ -3483,15 +3062,13 @@ function openOwnerPanel(){
 
 function closeOwnerPanel(){
 
-  ownerPage.classList.remove(
-    "show"
-  );
+  ownerPage.classList.remove("show");
 
 }
 
 
 /* =====================================================
-LOGIN DONO
+ LOGIN DONO
 ===================================================== */
 
 function ownerLogin(){
@@ -3512,7 +3089,6 @@ function ownerLogin(){
     );
 
     return;
-
   }
 
 
@@ -3526,7 +3102,6 @@ function ownerLogin(){
     );
 
     return;
-
   }
 
 
@@ -3544,7 +3119,7 @@ function ownerLogin(){
 
 
 /* =====================================================
-PAINEL DONO
+ PAINEL DONO
 ===================================================== */
 
 function updateOwnerPanel(){
@@ -3557,19 +3132,16 @@ function updateOwnerPanel(){
 
     ownerContent.innerHTML = `
 
-      <p
-        style="
-          color:#858c99;
-          font-size:12px;
-        "
-      >
+      <p style="
+        color:#858c99;
+        font-size:12px;
+      ">
         Faça login como Dono para administrar os membros.
       </p>
 
     `;
 
     return;
-
   }
 
 
@@ -3579,8 +3151,7 @@ function updateOwnerPanel(){
       👥 Pessoas na Análise
       ${
         currentRoom
-          ? String(currentRoom)
-              .padStart(2,"0")
+          ? String(currentRoom).padStart(2,"0")
           : "—"
       }
     </h3>
@@ -3591,133 +3162,120 @@ function updateOwnerPanel(){
   if(!currentUsers.length){
 
     html += `
-
-      <p
-        style="
-          color:#858c99;
-          font-size:12px;
-        "
-      >
-        Nenhuma pessoa encontrada.
+      <p style="
+        color:#777;
+        font-size:12px;
+      ">
+        Nenhuma pessoa conectada.
       </p>
-
     `;
 
   }
 
 
-  currentUsers.forEach(
-    user => {
+  currentUsers.forEach(user => {
 
-      const canRole =
-        myRole === "DONO" &&
-        user.id !== myId;
+    const canRole =
+      myRole === "DONO" &&
+      user.id !== myId;
 
 
-      const canMute =
-        (
-          myRole === "DONO" ||
-          myRole === "ADM" ||
-          myRole === "TELADOR"
-        ) &&
-        user.id !== myId;
+    const canMute =
+      (
+        myRole === "DONO" ||
+        myRole === "ADM" ||
+        myRole === "TELADOR"
+      ) &&
+      user.id !== myId;
 
+
+    html += `
+
+      <div class="admin-user">
+
+        <span class="avatar">
+          ${escapeHTML(
+            (user.name || "U")
+              .charAt(0)
+              .toUpperCase()
+          )}
+        </span>
+
+        <span class="admin-user-name">
+
+          ${escapeHTML(
+            user.name || "Usuário"
+          )}
+
+          <small
+            style="color:#777;margin-left:4px"
+          >
+            ${escapeHTML(
+              user.role || "MEMBRO"
+            )}
+          </small>
+
+        </span>
+
+    `;
+
+
+    if(canMute){
 
       html += `
 
-        <div class="admin-user">
+        <button
+          class="small-button"
+          onclick="muteMember('${user.id}')"
+        >
+          🔇 Mutar
+        </button>
 
-          <span class="avatar">
+        <button
+          class="small-button"
+          onclick="unmuteMember('${user.id}')"
+        >
+          🎙️ Liberar
+        </button>
 
-            ${escapeHTML(
-              (user.name || "U")
-                .charAt(0)
-                .toUpperCase()
-            )}
-
-          </span>
-
-          <span class="admin-user-name">
-
-            ${escapeHTML(
-              user.name || "Usuário"
-            )}
-
-            <small
-              style="
-                color:#777;
-                margin-left:4px
-              "
-            >
-              ${escapeHTML(
-                user.role || "MEMBRO"
-              )}
-            </small>
-
-          </span>
-
-      `;
-
-
-      if(canMute){
-
-        html += `
-
-          <button
-            class="small-button"
-            onclick="muteMember('${user.id}')"
-          >
-            🔇 Mutar
-          </button>
-
-          <button
-            class="small-button"
-            onclick="unmuteMember('${user.id}')"
-          >
-            🎙️ Liberar
-          </button>
-
-        `;
-
-      }
-
-
-      if(canRole){
-
-        html += `
-
-          <button
-            class="small-button"
-            onclick="changeRole('${user.id}','ADM')"
-          >
-            ADM
-          </button>
-
-          <button
-            class="small-button"
-            onclick="changeRole('${user.id}','TELADOR')"
-          >
-            Telador
-          </button>
-
-          <button
-            class="small-button"
-            onclick="changeRole('${user.id}','MEMBRO')"
-          >
-            Membro
-          </button>
-
-        `;
-
-      }
-
-
-      html += `
-        </div>
       `;
 
     }
-  );
+
+
+    if(canRole){
+
+      html += `
+
+        <button
+          class="small-button"
+          onclick="changeRole('${user.id}','ADM')"
+        >
+          ADM
+        </button>
+
+        <button
+          class="small-button"
+          onclick="changeRole('${user.id}','TELADOR')"
+        >
+          Telador
+        </button>
+
+        <button
+          class="small-button"
+          onclick="changeRole('${user.id}','MEMBRO')"
+        >
+          Membro
+        </button>
+
+      `;
+
+    }
+
+
+    html += `</div>`;
+
+  });
 
 
   ownerContent.innerHTML =
@@ -3727,7 +3285,7 @@ function updateOwnerPanel(){
 
 
 /* =====================================================
-CARGOS
+ CARGOS
 ===================================================== */
 
 function changeRole(
@@ -3742,7 +3300,6 @@ function changeRole(
     );
 
     return;
-
   }
 
 
@@ -3750,9 +3307,7 @@ function changeRole(
     !socket ||
     socket.readyState !== WebSocket.OPEN
   ){
-
     return;
-
   }
 
 
@@ -3772,21 +3327,17 @@ function changeRole(
 
 
 /* =====================================================
-MUTAR
+ MUTAR
 ===================================================== */
 
-function muteMember(
-  userId
-){
+function muteMember(userId){
 
   if(
     myRole !== "DONO" &&
     myRole !== "ADM" &&
     myRole !== "TELADOR"
   ){
-
     return;
-
   }
 
 
@@ -3794,9 +3345,7 @@ function muteMember(
     !socket ||
     socket.readyState !== WebSocket.OPEN
   ){
-
     return;
-
   }
 
 
@@ -3813,18 +3362,14 @@ function muteMember(
 }
 
 
-function unmuteMember(
-  userId
-){
+function unmuteMember(userId){
 
   if(
     myRole !== "DONO" &&
     myRole !== "ADM" &&
     myRole !== "TELADOR"
   ){
-
     return;
-
   }
 
 
@@ -3832,9 +3377,7 @@ function unmuteMember(
     !socket ||
     socket.readyState !== WebSocket.OPEN
   ){
-
     return;
-
   }
 
 
@@ -3852,7 +3395,7 @@ function unmuteMember(
 
 
 /* =====================================================
-SAIR DA ANÁLISE
+ SAIR DA ANÁLISE
 ===================================================== */
 
 function leaveRoom(){
@@ -3889,9 +3432,7 @@ function leaveRoom(){
   if(socket){
 
     try{
-
       socket.close();
-
     }catch{}
 
     socket = null;
@@ -3931,23 +3472,19 @@ function leaveRoom(){
 
   currentUsers = [];
 
-  updateAnalysisParticipants(
-    []
-  );
+  peopleList.innerHTML = "";
 
 }
 
 
 /* =====================================================
-ESCAPE HTML
+ ESCAPE HTML
 ===================================================== */
 
 function escapeHTML(value){
 
   const div =
-    document.createElement(
-      "div"
-    );
+    document.createElement("div");
 
   div.textContent =
     String(value || "");
@@ -3958,29 +3495,7 @@ function escapeHTML(value){
 
 
 /* =====================================================
-FECHAR MODAIS COM ESC
-===================================================== */
-
-document.addEventListener(
-  "keydown",
-  event => {
-
-    if(event.key !== "Escape"){
-      return;
-    }
-
-    closeEnterPanel();
-
-    closeRules();
-
-    closeOwnerPanel();
-
-  }
-);
-
-
-/* =====================================================
-INICIAR
+ INICIAR
 ===================================================== */
 
 loadName();
