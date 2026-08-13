@@ -1,7 +1,9 @@
 {
-  "name": "ff-arena-server",
+  "name": "ff-arena",
   "version": "1.0.0",
   "private": true,
+  "description": "Servidor FF Arena com salas de análise e WebRTC",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
