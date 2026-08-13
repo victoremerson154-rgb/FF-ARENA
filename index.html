@@ -3,25 +3,21 @@
 <head>
 <meta charset="UTF-8">
 
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
->
+<meta name="viewport"
+content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
 <meta name="theme-color" content="#111318">
 
-<title>FF Arena</title>
+<title>🔥 FF Arena</title>
 
 <style>
-
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
 }
 
-html,
-body{
+html,body{
   width:100%;
   height:100%;
 }
@@ -38,29 +34,28 @@ button{
   cursor:pointer;
 }
 
-/* =========================================
+/* =========================
 APP
-========================================= */
+========================= */
 
 .app{
-  display:flex;
   width:100%;
   height:100vh;
+  display:flex;
 }
 
-/* =========================================
+/* =========================
 SIDEBAR
-========================================= */
+========================= */
 
 .sidebar{
   width:285px;
-  height:100vh;
+  height:100%;
   background:#181b22;
   border-right:1px solid #292d36;
   display:flex;
   flex-direction:column;
-  overflow:auto;
-  flex-shrink:0;
+  overflow-y:auto;
 }
 
 .logo{
@@ -71,7 +66,7 @@ SIDEBAR
 }
 
 .category{
-  padding:18px 15px 8px;
+  padding:16px 15px 7px;
   font-size:12px;
   font-weight:bold;
   color:#858c99;
@@ -151,9 +146,9 @@ SIDEBAR
   margin-left:auto;
 }
 
-/* =========================================
-USER
-========================================= */
+/* =========================
+USUÁRIO
+========================= */
 
 .user-area{
   margin-top:auto;
@@ -183,49 +178,22 @@ USER
   margin-top:3px;
 }
 
-/* =========================================
+/* =========================
 MAIN
-========================================= */
+========================= */
 
 .main{
   flex:1;
   min-width:0;
-  height:100vh;
+  height:100%;
   display:flex;
   flex-direction:column;
-  background:#111318;
 }
 
-.header{
-  min-height:70px;
-  border-bottom:1px solid #292d36;
-  display:flex;
-  align-items:center;
-  padding:12px 20px;
-  flex-shrink:0;
-}
-
-.header-info{
-  flex:1;
-}
-
-.header h2{
-  font-size:18px;
-}
-
-.header p{
-  font-size:12px;
-  color:#858c99;
-  margin-top:4px;
-}
-
-.header-action{
-  margin-left:15px;
-}
-
-/* =========================================
-TELA INICIAL
-========================================= */
+/*
+Tela inicial:
+NÃO possui stage visível.
+*/
 
 .home-screen{
   flex:1;
@@ -233,105 +201,75 @@ TELA INICIAL
   align-items:center;
   justify-content:center;
   text-align:center;
-  padding:25px;
+  padding:20px;
 }
 
 .home-content{
-  max-width:450px;
-}
-
-.home-icon{
-  font-size:55px;
-  margin-bottom:15px;
+  color:#858c99;
 }
 
 .home-content h2{
+  color:#e5e7ec;
   margin-bottom:8px;
 }
 
 .home-content p{
-  color:#858c99;
   font-size:13px;
-  line-height:1.5;
 }
 
-/* =========================================
-TELA DE ENTRADA DA ANÁLISE
-========================================= */
+/* =========================
+ANÁLISE
+========================= */
 
-.join-screen{
-  flex:1;
+.analysis-screen{
   display:none;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:25px;
+  flex:1;
+  min-height:0;
+  flex-direction:column;
 }
 
-.join-screen.show{
+.analysis-screen.show{
   display:flex;
 }
 
-.join-box{
-  width:min(420px,100%);
-  background:#181b22;
-  border:1px solid #292d36;
-  border-radius:12px;
-  padding:25px;
+.analysis-header{
+  height:65px;
+  flex-shrink:0;
+  border-bottom:1px solid #292d36;
+  display:flex;
+  align-items:center;
+  padding:10px 18px;
 }
 
-.join-box .join-icon{
-  font-size:45px;
-  margin-bottom:12px;
+.analysis-header h2{
+  font-size:18px;
 }
 
-.join-box h2{
-  margin-bottom:8px;
-}
-
-.join-box p{
+.analysis-header p{
+  font-size:12px;
   color:#858c99;
-  font-size:13px;
-  margin-bottom:20px;
+  margin-top:4px;
 }
 
-.enter-button{
-  width:100%;
-  border:0;
-  border-radius:8px;
-  padding:13px;
-  background:#5865f2;
-  color:white;
-  font-weight:bold;
-}
-
-.enter-button:hover{
-  background:#4752c4;
-}
-
-/* =========================================
-STAGE
-========================================= */
+/*
+IMPORTANTE:
+o quadrado só existe dentro da análise.
+*/
 
 .stage{
-  position:relative;
   flex:1;
   min-height:0;
-  margin:15px;
+  margin:10px;
   border:1px solid #292d36;
   border-radius:10px;
   background:#090b0f;
   overflow:auto;
-  padding:12px;
-  display:none;
-}
-
-.stage.show{
-  display:block;
+  padding:8px;
 }
 
 .empty{
-  min-height:100%;
+  width:100%;
+  height:100%;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -341,27 +279,27 @@ STAGE
 }
 
 .empty-icon{
-  font-size:45px;
-  margin-bottom:10px;
+  font-size:40px;
+  margin-bottom:8px;
 }
 
 .empty h3{
   color:#e5e7ec;
-  margin-bottom:6px;
+  margin-bottom:5px;
 }
 
 .empty p{
   font-size:12px;
 }
 
-/* =========================================
-VIDEO GRID
-========================================= */
+/* =========================
+VÍDEOS
+========================= */
 
 .video-grid{
   display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:10px;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:8px;
   width:100%;
 }
 
@@ -370,14 +308,13 @@ VIDEO GRID
   background:#151820;
   border-radius:8px;
   overflow:hidden;
-  min-height:180px;
-  aspect-ratio:16/9;
+  min-height:160px;
 }
 
 .video-card video{
   width:100%;
   height:100%;
-  min-height:180px;
+  min-height:160px;
   object-fit:cover;
   background:#050608;
   display:block;
@@ -385,8 +322,8 @@ VIDEO GRID
 
 .video-label{
   position:absolute;
-  bottom:8px;
-  left:8px;
+  bottom:7px;
+  left:7px;
   background:rgba(0,0,0,.65);
   padding:5px 8px;
   border-radius:5px;
@@ -395,33 +332,34 @@ VIDEO GRID
 
 .video-status{
   position:absolute;
-  right:8px;
-  bottom:8px;
+  right:7px;
+  bottom:7px;
   font-size:13px;
 }
 
-/* =========================================
+/* =========================
 CONTROLES 2x2
-========================================= */
+========================= */
 
 .controls{
-  width:min(520px,100%);
+  width:min(430px,100%);
   margin:0 auto;
+  padding:7px 10px 12px;
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:8px;
-  padding:10px 15px 18px;
+  gap:7px;
   flex-shrink:0;
 }
 
 .control{
+  width:100%;
+  min-height:44px;
   border:0;
   border-radius:7px;
-  padding:11px 10px;
+  padding:10px;
   background:#292e3a;
   color:white;
   font-weight:bold;
-  min-height:44px;
 }
 
 .control:hover{
@@ -440,44 +378,100 @@ CONTROLES 2x2
   background:#b52e3b;
 }
 
-/* =========================================
-REGRAS
-========================================= */
+/* =========================
+ENTRAR NA ANÁLISE
+========================= */
 
-.rules{
+.enter-panel{
+  display:none;
   position:fixed;
   inset:0;
-  z-index:200;
-  display:none;
-  background:#111318;
-  overflow:auto;
-  padding:25px;
+  background:rgba(0,0,0,.78);
+  z-index:50;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
 }
 
-.rules.show{
+.enter-panel.show{
+  display:flex;
+}
+
+.enter-box{
+  width:min(420px,100%);
+  background:#181b22;
+  border:1px solid #343944;
+  border-radius:12px;
+  padding:22px;
+  text-align:center;
+}
+
+.enter-box h2{
+  margin-bottom:8px;
+}
+
+.enter-box p{
+  color:#858c99;
+  font-size:13px;
+  margin-bottom:18px;
+}
+
+.enter-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+/* =========================
+TELAS CHEIAS
+========================= */
+
+.fullscreen-page{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:80;
+  background:#111318;
+  overflow:auto;
+}
+
+.fullscreen-page.show{
   display:block;
 }
 
-.rules-header{
-  position:sticky;
-  top:0;
-  z-index:2;
-  background:#111318;
-  padding-bottom:15px;
-  margin-bottom:15px;
-  border-bottom:1px solid #292d36;
+.fullscreen-header{
+  height:65px;
   display:flex;
   align-items:center;
   justify-content:space-between;
+  padding:12px 18px;
+  border-bottom:1px solid #292d36;
+  background:#181b22;
 }
 
-.rules-header h2{
-  font-size:20px;
+.fullscreen-header h2{
+  font-size:18px;
 }
+
+.fullscreen-content{
+  max-width:900px;
+  margin:0 auto;
+  padding:20px;
+}
+
+.close-fullscreen{
+  border:0;
+  background:#d83b4b;
+  color:white;
+  border-radius:6px;
+  padding:9px 13px;
+}
+
+/* =========================
+REGRAS
+========================= */
 
 .rule-box{
-  max-width:1000px;
-  margin:0 auto 20px;
   background:#181b22;
   border:1px solid #292d36;
   border-radius:10px;
@@ -499,53 +493,17 @@ REGRAS
   margin:9px 0;
 }
 
-.fullscreen-close{
-  border:0;
-  background:#d83b4b;
-  color:white;
-  padding:9px 13px;
-  border-radius:6px;
-  font-weight:bold;
-}
-
-/* =========================================
+/* =========================
 DONOS
-========================================= */
-
-.owner-panel{
-  position:fixed;
-  inset:0;
-  background:#111318;
-  z-index:300;
-  display:none;
-  overflow:auto;
-  padding:25px;
-}
-
-.owner-panel.show{
-  display:block;
-}
+========================= */
 
 .owner-box{
-  width:min(800px,100%);
-  min-height:calc(100vh - 50px);
-  margin:auto;
+  max-width:700px;
+  margin:0 auto;
   background:#181b22;
   border:1px solid #343944;
   border-radius:12px;
-  padding:25px;
-}
-
-.owner-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  margin-bottom:20px;
-}
-
-.owner-box h2{
-  margin:0;
+  padding:20px;
 }
 
 .input{
@@ -597,54 +555,66 @@ DONOS
   border-radius:6px;
 }
 
-/* =========================================
+/* =========================
 MOBILE
-========================================= */
+========================= */
 
 @media(max-width:700px){
 
   .app{
-    flex-direction:column;
+    display:block;
   }
 
   .sidebar{
     width:100%;
-    height:auto;
-    max-height:100vh;
-    border-right:0;
-    border-bottom:1px solid #292d36;
+    height:100%;
+    border:0;
   }
 
   .logo{
-    padding:12px 15px;
-    font-size:19px;
+    padding:15px;
+    font-size:20px;
   }
 
   .category{
-    padding-top:10px;
+    padding-top:12px;
   }
 
   .user-area{
     display:none;
   }
 
+  /*
+  A tela inicial ocupa tudo.
+  */
+
   .main{
-    flex:1;
-    min-height:0;
+    display:none;
   }
 
-  .header{
-    min-height:58px;
-    padding:10px 15px;
+  /*
+  Quando análise abrir, sidebar some
+  e análise ocupa a tela.
+  */
+
+  body.analysis-open .sidebar{
+    display:none;
   }
 
-  .header h2{
-    font-size:16px;
+  body.analysis-open .main{
+    display:flex;
+    width:100%;
+    height:100%;
+  }
+
+  .analysis-header{
+    height:58px;
+    padding:9px 14px;
   }
 
   .stage{
-    margin:7px;
-    padding:7px;
+    margin:6px;
+    padding:6px;
   }
 
   .video-grid{
@@ -661,51 +631,43 @@ MOBILE
   }
 
   .controls{
-    padding:8px 8px 12px;
-    gap:6px;
+    width:100%;
+    padding:6px 8px 10px;
+    grid-template-columns:1fr 1fr;
   }
 
   .control{
+    min-height:43px;
     font-size:12px;
-    padding:10px 6px;
-    min-height:42px;
   }
 
-  .rules{
+  .fullscreen-content{
     padding:10px;
   }
 
-  .owner-panel{
-    padding:10px;
-  }
-
-  .owner-box{
-    min-height:calc(100vh - 20px);
+  .rule-box{
     padding:15px;
   }
 
-}
-
-/* =========================================
-TELA MUITO PEQUENA
-========================================= */
-
-@media(max-width:380px){
-
-  .video-card{
-    min-height:105px;
-  }
-
-  .video-card video{
-    min-height:105px;
-  }
-
-  .video-label{
-    font-size:9px;
+  .owner-box{
+    border-radius:0;
+    min-height:100%;
   }
 
 }
 
+/* =========================
+ESCONDER BARRA INICIAL
+========================= */
+
+body:not(.analysis-open) .analysis-screen{
+  display:none!important;
+}
+
+body:not(.analysis-open) .stage,
+body:not(.analysis-open) .controls{
+  display:none!important;
+}
 </style>
 </head>
 
@@ -713,9 +675,9 @@ TELA MUITO PEQUENA
 
 <div class="app">
 
-<!-- =========================================
+<!-- =========================
 SIDEBAR
-========================================= -->
+========================= -->
 
 <aside class="sidebar">
 
@@ -723,7 +685,8 @@ SIDEBAR
     🔥 FF Arena
   </div>
 
-  <!-- Área dos Donos PRIMEIRO -->
+  <!-- ÁREA DOS DONOS PRIMEIRO -->
+
   <div
     class="channel"
     onclick="openOwnerPanel()"
@@ -734,10 +697,10 @@ SIDEBAR
     </span>
   </div>
 
-  <!-- Regras -->
+  <!-- REGRAS -->
+
   <div
     class="channel"
-    id="rulesButton"
     onclick="openRules()"
   >
     📜
@@ -746,7 +709,8 @@ SIDEBAR
     </span>
   </div>
 
-  <!-- Análises -->
+  <!-- ANÁLISES ABAIXO -->
+
   <div class="category">
     🔎 ANÁLISES
   </div>
@@ -755,7 +719,10 @@ SIDEBAR
 
   <div class="user-area">
 
-    <div class="avatar" id="myAvatar">
+    <div
+      class="avatar"
+      id="myAvatar"
+    >
       U
     </div>
 
@@ -782,208 +749,202 @@ SIDEBAR
 </aside>
 
 
-<!-- =========================================
+<!-- =========================
 MAIN
-========================================= -->
+========================= -->
 
 <main class="main">
 
-  <header class="header">
+  <!-- TELA INICIAL SEM QUADRADO -->
 
-    <div class="header-info">
-
-      <h2 id="title">
-        🔥 FF Arena
-      </h2>
-
-      <p id="description">
-        Selecione uma Análise para entrar.
-      </p>
-
-    </div>
-
-    <div
-      class="header-action"
-      id="headerAction"
-    ></div>
-
-  </header>
-
-
-  <!-- =====================================
-  TELA INICIAL
-  ====================================== -->
-
-  <section
+  <div
     class="home-screen"
     id="homeScreen"
   >
 
     <div class="home-content">
 
-      <div class="home-icon">
-        🔥
-      </div>
-
       <h2>
-        FF Arena
+        🔥 FF Arena
       </h2>
 
       <p>
-        Selecione uma Análise no menu lateral para entrar.
+        Selecione uma Análise para entrar.
       </p>
 
     </div>
 
-  </section>
+  </div>
 
 
-  <!-- =====================================
-  TELA DE ENTRADA
-  ====================================== -->
+  <!-- ANÁLISE -->
 
   <section
-    class="join-screen"
-    id="joinScreen"
+    class="analysis-screen"
+    id="analysisScreen"
   >
 
-    <div class="join-box">
+    <header class="analysis-header">
 
-      <div class="join-icon">
-        🔎
+      <div>
+
+        <h2 id="title">
+          🔎 Análise
+        </h2>
+
+        <p id="description">
+          Entre na análise para participar.
+        </p>
+
       </div>
 
-      <h2 id="joinTitle">
-        Análise 01
-      </h2>
+    </header>
 
-      <p>
-        Você selecionou esta análise.
-        Clique no botão abaixo para entrar.
-      </p>
+
+    <section
+      class="stage"
+      id="stage"
+    >
+
+      <div
+        class="empty"
+        id="empty"
+      >
+
+        <div class="empty-icon">
+          🎥
+        </div>
+
+        <h3>
+          Nenhuma transmissão ativa
+        </h3>
+
+        <p>
+          Abra a câmera ou compartilhe sua tela.
+        </p>
+
+      </div>
+
+      <div
+        class="video-grid"
+        id="videoGrid"
+      ></div>
+
+    </section>
+
+
+    <!-- CONTROLES 2x2 -->
+
+    <footer class="controls">
 
       <button
-        class="enter-button"
-        onclick="enterSelectedRoom()"
+        class="control"
+        id="cameraButton"
+        onclick="toggleCamera()"
       >
-        ➡️ Entrar na Análise
+        📷 Abrir câmera
       </button>
 
-    </div>
+      <button
+        class="control"
+        id="flipButton"
+        onclick="flipCamera()"
+      >
+        🔄 Virar câmera
+      </button>
+
+      <button
+        class="control"
+        id="screenButton"
+        onclick="toggleScreen()"
+      >
+        🖥️ Compartilhar tela
+      </button>
+
+      <button
+        class="control"
+        id="micButton"
+        onclick="toggleMicrophone()"
+      >
+        🎙️ Microfone
+      </button>
+
+      <button
+        class="control danger"
+        onclick="leaveRoom()"
+      >
+        ⏹ Sair
+      </button>
+
+    </footer>
 
   </section>
-
-
-  <!-- =====================================
-  STAGE — SÓ APARECE DEPOIS DE ENTRAR
-  ====================================== -->
-
-  <section
-    class="stage"
-    id="stage"
-  >
-
-    <div
-      class="empty"
-      id="empty"
-    >
-
-      <div class="empty-icon">
-        🎥
-      </div>
-
-      <h3>
-        Nenhuma transmissão ativa
-      </h3>
-
-      <p>
-        Abra a câmera ou compartilhe sua tela.
-      </p>
-
-    </div>
-
-    <div
-      class="video-grid"
-      id="videoGrid"
-    ></div>
-
-  </section>
-
-
-  <!-- =====================================
-  CONTROLES
-  ====================================== -->
-
-  <footer
-    class="controls"
-    id="controls"
-    style="display:none"
-  >
-
-    <button
-      class="control"
-      id="cameraButton"
-      onclick="toggleCamera()"
-    >
-      📷 Abrir câmera
-    </button>
-
-    <button
-      class="control"
-      id="flipButton"
-      onclick="flipCamera()"
-    >
-      🔄 Virar câmera
-    </button>
-
-    <button
-      class="control"
-      id="screenButton"
-      onclick="toggleScreen()"
-    >
-      🖥️ Compartilhar tela
-    </button>
-
-    <button
-      class="control"
-      id="micButton"
-      onclick="toggleMicrophone()"
-    >
-      🎙️ Microfone
-    </button>
-
-    <button
-      class="control danger"
-      onclick="leaveRoom()"
-      style="grid-column:1 / -1"
-    >
-      ⏹ Sair da Análise
-    </button>
-
-  </footer>
 
 </main>
 
 </div>
 
 
-<!-- =========================================
-REGRAS — TELA CHEIA
-========================================= -->
+<!-- =========================
+ENTRAR NA ANÁLISE
+========================= -->
 
 <div
-  class="rules"
-  id="rules"
+  class="enter-panel"
+  id="enterPanel"
 >
 
-  <div class="rules-header">
+  <div class="enter-box">
+
+    <h2 id="enterTitle">
+      🔎 Análise
+    </h2>
+
+    <p>
+      Você selecionou esta análise.
+      Clique em <b>Entrar</b> para abrir.
+    </p>
+
+    <div class="enter-actions">
+
+      <button
+        class="control"
+        onclick="confirmEnterRoom()"
+      >
+        Entrar
+      </button>
+
+      <button
+        class="control danger"
+        onclick="closeEnterPanel()"
+      >
+        Cancelar
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+TELA DE REGRAS
+========================= -->
+
+<div
+  class="fullscreen-page"
+  id="rulesPage"
+>
+
+  <div class="fullscreen-header">
 
     <h2>
-      📜 Regras da FF Arena
+      📜 Regras
     </h2>
 
     <button
-      class="fullscreen-close"
+      class="close-fullscreen"
       onclick="closeRules()"
     >
       ✕ Fechar
@@ -992,75 +953,67 @@ REGRAS — TELA CHEIA
   </div>
 
 
-  <div class="rule-box">
+  <div class="fullscreen-content">
 
-    <h2>
-      📜 REGRAS
-    </h2>
+    <div class="rule-box">
 
+      <h2>
+        📜 REGRAS
+      </h2>
 
-    <h3>
-      📱 ANDROID
-    </h3>
+      <h3>📱 ANDROID</h3>
 
-    <div class="rule">🔹 PROIBIDO ROOT.</div>
-    <div class="rule">🔹 PROIBIDO MT MANAGER.</div>
-    <div class="rule">🔹 PLAY STORE PÓS-PARTIDA PODE RESULTAR EM W.O CASO O ANALISTA ACHE NECESSÁRIO.</div>
-    <div class="rule">🔹 PROIBIDO JOGAR QUALQUER MODO QUE SALVE REPLAY PÓS-PARTIDA.</div>
-    <div class="rule">🔹 PROIBIDO QUALQUER TIPO DE ARQUIVO OU PROGRAMA QUE DÊ VANTAGEM SOBRE OUTROS JOGADORES.</div>
-    <div class="rule">🔹 PROIBIDO ACESSAR GOOGLE DRIVE E ZARCHIVER PÓS-PARTIDA.</div>
-    <div class="rule">🔹 NAVEGADOR SÓ SERÁ W.O CASO O HISTÓRICO ESTEJA LIMPO.</div>
-    <div class="rule">🔹 QUALQUER TIPO DE ARQUIVO, PROGRAMA OU RASTRO SUSPEITO DO DIA 01 DE JANEIRO DE 2026 EM DIANTE SERÁ APLICADO W.O.</div>
-    <div class="rule">🔹 SHADERS MODIFICADA É W.O.</div>
-    <div class="rule">🔹 QUALQUER TIPO DE VPN QUE NÃO SEJA DO GOVERNO OU APOSTAS ESPORTIVAS SERÁ APLICADO W.O.</div>
-    <div class="rule">🔹 OBRIGATÓRIO TER APP USAGE INSTALADO COM TODAS AS PERMISSÕES CONCEDIDAS.</div>
-    <div class="rule">🔹 APP USAGE DESINSTALADO — W.O APENAS SE ESTIVER COM REPLAY SUSPEITO.</div>
-    <div class="rule">🔹 EM CASOS DE REPLAY SUSPEITO COM BUFFER DE LOG 256KB — PASSÍVEL DE W.O.</div>
+      <div class="rule">🔹 PROIBIDO ROOT.</div>
+      <div class="rule">🔹 PROIBIDO MT MANAGER.</div>
+      <div class="rule">🔹 PLAY STORE PÓS-PARTIDA PODE RESULTAR EM W.O CASO O ANALISTA ACHE NECESSÁRIO.</div>
+      <div class="rule">🔹 PROIBIDO JOGAR QUALQUER MODO QUE SALVE REPLAY PÓS-PARTIDA.</div>
+      <div class="rule">🔹 PROIBIDO QUALQUER TIPO DE ARQUIVO OU PROGRAMA QUE DÊ VANTAGEM SOBRE OUTROS JOGADORES.</div>
+      <div class="rule">🔹 PROIBIDO ACESSAR GOOGLE DRIVE E ZARCHIVER PÓS-PARTIDA.</div>
+      <div class="rule">🔹 NAVEGADOR SÓ SERÁ W.O CASO O HISTÓRICO ESTEJA LIMPO.</div>
+      <div class="rule">🔹 QUALQUER TIPO DE ARQUIVO, PROGRAMA OU RASTRO SUSPEITO DO DIA 01 DE JANEIRO DE 2026 EM DIANTE SERÁ APLICADO W.O.</div>
+      <div class="rule">🔹 SHADERS MODIFICADA É W.O.</div>
+      <div class="rule">🔹 QUALQUER TIPO DE VPN QUE NÃO SEJA DO GOVERNO OU APOSTAS ESPORTIVAS SERÁ APLICADO W.O.</div>
+      <div class="rule">🔹 OBRIGATÓRIO TER APP USAGE INSTALADO COM TODAS AS PERMISSÕES CONCEDIDAS.</div>
+      <div class="rule">🔹 APP USAGE DESINSTALADO — W.O APENAS SE ESTIVER COM REPLAY SUSPEITO.</div>
+      <div class="rule">🔹 EM CASOS DE REPLAY SUSPEITO COM BUFFER DE LOG 256KB — PASSÍVEL DE W.O.</div>
 
+      <h3>🍎 IOS</h3>
 
-    <h3>
-      🍎 IOS
-    </h3>
+      <div class="rule">🔹 VPN É W.O. (EXCETO VPN ESCOLAR).</div>
+      <div class="rule">🔹 IPHONE É PROIBIDO REINICIAR DURANTE/APÓS A PARTIDA.</div>
+      <div class="rule">🔹 IPHONE OBRIGATÓRIO JOGAR COM TEMPO DE USO E RELATÓRIO DE PRIVACIDADE ATIVADO.</div>
+      <div class="rule">🔹 PROIBIDO SCARLET, ESIGN, KSIGN, GBOX E SIMILARES.</div>
+      <div class="rule">🔹 IPHONE VERSÃO 15.X A 16.X EM APOSTAS ACIMA DE R$50 (MD3): DEVE ABRIR TELA REINSTALANDO O JOGO E ENTRANDO NA SALA.</div>
+      <div class="rule">🔹 IPHONES 15.X–16.X COM APP STORE NA BATERIA APÓS A PARTIDA SÃO PASSÍVEIS DE W.O.</div>
+      <div class="rule">🔹 IPHONES 15.X–16.X COM REPLAY SUSPEITO SÃO PASSÍVEIS DE W.O.</div>
+      <div class="rule">🔹 IPHONES COM MODO DEVELOPER ATIVADO RESULTAM EM W.O.</div>
+      <div class="rule">🔹 É PROIBIDO RELOGAR COM REPLAY SUSPEITO.</div>
+      <div class="rule">🔹 RELATÓRIO DE PRIVACIDADE OU TEMPO DE USO DESATIVADO — W.O APENAS SE REPLAY ESTIVER SUSPEITO.</div>
 
-    <div class="rule">🔹 VPN É W.O. (EXCETO VPN ESCOLAR).</div>
-    <div class="rule">🔹 IPHONE É PROIBIDO REINICIAR DURANTE/APÓS A PARTIDA.</div>
-    <div class="rule">🔹 IPHONE OBRIGATÓRIO JOGAR COM TEMPO DE USO E RELATÓRIO DE PRIVACIDADE ATIVADO.</div>
-    <div class="rule">🔹 PROIBIDO SCARLET, ESIGN, KSIGN, GBOX E SIMILARES.</div>
-    <div class="rule">🔹 IPHONE VERSÃO 15.X A 16.X EM APOSTAS ACIMA DE R$50 (MD3): DEVE ABRIR TELA REINSTALANDO O JOGO E ENTRANDO NA SALA.</div>
-    <div class="rule">🔹 IPHONES 15.X–16.X COM APP STORE NA BATERIA APÓS A PARTIDA SÃO PASSÍVEIS DE W.O.</div>
-    <div class="rule">🔹 IPHONES 15.X–16.X COM REPLAY SUSPEITO SÃO PASSÍVEIS DE W.O.</div>
-    <div class="rule">🔹 IPHONES COM MODO DEVELOPER ATIVADO RESULTAM EM W.O.</div>
-    <div class="rule">🔹 É PROIBIDO RELOGAR COM REPLAY SUSPEITO.</div>
-    <div class="rule">🔹 RELATÓRIO DE PRIVACIDADE OU TEMPO DE USO DESATIVADO — W.O APENAS SE REPLAY ESTIVER SUSPEITO.</div>
+      <h3>🖥️ EMULADO</h3>
 
+      <div class="rule">🔹 PROIBIDO USO DE INJEÇÕES OU MODIFICAÇÕES DE DLL DURANTE/APÓS A PARTIDA.</div>
+      <div class="rule">🔹 PROIBIDO REMOVER PENDRIVE PÓS BOOT.</div>
+      <div class="rule">🔹 TODOS OS DISCOS DEVEM SER NTFS COM USNJOURNAL ATIVO.</div>
+      <div class="rule">🔹 PROIBIDO REINICIAR O EMULADOR APÓS A PARTIDA.</div>
+      <div class="rule">🔹 TEMP, PREFETCH, RECENT LIMPAS PÓS BOOT DO PC = W.O.</div>
+      <div class="rule">🔹 BAM PAUSADA/LIMPA = W.O.</div>
+      <div class="rule">🔹 WINDOWS MODIFICADO QUE IMPOSSIBILITE TELAGEM = W.O.</div>
+      <div class="rule">🔹 NEGAR ACESSO VIA ANYDESK/TEAMVIEWER = W.O.</div>
+      <div class="rule">🔹 SYSMON ATIVADA APÓS BOOT = W.O.</div>
+      <div class="rule">🔹 RASTRO DE SERVIÇO PAUSADO MESMO QUE TEMPORARIAMENTE = W.O.</div>
+      <div class="rule">🔹 SEMPRE CONFIRA ATUALIZAÇÕES DA SYSMON.</div>
+      <div class="rule">🔹 PLACAS-MÃES X99: AVISAR O SS CASO NÃO TENHA SECURE BOOT/TPM.</div>
+      <div class="rule">🔹 PROIBIDO USO DE EMULADORES PROTEGIDOS POR KERNEL.</div>
+      <div class="rule">🔹 CASO ALGUM SERVIÇO NECESSÁRIO ESTEJA DESABILITADO, SERÁ W.O EM REPLAYS SUSPEITOS.</div>
+      <div class="rule">🔹 EM CASOS PARA CONFERIR SE O EMULADOR É PERMITIDO OU NÃO, INSTALE O ARQUIVO QUE CONFERE O EMULADOR.</div>
 
-    <h3>
-      🖥️ EMULADO
-    </h3>
+      <h3>⚠️ REGRA FINAL</h3>
 
-    <div class="rule">🔹 PROIBIDO USO DE INJEÇÕES OU MODIFICAÇÕES DE DLL DURANTE/APÓS A PARTIDA.</div>
-    <div class="rule">🔹 PROIBIDO REMOVER PENDRIVE PÓS BOOT.</div>
-    <div class="rule">🔹 TODOS OS DISCOS DEVEM SER NTFS COM USNJOURNAL ATIVO.</div>
-    <div class="rule">🔹 PROIBIDO REINICIAR O EMULADOR APÓS A PARTIDA.</div>
-    <div class="rule">🔹 TEMP, PREFETCH, RECENT LIMPAS PÓS BOOT DO PC = W.O.</div>
-    <div class="rule">🔹 BAM PAUSADA/LIMPA = W.O.</div>
-    <div class="rule">🔹 WINDOWS MODIFICADO QUE IMPOSSIBILITE TELAGEM = W.O.</div>
-    <div class="rule">🔹 NEGAR ACESSO VIA ANYDESK/TEAMVIEWER = W.O.</div>
-    <div class="rule">🔹 SYSMON ATIVADA APÓS BOOT = W.O.</div>
-    <div class="rule">🔹 RASTRO DE SERVIÇO PAUSADO MESMO QUE TEMPORARIAMENTE = W.O.</div>
-    <div class="rule">🔹 SEMPRE CONFIRA ATUALIZAÇÕES DA SYSMON.</div>
-    <div class="rule">🔹 PLACAS-MÃES X99: AVISAR O SS CASO NÃO TENHA SECURE BOOT/TPM.</div>
-    <div class="rule">🔹 PROIBIDO USO DE EMULADORES PROTEGIDOS POR KERNEL.</div>
-    <div class="rule">🔹 CASO ALGUM SERVIÇO NECESSÁRIO ESTEJA DESABILITADO, SERÁ W.O EM REPLAYS SUSPEITOS.</div>
-    <div class="rule">🔹 EM CASOS PARA CONFERIR SE O EMULADOR É PERMITIDO OU NÃO, INSTALE O ARQUIVO QUE CONFERE O EMULADOR.</div>
+      <div class="rule">
+        🔹 BREVENT PAREADO SERÁ W.O.
+      </div>
 
-
-    <h3>
-      ⚠️ REGRA FINAL
-    </h3>
-
-    <div class="rule">
-      🔹 BREVENT PAREADO SERÁ W.O.
     </div>
 
   </div>
@@ -1068,61 +1021,62 @@ REGRAS — TELA CHEIA
 </div>
 
 
-<!-- =========================================
-ÁREA DOS DONOS — TELA CHEIA
-========================================= -->
+<!-- =========================
+ÁREA DOS DONOS
+========================= -->
 
 <div
-  class="owner-panel"
-  id="ownerPanel"
+  class="fullscreen-page"
+  id="ownerPage"
 >
 
-  <div class="owner-box">
+  <div class="fullscreen-header">
 
-    <div class="owner-header">
+    <h2>
+      👑 Área dos Donos
+    </h2>
 
-      <h2>
-        👑 Área dos Donos
-      </h2>
+    <button
+      class="close-fullscreen"
+      onclick="closeOwnerPanel()"
+    >
+      ✕ Fechar
+    </button>
 
-      <button
-        class="close-button"
-        onclick="closeOwnerPanel()"
+  </div>
+
+
+  <div class="fullscreen-content">
+
+    <div class="owner-box">
+
+      <p
+        style="color:#858c99;font-size:12px;margin-bottom:15px"
       >
-        ✕ Fechar
-      </button>
+        Entre com o código do Dono para administrar a sala.
+      </p>
+
+      <input
+        class="input"
+        id="ownerCode"
+        type="password"
+        placeholder="Código do Dono"
+      >
+
+      <div class="owner-actions">
+
+        <button
+          class="control"
+          onclick="ownerLogin()"
+        >
+          Entrar
+        </button>
+
+      </div>
+
+      <div id="ownerContent"></div>
 
     </div>
-
-
-    <p
-      style="color:#858c99;font-size:12px;margin-bottom:15px"
-    >
-      Entre com o código do Dono para administrar a sala.
-    </p>
-
-
-    <input
-      class="input"
-      id="ownerCode"
-      type="password"
-      placeholder="Código do Dono"
-    >
-
-
-    <div class="owner-actions">
-
-      <button
-        class="control"
-        onclick="ownerLogin()"
-      >
-        Entrar
-      </button>
-
-    </div>
-
-
-    <div id="ownerContent"></div>
 
   </div>
 
@@ -1131,115 +1085,104 @@ REGRAS — TELA CHEIA
 
 <script>
 
-/* =========================================
+/* =========================
 CONFIG
-========================================= */
+========================= */
 
 const SERVER_URL =
 "wss://ff-arena-serve.onrender.com";
 
-let socket = null;
+let socket=null;
 
-let currentRoom = null;
+let currentRoom=null;
 
-let selectedRoom = null;
+let selectedRoom=null;
 
-let myId = null;
+let myId=null;
 
-let myName = "Usuário";
+let myName="Usuário";
 
-let myRole = "MEMBRO";
+let myRole="MEMBRO";
 
-let localCameraStream = null;
+let localCameraStream=null;
 
-let localScreenStream = null;
+let localScreenStream=null;
 
-let microphoneMuted = false;
+let microphoneMuted=false;
 
-let ownerAuthenticated = false;
+let cameraFacingMode="user";
 
-let facingMode = "user";
+let currentUsers=[];
 
-const peerConnections = {};
-
-const makingOffer = {};
-
-const ignoreOffer = {};
-
-const polite = {};
-
-let currentUsers = [];
+const peerConnections={};
+const makingOffer={};
+const ignoreOffer={};
+const polite={};
 
 
-/* =========================================
+/* =========================
 ELEMENTOS
-========================================= */
+========================= */
 
-const channels =
+const channels=
 document.getElementById("channels");
 
-const title =
-document.getElementById("title");
+const enterPanel=
+document.getElementById("enterPanel");
 
-const description =
-document.getElementById("description");
+const enterTitle=
+document.getElementById("enterTitle");
 
-const videoGrid =
-document.getElementById("videoGrid");
+const analysisScreen=
+document.getElementById("analysisScreen");
 
-const empty =
-document.getElementById("empty");
-
-const stage =
-document.getElementById("stage");
-
-const controls =
-document.getElementById("controls");
-
-const homeScreen =
+const homeScreen=
 document.getElementById("homeScreen");
 
-const joinScreen =
-document.getElementById("joinScreen");
+const title=
+document.getElementById("title");
 
-const joinTitle =
-document.getElementById("joinTitle");
+const description=
+document.getElementById("description");
 
-const headerAction =
-document.getElementById("headerAction");
+const videoGrid=
+document.getElementById("videoGrid");
 
-const rules =
-document.getElementById("rules");
+const empty=
+document.getElementById("empty");
 
-const cameraButton =
+const cameraButton=
 document.getElementById("cameraButton");
 
-const flipButton =
-document.getElementById("flipButton");
-
-const screenButton =
+const screenButton=
 document.getElementById("screenButton");
 
-const micButton =
+const micButton=
 document.getElementById("micButton");
 
-const ownerPanel =
-document.getElementById("ownerPanel");
+const flipButton=
+document.getElementById("flipButton");
 
-const ownerContent =
+const rulesPage=
+document.getElementById("rulesPage");
+
+const ownerPage=
+document.getElementById("ownerPage");
+
+const ownerContent=
 document.getElementById("ownerContent");
 
 
-/* =========================================
+/* =========================
 CRIAR 20 ANÁLISES
-========================================= */
+========================= */
 
 for(let i=1;i<=20;i++){
 
-  const container =
+  const container=
   document.createElement("div");
 
-  container.innerHTML = `
+  container.innerHTML=`
 
     <div
       class="channel"
@@ -1273,37 +1216,38 @@ for(let i=1;i<=20;i++){
 }
 
 
-/* =========================================
+/* =========================
 NOME
-========================================= */
+========================= */
 
 function loadName(){
 
-  const saved =
+  const saved=
   localStorage.getItem("ffArenaName");
 
   if(saved){
 
-    myName = saved;
+    myName=saved;
 
   }else{
 
-    const answer =
+    const answer=
     prompt("Digite seu nome:");
 
-    myName =
-    (answer || "Usuário")
-      .trim()
-      .slice(0,30);
+    myName=
+    (answer||"Usuário")
+    .trim()
+    .slice(0,30);
 
     if(!myName){
-      myName = "Usuário";
+      myName="Usuário";
     }
 
     localStorage.setItem(
       "ffArenaName",
       myName
     );
+
   }
 
   updateProfile();
@@ -1312,109 +1256,128 @@ function loadName(){
 
 function updateProfile(){
 
-  document.getElementById(
-    "myNameDisplay"
-  ).textContent = myName;
+  const name=
+  document.getElementById("myNameDisplay");
 
-  document.getElementById(
-    "myAvatar"
-  ).textContent =
-    myName.charAt(0).toUpperCase();
+  const avatar=
+  document.getElementById("myAvatar");
 
-  document.getElementById(
-    "myRoleDisplay"
-  ).textContent =
-    myRole;
+  const role=
+  document.getElementById("myRoleDisplay");
+
+  if(name) name.textContent=myName;
+
+  if(avatar){
+    avatar.textContent=
+      myName.charAt(0).toUpperCase();
+  }
+
+  if(role){
+    role.textContent=myRole;
+  }
+
 }
 
 
-/* =========================================
+/* =========================
 SELECIONAR ANÁLISE
-NÃO ENTRA AUTOMATICAMENTE
-========================================= */
+========================= */
 
 function selectRoom(room){
 
-  selectedRoom = room;
+  selectedRoom=room;
 
   document
-    .querySelectorAll(".channel")
-    .forEach(el =>
-      el.classList.remove("active")
-    );
+  .querySelectorAll(".channel")
+  .forEach(el=>{
+    el.classList.remove("active");
+  });
 
-  const channel =
-    document.getElementById(
-      `channel-${room}`
-    );
+  const channel=
+  document.getElementById(
+    `channel-${room}`
+  );
 
   if(channel){
     channel.classList.add("active");
   }
 
-  homeScreen.style.display = "none";
-
-  stage.classList.remove("show");
-
-  controls.style.display = "none";
-
-  joinScreen.classList.add("show");
-
-  joinTitle.textContent =
-    `Análise ${String(room).padStart(2,"0")}`;
-
-  title.textContent =
+  enterTitle.textContent=
     `🔎 Análise ${String(room).padStart(2,"0")}`;
 
-  description.textContent =
-    "Clique em Entrar na Análise para participar.";
-
-  headerAction.innerHTML = "";
+  enterPanel.classList.add("show");
 }
 
 
-/* =========================================
-ENTRAR NA ANÁLISE
-========================================= */
+/* =========================
+FECHAR CONFIRMAÇÃO
+========================= */
 
-function enterSelectedRoom(){
+function closeEnterPanel(){
+
+  enterPanel.classList.remove("show");
+
+  selectedRoom=null;
+
+}
+
+
+/* =========================
+ENTRAR
+========================= */
+
+function confirmEnterRoom(){
 
   if(!selectedRoom){
     return;
   }
 
-  currentRoom =
-    selectedRoom;
+  const room=selectedRoom;
 
-  joinScreen.classList.remove("show");
+  closeEnterPanel();
 
-  homeScreen.style.display = "none";
+  openRoom(room);
+}
+
+
+/* =========================
+ABRIR ANÁLISE
+========================= */
+
+function openRoom(room){
+
+  currentRoom=room;
 
   /*
-  AGORA SIM O QUADRADO APARECE.
+  Só aqui o quadrado aparece.
   */
 
-  stage.classList.add("show");
+  document.body.classList.add(
+    "analysis-open"
+  );
 
-  controls.style.display = "grid";
+  homeScreen.style.display="none";
 
-  title.textContent =
-    `🔎 Análise ${String(currentRoom).padStart(2,"0")}`;
+  analysisScreen.classList.add("show");
 
-  description.textContent =
+  title.textContent=
+    `🔎 Análise ${String(room).padStart(2,"0")}`;
+
+  description.textContent=
     "Conectando à análise...";
 
   clearVideos();
 
   closeAllPeerConnections();
 
-  connectServer(currentRoom);
+  connectServer(room);
+
 }
 
 
-/* =========================================
+/* =========================
 WEBSOCKET
-========================================= */
+========================= */
 
 function connectServer(room){
 
@@ -1426,11 +1389,11 @@ function connectServer(room){
 
   }
 
-  socket =
-    new WebSocket(SERVER_URL);
+  socket=
+  new WebSocket(SERVER_URL);
 
 
-  socket.onopen = () => {
+  socket.onopen=()=>{
 
     socket.send(
       JSON.stringify({
@@ -1443,204 +1406,193 @@ function connectServer(room){
   };
 
 
-  socket.onmessage =
-    async(event) => {
+  socket.onmessage=
+  async(event)=>{
 
-      let data;
+    let data;
 
-      try{
-
-        data =
-          JSON.parse(event.data);
-
-      }catch{
-
-        return;
-
-      }
+    try{
+      data=JSON.parse(event.data);
+    }catch{
+      return;
+    }
 
 
-      if(data.type === "joined"){
+    if(data.type==="joined"){
 
-        myId = data.id;
+      myId=data.id;
 
-        myRole =
-          data.role || "MEMBRO";
+      myRole=
+        data.role||"MEMBRO";
 
-        updateProfile();
+      updateProfile();
 
-        description.textContent =
-          "Você está conectado.";
+      description.textContent=
+        "Você está conectado.";
 
-        for(
-          const peer
-          of data.peers || []
-        ){
-
-          await createPeerConnection(
-            peer.id,
-            peer,
-            true
-          );
-
-        }
-
-        updateOwnerPanel();
-
-        return;
-      }
-
-
-      if(data.type === "peer-joined"){
+      for(
+        const peer
+        of data.peers||[]
+      ){
 
         await createPeerConnection(
-          data.user.id,
-          data.user,
-          false
+          peer.id,
+          peer,
+          true
         );
 
-        return;
       }
 
+      updateOwnerPanel();
 
-      if(data.type === "offer"){
-
-        await receiveOffer(
-          data.from,
-          data.data
-        );
-
-        return;
-      }
+      return;
+    }
 
 
-      if(data.type === "answer"){
+    if(data.type==="peer-joined"){
 
-        await receiveAnswer(
-          data.from,
-          data.data
-        );
+      await createPeerConnection(
+        data.user.id,
+        data.user,
+        false
+      );
 
-        return;
-      }
-
-
-      if(data.type === "ice-candidate"){
-
-        await receiveIce(
-          data.from,
-          data.data
-        );
-
-        return;
-      }
+      return;
+    }
 
 
-      if(data.type === "peer-left"){
+    if(data.type==="offer"){
 
-        removePeer(data.id);
+      await receiveOffer(
+        data.from,
+        data.data
+      );
 
-        return;
-      }
-
-
-      if(data.type === "users"){
-
-        updateUsers(
-          data.users || []
-        );
-
-        updateOwnerPanel();
-
-        return;
-      }
+      return;
+    }
 
 
-      if(data.type === "force-mute"){
+    if(data.type==="answer"){
 
-        forceMute();
+      await receiveAnswer(
+        data.from,
+        data.data
+      );
 
-        return;
-      }
-
-
-      if(data.type === "force-unmute"){
-
-        forceUnmute();
-
-        return;
-      }
+      return;
+    }
 
 
-      if(data.type === "role-changed"){
+    if(data.type==="ice-candidate"){
 
-        myRole =
-          data.role;
+      await receiveIce(
+        data.from,
+        data.data
+      );
+
+      return;
+    }
+
+
+    if(data.type==="peer-left"){
+
+      removePeer(data.id);
+
+      return;
+    }
+
+
+    if(data.type==="users"){
+
+      updateUsers(data.users||[]);
+
+      updateOwnerPanel();
+
+      return;
+    }
+
+
+    if(data.type==="force-mute"){
+
+      forceMute();
+
+      return;
+    }
+
+
+    if(data.type==="force-unmute"){
+
+      forceUnmute();
+
+      return;
+    }
+
+
+    if(data.type==="role-changed"){
+
+      myRole=data.role;
+
+      updateProfile();
+
+      updateOwnerPanel();
+
+      return;
+    }
+
+
+    if(data.type==="owner-login-result"){
+
+      if(data.success){
+
+        myRole="DONO";
 
         updateProfile();
 
-        updateOwnerPanel();
-
-        return;
-      }
-
-
-      if(data.type === "owner-login-result"){
-
-        if(data.success){
-
-          ownerAuthenticated = true;
-
-          myRole = "DONO";
-
-          updateProfile();
-
-          alert(
-            "Você entrou como Dono."
-          );
-
-        }else{
-
-          alert(
-            data.message ||
-            "Código incorreto."
-          );
-
-        }
-
-        updateOwnerPanel();
-
-        return;
-      }
-
-
-      if(data.type === "room-full"){
-
         alert(
-          data.message
+          "Você entrou como Dono."
         );
 
-        return;
-      }
-
-
-      if(data.type === "error"){
+      }else{
 
         alert(
-          data.message
+          data.message||
+          "Código incorreto."
         );
 
-        return;
       }
 
-    };
+      updateOwnerPanel();
+
+      return;
+    }
 
 
-  socket.onclose = () => {
+    if(data.type==="room-full"){
 
-    if(currentRoom){
+      alert(data.message);
 
-      description.textContent =
+      return;
+    }
+
+
+    if(data.type==="error"){
+
+      alert(data.message);
+
+    }
+
+  };
+
+
+  socket.onclose=()=>{
+
+    if(
+      document.body.classList.contains(
+        "analysis-open"
+      )
+    ){
+
+      description.textContent=
         "Conexão encerrada.";
 
     }
@@ -1648,9 +1600,9 @@ function connectServer(room){
   };
 
 
-  socket.onerror = () => {
+  socket.onerror=()=>{
 
-    description.textContent =
+    description.textContent=
       "Erro de conexão com o servidor.";
 
   };
@@ -1658,26 +1610,19 @@ function connectServer(room){
 }
 
 
-/* =========================================
+/* =========================
 WEBRTC
-========================================= */
+========================= */
 
-const rtcConfig = {
-
+const rtcConfig={
   iceServers:[
-
     {
-      urls:
-        "stun:stun.l.google.com:19302"
+      urls:"stun:stun.l.google.com:19302"
     },
-
     {
-      urls:
-        "stun:stun1.l.google.com:19302"
+      urls:"stun:stun1.l.google.com:19302"
     }
-
   ]
-
 };
 
 
@@ -1688,170 +1633,22 @@ async function createPeerConnection(
 ){
 
   if(peerConnections[peerId]){
-
     return peerConnections[peerId];
-
   }
 
+  const pc=
+  new RTCPeerConnection(
+    rtcConfig
+  );
 
-  const pc =
-    new RTCPeerConnection(
-      rtcConfig
-    );
+  peerConnections[peerId]=pc;
 
+  polite[peerId]=
+    String(myId)>String(peerId);
 
-  peerConnections[peerId] =
-    pc;
+  makingOffer[peerId]=false;
+  ignoreOffer[peerId]=false;
 
-
-  polite[peerId] =
-    String(myId) >
-    String(peerId);
-
-
-  makingOffer[peerId] =
-    false;
-
-  ignoreOffer[peerId] =
-    false;
-
-
-  addLocalTracks(pc);
-
-
-  pc.ontrack =
-    event => {
-
-      const stream =
-        event.streams[0];
-
-      if(!stream){
-        return;
-      }
-
-      showRemoteVideo(
-        peerId,
-        peerUser,
-        stream
-      );
-
-    };
-
-
-  pc.onicecandidate =
-    event => {
-
-      if(!event.candidate){
-        return;
-      }
-
-      sendSignal({
-
-        type:"ice-candidate",
-
-        target:peerId,
-
-        data:event.candidate
-
-      });
-
-    };
-
-
-  pc.onnegotiationneeded =
-    async() => {
-
-      try{
-
-        makingOffer[peerId] =
-          true;
-
-        await pc.setLocalDescription();
-
-        sendSignal({
-
-          type:"offer",
-
-          target:peerId,
-
-          data:pc.localDescription
-
-        });
-
-      }catch(error){
-
-        console.log(
-          "Negotiation error",
-          error
-        );
-
-      }finally{
-
-        makingOffer[peerId] =
-          false;
-
-      }
-
-    };
-
-
-  pc.onconnectionstatechange =
-    () => {
-
-      const state =
-        pc.connectionState;
-
-      if(
-        state === "failed" ||
-        state === "closed" ||
-        state === "disconnected"
-      ){
-
-        removePeer(peerId);
-
-      }
-
-    };
-
-
-  if(createOffer){
-
-    try{
-
-      makingOffer[peerId] =
-        true;
-
-      await pc.setLocalDescription();
-
-      sendSignal({
-
-        type:"offer",
-
-        target:peerId,
-
-        data:pc.localDescription
-
-      });
-
-    }catch(error){
-
-      console.log(error);
-
-    }finally{
-
-      makingOffer[peerId] =
-        false;
-
-    }
-
-  }
-
-
-  return pc;
-}
-
-
-function addLocalTracks(pc){
 
   if(localCameraStream){
 
@@ -1886,22 +1683,123 @@ function addLocalTracks(pc){
 
   }
 
+
+  pc.ontrack=event=>{
+
+    const stream=
+      event.streams[0];
+
+    if(!stream)return;
+
+    showRemoteVideo(
+      peerId,
+      peerUser,
+      stream
+    );
+
+  };
+
+
+  pc.onicecandidate=event=>{
+
+    if(!event.candidate)return;
+
+    sendSignal({
+      type:"ice-candidate",
+      target:peerId,
+      data:event.candidate
+    });
+
+  };
+
+
+  pc.onnegotiationneeded=
+  async()=>{
+
+    try{
+
+      makingOffer[peerId]=true;
+
+      await pc.setLocalDescription();
+
+      sendSignal({
+        type:"offer",
+        target:peerId,
+        data:pc.localDescription
+      });
+
+    }catch(error){
+
+      console.log(error);
+
+    }finally{
+
+      makingOffer[peerId]=false;
+
+    }
+
+  };
+
+
+  pc.onconnectionstatechange=()=>{
+
+    const state=
+      pc.connectionState;
+
+    if(
+      state==="failed"||
+      state==="closed"||
+      state==="disconnected"
+    ){
+
+      removePeer(peerId);
+
+    }
+
+  };
+
+
+  if(createOffer){
+
+    try{
+
+      makingOffer[peerId]=true;
+
+      await pc.setLocalDescription();
+
+      sendSignal({
+        type:"offer",
+        target:peerId,
+        data:pc.localDescription
+      });
+
+    }catch(error){
+
+      console.log(error);
+
+    }finally{
+
+      makingOffer[peerId]=false;
+
+    }
+
+  }
+
+  return pc;
 }
 
 
-/* =========================================
+/* =========================
 SINAL
-========================================= */
+========================= */
 
 function sendSignal(message){
 
   if(
-    !socket ||
-    socket.readyState !== WebSocket.OPEN
+    !socket||
+    socket.readyState!==WebSocket.OPEN
   ){
-
     return;
-
   }
 
   socket.send(
@@ -1911,39 +1809,33 @@ function sendSignal(message){
 }
 
 
-/* =========================================
+/* =========================
 OFFER
-========================================= */
+========================= */
 
 async function receiveOffer(
   peerId,
   descriptionData
 ){
 
-  const pc =
-    await createPeerConnection(
-      peerId,
-      {
-        name:"Usuário"
-      },
-      false
-    );
+  const pc=
+  await createPeerConnection(
+    peerId,
+    {name:"Usuário"},
+    false
+  );
 
+  const offerCollision=
+    makingOffer[peerId]||
+    pc.signalingState!=="stable";
 
-  const offerCollision =
-    makingOffer[peerId] ||
-    pc.signalingState !== "stable";
-
-
-  ignoreOffer[peerId] =
-    !polite[peerId] &&
+  ignoreOffer[peerId]=
+    !polite[peerId]&&
     offerCollision;
-
 
   if(ignoreOffer[peerId]){
     return;
   }
-
 
   try{
 
@@ -1954,42 +1846,33 @@ async function receiveOffer(
     await pc.setLocalDescription();
 
     sendSignal({
-
       type:"answer",
-
       target:peerId,
-
       data:pc.localDescription
-
     });
 
   }catch(error){
 
-    console.log(
-      "Offer error",
-      error
-    );
+    console.log(error);
 
   }
 
 }
 
 
-/* =========================================
+/* =========================
 ANSWER
-========================================= */
+========================= */
 
 async function receiveAnswer(
   peerId,
   descriptionData
 ){
 
-  const pc =
+  const pc=
     peerConnections[peerId];
 
-  if(!pc){
-    return;
-  }
+  if(!pc)return;
 
   try{
 
@@ -1999,31 +1882,26 @@ async function receiveAnswer(
 
   }catch(error){
 
-    console.log(
-      "Answer error",
-      error
-    );
+    console.log(error);
 
   }
 
 }
 
 
-/* =========================================
+/* =========================
 ICE
-========================================= */
+========================= */
 
 async function receiveIce(
   peerId,
   candidate
 ){
 
-  const pc =
+  const pc=
     peerConnections[peerId];
 
-  if(!pc){
-    return;
-  }
+  if(!pc)return;
 
   try{
 
@@ -2034,12 +1912,7 @@ async function receiveIce(
   }catch(error){
 
     if(!ignoreOffer[peerId]){
-
-      console.log(
-        "ICE error",
-        error
-      );
-
+      console.log(error);
     }
 
   }
@@ -2047,23 +1920,21 @@ async function receiveIce(
 }
 
 
-/* =========================================
+/* =========================
 CÂMERA
-========================================= */
+========================= */
 
 async function toggleCamera(){
 
   if(localCameraStream){
 
     localCameraStream
-      .getTracks()
-      .forEach(
-        track => track.stop()
-      );
+    .getTracks()
+    .forEach(track=>track.stop());
 
-    localCameraStream = null;
+    localCameraStream=null;
 
-    cameraButton.textContent =
+    cameraButton.textContent=
       "📷 Abrir câmera";
 
     await renegotiateAll();
@@ -2071,48 +1942,20 @@ async function toggleCamera(){
     sendStatus();
 
     if(!localScreenStream){
-
       hideLocalVideo();
-
     }
 
     return;
   }
 
 
-  await openCamera();
-
-}
-
-
-/* =========================================
-ABRIR CÂMERA
-========================================= */
-
-async function openCamera(){
-
   try{
 
-    if(localCameraStream){
-
-      localCameraStream
-        .getTracks()
-        .forEach(
-          track => track.stop()
-        );
-
-      localCameraStream = null;
-
-    }
-
-
-    localCameraStream =
+    localCameraStream=
       await navigator.mediaDevices.getUserMedia({
 
         video:{
-          facingMode:{
-            ideal:facingMode
-          }
+          facingMode:cameraFacingMode
         },
 
         audio:true
@@ -2125,15 +1968,14 @@ async function openCamera(){
       of localCameraStream.getAudioTracks()
     ){
 
-      track.enabled =
+      track.enabled=
         !microphoneMuted;
 
     }
 
 
-    cameraButton.textContent =
+    cameraButton.textContent=
       "📷 Fechar câmera";
-
 
     showLocalVideo();
 
@@ -2154,9 +1996,9 @@ async function openCamera(){
 }
 
 
-/* =========================================
+/* =========================
 VIRAR CÂMERA
-========================================= */
+========================= */
 
 async function flipCamera(){
 
@@ -2167,36 +2009,27 @@ async function flipCamera(){
     );
 
     return;
-
   }
 
 
-  facingMode =
-    facingMode === "user"
-      ? "environment"
-      : "user";
-
-
-  const oldAudioEnabled =
-    !microphoneMuted;
+  cameraFacingMode=
+    cameraFacingMode==="user"
+    ?"environment"
+    :"user";
 
 
   try{
 
     localCameraStream
-      .getTracks()
-      .forEach(
-        track => track.stop()
-      );
+    .getTracks()
+    .forEach(track=>track.stop());
 
 
-    localCameraStream =
+    localCameraStream=
       await navigator.mediaDevices.getUserMedia({
 
         video:{
-          facingMode:{
-            ideal:facingMode
-          }
+          facingMode:cameraFacingMode
         },
 
         audio:true
@@ -2209,8 +2042,8 @@ async function flipCamera(){
       of localCameraStream.getAudioTracks()
     ){
 
-      track.enabled =
-        oldAudioEnabled;
+      track.enabled=
+        !microphoneMuted;
 
     }
 
@@ -2225,18 +2058,8 @@ async function flipCamera(){
 
     console.log(error);
 
-    /*
-    Se a câmera traseira não estiver disponível,
-    volta para a frontal.
-    */
-
-    facingMode =
-      facingMode === "user"
-        ? "environment"
-        : "user";
-
     alert(
-      "Não foi possível virar a câmera neste dispositivo."
+      "Não foi possível virar a câmera."
     );
 
   }
@@ -2244,23 +2067,21 @@ async function flipCamera(){
 }
 
 
-/* =========================================
-COMPARTILHAR TELA
-========================================= */
+/* =========================
+TELA
+========================= */
 
 async function toggleScreen(){
 
   if(localScreenStream){
 
     localScreenStream
-      .getTracks()
-      .forEach(
-        track => track.stop()
-      );
+    .getTracks()
+    .forEach(track=>track.stop());
 
-    localScreenStream = null;
+    localScreenStream=null;
 
-    screenButton.textContent =
+    screenButton.textContent=
       "🖥️ Compartilhar tela";
 
     await renegotiateAll();
@@ -2268,9 +2089,7 @@ async function toggleScreen(){
     sendStatus();
 
     if(!localCameraStream){
-
       hideLocalVideo();
-
     }
 
     return;
@@ -2278,12 +2097,12 @@ async function toggleScreen(){
 
 
   if(
-    !navigator.mediaDevices ||
+    !navigator.mediaDevices||
     !navigator.mediaDevices.getDisplayMedia
   ){
 
     alert(
-      "Este navegador/dispositivo não disponibiliza compartilhamento de tela por esta página."
+      "Este navegador não disponibiliza compartilhamento de tela."
     );
 
     return;
@@ -2292,46 +2111,40 @@ async function toggleScreen(){
 
   try{
 
-    localScreenStream =
+    localScreenStream=
       await navigator.mediaDevices.getDisplayMedia({
-
         video:true,
-
         audio:true
-
       });
 
 
-    screenButton.textContent =
+    screenButton.textContent=
       "🖥️ Parar tela";
 
 
-    const track =
-      localScreenStream
-        .getVideoTracks()[0];
+    const track=
+      localScreenStream.getVideoTracks()[0];
 
 
     if(track){
 
-      track.onended =
-        async() => {
+      track.onended=
+      async()=>{
 
-          localScreenStream = null;
+        localScreenStream=null;
 
-          screenButton.textContent =
-            "🖥️ Compartilhar tela";
+        screenButton.textContent=
+          "🖥️ Compartilhar tela";
 
-          await renegotiateAll();
+        await renegotiateAll();
 
-          sendStatus();
+        sendStatus();
 
-          if(!localCameraStream){
+        if(!localCameraStream){
+          hideLocalVideo();
+        }
 
-            hideLocalVideo();
-
-          }
-
-        };
+      };
 
     }
 
@@ -2351,9 +2164,9 @@ async function toggleScreen(){
 }
 
 
-/* =========================================
+/* =========================
 MICROFONE
-========================================= */
+========================= */
 
 function toggleMicrophone(){
 
@@ -2364,11 +2177,10 @@ function toggleMicrophone(){
     );
 
     return;
-
   }
 
 
-  microphoneMuted =
+  microphoneMuted=
     !microphoneMuted;
 
 
@@ -2377,7 +2189,7 @@ function toggleMicrophone(){
     of localCameraStream.getAudioTracks()
   ){
 
-    track.enabled =
+    track.enabled=
       !microphoneMuted;
 
   }
@@ -2392,32 +2204,29 @@ function toggleMicrophone(){
 
 function updateMicButton(){
 
-  micButton.textContent =
+  micButton.textContent=
     microphoneMuted
-      ? "🔇 Microfone"
-      : "🎙️ Microfone";
+    ?"🔇 Microfone"
+    :"🎙️ Microfone";
 
 }
 
 
-/* =========================================
-MUTE FORÇADO
-========================================= */
+/* =========================
+MUTE
+========================= */
 
 function forceMute(){
 
-  microphoneMuted = true;
+  microphoneMuted=true;
 
   if(localCameraStream){
 
-    for(
-      const track
-      of localCameraStream.getAudioTracks()
-    ){
-
-      track.enabled = false;
-
-    }
+    localCameraStream
+    .getAudioTracks()
+    .forEach(
+      track=>track.enabled=false
+    );
 
   }
 
@@ -2430,18 +2239,15 @@ function forceMute(){
 
 function forceUnmute(){
 
-  microphoneMuted = false;
+  microphoneMuted=false;
 
   if(localCameraStream){
 
-    for(
-      const track
-      of localCameraStream.getAudioTracks()
-    ){
-
-      track.enabled = true;
-
-    }
+    localCameraStream
+    .getAudioTracks()
+    .forEach(
+      track=>track.enabled=true
+    );
 
   }
 
@@ -2452,19 +2258,17 @@ function forceUnmute(){
 }
 
 
-/* =========================================
+/* =========================
 STATUS
-========================================= */
+========================= */
 
 function sendStatus(){
 
   if(
-    !socket ||
-    socket.readyState !== WebSocket.OPEN
+    !socket||
+    socket.readyState!==WebSocket.OPEN
   ){
-
     return;
-
   }
 
   socket.send(
@@ -2472,14 +2276,11 @@ function sendStatus(){
 
       type:"status",
 
-      camera:
-        !!localCameraStream,
+      camera:!!localCameraStream,
 
-      screen:
-        !!localScreenStream,
+      screen:!!localScreenStream,
 
-      muted:
-        microphoneMuted
+      muted:microphoneMuted
 
     })
   );
@@ -2487,9 +2288,9 @@ function sendStatus(){
 }
 
 
-/* =========================================
-RENEGOCIAÇÃO
-========================================= */
+/* =========================
+RENEGOCIAR
+========================= */
 
 async function renegotiateAll(){
 
@@ -2498,17 +2299,11 @@ async function renegotiateAll(){
     of Object.keys(peerConnections)
   ){
 
-    const pc =
+    const pc=
       peerConnections[peerId];
 
-    if(!pc){
-      continue;
-    }
+    if(!pc)continue;
 
-
-    /*
-    Recria os senders de mídia.
-    */
 
     for(
       const sender
@@ -2516,47 +2311,74 @@ async function renegotiateAll(){
     ){
 
       try{
-
-        await pc.removeTrack(
-          sender
-        );
-
+        await pc.removeTrack(sender);
       }catch{}
 
     }
 
 
-    addLocalTracks(pc);
+    if(localCameraStream){
+
+      for(
+        const track
+        of localCameraStream.getTracks()
+      ){
+
+        pc.addTrack(
+          track,
+          localCameraStream
+        );
+
+      }
+
+    }
+
+
+    if(localScreenStream){
+
+      for(
+        const track
+        of localScreenStream.getTracks()
+      ){
+
+        pc.addTrack(
+          track,
+          localScreenStream
+        );
+
+      }
+
+    }
 
   }
 
 }
 
 
-/* =========================================
+/* =========================
 VÍDEO LOCAL
-========================================= */
+========================= */
 
 function showLocalVideo(){
 
-  const id =
-    `local-${myId || "me"}`;
+  const id=
+    `local-${myId}`;
 
-  let card =
+  let card=
     document.getElementById(id);
 
 
   if(!card){
 
-    card =
+    card=
       document.createElement("div");
 
-    card.className =
+    card.className=
       "video-card";
 
-    card.id = id;
+    card.id=id;
 
-    card.innerHTML = `
+    card.innerHTML=`
 
       <video
         id="${id}-video"
@@ -2583,7 +2405,7 @@ function showLocalVideo(){
   }
 
 
-  const video =
+  const video=
     document.getElementById(
       `${id}-video`
     );
@@ -2591,38 +2413,31 @@ function showLocalVideo(){
 
   if(localScreenStream){
 
-    video.srcObject =
+    video.srcObject=
       localScreenStream;
 
   }else{
 
-    video.srcObject =
+    video.srcObject=
       localCameraStream;
 
   }
 
 
-  empty.style.display =
-    "none";
+  empty.style.display="none";
 
 }
 
 
-/* =========================================
-ESCONDER VÍDEO LOCAL
-========================================= */
-
 function hideLocalVideo(){
 
-  const card =
+  const card=
     document.getElementById(
-      `local-${myId || "me"}`
+      `local-${myId}`
     );
 
   if(card){
-
     card.remove();
-
   }
 
   updateEmpty();
@@ -2630,9 +2445,9 @@ function hideLocalVideo(){
 }
 
 
-/* =========================================
+/* =========================
 VÍDEO REMOTO
-========================================= */
+========================= */
 
 function showRemoteVideo(
   peerId,
@@ -2640,24 +2455,24 @@ function showRemoteVideo(
   stream
 ){
 
-  const id =
+  const id=
     `remote-${peerId}`;
 
-  let card =
+  let card=
     document.getElementById(id);
 
 
   if(!card){
 
-    card =
+    card=
       document.createElement("div");
 
-    card.className =
+    card.className=
       "video-card";
 
-    card.id = id;
+    card.id=id;
 
-    card.innerHTML = `
+    card.innerHTML=`
 
       <video
         id="${id}-video"
@@ -2666,7 +2481,9 @@ function showRemoteVideo(
       ></video>
 
       <div class="video-label">
-        ${escapeHTML(user.name || "Usuário")}
+        ${escapeHTML(
+          user.name||"Usuário"
+        )}
       </div>
 
       <div
@@ -2683,40 +2500,28 @@ function showRemoteVideo(
   }
 
 
-  const video =
+  const video=
     document.getElementById(
       `${id}-video`
     );
 
 
-  if(video.srcObject !== stream){
-
-    video.srcObject =
-      stream;
-
+  if(video.srcObject!==stream){
+    video.srcObject=stream;
   }
 
 
-  empty.style.display =
-    "none";
+  empty.style.display="none";
 
 }
 
 
-/* =========================================
-REMOVER PEER
-========================================= */
-
 function removePeer(peerId){
 
-  if(
-    peerConnections[peerId]
-  ){
+  if(peerConnections[peerId]){
 
     try{
-
       peerConnections[peerId].close();
-
     }catch{}
 
     delete peerConnections[peerId];
@@ -2724,61 +2529,43 @@ function removePeer(peerId){
   }
 
 
-  const card =
+  const card=
     document.getElementById(
       `remote-${peerId}`
     );
 
   if(card){
-
     card.remove();
-
   }
-
 
   updateEmpty();
 
 }
 
-
-/* =========================================
-EMPTY
-========================================= */
 
 function updateEmpty(){
 
   if(videoGrid.children.length){
 
-    empty.style.display =
-      "none";
+    empty.style.display="none";
 
   }else{
 
-    empty.style.display =
-      "flex";
+    empty.style.display="flex";
 
   }
 
 }
 
 
-/* =========================================
-LIMPAR VÍDEOS
-========================================= */
-
 function clearVideos(){
 
-  videoGrid.innerHTML =
-    "";
+  videoGrid.innerHTML="";
 
   updateEmpty();
 
 }
 
-
-/* =========================================
-FECHAR PEERS
-========================================= */
 
 function closeAllPeerConnections(){
 
@@ -2788,9 +2575,7 @@ function closeAllPeerConnections(){
   ){
 
     try{
-
       peerConnections[id].close();
-
     }catch{}
 
     delete peerConnections[id];
@@ -2800,113 +2585,103 @@ function closeAllPeerConnections(){
 }
 
 
-/* =========================================
+/* =========================
 USUÁRIOS
-========================================= */
+========================= */
 
 function updateUsers(users){
 
-  currentUsers =
-    users;
+  currentUsers=users;
 
 
   for(let i=1;i<=20;i++){
 
-    const count =
+    const count=
       document.getElementById(
         `count-${i}`
       );
 
-    const members =
+    const members=
       document.getElementById(
         `members-${i}`
       );
 
-
-    if(!count || !members){
-      continue;
-    }
+    if(!count||!members)continue;
 
 
-    if(
-      i === currentRoom
-    ){
+    if(i===currentRoom){
 
-      count.textContent =
+      count.textContent=
         `${users.length}/8`;
 
-      members.innerHTML =
-        "";
+      members.innerHTML="";
 
 
-      users.forEach(
-        user => {
+      users.forEach(user=>{
 
-          const item =
-            document.createElement("div");
+        const item=
+          document.createElement("div");
 
-          item.className =
-            "member";
+        item.className="member";
 
 
-          let status = "";
+        let status="";
 
 
-          if(user.camera){
+        if(user.camera){
 
-            status +=
-              `<span class="status-icon camera">📷</span>`;
-
-          }
-
-
-          if(user.screen){
-
-            status +=
-              `<span class="status-icon screen">🖥️</span>`;
-
-          }
-
-
-          if(user.muted){
-
-            status +=
-              `<span class="status-icon muted">🎙️</span>`;
-
-          }
-
-
-          item.innerHTML = `
-
-            <span class="avatar">
-              ${escapeHTML(
-                (user.name || "U")
-                  .charAt(0)
-                  .toUpperCase()
-              )}
-            </span>
-
-            <span>
-              ${escapeHTML(
-                user.name || "Usuário"
-              )}
-            </span>
-
-            ${status}
-
-            <span class="role">
-              ${escapeHTML(
-                user.role || "MEMBRO"
-              )}
-            </span>
-
-          `;
-
-
-          members.appendChild(item);
+          status+=
+            `<span class="status-icon camera">📷</span>`;
 
         }
-      );
+
+
+        if(user.screen){
+
+          status+=
+            `<span class="status-icon screen">🖥️</span>`;
+
+        }
+
+
+        if(user.muted){
+
+          status+=
+            `<span class="status-icon muted">🎙️</span>`;
+
+        }
+
+
+        item.innerHTML=`
+
+          <span class="avatar">
+            ${escapeHTML(
+              (user.name||"U")
+              .charAt(0)
+              .toUpperCase()
+            )}
+          </span>
+
+          <span>
+            ${escapeHTML(
+              user.name||"Usuário"
+            )}
+          </span>
+
+          ${status}
+
+          <span class="role">
+            ${escapeHTML(
+              user.role||"MEMBRO"
+            )}
+          </span>
+
+        `;
+
+
+        members.appendChild(item);
+
+      });
 
     }
 
@@ -2915,15 +2690,39 @@ function updateUsers(users){
 }
 
 
-/* =========================================
-DONOS
-========================================= */
+/* =========================
+REGRAS
+========================= */
+
+function openRules(){
+
+  /*
+  Fecha análise se estiver aberta.
+  */
+
+  leaveRoom(false);
+
+  rulesPage.classList.add("show");
+
+}
+
+
+function closeRules(){
+
+  rulesPage.classList.remove("show");
+
+}
+
+
+/* =========================
+ÁREA DOS DONOS
+========================= */
 
 function openOwnerPanel(){
 
-  ownerPanel.classList.add(
-    "show"
-  );
+  leaveRoom(false);
+
+  ownerPage.classList.add("show");
 
   updateOwnerPanel();
 
@@ -2932,20 +2731,18 @@ function openOwnerPanel(){
 
 function closeOwnerPanel(){
 
-  ownerPanel.classList.remove(
-    "show"
-  );
+  ownerPage.classList.remove("show");
 
 }
 
 
-/* =========================================
+/* =========================
 LOGIN DONO
-========================================= */
+========================= */
 
 function ownerLogin(){
 
-  const code =
+  const code=
     document.getElementById(
       "ownerCode"
     ).value.trim();
@@ -2958,13 +2755,12 @@ function ownerLogin(){
     );
 
     return;
-
   }
 
 
   if(
-    !socket ||
-    socket.readyState !== WebSocket.OPEN
+    !socket||
+    socket.readyState!==WebSocket.OPEN
   ){
 
     alert(
@@ -2972,7 +2768,6 @@ function ownerLogin(){
     );
 
     return;
-
   }
 
 
@@ -2989,176 +2784,163 @@ function ownerLogin(){
 }
 
 
-/* =========================================
-PAINEL ADMIN
-========================================= */
+/* =========================
+PAINEL DONO
+========================= */
 
 function updateOwnerPanel(){
 
   if(
-    myRole !== "DONO" &&
-    myRole !== "ADM" &&
-    myRole !== "TELADOR"
+    myRole!=="DONO"&&
+    myRole!=="ADM"&&
+    myRole!=="TELADOR"
   ){
 
-    ownerContent.innerHTML = `
+    ownerContent.innerHTML=`
 
-      <p
-        style="color:#858c99;font-size:12px"
-      >
+      <p style="
+        color:#858c99;
+        font-size:12px;
+      ">
         Faça login como Dono para administrar os membros.
       </p>
 
     `;
 
     return;
-
   }
 
 
-  let html = `
+  let html=`
 
     <h3 style="margin:15px 0 10px">
       👥 Pessoas na Análise
-      ${
-        currentRoom
-          ? String(currentRoom).padStart(2,"0")
-          : "-"
-      }
+      ${currentRoom?
+        String(currentRoom).padStart(2,"0"):
+        "—"}
     </h3>
 
   `;
 
 
-  currentUsers.forEach(
-    user => {
+  currentUsers.forEach(user=>{
 
-      const canRole =
-        myRole === "DONO" &&
-        user.id !== myId;
-
-
-      const canMute =
-        (
-          myRole === "DONO" ||
-          myRole === "ADM" ||
-          myRole === "TELADOR"
-        ) &&
-        user.id !== myId;
+    const canRole=
+      myRole==="DONO"&&
+      user.id!==myId;
 
 
-      html += `
-
-        <div class="admin-user">
-
-          <span class="avatar">
-            ${escapeHTML(
-              (user.name || "U")
-                .charAt(0)
-                .toUpperCase()
-            )}
-          </span>
-
-          <span class="admin-user-name">
-            ${escapeHTML(user.name)}
-            <small
-              style="color:#777;margin-left:4px"
-            >
-              ${escapeHTML(user.role)}
-            </small>
-          </span>
-
-      `;
+    const canMute=
+      (
+        myRole==="DONO"||
+        myRole==="ADM"||
+        myRole==="TELADOR"
+      )&&
+      user.id!==myId;
 
 
-      if(canMute){
+    html+=`
 
-        html += `
+      <div class="admin-user">
 
-          <button
-            class="small-button"
-            onclick="muteMember('${user.id}')"
+        <span class="avatar">
+          ${escapeHTML(
+            (user.name||"U")
+            .charAt(0)
+            .toUpperCase()
+          )}
+        </span>
+
+        <span class="admin-user-name">
+
+          ${escapeHTML(user.name)}
+
+          <small
+            style="color:#777;margin-left:4px"
           >
-            🔇 Mutar
-          </button>
+            ${escapeHTML(user.role)}
+          </small>
 
-          <button
-            class="small-button"
-            onclick="unmuteMember('${user.id}')"
-          >
-            🎙️ Liberar
-          </button>
+        </span>
 
-        `;
-
-      }
+    `;
 
 
-      if(canRole){
+    if(canMute){
 
-        html += `
+      html+=`
 
-          <button
-            class="small-button"
-            onclick="changeRole('${user.id}','ADM')"
-          >
-            ADM
-          </button>
+        <button
+          class="small-button"
+          onclick="muteMember('${user.id}')"
+        >
+          🔇 Mutar
+        </button>
 
-          <button
-            class="small-button"
-            onclick="changeRole('${user.id}','TELADOR')"
-          >
-            Telador
-          </button>
+        <button
+          class="small-button"
+          onclick="unmuteMember('${user.id}')"
+        >
+          🎙️ Liberar
+        </button>
 
-          <button
-            class="small-button"
-            onclick="changeRole('${user.id}','MEMBRO')"
-          >
-            Membro
-          </button>
-
-        `;
-
-      }
-
-
-      html += `
-        </div>
       `;
 
     }
-  );
 
 
-  ownerContent.innerHTML =
-    html;
+    if(canRole){
+
+      html+=`
+
+        <button
+          class="small-button"
+          onclick="changeRole('${user.id}','ADM')"
+        >
+          ADM
+        </button>
+
+        <button
+          class="small-button"
+          onclick="changeRole('${user.id}','TELADOR')"
+        >
+          Telador
+        </button>
+
+        <button
+          class="small-button"
+          onclick="changeRole('${user.id}','MEMBRO')"
+        >
+          Membro
+        </button>
+
+      `;
+
+    }
+
+
+    html+=`</div>`;
+
+  });
+
+
+  ownerContent.innerHTML=html;
 
 }
 
 
-/* =========================================
-ALTERAR CARGO
-========================================= */
+/* =========================
+CARGOS
+========================= */
 
-function changeRole(
-  userId,
-  role
-){
+function changeRole(userId,role){
 
-  if(myRole !== "DONO"){
+  if(myRole!=="DONO"){
 
     alert(
       "Somente o Dono pode alterar cargos."
     );
 
-    return;
-
-  }
-
-
-  if(!socket){
     return;
   }
 
@@ -3178,20 +2960,18 @@ function changeRole(
 }
 
 
-/* =========================================
+/* =========================
 MUTAR
-========================================= */
+========================= */
 
 function muteMember(userId){
 
   if(
-    myRole !== "DONO" &&
-    myRole !== "ADM" &&
-    myRole !== "TELADOR"
+    myRole!=="DONO"&&
+    myRole!=="ADM"&&
+    myRole!=="TELADOR"
   ){
-
     return;
-
   }
 
 
@@ -3208,20 +2988,14 @@ function muteMember(userId){
 }
 
 
-/* =========================================
-DESMUTAR
-========================================= */
-
 function unmuteMember(userId){
 
   if(
-    myRole !== "DONO" &&
-    myRole !== "ADM" &&
-    myRole !== "TELADOR"
+    myRole!=="DONO"&&
+    myRole!=="ADM"&&
+    myRole!=="TELADOR"
   ){
-
     return;
-
   }
 
 
@@ -3238,43 +3012,21 @@ function unmuteMember(userId){
 }
 
 
-/* =========================================
-REGRAS
-========================================= */
-
-function openRules(){
-
-  rules.classList.add(
-    "show"
-  );
-
-}
-
-
-function closeRules(){
-
-  rules.classList.remove(
-    "show"
-  );
-
-}
-
-
-/* =========================================
+/* =========================
 SAIR DA ANÁLISE
-========================================= */
+========================= */
 
-function leaveRoom(){
+function leaveRoom(showMessage=true){
 
   if(localCameraStream){
 
     localCameraStream
-      .getTracks()
-      .forEach(
-        track => track.stop()
-      );
+    .getTracks()
+    .forEach(
+      track=>track.stop()
+    );
 
-    localCameraStream = null;
+    localCameraStream=null;
 
   }
 
@@ -3282,12 +3034,12 @@ function leaveRoom(){
   if(localScreenStream){
 
     localScreenStream
-      .getTracks()
-      .forEach(
-        track => track.stop()
-      );
+    .getTracks()
+    .forEach(
+      track=>track.stop()
+    );
 
-    localScreenStream = null;
+    localScreenStream=null;
 
   }
 
@@ -3301,7 +3053,7 @@ function leaveRoom(){
       socket.close();
     }catch{}
 
-    socket = null;
+    socket=null;
 
   }
 
@@ -3309,88 +3061,76 @@ function leaveRoom(){
   clearVideos();
 
 
-  currentRoom =
-    null;
-
-
-  selectedRoom =
-    null;
-
-
-  cameraButton.textContent =
+  cameraButton.textContent=
     "📷 Abrir câmera";
 
-  screenButton.textContent =
+  screenButton.textContent=
     "🖥️ Compartilhar tela";
 
-  microphoneMuted =
-    false;
+  microphoneMuted=false;
+
+  cameraFacingMode="user";
 
   updateMicButton();
 
 
-  stage.classList.remove(
+  /*
+  REMOVE COMPLETAMENTE A TELA DA ANÁLISE.
+  */
+
+  document.body.classList.remove(
+    "analysis-open"
+  );
+
+  analysisScreen.classList.remove(
     "show"
   );
 
-  controls.style.display =
-    "none";
-
-  joinScreen.classList.remove(
-    "show"
-  );
-
-  homeScreen.style.display =
+  homeScreen.style.display=
     "flex";
 
 
-  title.textContent =
-    "🔥 FF Arena";
+  currentRoom=null;
 
-  description.textContent =
-    "Selecione uma Análise para entrar.";
+  if(showMessage){
 
+    /*
+    Não mostra mensagem ocupando espaço.
+    */
 
-  document
-    .querySelectorAll(".channel")
-    .forEach(el =>
-      el.classList.remove("active")
-    );
+  }
 
 }
 
 
-/* =========================================
+/* =========================
 ESCAPE HTML
-========================================= */
+========================= */
 
 function escapeHTML(value){
 
-  const div =
+  const div=
     document.createElement("div");
 
-  div.textContent =
-    String(value || "");
+  div.textContent=
+    String(value||"");
 
   return div.innerHTML;
 
 }
 
 
-/* =========================================
+/* =========================
 INICIAR
-========================================= */
-
-loadName();
+========================= */
 
 /*
 IMPORTANTE:
-Não chamamos openRoom(1) aqui.
-
-Assim a tela inicial NÃO mostra
-quadrado de transmissão e NÃO entra
-automaticamente na Análise 01.
+não existe openRoom(1) aqui.
+A página começa limpa.
 */
+
+loadName();
 
 </script>
 
