@@ -1,1 +1,74 @@
+const SERVER_URL = "wss://ff-arena-serve.onrender.com";
 
+let socket = null;
+let myName = "Usuário";
+
+function connectToServer(room) {
+  if (socket) {
+    socket.close();
+  }
+
+  socket = new WebSocket(SERVER_URL);
+
+  socket.onopen = () => {
+    socket.send(JSON.stringify({
+      type: "join",
+      room: room,
+      name: myName
+    }));
+  };
+
+  socket.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+
+    if (data.type === "users") {
+      updateRoomUsers(data.users);
+    }
+  };
+
+  socket.onerror = () => {
+    console.log("Erro ao conectar ao servidor.");
+  };
+}
+
+function updateRoomUsers(users) {
+  const list = document.getElementById(`members-${currentRoom}`);
+
+  if (!list) return;
+
+  list.innerHTML = "";
+
+  users.forEach(user => {
+    const member = document.createElement("div");
+    member.className = "member";
+
+    let status = "";
+
+    if (user.camera) {
+      status += '<span class="camera">📷</span>';
+    }
+
+    if (user.screen) {
+      status += '<span class="screen-share">🖥️</span>';
+    }
+
+    if (user.muted) {
+      status += '<span class="muted">🎙️</span>';
+    }
+
+    member.innerHTML = `
+      <span class="avatar">
+        ${user.name.charAt(0).toUpperCase()}
+      </span>
+
+      <span>${user.name}</span>
+
+      ${status}
+    `;
+
+    list.appendChild(member);
+  });
+
+  document.getElementById(`count-${currentRoom}`).textContent =
+    `${users.length}/8`;
+}
