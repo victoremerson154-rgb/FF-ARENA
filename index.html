@@ -3,8 +3,10 @@
 <head>
 <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
+>
 
 <meta name="theme-color" content="#111318">
 
@@ -17,7 +19,8 @@ content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
   padding:0;
 }
 
-html,body{
+html,
+body{
   width:100%;
   height:100%;
 }
@@ -25,7 +28,7 @@ html,body{
 body{
   font-family:Arial,sans-serif;
   background:#111318;
-  color:white;
+  color:#fff;
   overflow:hidden;
 }
 
@@ -34,9 +37,9 @@ button{
   cursor:pointer;
 }
 
-/* =========================
+/* =====================================================
 APP
-========================= */
+===================================================== */
 
 .app{
   width:100%;
@@ -44,9 +47,9 @@ APP
   display:flex;
 }
 
-/* =========================
+/* =====================================================
 SIDEBAR
-========================= */
+===================================================== */
 
 .sidebar{
   width:285px;
@@ -86,7 +89,7 @@ SIDEBAR
 .channel:hover,
 .channel.active{
   background:#292e3a;
-  color:white;
+  color:#fff;
 }
 
 .channel-name{
@@ -146,9 +149,9 @@ SIDEBAR
   margin-left:auto;
 }
 
-/* =========================
+/* =====================================================
 USUÁRIO
-========================= */
+===================================================== */
 
 .user-area{
   margin-top:auto;
@@ -178,9 +181,9 @@ USUÁRIO
   margin-top:3px;
 }
 
-/* =========================
+/* =====================================================
 MAIN
-========================= */
+===================================================== */
 
 .main{
   flex:1;
@@ -190,10 +193,9 @@ MAIN
   flex-direction:column;
 }
 
-/*
-Tela inicial:
-NÃO possui stage visível.
-*/
+/* =====================================================
+TELA INICIAL
+===================================================== */
 
 .home-screen{
   flex:1;
@@ -217,69 +219,193 @@ NÃO possui stage visível.
   font-size:13px;
 }
 
-/* =========================
+/* =====================================================
 ANÁLISE
-========================= */
+===================================================== */
 
 .analysis-screen{
   display:none;
   flex:1;
+  min-width:0;
   min-height:0;
+
+  align-items:center;
+  justify-content:center;
+
   flex-direction:column;
+
+  padding:18px;
+
+  background:#111318;
 }
 
 .analysis-screen.show{
   display:flex;
 }
 
+/* Cabeçalho */
+
 .analysis-header{
-  height:65px;
+  width:min(760px,100%);
+  min-height:60px;
+
   flex-shrink:0;
-  border-bottom:1px solid #292d36;
+
+  border:1px solid #292d36;
+  border-radius:10px 10px 0 0;
+
+  background:#181b22;
+
   display:flex;
   align-items:center;
-  padding:10px 18px;
+  justify-content:space-between;
+
+  gap:10px;
+
+  padding:10px 14px;
 }
 
-.analysis-header h2{
-  font-size:18px;
+.analysis-title h2{
+  font-size:17px;
 }
 
-.analysis-header p{
-  font-size:12px;
+.analysis-title p{
+  font-size:11px;
   color:#858c99;
   margin-top:4px;
 }
 
-/*
-IMPORTANTE:
-o quadrado só existe dentro da análise.
-*/
+/* Botões do cabeçalho */
+
+.analysis-header-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:5px;
+  flex-wrap:wrap;
+}
+
+.header-button{
+  border:0;
+  background:#292e3a;
+  color:#fff;
+
+  border-radius:6px;
+
+  padding:8px 9px;
+
+  font-size:10px;
+  font-weight:bold;
+}
+
+.header-button:hover{
+  background:#353b49;
+}
+
+/* =====================================================
+PARTICIPANTES
+===================================================== */
+
+.participants-panel{
+  width:min(760px,100%);
+
+  background:#181b22;
+
+  border-left:1px solid #292d36;
+  border-right:1px solid #292d36;
+
+  padding:8px 10px;
+}
+
+.participants-title{
+  font-size:11px;
+  font-weight:bold;
+  color:#dfe3ea;
+  margin-bottom:6px;
+}
+
+#analysisParticipants{
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px;
+}
+
+.participant{
+  display:flex;
+  align-items:center;
+  gap:5px;
+
+  background:#242934;
+
+  border-radius:6px;
+
+  padding:5px 7px;
+
+  font-size:10px;
+}
+
+.participant-avatar{
+  width:21px;
+  height:21px;
+
+  border-radius:50%;
+
+  background:#5865f2;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:9px;
+  font-weight:bold;
+}
+
+.participant-icons{
+  display:flex;
+  gap:2px;
+}
+
+/* =====================================================
+STAGE
+===================================================== */
 
 .stage{
-  flex:1;
-  min-height:0;
-  margin:10px;
+  width:min(760px,100%);
+
+  height:min(400px,50vh);
+
+  flex:none;
+
+  margin:0;
+
   border:1px solid #292d36;
-  border-radius:10px;
+
+  border-radius:0 0 10px 10px;
+
   background:#090b0f;
+
   overflow:auto;
+
   padding:8px;
 }
 
 .empty{
   width:100%;
   height:100%;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   flex-direction:column;
+
   color:#858c99;
+
   text-align:center;
 }
 
 .empty-icon{
-  font-size:40px;
+  font-size:38px;
   margin-bottom:8px;
 }
 
@@ -289,77 +415,110 @@ o quadrado só existe dentro da análise.
 }
 
 .empty p{
-  font-size:12px;
+  font-size:11px;
 }
 
-/* =========================
+/* =====================================================
 VÍDEOS
-========================= */
+===================================================== */
 
 .video-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:8px;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap:7px;
+
   width:100%;
 }
 
 .video-card{
   position:relative;
+
   background:#151820;
+
   border-radius:8px;
+
   overflow:hidden;
-  min-height:160px;
+
+  min-height:150px;
 }
 
 .video-card video{
   width:100%;
   height:100%;
-  min-height:160px;
+
+  min-height:150px;
+
   object-fit:cover;
+
   background:#050608;
+
   display:block;
 }
 
 .video-label{
   position:absolute;
+
   bottom:7px;
   left:7px;
+
   background:rgba(0,0,0,.65);
+
   padding:5px 8px;
+
   border-radius:5px;
-  font-size:11px;
+
+  font-size:10px;
 }
 
 .video-status{
   position:absolute;
+
   right:7px;
   bottom:7px;
-  font-size:13px;
+
+  font-size:12px;
 }
 
-/* =========================
-CONTROLES 2x2
-========================= */
+/* =====================================================
+CONTROLES 2X2
+===================================================== */
 
 .controls{
-  width:min(430px,100%);
-  margin:0 auto;
-  padding:7px 10px 12px;
+  width:min(760px,100%);
+
+  padding:8px 0 0;
+
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:7px;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:6px;
+
   flex-shrink:0;
 }
 
 .control{
   width:100%;
-  min-height:44px;
+
+  min-height:42px;
+
   border:0;
+
   border-radius:7px;
-  padding:10px;
+
+  padding:9px;
+
   background:#292e3a;
-  color:white;
+
+  color:#fff;
+
   font-weight:bold;
+
+  font-size:11px;
 }
 
 .control:hover{
@@ -378,18 +537,24 @@ CONTROLES 2x2
   background:#b52e3b;
 }
 
-/* =========================
-ENTRAR NA ANÁLISE
-========================= */
+/* =====================================================
+PAINEL ENTRAR
+===================================================== */
 
 .enter-panel{
   display:none;
+
   position:fixed;
+
   inset:0;
+
   background:rgba(0,0,0,.78);
+
   z-index:50;
+
   align-items:center;
   justify-content:center;
+
   padding:20px;
 }
 
@@ -399,10 +564,15 @@ ENTRAR NA ANÁLISE
 
 .enter-box{
   width:min(420px,100%);
+
   background:#181b22;
+
   border:1px solid #343944;
+
   border-radius:12px;
+
   padding:22px;
+
   text-align:center;
 }
 
@@ -412,26 +582,36 @@ ENTRAR NA ANÁLISE
 
 .enter-box p{
   color:#858c99;
+
   font-size:13px;
+
   margin-bottom:18px;
 }
 
 .enter-actions{
   display:grid;
-  grid-template-columns:1fr 1fr;
+
+  grid-template-columns:
+    1fr 1fr;
+
   gap:8px;
 }
 
-/* =========================
-TELAS CHEIAS
-========================= */
+/* =====================================================
+TELAS FULLSCREEN
+===================================================== */
 
 .fullscreen-page{
   display:none;
+
   position:fixed;
+
   inset:0;
+
   z-index:80;
+
   background:#111318;
+
   overflow:auto;
 }
 
@@ -441,40 +621,61 @@ TELAS CHEIAS
 
 .fullscreen-header{
   height:65px;
+
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
+
   padding:12px 18px;
+
   border-bottom:1px solid #292d36;
+
   background:#181b22;
+
+  position:sticky;
+
+  top:0;
+
+  z-index:2;
 }
 
 .fullscreen-header h2{
   font-size:18px;
 }
 
-.fullscreen-content{
-  max-width:900px;
-  margin:0 auto;
-  padding:20px;
-}
-
 .close-fullscreen{
   border:0;
+
   background:#d83b4b;
-  color:white;
+
+  color:#fff;
+
   border-radius:6px;
+
   padding:9px 13px;
 }
 
-/* =========================
+.fullscreen-content{
+  max-width:900px;
+
+  margin:0 auto;
+
+  padding:20px;
+}
+
+/* =====================================================
 REGRAS
-========================= */
+===================================================== */
 
 .rule-box{
   background:#181b22;
+
   border:1px solid #292d36;
+
   border-radius:10px;
+
   padding:20px;
 }
 
@@ -488,76 +689,100 @@ REGRAS
 
 .rule{
   font-size:13px;
+
   line-height:1.5;
+
   color:#c5c9d1;
+
   margin:9px 0;
 }
 
-/* =========================
+/* =====================================================
 DONOS
-========================= */
+===================================================== */
 
 .owner-box{
   max-width:700px;
+
   margin:0 auto;
+
   background:#181b22;
+
   border:1px solid #343944;
+
   border-radius:12px;
+
   padding:20px;
 }
 
 .input{
   width:100%;
+
   padding:12px;
+
   border:1px solid #343944;
+
   border-radius:7px;
+
   background:#101218;
-  color:white;
+
+  color:#fff;
+
   margin-bottom:10px;
+
   outline:none;
 }
 
 .owner-actions{
   display:flex;
+
   gap:8px;
+
   flex-wrap:wrap;
+
   margin-bottom:15px;
 }
 
 .admin-user{
   display:flex;
+
   align-items:center;
+
   gap:8px;
+
   padding:9px;
+
   background:#22262f;
+
   border-radius:7px;
+
   margin:5px 0;
+
+  flex-wrap:wrap;
 }
 
 .admin-user-name{
   flex:1;
+  min-width:120px;
 }
 
 .small-button{
   border:0;
+
   border-radius:5px;
+
   padding:7px 9px;
+
   background:#343a48;
-  color:white;
+
+  color:#fff;
+
   font-size:11px;
 }
 
-.close-button{
-  border:0;
-  background:#d83b4b;
-  color:white;
-  padding:9px 12px;
-  border-radius:6px;
-}
-
-/* =========================
+/* =====================================================
 MOBILE
-========================= */
+===================================================== */
 
 @media(max-width:700px){
 
@@ -584,18 +809,9 @@ MOBILE
     display:none;
   }
 
-  /*
-  A tela inicial ocupa tudo.
-  */
-
   .main{
     display:none;
   }
-
-  /*
-  Quando análise abrir, sidebar some
-  e análise ocupa a tela.
-  */
 
   body.analysis-open .sidebar{
     display:none;
@@ -603,42 +819,74 @@ MOBILE
 
   body.analysis-open .main{
     display:flex;
+
     width:100%;
     height:100%;
   }
 
+  .analysis-screen{
+    padding:7px;
+  }
+
   .analysis-header{
-    height:58px;
-    padding:9px 14px;
+    min-height:58px;
+    padding:8px 10px;
+  }
+
+  .analysis-title h2{
+    font-size:15px;
+  }
+
+  .analysis-title p{
+    font-size:9px;
+  }
+
+  .analysis-header-actions{
+    gap:3px;
+  }
+
+  .header-button{
+    padding:7px 6px;
+    font-size:9px;
+  }
+
+  .participants-panel{
+    padding:6px 8px;
+  }
+
+  .participant{
+    padding:4px 6px;
+    font-size:9px;
   }
 
   .stage{
-    margin:6px;
-    padding:6px;
+    height:calc(100vh - 275px);
+    min-height:180px;
+    padding:5px;
   }
 
   .video-grid{
     grid-template-columns:1fr 1fr;
-    gap:6px;
+    gap:5px;
   }
 
   .video-card{
-    min-height:120px;
+    min-height:110px;
   }
 
   .video-card video{
-    min-height:120px;
+    min-height:110px;
   }
 
   .controls{
     width:100%;
-    padding:6px 8px 10px;
-    grid-template-columns:1fr 1fr;
+    padding:6px 0 0;
+    gap:5px;
   }
 
   .control{
-    min-height:43px;
-    font-size:12px;
+    min-height:40px;
+    font-size:10px;
   }
 
   .fullscreen-content{
@@ -647,6 +895,7 @@ MOBILE
 
   .rule-box{
     padding:15px;
+    border-radius:7px;
   }
 
   .owner-box{
@@ -656,16 +905,22 @@ MOBILE
 
 }
 
-/* =========================
-ESCONDER BARRA INICIAL
-========================= */
+/* =====================================================
+NUNCA MOSTRAR ANÁLISE NA TELA INICIAL
+===================================================== */
 
 body:not(.analysis-open) .analysis-screen{
   display:none!important;
 }
 
+/*
+Quando a análise estiver minimizada,
+não existe stage escondido no final da página.
+*/
+
 body:not(.analysis-open) .stage,
-body:not(.analysis-open) .controls{
+body:not(.analysis-open) .controls,
+body:not(.analysis-open) .participants-panel{
   display:none!important;
 }
 </style>
@@ -675,17 +930,15 @@ body:not(.analysis-open) .controls{
 
 <div class="app">
 
-<!-- =========================
+<!-- ===================================================
 SIDEBAR
-========================= -->
+=================================================== -->
 
 <aside class="sidebar">
 
   <div class="logo">
     🔥 FF Arena
   </div>
-
-  <!-- ÁREA DOS DONOS PRIMEIRO -->
 
   <div
     class="channel"
@@ -697,8 +950,6 @@ SIDEBAR
     </span>
   </div>
 
-  <!-- REGRAS -->
-
   <div
     class="channel"
     onclick="openRules()"
@@ -708,8 +959,6 @@ SIDEBAR
       Regras
     </span>
   </div>
-
-  <!-- ANÁLISES ABAIXO -->
 
   <div class="category">
     🔎 ANÁLISES
@@ -749,13 +998,11 @@ SIDEBAR
 </aside>
 
 
-<!-- =========================
+<!-- ===================================================
 MAIN
-========================= -->
+=================================================== -->
 
 <main class="main">
-
-  <!-- TELA INICIAL SEM QUADRADO -->
 
   <div
     class="home-screen"
@@ -777,7 +1024,9 @@ MAIN
   </div>
 
 
-  <!-- ANÁLISE -->
+  <!-- =================================================
+  ANÁLISE
+  ================================================= -->
 
   <section
     class="analysis-screen"
@@ -786,7 +1035,7 @@ MAIN
 
     <header class="analysis-header">
 
-      <div>
+      <div class="analysis-title">
 
         <h2 id="title">
           🔎 Análise
@@ -798,8 +1047,63 @@ MAIN
 
       </div>
 
+      <div class="analysis-header-actions">
+
+        <button
+          class="header-button"
+          onclick="openRules()"
+        >
+          📜 Regras
+        </button>
+
+        <button
+          class="header-button"
+          onclick="openOwnerPanel()"
+        >
+          👑 Donos
+        </button>
+
+        <button
+          class="header-button"
+          onclick="minimizeAnalysis()"
+        >
+          ⬇️ Minimizar
+        </button>
+
+      </div>
+
     </header>
 
+
+    <!-- =================================================
+    PARTICIPANTES
+    ================================================= -->
+
+    <div class="participants-panel">
+
+      <div class="participants-title">
+        👥 Pessoas na análise
+      </div>
+
+      <div id="analysisParticipants">
+
+        <span
+          style="
+            color:#858c99;
+            font-size:11px;
+          "
+        >
+          Nenhuma pessoa na análise.
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- =================================================
+    STAGE
+    ================================================= -->
 
     <section
       class="stage"
@@ -833,7 +1137,9 @@ MAIN
     </section>
 
 
-    <!-- CONTROLES 2x2 -->
+    <!-- =================================================
+    CONTROLES
+    ================================================= -->
 
     <footer class="controls">
 
@@ -885,9 +1191,9 @@ MAIN
 </div>
 
 
-<!-- =========================
+<!-- ===================================================
 ENTRAR NA ANÁLISE
-========================= -->
+=================================================== -->
 
 <div
   class="enter-panel"
@@ -928,9 +1234,9 @@ ENTRAR NA ANÁLISE
 </div>
 
 
-<!-- =========================
-TELA DE REGRAS
-========================= -->
+<!-- ===================================================
+REGRAS
+=================================================== -->
 
 <div
   class="fullscreen-page"
@@ -951,7 +1257,6 @@ TELA DE REGRAS
     </button>
 
   </div>
-
 
   <div class="fullscreen-content">
 
@@ -1021,9 +1326,9 @@ TELA DE REGRAS
 </div>
 
 
-<!-- =========================
+<!-- ===================================================
 ÁREA DOS DONOS
-========================= -->
+=================================================== -->
 
 <div
   class="fullscreen-page"
@@ -1045,13 +1350,16 @@ TELA DE REGRAS
 
   </div>
 
-
   <div class="fullscreen-content">
 
     <div class="owner-box">
 
       <p
-        style="color:#858c99;font-size:12px;margin-bottom:15px"
+        style="
+          color:#858c99;
+          font-size:12px;
+          margin-bottom:15px
+        "
       >
         Entre com o código do Dono para administrar a sala.
       </p>
@@ -1085,104 +1393,107 @@ TELA DE REGRAS
 
 <script>
 
-/* =========================
+/* =====================================================
 CONFIG
-========================= */
+===================================================== */
 
 const SERVER_URL =
-"wss://ff-arena-serve.onrender.com";
+  "wss://ff-arena-serve.onrender.com";
 
-let socket=null;
+let socket = null;
 
-let currentRoom=null;
+let currentRoom = null;
 
-let selectedRoom=null;
+let selectedRoom = null;
 
-let myId=null;
+let myId = null;
 
-let myName="Usuário";
+let myName = "Usuário";
 
-let myRole="MEMBRO";
+let myRole = "MEMBRO";
 
-let localCameraStream=null;
+let localCameraStream = null;
 
-let localScreenStream=null;
+let localScreenStream = null;
 
-let microphoneMuted=false;
+let microphoneMuted = false;
 
-let cameraFacingMode="user";
+let cameraFacingMode = "user";
 
-let currentUsers=[];
+let currentUsers = [];
 
-const peerConnections={};
-const makingOffer={};
-const ignoreOffer={};
-const polite={};
+const peerConnections = {};
+const makingOffer = {};
+const ignoreOffer = {};
+const polite = {};
 
 
-/* =========================
+/* =====================================================
 ELEMENTOS
-========================= */
+===================================================== */
 
-const channels=
-document.getElementById("channels");
+const channels =
+  document.getElementById("channels");
 
-const enterPanel=
-document.getElementById("enterPanel");
+const enterPanel =
+  document.getElementById("enterPanel");
 
-const enterTitle=
-document.getElementById("enterTitle");
+const enterTitle =
+  document.getElementById("enterTitle");
 
-const analysisScreen=
-document.getElementById("analysisScreen");
+const analysisScreen =
+  document.getElementById("analysisScreen");
 
-const homeScreen=
-document.getElementById("homeScreen");
+const homeScreen =
+  document.getElementById("homeScreen");
 
-const title=
-document.getElementById("title");
+const title =
+  document.getElementById("title");
 
-const description=
-document.getElementById("description");
+const description =
+  document.getElementById("description");
 
-const videoGrid=
-document.getElementById("videoGrid");
+const videoGrid =
+  document.getElementById("videoGrid");
 
-const empty=
-document.getElementById("empty");
+const empty =
+  document.getElementById("empty");
 
-const cameraButton=
-document.getElementById("cameraButton");
+const cameraButton =
+  document.getElementById("cameraButton");
 
-const screenButton=
-document.getElementById("screenButton");
+const screenButton =
+  document.getElementById("screenButton");
 
-const micButton=
-document.getElementById("micButton");
+const micButton =
+  document.getElementById("micButton");
 
-const flipButton=
-document.getElementById("flipButton");
+const flipButton =
+  document.getElementById("flipButton");
 
-const rulesPage=
-document.getElementById("rulesPage");
+const rulesPage =
+  document.getElementById("rulesPage");
 
-const ownerPage=
-document.getElementById("ownerPage");
+const ownerPage =
+  document.getElementById("ownerPage");
 
-const ownerContent=
-document.getElementById("ownerContent");
+const ownerContent =
+  document.getElementById("ownerContent");
+
+const analysisParticipants =
+  document.getElementById("analysisParticipants");
 
 
-/* =========================
+/* =====================================================
 CRIAR 20 ANÁLISES
-========================= */
+===================================================== */
 
-for(let i=1;i<=20;i++){
+for(let i = 1; i <= 20; i++){
 
-  const container=
-  document.createElement("div");
+  const container =
+    document.createElement("div");
 
-  container.innerHTML=`
+  container.innerHTML = `
 
     <div
       class="channel"
@@ -1216,31 +1527,31 @@ for(let i=1;i<=20;i++){
 }
 
 
-/* =========================
+/* =====================================================
 NOME
-========================= */
+===================================================== */
 
 function loadName(){
 
-  const saved=
-  localStorage.getItem("ffArenaName");
+  const saved =
+    localStorage.getItem("ffArenaName");
 
   if(saved){
 
-    myName=saved;
+    myName = saved;
 
   }else{
 
-    const answer=
-    prompt("Digite seu nome:");
+    const answer =
+      prompt("Digite seu nome:");
 
-    myName=
-    (answer||"Usuário")
-    .trim()
-    .slice(0,30);
+    myName =
+      (answer || "Usuário")
+        .trim()
+        .slice(0,30);
 
     if(!myName){
-      myName="Usuário";
+      myName = "Usuário";
     }
 
     localStorage.setItem(
@@ -1256,75 +1567,85 @@ function loadName(){
 
 function updateProfile(){
 
-  const name=
-  document.getElementById("myNameDisplay");
+  const name =
+    document.getElementById(
+      "myNameDisplay"
+    );
 
-  const avatar=
-  document.getElementById("myAvatar");
+  const avatar =
+    document.getElementById(
+      "myAvatar"
+    );
 
-  const role=
-  document.getElementById("myRoleDisplay");
+  const role =
+    document.getElementById(
+      "myRoleDisplay"
+    );
 
-  if(name) name.textContent=myName;
+  if(name){
+    name.textContent = myName;
+  }
 
   if(avatar){
-    avatar.textContent=
-      myName.charAt(0).toUpperCase();
+    avatar.textContent =
+      myName
+        .charAt(0)
+        .toUpperCase();
   }
 
   if(role){
-    role.textContent=myRole;
+    role.textContent = myRole;
   }
 
 }
 
 
-/* =========================
+/* =====================================================
 SELECIONAR ANÁLISE
-========================= */
+===================================================== */
 
 function selectRoom(room){
 
-  selectedRoom=room;
+  selectedRoom = room;
 
   document
-  .querySelectorAll(".channel")
-  .forEach(el=>{
-    el.classList.remove("active");
-  });
+    .querySelectorAll(".channel")
+    .forEach(el => {
+      el.classList.remove("active");
+    });
 
-  const channel=
-  document.getElementById(
-    `channel-${room}`
-  );
+  const channel =
+    document.getElementById(
+      `channel-${room}`
+    );
 
   if(channel){
     channel.classList.add("active");
   }
 
-  enterTitle.textContent=
+  enterTitle.textContent =
     `🔎 Análise ${String(room).padStart(2,"0")}`;
 
   enterPanel.classList.add("show");
 }
 
 
-/* =========================
+/* =====================================================
 FECHAR CONFIRMAÇÃO
-========================= */
+===================================================== */
 
 function closeEnterPanel(){
 
   enterPanel.classList.remove("show");
 
-  selectedRoom=null;
+  selectedRoom = null;
 
 }
 
 
-/* =========================
+/* =====================================================
 ENTRAR
-========================= */
+===================================================== */
 
 function confirmEnterRoom(){
 
@@ -1332,7 +1653,7 @@ function confirmEnterRoom(){
     return;
   }
 
-  const room=selectedRoom;
+  const room = selectedRoom;
 
   closeEnterPanel();
 
@@ -1340,30 +1661,26 @@ function confirmEnterRoom(){
 }
 
 
-/* =========================
+/* =====================================================
 ABRIR ANÁLISE
-========================= */
+===================================================== */
 
 function openRoom(room){
 
-  currentRoom=room;
-
-  /*
-  Só aqui o quadrado aparece.
-  */
+  currentRoom = room;
 
   document.body.classList.add(
     "analysis-open"
   );
 
-  homeScreen.style.display="none";
+  homeScreen.style.display = "none";
 
   analysisScreen.classList.add("show");
 
-  title.textContent=
+  title.textContent =
     `🔎 Análise ${String(room).padStart(2,"0")}`;
 
-  description.textContent=
+  description.textContent =
     "Conectando à análise...";
 
   clearVideos();
@@ -1371,13 +1688,38 @@ function openRoom(room){
   closeAllPeerConnections();
 
   connectServer(room);
-
 }
 
 
-/* =========================
+/* =====================================================
+MINIMIZAR ANÁLISE
+===================================================== */
+
+function minimizeAnalysis(){
+
+  /*
+   * IMPORTANTE:
+   * NÃO chama leaveRoom().
+   *
+   * A conexão continua ativa.
+   * Apenas escondemos a interface da análise.
+   */
+
+  document.body.classList.remove(
+    "analysis-open"
+  );
+
+  analysisScreen.classList.remove(
+    "show"
+  );
+
+  homeScreen.style.display = "flex";
+}
+
+
+/* =====================================================
 WEBSOCKET
-========================= */
+===================================================== */
 
 function connectServer(room){
 
@@ -1389,202 +1731,213 @@ function connectServer(room){
 
   }
 
-  socket=
-  new WebSocket(SERVER_URL);
+  socket =
+    new WebSocket(SERVER_URL);
 
 
-  socket.onopen=()=>{
+  socket.onopen = () => {
 
     socket.send(
       JSON.stringify({
+
         type:"join",
+
         room:String(room),
+
         name:myName
+
       })
     );
 
   };
 
 
-  socket.onmessage=
-  async(event)=>{
+  socket.onmessage =
+    async(event) => {
 
-    let data;
+      let data;
 
-    try{
-      data=JSON.parse(event.data);
-    }catch{
-      return;
-    }
+      try{
 
+        data =
+          JSON.parse(event.data);
 
-    if(data.type==="joined"){
+      }catch{
 
-      myId=data.id;
-
-      myRole=
-        data.role||"MEMBRO";
-
-      updateProfile();
-
-      description.textContent=
-        "Você está conectado.";
-
-      for(
-        const peer
-        of data.peers||[]
-      ){
-
-        await createPeerConnection(
-          peer.id,
-          peer,
-          true
-        );
+        return;
 
       }
 
-      updateOwnerPanel();
 
-      return;
-    }
+      if(data.type === "joined"){
 
+        myId = data.id;
 
-    if(data.type==="peer-joined"){
-
-      await createPeerConnection(
-        data.user.id,
-        data.user,
-        false
-      );
-
-      return;
-    }
-
-
-    if(data.type==="offer"){
-
-      await receiveOffer(
-        data.from,
-        data.data
-      );
-
-      return;
-    }
-
-
-    if(data.type==="answer"){
-
-      await receiveAnswer(
-        data.from,
-        data.data
-      );
-
-      return;
-    }
-
-
-    if(data.type==="ice-candidate"){
-
-      await receiveIce(
-        data.from,
-        data.data
-      );
-
-      return;
-    }
-
-
-    if(data.type==="peer-left"){
-
-      removePeer(data.id);
-
-      return;
-    }
-
-
-    if(data.type==="users"){
-
-      updateUsers(data.users||[]);
-
-      updateOwnerPanel();
-
-      return;
-    }
-
-
-    if(data.type==="force-mute"){
-
-      forceMute();
-
-      return;
-    }
-
-
-    if(data.type==="force-unmute"){
-
-      forceUnmute();
-
-      return;
-    }
-
-
-    if(data.type==="role-changed"){
-
-      myRole=data.role;
-
-      updateProfile();
-
-      updateOwnerPanel();
-
-      return;
-    }
-
-
-    if(data.type==="owner-login-result"){
-
-      if(data.success){
-
-        myRole="DONO";
+        myRole =
+          data.role || "MEMBRO";
 
         updateProfile();
 
-        alert(
-          "Você entrou como Dono."
+        description.textContent =
+          "Você está conectado.";
+
+        for(
+          const peer
+          of data.peers || []
+        ){
+
+          await createPeerConnection(
+            peer.id,
+            peer,
+            true
+          );
+
+        }
+
+        updateOwnerPanel();
+
+        return;
+      }
+
+
+      if(data.type === "peer-joined"){
+
+        await createPeerConnection(
+          data.user.id,
+          data.user,
+          false
         );
 
-      }else{
+        return;
+      }
 
-        alert(
-          data.message||
-          "Código incorreto."
+
+      if(data.type === "offer"){
+
+        await receiveOffer(
+          data.from,
+          data.data
         );
+
+        return;
+      }
+
+
+      if(data.type === "answer"){
+
+        await receiveAnswer(
+          data.from,
+          data.data
+        );
+
+        return;
+      }
+
+
+      if(data.type === "ice-candidate"){
+
+        await receiveIce(
+          data.from,
+          data.data
+        );
+
+        return;
+      }
+
+
+      if(data.type === "peer-left"){
+
+        removePeer(data.id);
+
+        return;
+      }
+
+
+      if(data.type === "users"){
+
+        updateUsers(
+          data.users || []
+        );
+
+        updateOwnerPanel();
+
+        return;
+      }
+
+
+      if(data.type === "force-mute"){
+
+        forceMute();
+
+        return;
+      }
+
+
+      if(data.type === "force-unmute"){
+
+        forceUnmute();
+
+        return;
+      }
+
+
+      if(data.type === "role-changed"){
+
+        myRole = data.role;
+
+        updateProfile();
+
+        updateOwnerPanel();
+
+        return;
+      }
+
+
+      if(data.type === "owner-login-result"){
+
+        if(data.success){
+
+          myRole = "DONO";
+
+          updateProfile();
+
+          alert(
+            "Você entrou como Dono."
+          );
+
+        }else{
+
+          alert(
+            data.message ||
+            "Código incorreto."
+          );
+
+        }
+
+        updateOwnerPanel();
+
+        return;
+      }
+
+
+      if(data.type === "room-full"){
+
+        alert(data.message);
+
+        return;
+      }
+
+
+      if(data.type === "error"){
+
+        alert(data.message);
 
       }
 
-      updateOwnerPanel();
-
-      return;
-    }
+    };
 
 
-    if(data.type==="room-full"){
-
-      alert(data.message);
-
-      return;
-    }
-
-
-    if(data.type==="error"){
-
-      alert(data.message);
-
-    }
-
-  };
-
-
-  socket.onclose=()=>{
+  socket.onclose = () => {
 
     if(
       document.body.classList.contains(
@@ -1592,7 +1945,7 @@ function connectServer(room){
       )
     ){
 
-      description.textContent=
+      description.textContent =
         "Conexão encerrada.";
 
     }
@@ -1600,9 +1953,9 @@ function connectServer(room){
   };
 
 
-  socket.onerror=()=>{
+  socket.onerror = () => {
 
-    description.textContent=
+    description.textContent =
       "Erro de conexão com o servidor.";
 
   };
@@ -1610,11 +1963,12 @@ function connectServer(room){
 }
 
 
-/* =========================
+/* =====================================================
 WEBRTC
-========================= */
+===================================================== */
 
-const rtcConfig={
+const rtcConfig = {
+
   iceServers:[
     {
       urls:"stun:stun.l.google.com:19302"
@@ -1623,6 +1977,7 @@ const rtcConfig={
       urls:"stun:stun1.l.google.com:19302"
     }
   ]
+
 };
 
 
@@ -1636,18 +1991,19 @@ async function createPeerConnection(
     return peerConnections[peerId];
   }
 
-  const pc=
-  new RTCPeerConnection(
-    rtcConfig
-  );
+  const pc =
+    new RTCPeerConnection(
+      rtcConfig
+    );
 
-  peerConnections[peerId]=pc;
+  peerConnections[peerId] = pc;
 
-  polite[peerId]=
-    String(myId)>String(peerId);
+  polite[peerId] =
+    String(myId) > String(peerId);
 
-  makingOffer[peerId]=false;
-  ignoreOffer[peerId]=false;
+  makingOffer[peerId] = false;
+
+  ignoreOffer[peerId] = false;
 
 
   if(localCameraStream){
@@ -1684,12 +2040,14 @@ async function createPeerConnection(
   }
 
 
-  pc.ontrack=event=>{
+  pc.ontrack = event => {
 
-    const stream=
+    const stream =
       event.streams[0];
 
-    if(!stream)return;
+    if(!stream){
+      return;
+    }
 
     showRemoteVideo(
       peerId,
@@ -1700,56 +2058,66 @@ async function createPeerConnection(
   };
 
 
-  pc.onicecandidate=event=>{
+  pc.onicecandidate = event => {
 
-    if(!event.candidate)return;
+    if(!event.candidate){
+      return;
+    }
 
     sendSignal({
+
       type:"ice-candidate",
+
       target:peerId,
+
       data:event.candidate
+
     });
 
   };
 
 
-  pc.onnegotiationneeded=
-  async()=>{
+  pc.onnegotiationneeded =
+    async() => {
 
-    try{
+      try{
 
-      makingOffer[peerId]=true;
+        makingOffer[peerId] = true;
 
-      await pc.setLocalDescription();
+        await pc.setLocalDescription();
 
-      sendSignal({
-        type:"offer",
-        target:peerId,
-        data:pc.localDescription
-      });
+        sendSignal({
 
-    }catch(error){
+          type:"offer",
 
-      console.log(error);
+          target:peerId,
 
-    }finally{
+          data:pc.localDescription
 
-      makingOffer[peerId]=false;
+        });
 
-    }
+      }catch(error){
 
-  };
+        console.log(error);
+
+      }finally{
+
+        makingOffer[peerId] = false;
+
+      }
+
+    };
 
 
-  pc.onconnectionstatechange=()=>{
+  pc.onconnectionstatechange = () => {
 
-    const state=
+    const state =
       pc.connectionState;
 
     if(
-      state==="failed"||
-      state==="closed"||
-      state==="disconnected"
+      state === "failed" ||
+      state === "closed" ||
+      state === "disconnected"
     ){
 
       removePeer(peerId);
@@ -1763,14 +2131,18 @@ async function createPeerConnection(
 
     try{
 
-      makingOffer[peerId]=true;
+      makingOffer[peerId] = true;
 
       await pc.setLocalDescription();
 
       sendSignal({
+
         type:"offer",
+
         target:peerId,
+
         data:pc.localDescription
+
       });
 
     }catch(error){
@@ -1779,7 +2151,7 @@ async function createPeerConnection(
 
     }finally{
 
-      makingOffer[peerId]=false;
+      makingOffer[peerId] = false;
 
     }
 
@@ -1789,15 +2161,15 @@ async function createPeerConnection(
 }
 
 
-/* =========================
+/* =====================================================
 SINAL
-========================= */
+===================================================== */
 
 function sendSignal(message){
 
   if(
-    !socket||
-    socket.readyState!==WebSocket.OPEN
+    !socket ||
+    socket.readyState !== WebSocket.OPEN
   ){
     return;
   }
@@ -1809,28 +2181,28 @@ function sendSignal(message){
 }
 
 
-/* =========================
+/* =====================================================
 OFFER
-========================= */
+===================================================== */
 
 async function receiveOffer(
   peerId,
   descriptionData
 ){
 
-  const pc=
-  await createPeerConnection(
-    peerId,
-    {name:"Usuário"},
-    false
-  );
+  const pc =
+    await createPeerConnection(
+      peerId,
+      {name:"Usuário"},
+      false
+    );
 
-  const offerCollision=
-    makingOffer[peerId]||
-    pc.signalingState!=="stable";
+  const offerCollision =
+    makingOffer[peerId] ||
+    pc.signalingState !== "stable";
 
-  ignoreOffer[peerId]=
-    !polite[peerId]&&
+  ignoreOffer[peerId] =
+    !polite[peerId] &&
     offerCollision;
 
   if(ignoreOffer[peerId]){
@@ -1846,9 +2218,13 @@ async function receiveOffer(
     await pc.setLocalDescription();
 
     sendSignal({
+
       type:"answer",
+
       target:peerId,
+
       data:pc.localDescription
+
     });
 
   }catch(error){
@@ -1860,19 +2236,21 @@ async function receiveOffer(
 }
 
 
-/* =========================
+/* =====================================================
 ANSWER
-========================= */
+===================================================== */
 
 async function receiveAnswer(
   peerId,
   descriptionData
 ){
 
-  const pc=
+  const pc =
     peerConnections[peerId];
 
-  if(!pc)return;
+  if(!pc){
+    return;
+  }
 
   try{
 
@@ -1889,19 +2267,21 @@ async function receiveAnswer(
 }
 
 
-/* =========================
+/* =====================================================
 ICE
-========================= */
+===================================================== */
 
 async function receiveIce(
   peerId,
   candidate
 ){
 
-  const pc=
+  const pc =
     peerConnections[peerId];
 
-  if(!pc)return;
+  if(!pc){
+    return;
+  }
 
   try{
 
@@ -1920,21 +2300,23 @@ async function receiveIce(
 }
 
 
-/* =========================
+/* =====================================================
 CÂMERA
-========================= */
+===================================================== */
 
 async function toggleCamera(){
 
   if(localCameraStream){
 
     localCameraStream
-    .getTracks()
-    .forEach(track=>track.stop());
+      .getTracks()
+      .forEach(
+        track => track.stop()
+      );
 
-    localCameraStream=null;
+    localCameraStream = null;
 
-    cameraButton.textContent=
+    cameraButton.textContent =
       "📷 Abrir câmera";
 
     await renegotiateAll();
@@ -1951,11 +2333,12 @@ async function toggleCamera(){
 
   try{
 
-    localCameraStream=
+    localCameraStream =
       await navigator.mediaDevices.getUserMedia({
 
         video:{
-          facingMode:cameraFacingMode
+          facingMode:
+            cameraFacingMode
         },
 
         audio:true
@@ -1968,13 +2351,13 @@ async function toggleCamera(){
       of localCameraStream.getAudioTracks()
     ){
 
-      track.enabled=
+      track.enabled =
         !microphoneMuted;
 
     }
 
 
-    cameraButton.textContent=
+    cameraButton.textContent =
       "📷 Fechar câmera";
 
     showLocalVideo();
@@ -1996,9 +2379,9 @@ async function toggleCamera(){
 }
 
 
-/* =========================
+/* =====================================================
 VIRAR CÂMERA
-========================= */
+===================================================== */
 
 async function flipCamera(){
 
@@ -2012,45 +2395,83 @@ async function flipCamera(){
   }
 
 
-  cameraFacingMode=
-    cameraFacingMode==="user"
-    ?"environment"
-    :"user";
+  cameraFacingMode =
+    cameraFacingMode === "user"
+      ? "environment"
+      : "user";
 
 
   try{
 
-    localCameraStream
-    .getTracks()
-    .forEach(track=>track.stop());
-
-
-    localCameraStream=
+    const newStream =
       await navigator.mediaDevices.getUserMedia({
 
         video:{
-          facingMode:cameraFacingMode
+          facingMode:
+            cameraFacingMode
         },
 
-        audio:true
+        audio:false
 
       });
 
 
+    const newVideoTrack =
+      newStream.getVideoTracks()[0];
+
+
     for(
-      const track
-      of localCameraStream.getAudioTracks()
+      const peerId
+      of Object.keys(peerConnections)
     ){
 
-      track.enabled=
-        !microphoneMuted;
+      const pc =
+        peerConnections[peerId];
+
+      const sender =
+        pc.getSenders().find(
+          s =>
+            s.track &&
+            s.track.kind === "video"
+        );
+
+
+      if(sender){
+
+        await sender.replaceTrack(
+          newVideoTrack
+        );
+
+      }
 
     }
 
 
-    showLocalVideo();
+    const oldTracks =
+      localCameraStream
+        .getVideoTracks();
 
-    await renegotiateAll();
+
+    oldTracks.forEach(
+      track => track.stop()
+    );
+
+
+    if(oldTracks[0]){
+
+      localCameraStream.removeTrack(
+        oldTracks[0]
+      );
+
+    }
+
+
+    localCameraStream.addTrack(
+      newVideoTrack
+    );
+
+
+    showLocalVideo();
 
     sendStatus();
 
@@ -2067,37 +2488,86 @@ async function flipCamera(){
 }
 
 
-/* =========================
-TELA
-========================= */
+/* =====================================================
+COMPARTILHAR TELA
+===================================================== */
 
 async function toggleScreen(){
 
   if(localScreenStream){
 
     localScreenStream
-    .getTracks()
-    .forEach(track=>track.stop());
+      .getTracks()
+      .forEach(
+        track => track.stop()
+      );
 
-    localScreenStream=null;
+    localScreenStream = null;
 
-    screenButton.textContent=
+    screenButton.textContent =
       "🖥️ Compartilhar tela";
 
-    await renegotiateAll();
+
+    const cameraTrack =
+      localCameraStream
+        ?.getVideoTracks()[0];
+
+
+    for(
+      const peerId
+      of Object.keys(peerConnections)
+    ){
+
+      const pc =
+        peerConnections[peerId];
+
+      const sender =
+        pc.getSenders().find(
+          s =>
+            s.track &&
+            s.track.kind === "video"
+        );
+
+
+      if(sender){
+
+        if(cameraTrack){
+
+          await sender.replaceTrack(
+            cameraTrack
+          );
+
+        }else{
+
+          await sender.replaceTrack(
+            null
+          );
+
+        }
+
+      }
+
+    }
+
+
+    if(localCameraStream){
+
+      showLocalVideo();
+
+    }else{
+
+      hideLocalVideo();
+
+    }
 
     sendStatus();
-
-    if(!localCameraStream){
-      hideLocalVideo();
-    }
 
     return;
   }
 
 
   if(
-    !navigator.mediaDevices||
+    !navigator.mediaDevices ||
     !navigator.mediaDevices.getDisplayMedia
   ){
 
@@ -2111,47 +2581,126 @@ async function toggleScreen(){
 
   try{
 
-    localScreenStream=
+    localScreenStream =
       await navigator.mediaDevices.getDisplayMedia({
+
         video:true,
+
         audio:true
+
       });
 
 
-    screenButton.textContent=
-      "🖥️ Parar tela";
+    const screenTrack =
+      localScreenStream
+        .getVideoTracks()[0];
 
 
-    const track=
-      localScreenStream.getVideoTracks()[0];
+    screenButton.textContent =
+      "🛑 Parar tela";
 
 
-    if(track){
+    for(
+      const peerId
+      of Object.keys(peerConnections)
+    ){
 
-      track.onended=
-      async()=>{
+      const pc =
+        peerConnections[peerId];
 
-        localScreenStream=null;
+      const sender =
+        pc.getSenders().find(
+          s =>
+            s.track &&
+            s.track.kind === "video"
+        );
 
-        screenButton.textContent=
-          "🖥️ Compartilhar tela";
 
-        await renegotiateAll();
+      if(sender){
 
-        sendStatus();
+        await sender.replaceTrack(
+          screenTrack
+        );
 
-        if(!localCameraStream){
-          hideLocalVideo();
-        }
+      }else{
 
-      };
+        pc.addTrack(
+          screenTrack,
+          localScreenStream
+        );
+
+      }
 
     }
 
 
-    showLocalVideo();
+    screenTrack.onended =
+      async() => {
 
-    await renegotiateAll();
+        if(localScreenStream){
+
+          localScreenStream
+            .getTracks()
+            .forEach(
+              track => track.stop()
+            );
+
+          localScreenStream = null;
+
+        }
+
+        screenButton.textContent =
+          "🖥️ Compartilhar tela";
+
+
+        const cameraTrack =
+          localCameraStream
+            ?.getVideoTracks()[0];
+
+
+        for(
+          const peerId
+          of Object.keys(peerConnections)
+        ){
+
+          const pc =
+            peerConnections[peerId];
+
+          const sender =
+            pc.getSenders().find(
+              s =>
+                s.track &&
+                s.track.kind === "video"
+            );
+
+
+          if(sender){
+
+            await sender.replaceTrack(
+              cameraTrack || null
+            );
+
+          }
+
+        }
+
+
+        if(localCameraStream){
+
+          showLocalVideo();
+
+        }else{
+
+          hideLocalVideo();
+
+        }
+
+        sendStatus();
+
+      };
+
+
+    showLocalVideo();
 
     sendStatus();
 
@@ -2164,9 +2713,9 @@ async function toggleScreen(){
 }
 
 
-/* =========================
+/* =====================================================
 MICROFONE
-========================= */
+===================================================== */
 
 function toggleMicrophone(){
 
@@ -2180,7 +2729,7 @@ function toggleMicrophone(){
   }
 
 
-  microphoneMuted=
+  microphoneMuted =
     !microphoneMuted;
 
 
@@ -2189,7 +2738,7 @@ function toggleMicrophone(){
     of localCameraStream.getAudioTracks()
   ){
 
-    track.enabled=
+    track.enabled =
       !microphoneMuted;
 
   }
@@ -2204,69 +2753,69 @@ function toggleMicrophone(){
 
 function updateMicButton(){
 
-  micButton.textContent=
+  micButton.textContent =
     microphoneMuted
-    ?"🔇 Microfone"
-    :"🎙️ Microfone";
+      ? "🔇 Microfone"
+      : "🎙️ Microfone";
 
 }
 
 
-/* =========================
-MUTE
-========================= */
+/* =====================================================
+FORCE MUTE
+===================================================== */
 
 function forceMute(){
 
-  microphoneMuted=true;
+  microphoneMuted = true;
 
   if(localCameraStream){
 
     localCameraStream
-    .getAudioTracks()
-    .forEach(
-      track=>track.enabled=false
-    );
+      .getAudioTracks()
+      .forEach(
+        track => track.enabled = false
+      );
 
   }
 
   updateMicButton();
 
-  sendStatus();
-
 }
 
+
+/* =====================================================
+FORCE UNMUTE
+===================================================== */
 
 function forceUnmute(){
 
-  microphoneMuted=false;
+  microphoneMuted = false;
 
   if(localCameraStream){
 
     localCameraStream
-    .getAudioTracks()
-    .forEach(
-      track=>track.enabled=true
-    );
+      .getAudioTracks()
+      .forEach(
+        track => track.enabled = true
+      );
 
   }
 
   updateMicButton();
 
-  sendStatus();
-
 }
 
 
-/* =========================
+/* =====================================================
 STATUS
-========================= */
+===================================================== */
 
 function sendStatus(){
 
   if(
-    !socket||
-    socket.readyState!==WebSocket.OPEN
+    !socket ||
+    socket.readyState !== WebSocket.OPEN
   ){
     return;
   }
@@ -2276,11 +2825,14 @@ function sendStatus(){
 
       type:"status",
 
-      camera:!!localCameraStream,
+      camera:
+        !!localCameraStream,
 
-      screen:!!localScreenStream,
+      screen:
+        !!localScreenStream,
 
-      muted:microphoneMuted
+      muted:
+        microphoneMuted
 
     })
   );
@@ -2288,9 +2840,9 @@ function sendStatus(){
 }
 
 
-/* =========================
+/* =====================================================
 RENEGOCIAR
-========================= */
+===================================================== */
 
 async function renegotiateAll(){
 
@@ -2299,54 +2851,83 @@ async function renegotiateAll(){
     of Object.keys(peerConnections)
   ){
 
-    const pc=
+    const pc =
       peerConnections[peerId];
 
-    if(!pc)continue;
+    if(!pc){
+      continue;
+    }
 
 
-    for(
-      const sender
-      of pc.getSenders()
-    ){
+    const cameraTrack =
+      localCameraStream
+        ?.getVideoTracks()[0];
 
-      try{
-        await pc.removeTrack(sender);
-      }catch{}
+    const screenTrack =
+      localScreenStream
+        ?.getVideoTracks()[0];
+
+
+    const videoTrack =
+      screenTrack ||
+      cameraTrack ||
+      null;
+
+
+    const videoSender =
+      pc.getSenders().find(
+        sender =>
+          sender.track &&
+          sender.track.kind === "video"
+      );
+
+
+    if(videoSender){
+
+      await videoSender.replaceTrack(
+        videoTrack
+      );
+
+    }else if(videoTrack){
+
+      const stream =
+        screenTrack
+          ? localScreenStream
+          : localCameraStream;
+
+      pc.addTrack(
+        videoTrack,
+        stream
+      );
 
     }
 
 
-    if(localCameraStream){
-
-      for(
-        const track
-        of localCameraStream.getTracks()
-      ){
-
-        pc.addTrack(
-          track,
-          localCameraStream
-        );
-
-      }
-
-    }
+    const audioTrack =
+      localCameraStream
+        ?.getAudioTracks()[0];
 
 
-    if(localScreenStream){
+    const audioSender =
+      pc.getSenders().find(
+        sender =>
+          sender.track &&
+          sender.track.kind === "audio"
+      );
 
-      for(
-        const track
-        of localScreenStream.getTracks()
-      ){
 
-        pc.addTrack(
-          track,
-          localScreenStream
-        );
+    if(audioSender){
 
-      }
+      await audioSender.replaceTrack(
+        audioTrack || null
+      );
+
+    }else if(audioTrack){
+
+      pc.addTrack(
+        audioTrack,
+        localCameraStream
+      );
 
     }
 
@@ -2355,30 +2936,34 @@ async function renegotiateAll(){
 }
 
 
-/* =========================
+/* =====================================================
 VÍDEO LOCAL
-========================= */
+===================================================== */
 
 function showLocalVideo(){
 
-  const id=
+  if(!myId){
+    return;
+  }
+
+  const id =
     `local-${myId}`;
 
-  let card=
+  let card =
     document.getElementById(id);
 
 
   if(!card){
 
-    card=
+    card =
       document.createElement("div");
 
-    card.className=
+    card.className =
       "video-card";
 
-    card.id=id;
+    card.id = id;
 
-    card.innerHTML=`
+    card.innerHTML = `
 
       <video
         id="${id}-video"
@@ -2405,7 +2990,7 @@ function showLocalVideo(){
   }
 
 
-  const video=
+  const video =
     document.getElementById(
       `${id}-video`
     );
@@ -2413,25 +2998,30 @@ function showLocalVideo(){
 
   if(localScreenStream){
 
-    video.srcObject=
+    video.srcObject =
       localScreenStream;
 
-  }else{
+  }else if(localCameraStream){
 
-    video.srcObject=
+    video.srcObject =
       localCameraStream;
 
   }
 
 
-  empty.style.display="none";
+  empty.style.display =
+    "none";
 
 }
 
 
+/* =====================================================
+ESCONDER VÍDEO LOCAL
+===================================================== */
+
 function hideLocalVideo(){
 
-  const card=
+  const card =
     document.getElementById(
       `local-${myId}`
     );
@@ -2445,9 +3035,9 @@ function hideLocalVideo(){
 }
 
 
-/* =========================
+/* =====================================================
 VÍDEO REMOTO
-========================= */
+===================================================== */
 
 function showRemoteVideo(
   peerId,
@@ -2455,24 +3045,24 @@ function showRemoteVideo(
   stream
 ){
 
-  const id=
+  const id =
     `remote-${peerId}`;
 
-  let card=
+  let card =
     document.getElementById(id);
 
 
   if(!card){
 
-    card=
+    card =
       document.createElement("div");
 
-    card.className=
+    card.className =
       "video-card";
 
-    card.id=id;
+    card.id = id;
 
-    card.innerHTML=`
+    card.innerHTML = `
 
       <video
         id="${id}-video"
@@ -2482,7 +3072,7 @@ function showRemoteVideo(
 
       <div class="video-label">
         ${escapeHTML(
-          user.name||"Usuário"
+          user?.name || "Usuário"
         )}
       </div>
 
@@ -2500,28 +3090,38 @@ function showRemoteVideo(
   }
 
 
-  const video=
+  const video =
     document.getElementById(
       `${id}-video`
     );
 
 
-  if(video.srcObject!==stream){
-    video.srcObject=stream;
+  if(video.srcObject !== stream){
+
+    video.srcObject =
+      stream;
+
   }
 
 
-  empty.style.display="none";
+  empty.style.display =
+    "none";
 
 }
 
+
+/* =====================================================
+REMOVER PEER
+===================================================== */
 
 function removePeer(peerId){
 
   if(peerConnections[peerId]){
 
     try{
+
       peerConnections[peerId].close();
+
     }catch{}
 
     delete peerConnections[peerId];
@@ -2529,43 +3129,61 @@ function removePeer(peerId){
   }
 
 
-  const card=
+  const card =
     document.getElementById(
       `remote-${peerId}`
     );
 
   if(card){
+
     card.remove();
+
   }
+
 
   updateEmpty();
 
 }
 
+
+/* =====================================================
+EMPTY
+===================================================== */
 
 function updateEmpty(){
 
   if(videoGrid.children.length){
 
-    empty.style.display="none";
+    empty.style.display =
+      "none";
 
   }else{
 
-    empty.style.display="flex";
+    empty.style.display =
+      "flex";
 
   }
 
 }
 
 
+/* =====================================================
+LIMPAR VÍDEOS
+===================================================== */
+
 function clearVideos(){
 
-  videoGrid.innerHTML="";
+  videoGrid.innerHTML =
+    "";
 
   updateEmpty();
 
 }
 
+
+/* =====================================================
+FECHAR CONEXÕES
+===================================================== */
 
 function closeAllPeerConnections(){
 
@@ -2575,7 +3193,9 @@ function closeAllPeerConnections(){
   ){
 
     try{
+
       peerConnections[id].close();
+
     }catch{}
 
     delete peerConnections[id];
@@ -2585,52 +3205,169 @@ function closeAllPeerConnections(){
 }
 
 
-/* =========================
+/* =====================================================
+ATUALIZAR PARTICIPANTES
+===================================================== */
+
+function updateAnalysisParticipants(
+  users
+){
+
+  if(!analysisParticipants){
+    return;
+  }
+
+
+  analysisParticipants.innerHTML =
+    "";
+
+
+  if(!users.length){
+
+    analysisParticipants.innerHTML = `
+
+      <span
+        style="
+          color:#858c99;
+          font-size:11px;
+        "
+      >
+        Nenhuma pessoa na análise.
+      </span>
+
+    `;
+
+    return;
+
+  }
+
+
+  users.forEach(user => {
+
+    const item =
+      document.createElement("div");
+
+    item.className =
+      "participant";
+
+
+    let icons = "";
+
+
+    if(user.camera){
+
+      icons +=
+        `<span class="camera">📷</span>`;
+
+    }
+
+
+    if(user.screen){
+
+      icons +=
+        `<span class="screen">🖥️</span>`;
+
+    }
+
+
+    if(user.muted){
+
+      icons +=
+        `<span class="muted">🔇</span>`;
+
+    }
+
+
+    item.innerHTML = `
+
+      <span class="participant-avatar">
+
+        ${escapeHTML(
+          (user.name || "U")
+            .charAt(0)
+            .toUpperCase()
+        )}
+
+      </span>
+
+      <span>
+        ${escapeHTML(
+          user.name || "Usuário"
+        )}
+      </span>
+
+      <span class="participant-icons">
+        ${icons}
+      </span>
+
+    `;
+
+
+    analysisParticipants.appendChild(
+      item
+    );
+
+  });
+
+}
+
+
+/* =====================================================
 USUÁRIOS
-========================= */
+===================================================== */
 
 function updateUsers(users){
 
-  currentUsers=users;
+  currentUsers =
+    users;
+
+  updateAnalysisParticipants(
+    users
+  );
 
 
-  for(let i=1;i<=20;i++){
+  for(let i = 1; i <= 20; i++){
 
-    const count=
+    const count =
       document.getElementById(
         `count-${i}`
       );
 
-    const members=
+    const members =
       document.getElementById(
         `members-${i}`
       );
 
-    if(!count||!members)continue;
+
+    if(!count || !members){
+      continue;
+    }
 
 
-    if(i===currentRoom){
+    if(i === currentRoom){
 
-      count.textContent=
+      count.textContent =
         `${users.length}/8`;
 
-      members.innerHTML="";
+      members.innerHTML =
+        "";
 
 
-      users.forEach(user=>{
+      users.forEach(user => {
 
-        const item=
+        const item =
           document.createElement("div");
 
-        item.className="member";
+        item.className =
+          "member";
 
 
-        let status="";
+        let status = "";
 
 
         if(user.camera){
 
-          status+=
+          status +=
             `<span class="status-icon camera">📷</span>`;
 
         }
@@ -2638,7 +3375,7 @@ function updateUsers(users){
 
         if(user.screen){
 
-          status+=
+          status +=
             `<span class="status-icon screen">🖥️</span>`;
 
         }
@@ -2646,40 +3383,48 @@ function updateUsers(users){
 
         if(user.muted){
 
-          status+=
+          status +=
             `<span class="status-icon muted">🎙️</span>`;
 
         }
 
 
-        item.innerHTML=`
+        item.innerHTML = `
 
           <span class="avatar">
+
             ${escapeHTML(
-              (user.name||"U")
-              .charAt(0)
-              .toUpperCase()
+              (user.name || "U")
+                .charAt(0)
+                .toUpperCase()
             )}
+
           </span>
 
           <span>
+
             ${escapeHTML(
-              user.name||"Usuário"
+              user.name || "Usuário"
             )}
+
           </span>
 
           ${status}
 
           <span class="role">
+
             ${escapeHTML(
-              user.role||"MEMBRO"
+              user.role || "MEMBRO"
             )}
+
           </span>
 
         `;
 
 
-        members.appendChild(item);
+        members.appendChild(
+          item
+        );
 
       });
 
@@ -2690,39 +3435,46 @@ function updateUsers(users){
 }
 
 
-/* =========================
+/* =====================================================
 REGRAS
-========================= */
+===================================================== */
 
 function openRules(){
 
   /*
-  Fecha análise se estiver aberta.
-  */
+   * NÃO sai da análise.
+   * Apenas abre a tela de regras por cima.
+   */
 
-  leaveRoom(false);
-
-  rulesPage.classList.add("show");
+  rulesPage.classList.add(
+    "show"
+  );
 
 }
 
 
 function closeRules(){
 
-  rulesPage.classList.remove("show");
+  rulesPage.classList.remove(
+    "show"
+  );
 
 }
 
 
-/* =========================
+/* =====================================================
 ÁREA DOS DONOS
-========================= */
+===================================================== */
 
 function openOwnerPanel(){
 
-  leaveRoom(false);
+  /*
+   * NÃO sai da análise.
+   */
 
-  ownerPage.classList.add("show");
+  ownerPage.classList.add(
+    "show"
+  );
 
   updateOwnerPanel();
 
@@ -2731,21 +3483,26 @@ function openOwnerPanel(){
 
 function closeOwnerPanel(){
 
-  ownerPage.classList.remove("show");
+  ownerPage.classList.remove(
+    "show"
+  );
 
 }
 
 
-/* =========================
+/* =====================================================
 LOGIN DONO
-========================= */
+===================================================== */
 
 function ownerLogin(){
 
-  const code=
+  const input =
     document.getElementById(
       "ownerCode"
-    ).value.trim();
+    );
+
+  const code =
+    input.value.trim();
 
 
   if(!code){
@@ -2755,12 +3512,13 @@ function ownerLogin(){
     );
 
     return;
+
   }
 
 
   if(
-    !socket||
-    socket.readyState!==WebSocket.OPEN
+    !socket ||
+    socket.readyState !== WebSocket.OPEN
   ){
 
     alert(
@@ -2768,6 +3526,7 @@ function ownerLogin(){
     );
 
     return;
+
   }
 
 
@@ -2784,164 +3543,216 @@ function ownerLogin(){
 }
 
 
-/* =========================
+/* =====================================================
 PAINEL DONO
-========================= */
+===================================================== */
 
 function updateOwnerPanel(){
 
   if(
-    myRole!=="DONO"&&
-    myRole!=="ADM"&&
-    myRole!=="TELADOR"
+    myRole !== "DONO" &&
+    myRole !== "ADM" &&
+    myRole !== "TELADOR"
   ){
 
-    ownerContent.innerHTML=`
+    ownerContent.innerHTML = `
 
-      <p style="
-        color:#858c99;
-        font-size:12px;
-      ">
+      <p
+        style="
+          color:#858c99;
+          font-size:12px;
+        "
+      >
         Faça login como Dono para administrar os membros.
       </p>
 
     `;
 
     return;
+
   }
 
 
-  let html=`
+  let html = `
 
     <h3 style="margin:15px 0 10px">
       👥 Pessoas na Análise
-      ${currentRoom?
-        String(currentRoom).padStart(2,"0"):
-        "—"}
+      ${
+        currentRoom
+          ? String(currentRoom)
+              .padStart(2,"0")
+          : "—"
+      }
     </h3>
 
   `;
 
 
-  currentUsers.forEach(user=>{
+  if(!currentUsers.length){
 
-    const canRole=
-      myRole==="DONO"&&
-      user.id!==myId;
+    html += `
 
-
-    const canMute=
-      (
-        myRole==="DONO"||
-        myRole==="ADM"||
-        myRole==="TELADOR"
-      )&&
-      user.id!==myId;
-
-
-    html+=`
-
-      <div class="admin-user">
-
-        <span class="avatar">
-          ${escapeHTML(
-            (user.name||"U")
-            .charAt(0)
-            .toUpperCase()
-          )}
-        </span>
-
-        <span class="admin-user-name">
-
-          ${escapeHTML(user.name)}
-
-          <small
-            style="color:#777;margin-left:4px"
-          >
-            ${escapeHTML(user.role)}
-          </small>
-
-        </span>
+      <p
+        style="
+          color:#858c99;
+          font-size:12px;
+        "
+      >
+        Nenhuma pessoa encontrada.
+      </p>
 
     `;
 
+  }
 
-    if(canMute){
 
-      html+=`
+  currentUsers.forEach(
+    user => {
 
-        <button
-          class="small-button"
-          onclick="muteMember('${user.id}')"
-        >
-          🔇 Mutar
-        </button>
+      const canRole =
+        myRole === "DONO" &&
+        user.id !== myId;
 
-        <button
-          class="small-button"
-          onclick="unmuteMember('${user.id}')"
-        >
-          🎙️ Liberar
-        </button>
+
+      const canMute =
+        (
+          myRole === "DONO" ||
+          myRole === "ADM" ||
+          myRole === "TELADOR"
+        ) &&
+        user.id !== myId;
+
+
+      html += `
+
+        <div class="admin-user">
+
+          <span class="avatar">
+
+            ${escapeHTML(
+              (user.name || "U")
+                .charAt(0)
+                .toUpperCase()
+            )}
+
+          </span>
+
+          <span class="admin-user-name">
+
+            ${escapeHTML(
+              user.name || "Usuário"
+            )}
+
+            <small
+              style="
+                color:#777;
+                margin-left:4px
+              "
+            >
+              ${escapeHTML(
+                user.role || "MEMBRO"
+              )}
+            </small>
+
+          </span>
 
       `;
 
-    }
+
+      if(canMute){
+
+        html += `
+
+          <button
+            class="small-button"
+            onclick="muteMember('${user.id}')"
+          >
+            🔇 Mutar
+          </button>
+
+          <button
+            class="small-button"
+            onclick="unmuteMember('${user.id}')"
+          >
+            🎙️ Liberar
+          </button>
+
+        `;
+
+      }
 
 
-    if(canRole){
+      if(canRole){
 
-      html+=`
+        html += `
 
-        <button
-          class="small-button"
-          onclick="changeRole('${user.id}','ADM')"
-        >
-          ADM
-        </button>
+          <button
+            class="small-button"
+            onclick="changeRole('${user.id}','ADM')"
+          >
+            ADM
+          </button>
 
-        <button
-          class="small-button"
-          onclick="changeRole('${user.id}','TELADOR')"
-        >
-          Telador
-        </button>
+          <button
+            class="small-button"
+            onclick="changeRole('${user.id}','TELADOR')"
+          >
+            Telador
+          </button>
 
-        <button
-          class="small-button"
-          onclick="changeRole('${user.id}','MEMBRO')"
-        >
-          Membro
-        </button>
+          <button
+            class="small-button"
+            onclick="changeRole('${user.id}','MEMBRO')"
+          >
+            Membro
+          </button>
 
+        `;
+
+      }
+
+
+      html += `
+        </div>
       `;
 
     }
+  );
 
 
-    html+=`</div>`;
-
-  });
-
-
-  ownerContent.innerHTML=html;
+  ownerContent.innerHTML =
+    html;
 
 }
 
 
-/* =========================
+/* =====================================================
 CARGOS
-========================= */
+===================================================== */
 
-function changeRole(userId,role){
+function changeRole(
+  userId,
+  role
+){
 
-  if(myRole!=="DONO"){
+  if(myRole !== "DONO"){
 
     alert(
       "Somente o Dono pode alterar cargos."
     );
 
     return;
+
+  }
+
+
+  if(
+    !socket ||
+    socket.readyState !== WebSocket.OPEN
+  ){
+
+    return;
+
   }
 
 
@@ -2960,18 +3771,32 @@ function changeRole(userId,role){
 }
 
 
-/* =========================
+/* =====================================================
 MUTAR
-========================= */
+===================================================== */
 
-function muteMember(userId){
+function muteMember(
+  userId
+){
 
   if(
-    myRole!=="DONO"&&
-    myRole!=="ADM"&&
-    myRole!=="TELADOR"
+    myRole !== "DONO" &&
+    myRole !== "ADM" &&
+    myRole !== "TELADOR"
   ){
+
     return;
+
+  }
+
+
+  if(
+    !socket ||
+    socket.readyState !== WebSocket.OPEN
+  ){
+
+    return;
+
   }
 
 
@@ -2988,14 +3813,28 @@ function muteMember(userId){
 }
 
 
-function unmuteMember(userId){
+function unmuteMember(
+  userId
+){
 
   if(
-    myRole!=="DONO"&&
-    myRole!=="ADM"&&
-    myRole!=="TELADOR"
+    myRole !== "DONO" &&
+    myRole !== "ADM" &&
+    myRole !== "TELADOR"
   ){
+
     return;
+
+  }
+
+
+  if(
+    !socket ||
+    socket.readyState !== WebSocket.OPEN
+  ){
+
+    return;
+
   }
 
 
@@ -3012,21 +3851,21 @@ function unmuteMember(userId){
 }
 
 
-/* =========================
+/* =====================================================
 SAIR DA ANÁLISE
-========================= */
+===================================================== */
 
-function leaveRoom(showMessage=true){
+function leaveRoom(){
 
   if(localCameraStream){
 
     localCameraStream
-    .getTracks()
-    .forEach(
-      track=>track.stop()
-    );
+      .getTracks()
+      .forEach(
+        track => track.stop()
+      );
 
-    localCameraStream=null;
+    localCameraStream = null;
 
   }
 
@@ -3034,12 +3873,12 @@ function leaveRoom(showMessage=true){
   if(localScreenStream){
 
     localScreenStream
-    .getTracks()
-    .forEach(
-      track=>track.stop()
-    );
+      .getTracks()
+      .forEach(
+        track => track.stop()
+      );
 
-    localScreenStream=null;
+    localScreenStream = null;
 
   }
 
@@ -3050,10 +3889,12 @@ function leaveRoom(showMessage=true){
   if(socket){
 
     try{
+
       socket.close();
+
     }catch{}
 
-    socket=null;
+    socket = null;
 
   }
 
@@ -3061,22 +3902,18 @@ function leaveRoom(showMessage=true){
   clearVideos();
 
 
-  cameraButton.textContent=
+  cameraButton.textContent =
     "📷 Abrir câmera";
 
-  screenButton.textContent=
+  screenButton.textContent =
     "🖥️ Compartilhar tela";
 
-  microphoneMuted=false;
+  microphoneMuted = false;
 
-  cameraFacingMode="user";
+  cameraFacingMode = "user";
 
   updateMicButton();
 
-
-  /*
-  REMOVE COMPLETAMENTE A TELA DA ANÁLISE.
-  */
 
   document.body.classList.remove(
     "analysis-open"
@@ -3086,49 +3923,65 @@ function leaveRoom(showMessage=true){
     "show"
   );
 
-  homeScreen.style.display=
+  homeScreen.style.display =
     "flex";
 
 
-  currentRoom=null;
+  currentRoom = null;
 
-  if(showMessage){
+  currentUsers = [];
 
-    /*
-    Não mostra mensagem ocupando espaço.
-    */
-
-  }
+  updateAnalysisParticipants(
+    []
+  );
 
 }
 
 
-/* =========================
+/* =====================================================
 ESCAPE HTML
-========================= */
+===================================================== */
 
 function escapeHTML(value){
 
-  const div=
-    document.createElement("div");
+  const div =
+    document.createElement(
+      "div"
+    );
 
-  div.textContent=
-    String(value||"");
+  div.textContent =
+    String(value || "");
 
   return div.innerHTML;
 
 }
 
 
-/* =========================
-INICIAR
-========================= */
+/* =====================================================
+FECHAR MODAIS COM ESC
+===================================================== */
 
-/*
-IMPORTANTE:
-não existe openRoom(1) aqui.
-A página começa limpa.
-*/
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if(event.key !== "Escape"){
+      return;
+    }
+
+    closeEnterPanel();
+
+    closeRules();
+
+    closeOwnerPanel();
+
+  }
+);
+
+
+/* =====================================================
+INICIAR
+===================================================== */
 
 loadName();
 
